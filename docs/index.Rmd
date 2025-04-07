@@ -1,5 +1,5 @@
 ---
-title: "Snake Basin Anadromous Fish Status: Updated QET Analysis"
+title: "Snake River Anadromous Fish Status: Updated QET Analysis"
 author:
 - Jay Hesse:
     email: jayh@nezperce.org
