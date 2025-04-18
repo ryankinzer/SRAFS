@@ -15,14 +15,181 @@ spp <- 'Steelhead'
 run <- 'Summer'
 
 fig_path <- here::here('figures',gsub(' ','_',spp))
+# set figure dimensions
+h <- 10
+w <- 16
+dp <- 600
 
-plot_title <- paste(run,spp) #'Spring-summer Chinook Salmon'
+#plot_title <- paste(run,spp) #'Spring-summer Chinook Salmon'
+#model_run <- 'multiple' # or single
+#data_source <- paste0('Source: StreamNet Coordinated Assessments (3/5/2025); missing observations obtained from personnal communication \n with co-managers or derived by the Nez Perce Tribe using PIT-tag observations.')
 
-model_run <- 'multiple' # or single
-data_source <- paste0('Source: StreamNet Coordinated Assessments (3/5/2025); missing observations obtained from personnal communication \n with co-managers or derived by the Nez Perce Tribe using PIT-tag observations.')
 
-# load data
-load(paste0('./data/output/',spp, '_best_fit_',model_run,'_trends_',yr,'.rda'))
+# Lower Granite Plots----
+
+mgt_targets <- readxl::read_excel('./data/input/mgt_targets.xlsx',
+                                  sheet = 'targets') %>%
+  mutate(target = as.numeric(target))
+
+origin_size <- readxl::read_excel(path = './data/input/LGDAbundance Live Link_3_17_25.xlsx',
+                                  sheet = 'Origin_Size') %>%
+  filter(SpeciesName == strsplit(spp, ' ')[[1]][1]) %>%
+  group_by(SpawnYear, RearName, Size) %>%
+  summarise(est = sum(Estimate)) %>%
+  select(spawnyear = SpawnYear, origin = RearName, size = Size, est)
+
+master_dam <- readxl::read_excel(path = './data/input/LGDAbundance Live Link_3_17_25.xlsx',
+                                 sheet = 'Master_Dam_Counts')
+
+if(spp == 'Chinook salmon'){
+  master_dam <- master_dam %>%
+  select(spawnyear = ChinookRunYear, Wild_Large = WildSpSuChinookAdults, Wild_Small = WildSpSuChinookJacks, Hatchery_Large = HatcherySpSuChinookAdults, Hatchery_Small = HatcherySpSuChinookJacks)
+} else {
+  master_dam <- master_dam %>%
+    select(spawnyear = ChinookRunYear, Wild_Large = WildSteelheadAdults, Hatchery_Large = HatcherySteelheadAdults) %>%
+    mutate(spawnyear = spawnyear - 1)
+}
+  
+master_dam <- master_dam %>%
+  pivot_longer(-spawnyear, names_to = 'grp', values_to = 'est') %>%
+  separate(grp, into = c('origin', 'size'), sep = '_')
+
+yrs <- unique(origin_size$spawnyear)
+
+idfg_dat <- bind_rows(master_dam[!(master_dam$spawnyear %in% yrs),], origin_size) %>%
+  mutate(size = case_when(
+    size == 'Large' ~ 'Adult',
+    size == 'Small' ~ 'Jack',
+    TRUE ~ 'Adult')
+  )
+
+# total at LGR
+
+lgr_mgt_total <- mgt_targets %>%
+  filter(species == spp,
+         grepl('Spring/summer|Summer', run)) %>%
+  filter(origin == 'Total') %>%
+  mutate(grp = 'Total (Wild + Hatchery)')
+
+t2 <- idfg_dat %>%
+  filter(size == 'Adult') %>%
+  mutate(grp = 'Total (Wild + Hatchery)') %>%
+  ggplot(aes(x = spawnyear)) +
+  geom_col(aes(y = est, fill = origin), colour = 'black') +
+  scale_fill_manual(values = c('grey60', 'grey80'), breaks = c('Wild', 'Hatchery'), labels = c('Wild', 'Hatchery')) +
+  geom_hline(data = lgr_mgt_total, 
+             aes(yintercept = target, colour = goal_label), size = 1) +
+  geom_label(data = lgr_mgt_total, 
+             aes(x = 1970, y = target, label = goal_label, colour = goal_label)) +
+  scale_color_manual(values = c('darkgreen'), guide = 'none') +
+  scale_x_continuous(breaks = seq(1960, 2020, 5)) +
+  scale_y_continuous(expand = c(0,0), limits = c(0, 350000),
+                     label = scales::comma,
+                     breaks = seq(25000,325000, by = 100000)#,
+                     # sec.axis = sec_axis(~./scaleFactor, name = 'Percent Hatchery',
+                     #                     labels = function(b){paste0(round(b * 100,0),"%")},
+                     #                     breaks = seq(0,1, by = .1))
+  ) +
+  facet_wrap(~grp) +
+  labs(
+    #title = 'Spring/Summer Chinook Salmon',
+    #subtitle = 'Adult escapement at Lower Granite Dam',
+    # caption = 'Data Source: Idaho Department of Fish and Game; Lawry et al. 2020',
+    x = 'Spawn Year',
+    y = 'Escapement',
+    fill = 'Origin') +
+  theme_rk() +
+  theme(legend.position = c(0.10, 0.4), #.1, .25
+        legend.background = element_rect(fill = "white", color = "black"))
+
+
+# hatchery fraction
+phos_line <- idfg_dat %>%
+  filter(size == 'Adult') %>%
+  group_by(spawnyear) %>%
+  mutate(total = sum(est),
+         p = est/total) %>%
+  filter(origin == 'Wild') %>%
+  ggplot(aes(x = spawnyear, y = p)) +
+  geom_line() +
+  geom_point() +
+  scale_y_continuous(limits = c(0,1), expand = c(0,0), label = scales::percent) +
+  labs(subtitle = 'Percent Wild',
+       x = '',
+       y = '') +
+  theme_rk() +
+  theme(plot.subtitle = element_text(size = 10, face = 'plain', vjust = 2, hjust = 0),
+        axis.title=element_text(size=8),
+        axis.text = element_text(size=8),
+        plot.margin = unit(c(0, 0, 0, 0), "points"))
+
+t_phos <- t2 + inset_element(phos_line, left = .7, bottom = .36, right = .95, top = .9)
+
+lgr_mgt_total <- mgt_targets %>%
+  filter(species == spp,
+         grepl('Spring/summer|Summer', run)) %>%
+  filter(origin == 'Hatchery')
+
+h <- idfg_dat %>%
+  filter(origin == 'Hatchery') %>%
+  filter(size == 'Adult') %>%
+  ggplot(aes(x = spawnyear, y =est)) +
+  geom_col(fill = 'grey80', colour = 'black') +
+  geom_hline(data = lgr_mgt_total, 
+             aes(yintercept = target, colour = goal_label), size = 1) +
+  geom_label(data = lgr_mgt_total, 
+             aes(x = c(1980,2010), y = target, label = goal_label, colour = goal_label)) +
+  scale_y_continuous(expand = c(0,0), limits = c(0, 260000), label = scales::comma, breaks = c(235000, 90000,11638)) +
+  scale_color_manual(values = c('firebrick', 'darkgreen')) +
+  #scale_x_continuous(breaks = seq(1975, 2020, 5)) +
+  facet_wrap(~origin, ncol = 2) +
+  labs(#title = 'Natural-origin Spring/Summer Chinook Salmon',
+    #subtitle = 'Adult escapement at Lower Granite Dam',
+    caption = 'Data Source: Idaho Department of Fish and Game',
+    x = 'Spawn Year',
+    y = 'Escapement') +
+  theme_rk() +
+  theme(legend.position = 'none')
+
+
+lgr_mgt_total <- mgt_targets %>%
+  mutate(origin = ifelse(origin == 'Wild/natural', 'Wild', origin)) %>%
+  filter(species == spp,
+         grepl('Spring/summer|Summer', run),
+         origin == 'Wild') %>%
+  filter(CBP_goals != 'Medium')
+  
+
+w <- idfg_dat %>%
+  filter(origin == 'Wild') %>%
+  filter(size == 'Adult') %>%
+  #  filter(Year >= 1975) %>%
+  ggplot(aes(x = spawnyear, y = est)) +
+  geom_col(fill = 'grey60', colour = 'black') +
+  #scale_x_continuous(breaks = seq(1975, 2020, 5)) +
+  geom_hline(data = lgr_mgt_total, 
+             aes(yintercept = target, colour = goal_label), size = 1) +
+  geom_label(data = lgr_mgt_total, 
+             aes(x = 1980, y = target, label = goal_label, colour = goal_label), vjust = c(.5,.5, 0)) +
+  scale_y_continuous(expand = c(0,0), limits = c(0, 260000), label = scales::comma, breaks = c(235000,43000,1850)) +
+  scale_color_manual(values = c('firebrick', 'navy', 'darkgreen')) +  
+  facet_wrap(~origin, ncol = 2) +
+  labs(#title = 'Natural-origin Spring/Summer Chinook Salmon',
+    #subtitle = 'Adult escapement at Lower Granite Dam',
+    x = 'Spawn Year',
+    y = 'Escapement'
+  ) +
+  theme_rk() +
+  theme(legend.position = 'none')
+
+
+lgr_plots <- t_phos / (w | h)
+
+lgr_plots
+ggsave(paste0(fig_path,'/',gsub(' ','_',spp) ,'_lgr_',yr,'.png'), width = w, height = h, dpi = dp)
+
+# load QET data----
+load(paste0('./data/output/',gsub(' ', '_', spp), '_best_fit_',yr,'.rda'))
 
 # mpg_dat <- best_mod_fits %>%
 #   select(mpg, pop, TRT_POPID) %>%
@@ -32,18 +199,27 @@ load(paste0('./data/output/',spp, '_best_fit_',model_run,'_trends_',yr,'.rda'))
 pop_names <- best_mod_fits %>%
   distinct(mpg, pop) %>%
   filter(!is.na(mpg)) %>%
-  mutate(mpg = ifelse(spp == 'Chinook salmon',
-    factor(mpg, levels = c('Lower Snake', 'Dry Clearwater', 'Wet Clearwater', 'Grande Ronde / Imnaha',
-                           'South Fork Salmon River', 'Middle Fork Salmon River', 'Upper Salmon River')),
-    factor(mpg, levels = c('Lower Snake', 'Clearwater River', 'Grande Ronde River', 'Imnaha River', 'Salmon River')))
-    ) %>%
-  group_by(mpg) %>%
-  arrange(mpg, pop) %>%
+  mutate(
+    mpg = case_when(
+      spp == "Chinook salmon" ~ factor(mpg, levels = c(
+        "Lower Snake", "Dry Clearwater", "Wet Clearwater",
+        "Grande Ronde / Imnaha", "South Fork Salmon River",
+        "Middle Fork Salmon River", "Upper Salmon River"
+      )),
+      TRUE ~ factor(mpg, levels = c(
+        "Lower Snake", "Clearwater River",
+        "Grande Ronde River", "Imnaha River", "Salmon River"
+      ))
+    )
+  ) %>%
+  arrange(mpg, pop)
+
+pop_levels <- pop_names %>%
   pull(pop)
 
 #pop_names <- c("Tucannon River", "Asotin Creek", "Lapwai/Big Canyon", "Lolo Creek", "Upper South Fork Clearwater", "Lochsa River", "Wenaha River", "Minam River", "Wallowa/Lostine Rivers", "Lookingglass Creek", "Catherine Creek", "Grande Ronde River Upper Mainstem", "Imnaha River Mainstem", "Big Sheep Creek", "Little Salmon River", "Secesh River", "East Fork South Fork Salmon River", "South Fork Salmon River", "Big Creek", "Camas Creek", "Loon Creek", "Middle Fork Salmon River Lower Mainstem", "Middle Fork Salmon River Upper Mainstem", "Sulphur Creek", "Marsh Creek", "Bear Valley Creek", "Chamberlain Creek", "Panther Creek", "North Fork Salmon River", "Lemhi River", "Pahsimeroi River", "East Fork Salmon River", "Salmon River Lower Mainstem", "Salmon River Upper Mainstem","Yankee Fork", "Valley Creek")              
 
-best_mod_fits$pop <- factor(best_mod_fits$pop, levels = pop_names)
+best_mod_fits$pop <- factor(best_mod_fits$pop, levels = pop_levels)
 
 best_mod_fits <- best_mod_fits %>%
   mutate(method = case_when(
@@ -52,10 +228,6 @@ best_mod_fits <- best_mod_fits %>%
     TRUE ~ 'PIT-tag Observations'
   ))
 
-# set figure dimensions
-h <- 10
-w <- 16
-dp <- 600
 
 best_mod_fits %>%
   ggplot(aes(x = spawningyear, group = pop_series)) +
@@ -82,28 +254,48 @@ best_mod_fits %>%
 ggsave(paste0(fig_path,'/',gsub(' ','_',spp) ,'_centered_',yr,'.png'), width = w, height = h, dpi = dp)
 
 # states
+drift_df <- tibble(.rownames = rownames(fitCI$par$U),
+         x0 = fitCI$par$x0[,],
+         u = fitCI$par$U[,1]) %>%
+  mutate(drift = exp(u),
+         growth = ifelse(drift>=1, (drift-1)*100, (1-drift)*-100))
+
+pop_cnt <- pop_names %>%
+  group_by(mpg) %>%
+  count() %>%
+  mutate(strip_labels = paste0(mpg, ' (',n,' populations)'))
+
+
+if(spp == 'Steelhead'){
+  drift_df$.rownames = 'Snake Basin'
+  
+  pop_cnt <- pop_names %>%
+    mutate(mpg = 'Snake Basin') %>%
+    group_by(mpg) %>%
+    count() %>%
+    mutate(strip_labels = paste0('Snake Basin', ' (',n,' populations)'))
+  
+}
+
+
+drift_df <- left_join(drift_df, pop_cnt, by = c('.rownames' = 'mpg'))
+
 xtT %>%
-  mutate(mpg = as.character(.rownames)) %>%
-  mutate(
-    process = case_when(
-      spp == 'Chinook salmon' ~ factor(mpg, levels = c(
-        'Lower Snake', 'Dry Clearwater', 'Wet Clearwater', 'Grande Ronde / Imnaha',
-        'South Fork Salmon River', 'Middle Fork Salmon River', 'Upper Salmon River')),
-      spp != 'Chinook salmon' ~ factor(mpg, levels = c(
-        'Lower Snake', 'Clearwater River', 'Grande Ronde River', 'Imnaha River', 'Salmon River'))
-    )
-  ) %>%
-  ggplot(aes(x = spawningyear)) +
+  left_join(pop_cnt, by = c('.rownames' = 'mpg')) %>%
+ ggplot(aes(x = t)) +
   geom_ribbon(aes(ymin = .conf.low, ymax = .conf.up), alpha = .25) +
   geom_line(aes(y = .estimate), linewidth = 1) +
+  geom_abline(data = drift_df, aes(intercept = x0, slope = u), size = 1, linetype = 1, colour = 'blue') +
+  geom_text(data = drift_df, aes(x = 0, y = -Inf, label = paste0("x0 = ", round(x0,2))),hjust = 0, vjust = -1.5) +
+  geom_text(data = drift_df, aes(x = 0, y = -Inf, label = paste0("u = ", round(u,2))), hjust = 0, vjust = -.5) +
   scale_colour_brewer(palette = 'Dark2') +
-  scale_x_continuous(breaks = scales::pretty_breaks()) +
-  facet_wrap(~.rownames, scales = 'free_y') +
+  #scale_x_continuous(breaks = scales::pretty_breaks()) +
+  facet_wrap(~strip_labels) +
   theme_rk() +
   labs(
     #title = plot_title,
     #subtitle = 'Estimated state processes from the best fitting model to Snake River Basin population abundance observatons.',
-    x = 'Spawn Year',
+    x = 'Time',
     y = 'LN(Abundance)')
 
 ggsave(paste0(fig_path,'/',gsub(' ','_',spp) ,'_states_',yr,'.png'), width = w, height = h, dpi = dp)
@@ -324,19 +516,20 @@ if(length(unique(xtT$.rownames))>1){
   #mutate(grp_mod = ifelse(pop %in% exclude_pops, 0, 1)) %>%
   
   sa_slope %>%
-    ggplot(aes(x = fct_reorder(.rownames, estimate), y = estimate)) +
+    left_join(pop_cnt, by = c('.rownames' = 'mpg')) %>%
+    ggplot(aes(x = fct_reorder(strip_labels, estimate), y = estimate)) +
     geom_pointrange(aes(y = estimate,
                         ymin = estimate - 1.96*std.error,
                         ymax = estimate + 1.96*std.error),
                     shape = 21, fill = 'blue', colour = 'blue') +
-    geom_text(aes(label = round(estimate,2)), vjust = -1) +
+    geom_text(aes(label = round(estimate,2)), size = 6, vjust = -1) +
     #scale_fill_manual(values = c('white', 'black'), labels = c('Excluded', 'Included')) +
     geom_hline(data = grp_slope, aes(yintercept = estimate), colour = 'black') +
     geom_hline(data = grp_slope, aes(yintercept = estimate - 1.96*std.error), colour = 'black', linetype = 2) +
     geom_hline(data = grp_slope, aes(yintercept = estimate + 1.96*std.error), colour = 'black', linetype = 2) +
     scale_y_continuous(limits = c(-.3, .3), breaks = c(-.3, -.2, -.1, 0, .1, .2, .3)) +
     coord_flip() +
-    theme_rk() +
+    theme_rk2() +
     labs(
       #title = plot_title,
       #subtitle = paste('Modeled natural-origin spawner abundance growth for last 10-years (',min(sa_dat$spawningyear),'-',max(sa_dat$spawningyear),') across Snake Basin major population groups. Population abundance on \n average declined by approximately',round((1-exp(grp_slope$estimate))*100),'% each year across the time period.'),
@@ -346,23 +539,57 @@ if(length(unique(xtT$.rownames))>1){
       )
   
   } else {
-    state_slope <- lm(.estimate ~ spawningyear, sa_dat)
-    summary(state_slope)
     
-  sa_dat %>%
-      mutate(spawnngyear = as.integer(spawningyear)) %>%
-      ggplot(aes(x = spawningyear, y = .estimate)) +
-      geom_point(shape = 21, fill = 'blue', colour = 'blue') +
-      geom_smooth(method = 'lm', se = FALSE) +
-      scale_x_continuous(breaks = scales::pretty_breaks()) +
-      theme_rk() +
+    sa_slope <- sa_dat %>%
+      nest(data = -.rownames) %>%
+      mutate(
+        fit = purrr::map(data, ~ lm(.estimate ~ spawningyear, data = .x)),
+        tidied = purrr::map(fit, broom::tidy)
+      ) %>%
+      unnest(tidied) %>%
+      filter(term == 'spawningyear')
+    #mutate(grp_mod = ifelse(pop %in% exclude_pops, 0, 1)) %>%
+    
+    sa_slope %>%
+      left_join(pop_cnt, by = c('.rownames' = 'mpg')) %>%
+      ggplot(aes(x = fct_reorder(strip_labels, estimate), y = estimate)) +
+      geom_pointrange(aes(y = estimate,
+                          ymin = estimate - 1.96*std.error,
+                          ymax = estimate + 1.96*std.error),
+                      shape = 21, fill = 'blue', colour = 'blue') +
+      geom_text(aes(label = round(estimate,2)), size = 6, vjust = -1) +
+      #scale_fill_manual(values = c('white', 'black'), labels = c('Excluded', 'Included')) +
+      #geom_hline(data = grp_slope, aes(yintercept = estimate), colour = 'black') +
+      #geom_hline(data = grp_slope, aes(yintercept = estimate - 1.96*std.error), colour = 'black', linetype = 2) +
+      #geom_hline(data = grp_slope, aes(yintercept = estimate + 1.96*std.error), colour = 'black', linetype = 2) +
+      scale_y_continuous(limits = c(-.3, .3), breaks = c(-.3, -.2, -.1, 0, .1, .2, .3)) +
+      coord_flip() +
+      theme_rk2() +
       labs(
         #title = plot_title,
-        #subtitle = paste('Modeled natural-origin spawner abundance growth for last 10-years (',min(sa_dat$spawningyear),'-',max(sa_dat$spawningyear),') across Snake Basin major population groups. Population abundance on \n average declined by approximately',round((1-exp(coef(state_slope)[2]))*100),'% each year across the time period.'),
+        #subtitle = paste('Modeled natural-origin spawner abundance growth for last 10-years (',min(sa_dat$spawningyear),'-',max(sa_dat$spawningyear),') across Snake Basin major population groups. Population abundance on \n average declined by approximately',round((1-exp(grp_slope$estimate))*100),'% each year across the time period.'),
         #caption = data_source,
-        x = 'Spawn Year',
-        y = 'LN(Abundance)'
-        )
+        x = '',
+        y = 'Slope (log scale)'
+      )
+
+    state_slope <- lm(.estimate ~ spawningyear, sa_dat)
+    # summary(state_slope)
+    # 
+    # sa_dat %>%
+    #     mutate(spawnngyear = as.integer(spawningyear)) %>%
+    #     ggplot(aes(x = spawningyear, y = .estimate)) +
+    #     geom_point(shape = 21, fill = 'blue', colour = 'blue') +
+    #     geom_smooth(method = 'lm', se = FALSE) +
+    #     scale_x_continuous(breaks = scales::pretty_breaks()) +
+    #     theme_rk2() +
+    #     labs(
+    #       #title = plot_title,
+    #       #subtitle = paste('Modeled natural-origin spawner abundance growth for last 10-years (',min(sa_dat$spawningyear),'-',max(sa_dat$spawningyear),') across Snake Basin major population groups. Population abundance on \n average declined by approximately',round((1-exp(coef(state_slope)[2]))*100),'% each year across the time period.'),
+    #       #caption = data_source,
+    #       x = 'Spawn Year',
+    #       y = 'LN(Abundance)'
+    #       )
   }
 
 ggsave(paste0(fig_path,'/',gsub(' ','_',spp) ,'_slope_',yr,'.png'), width = w, height = h, dpi = dp)
@@ -503,6 +730,7 @@ library(maps)
 
 user_path <- Sys.getenv('OneDrive')
 proj_path <- '/Projects/DFRM Projects/River_Mapping/data/'
+
 spatial_files <- paste0(user_path, proj_path, 'polygons/SR_pops.rda')
 load(spatial_files) ; rm(fall_pop)
 
@@ -528,9 +756,18 @@ if(spp == 'Chinook salmon'){
                 select(pop, CBP_goals, target) %>%
                 pivot_wider(names_from = CBP_goals, values_from = target),
               by = 'pop')
+  
+  full_esu_dps <- sf::st_read(paste0(user_path, proj_path,'polygons/CHNK_SPSU_ALL/CHNK_SPSU_All.shp')) %>%
+    filter(grepl('Snake', ESU_DPS)) %>%
+    mutate(extant = case_when(
+      grepl('Outside', ESU_DPS) ~ 'Extinct',
+      grepl('North Fork Clearwater', NWR_NAME) ~ 'Extinct',
+      TRUE ~ 'Extant')
+    ) %>%
+    group_by(extant) %>%
+    summarize(shape_area = sum(SHAPE_AREA)) %>%
+    st_transform(crs = 4326)
 
-  
-  
 } else {
   trt_pops <- sth_pop %>%
     filter(!grepl('NFC', TRT_POPID)) %>%
@@ -549,6 +786,18 @@ if(spp == 'Chinook salmon'){
               pivot_wider(names_from = CBP_goals, values_from = target),
             by = 'pop')
   
+  
+  full_esu_dps <- sf::st_read(paste0(user_path, proj_path,'polygons/STHD_SUWI_ALL/STHD_SUWI_All.shp')) %>%
+    filter(grepl('Snake', ESU_DPS)) %>%
+    mutate(extant = case_when(
+      grepl('Outside', ESU_DPS) ~ 'Extinct',
+      grepl('North Fork Clearwater', NWR_NAME) ~ 'Extinct',
+      TRUE ~ 'Extant')
+    ) %>%
+    group_by(extant) %>%
+    summarize(shape_area = sum(SHAPE_AREA)) %>%
+    st_transform(crs = 4326)
+  
 }
 
 
@@ -560,8 +809,9 @@ pnw <- states %>% filter(ID %in% c('idaho', 'oregon', 'washington')) %>%
 # load polygons
 load(paste0(user_path, proj_path, 'polygons/npt_boundaries.rda'))
 
-icc <- icc %>%
-  st_transform(crs = 4326)
+ icc <- icc %>%
+   st_transform(crs = 4326)
+
 # Subset Pops/Remove NF Clearwater ----
 # sth_pop <- sth_pop %>%
 #   filter(TRT_POPID != 'CRNFC-s')
@@ -570,18 +820,18 @@ icc <- icc %>%
 
 # load rivers and trim
 load(paste0(user_path, proj_path,"flowlines/large_rivers.rda"))
-load(paste0(user_path, proj_path,"flowlines/SR_streams.rda"))
-
+# load(paste0(user_path, proj_path,"flowlines/SR_streams.rda"))
+# 
 pnw_rivers <- st_intersection(pnw_rivers %>% 
-                                st_transform(crs = 4326), sth_pop)
-
-snake_rivers <- st_intersection(snake_rivers %>%
-                                  st_transform(crs = 4326), sth_pop)
+                                 st_transform(crs = 4326), sth_pop)
+# 
+# snake_rivers <- st_intersection(snake_rivers %>%
+#                                   st_transform(crs = 4326), sth_pop)
 
 # Get basemap
-snk_basin <- as_Spatial(sth_pop) # convert to use sp package fun
-b <- sp::bbox(snk_basin) # get bounding box around polygons
-map_center <- apply(b,1,mean) # find center
+# snk_basin <- as_Spatial(sth_pop) # convert to use sp package fun
+#b <- sp::bbox(snk_basin) # get bounding box around polygons
+# map_center <- apply(b,1,mean) # find center
 
 # gather basemap from google
 
@@ -632,7 +882,8 @@ qet_levels <- c('Above Healthy and Harvestable',
                 paste0("Predicted Below 50 by ", yr+5),
                 paste0("Below 50 Spawners in ", yr),
                 'Currently Below QET50',
-                'Not Modeled')
+                'Not Modeled',
+                'Extinct')
 
 map_dat <- left_join(trt_pops, map_qet) %>%
   mutate(QET = ifelse(is.na(QET), 'Not Modeled', QET)) %>%
@@ -654,17 +905,25 @@ if (length(missing_levels) > 0) {
 
 
 #col <- c(colorRampPalette(c("#FF5E5B", "#F5C33B"), alpha = TRUE)(4), 'grey80')
-col <- c('lightgreen', 'dodgerblue', colorRampPalette(c("#F5C33B", "#FF5E5B"), alpha = TRUE)(4), 'grey80')
+#col <- c('lightgreen', 'dodgerblue', colorRampPalette(c("#F5C33B", "#FF5E5B"), alpha = TRUE)(4), 'grey50', 'grey80')
+col <- c('#99d594', '#3288bd', '#ffffbf', '#f3be2a', '#fc8d59', '#E31A1C', 'grey50', 'grey80')
 
 scales::show_col(col)
 
+b <- st_bbox(full_esu_dps)
+buffer <- 0.1  # degrees; adjust to your need
+xlim <- c(b$xmin - buffer, b$xmax + buffer)
+ylim <- c(b$ymin - buffer, b$ymax + buffer)
+
 map_fig <- ggplot() +
   #base_map +
-  #geom_sf(data = pnw, fill = NA, inherit.aes = FALSE) +
+  geom_sf(data = pnw, fill = NA, inherit.aes = FALSE) +
+  geom_sf(data = full_esu_dps, fill = 'grey80', inherit.aes = FALSE) +
   geom_sf(data = map_dat, aes(fill = QET),
           colour = 'black', size = 1, inherit.aes = FALSE) +
   #geom_sf(data = snake_rivers, colour = 'cyan', inherit.aes = FALSE) +
   #geom_sf(data = icc, aes(colour = 'NPT ICC Boundary'), fill = NA, linewidth = 1.25, inherit.aes = FALSE) +
+  coord_sf(xlim = xlim, ylim = ylim) +
   ggrepel::geom_label_repel(
     data = map_dat[map_dat$QET!='Not Modeled',],
     aes(label = TRT_POPID, geometry = geometry,
@@ -698,7 +957,7 @@ map_fig <- ggplot() +
   theme_void() +
   theme(#plot.title=element_text(colour = 'white', hjust=.10, vjust=-1, face='bold', margin=margin(t=0,b=-40)),
     #plot.subtitle = element_text(colour = 'white', hjust=.10, vjust=-1, face='bold', margin=margin(t=0,b=-50)),
-    legend.position = c(0.2,0.15),
+    legend.position = c(0.00,0.15),
     legend.key = element_blank(),
     legend.margin = margin(0, 0, 0, 0),
     legend.spacing.y = unit(1, "pt"),
@@ -711,8 +970,11 @@ library(cowplot)
 
 inset <- ggplot() +
   geom_sf(data = pnw) +
-  geom_sf(data = map_dat, fill = 'grey75', color = NA) +
-  #geom_sf(data = icc, fill = NA, color = 'black') +
+  geom_sf(data = full_esu_dps, fill = 'grey80') +
+  geom_sf(data = map_dat, aes(fill = QET),
+          colour = 'black', size = 1, inherit.aes = FALSE) +
+  scale_fill_manual(values = col, drop = FALSE) +
+  scale_color_manual(values = 'black') +
   theme_nothing()
 
 ggdraw(map_fig) +
@@ -724,7 +986,49 @@ ggdraw(map_fig) +
 
 ggsave(paste0(fig_path,'/',gsub(' ','_',spp) ,'_map_',yr,'.png'), width = w, height = h, dpi = dp)
 
+
+
+brbg <- RColorBrewer::brewer.pal(4, "BrBG")[c(1,2)]
+show_col(brbg)
+
+
+offices <- st_as_sf(
+  tribble(~'city', ~'lon', ~'lat',
+          'Lapwai', 46.399965, -116.802493,
+          'Sweetwater', 46.372628, -116.796259,
+          'McCall', 44.862112, -116.087774,
+          'Joseph', 45.356404, -117.229461,
+          'NPTH', 46.520427, -116.660615,
+          'Kooskia', 46.129688, -115.946948,
+          'Orofino', 46.464489, -116.234573,
+          'Grangeville', 45.926067, -116.122625,
+          'Powell', 46.509943, -114.712225),
+  coords = c('lat', 'lon'),
+  crs = st_crs(4326)
+)
+
+
+tmp <- ggplot() +
+  geom_sf(data = pnw) +
+  geom_sf(data = full_esu_dps,  aes(fill = extant)) +
+  geom_sf(data = map_dat, fill = NA,
+          colour = 'black', size = 1, inherit.aes = FALSE) +
+  geom_sf(data = icc, fill = NA, linewidth = 1.25, color = 'black') +
+  #geom_sf(data = npt1863, fill = NA, linewidth = 1, color = 'green') +
+  geom_sf(data = pnw_rivers, inherit.aes = FALSE, color = 'blue') +
+  geom_sf(data = offices, inherit.aes = FALSE, size = 2, color = 'black') +
+  scale_color_manual(values = 'black') +
+  scale_fill_manual(values = brbg) +
+  theme_nothing()
+
+tmp
+
+ggsave(paste0(fig_path,'/','_basin_map_.png'), width = w, height = h, dpi = dp)
+
+
 #saveRDS(map_dat, here::here("data","map_data","spsm_qet_map.rds"))
+
+
 
 
 # 

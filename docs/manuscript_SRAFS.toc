@@ -1,0 +1,9 @@
+\contentsline {section}{\numberline {1}Background}{1}{section.1}%
+\contentsline {section}{\numberline {2}Methods}{3}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Data}{3}{subsection.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.1}Population Abundance and Status}{5}{subsubsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.2}Objective 1: Model Abundance}{5}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Objective 2: Trend Analysis}{8}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Objectives 3 \& 4: Proportion Below QET}{9}{subsection.2.4}%
+\contentsline {section}{\numberline {3}Results}{9}{section.3}%
+\contentsline {section}{\numberline {4}Conclusions}{10}{section.4}%

@@ -6,7 +6,7 @@ library(tidyverse)
 #library(plotly)
 library(patchwork)
 source('./R/theme_rk.R')
-yr <- 2023
+yr <- 2024
 
 # Run getIDFGdata.R ----
 
@@ -14,15 +14,28 @@ yr <- 2023
 # Sp/sm Chinook Salmon ----
 load(file='./data/IDFG_historic/idfg_chn_data.rda')
 
+
+
+idfg_dat %>%
+  ggplot(aes(x= spawnyear, y = est)) +
+  geom_line() +
+  geom_point() +
+  facet_grid(origin ~ size)
+  
+
 # 5-year average
 idfg_dat %>%
-  filter(Year >= (yr-4)) %>%
+  filter(spawnyear >= (yr-4)) %>%
   filter(origin == 'Wild') %>%
-  group_by(group) %>%
-  summarise(min_yr = min(Year),
-            max_yr = max(Year),
+  group_by(size) %>%
+  summarise(min_yr = min(spawnyear),
+            max_yr = max(spawnyear),
             n_yrs = n(),
-            avg = mean(IDFG_total))
+            avg = mean(est))
+
+idfg_dat %>%
+  ggplot(aes(x = spawnyear, y = est)) +
+  geom_col(aes(fill = origin))
 
 # new_df <- tribble(~Year, ~species, ~run_cmb, ~origin, ~group, ~IDFG_total,
 #                   2021, 'Chinook', 'Sp/sm', 'Wild', 'Adult', 6556,  #email to Jay Hesse on 1/31/2022 from Jonathan Ebel

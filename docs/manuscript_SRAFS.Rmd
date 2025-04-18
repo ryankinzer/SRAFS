@@ -1,66 +1,123 @@
 ---
-title: "Status of ESA-listed Snake River Basin Spring/summer Chinook Salmon and Steelhead after 45 years of recovery efforts."
-author: 
-  - Ryan N. Kinzer, *Research Scientist*
-  - Jay Hesse, *Director of Biological Services*
-#- name: Ryan N. Kinzer
-#  affiliation: Research Division, Department of Fisheries Resources Management
+title: "Three Decades of ESA-Listing: Are Snake River Spring/summer Chinook Salmon and Steelhead on the Path to Recovery?"
+author:
+  - name: Ryan N. Kinzer
+    title: Research Scientist
+    affil: 1
+  - name: Jay Hesse
+    title: Director of Biological Services
+    affil: 1
+  - name: Jason Vogel
+    title: Research Division Director
+    affil: 1
+
+affiliations:
+  - id: 1
+    name: Nez Perce Tribe, Department of Fisheries Resources Management
+    
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   bookdown::pdf_document2:
     citation_package: biblatex #natbib
     keep_tex: yes
     fig_caption: yes
+    tables: true
     latex_engine: pdflatex #xelatex
-    template: C:\ryank\Templates\NPT_report_template2.tex
+    template: ..\templates\NPT_article_template.tex
   bookdown::word_document2:
-    reference_docx: "template1.docx"
+    reference_docx: ..\templates\Word_template_draft.docx
     number_sections: false
     toc: false
     toc_levels: 3
   bookdown::html_document2:
-    number_sections: no
-    fig_caption: yes
+    theme: cerulean
     toc: yes
-    floating_toc: yes
-    df_print: paged
+    toc_depth: 4
+    toc_float:
+      collapsed: no
+      smooth_scroll: yes
+    number_sections: yes
+    css: "../templates/styles.css"
+    pandoc_args:
+    - "--lua-filter=../templates/scholarly-metadata.lua"
+    - "--lua-filter=../templates/author-info-blocks.lua"
+    - "--lua-filter=../templates/pagebreak.lua"
 shorttitle: Chinook and Steelhead Status
 geometry: margin=1in
-fontfamily: mathpazo
+#fontfamily: mathpazo
 fontsize: 11pt
-branding: no
-bibliography:
-- abundance_decline.bib
+branding: yes
+linenumbers: no
+# abstract:
+#   The historic and abundant Snake River returns started declining soon after European settlement beginning in the 1850's due to overharvest, hydropower development, natural resource extraction and urban growth along the Columbia and Snake rivers. Between 1980 and 1990 sp/su Chinook Salmon escapement into the Snake River basin ranged between 3,343 to 21,870 adults. Based on their rapid decline and the low numbers observed the Snake River sp/su Chinook Salmon evolutionary significant unit (ESU) was listed as threatened under the Endangered Species Act (ESA) in 1992 (57 FR 14653). During the same period, the returning Snake River summer steelhead distinct population segment (DPS) experienced similar rates of decline, with an average annual return of only 9,400 when they were listed as threatened under ESA in 1997 (62 FR 43937)
+# keywords: pacific salmon, steelhead, 
+csl: "../templates/american-fisheries-society.csl"
+bibliography: 
+  - abundance-decline.bib
+  - packages.bib
 link-citations: true
-csl: "../../../Templates/american-fisheries-society.csl" # Insert path for the bib-style
+always_allow_html: yes
 ---
 
 ```{r setup, include=FALSE}
 library(knitr)
 library(kableExtra)
 
-opts_chunk$set(echo = FALSE, message = FALSE, error = FALSE,
-                      warning = FALSE)
+opts_chunk$set(echo = FALSE, message = FALSE, error = FALSE, warning = FALSE)
 
+# default options for tables
 options(knitr.kable.NA = '-')
+
+# when knitting to Word, use this
+# what kind of document is being created?
+doc.type <- knitr::opts_knit$get('rmarkdown.pandoc.to')
+
+if(!(is.null(doc.type)) && doc.type == 'docx') {
+  options(knitr.table.format = "pandoc")
+}
+
+if(!(is.null(doc.type)) && doc.type %in% c("docx", "html")) {
+  theme_set(theme_pubr(base_family = "Times New Roman"))
+}
 ```
 
 ```{r load-pkgs}
 library(tidyverse)
-# library(scales)
-# library(flextable)
-# library(officer)
-# library(cuyem)
-# library(fisheR)
+library(sf)
+library(scales)
+library(ggmap)
+library(maps)
+source('../R/theme_rk.R')
+source('../R/summarize_ModelFits.R')
+
+# set default theme for ggplot2
+#theme_set(theme_pubr())
 ```
 
-```{r source-theme}
-source('../R/theme_rk.R')
+```{r package-bibtex, eval = TRUE}
+knitr::write_bib(c("tidyverse",
+                   "MARSS",
+                   "knitr", 
+                   "rmarkdown",
+                   "ggpubr",
+                   "sf",
+                   "scales",
+                   "ggmap",
+                   "maps",
+                   "dabom",
+                   "stadem"),
+                 file = 'packages.bib')
+```
+
+
+```{r set-params}
+yr <- 2024
+fig_path <- here::here('figures','/')
 ```
 
 # Background
 
-Freshwater and marine fish species are declining globally due to a variety of stressors, including habitat loss, overfishing, climate change, and pollution. Freshwater species have experienced an alarming 83% decline in monitored populations since 1970, with significant losses observed in the Pacific region [@wwf_living_2022]. A recent study conducted for the International Union for the Conservation of Nature (IUCN)'s Red List of Threatened Species found 25% of all freshwater species are at high risk of extinction [@sayer_one-quarter_2025]. Similarly, marine species such as Atlantic Cod *Gadus morhua*)* and Bluefin Tuna *Thunnus thynnus* have suffered steep population declines from over exploitation and environmental changes [@fao_state_2020]. The downward patterns and root causes are shared with most North American diadromous fish as well [@waldman_north_2022], and mirrored by populations of anadromous salmonids along the western coast of the United States, where Pacific salmon (*Oncorhynchus spp.*) abundance has been negatively impacted since commercial harvest began with European settlement [@chapman_salmon_1986] and continues to be threatened from altered river flows, warming waters, and habitat fragmentation caused by dams and urban development.
+Freshwater and marine fish species are declining globally due to a variety of stressors, including habitat loss, overfishing, climate change, and pollution. Freshwater species have experienced an alarming 83% decline in monitored populations since 1970, with significant losses observed in the Pacific region [@wwf_living_2022]. A recent study conducted for the International Union for the Conservation of Nature (IUCN)'s Red List of Threatened Species found 25% of all freshwater species are at high risk of extinction [@sayer_one-quarter_2025]. Similarly, marine species such as Atlantic Cod *Gadus morhua*)* and Bluefin Tuna *Thunnus thynnus* have suffered steep population declines from over exploitation and environmental changes [@fao_state_2020]. The downward patterns and root causes are shared with most North American diadromous fish as well [@waldman_north_2022], and mirrored by populations of anadromous salmonids along the western coast of the United States, where fish abundance has been negatively impacted since commercial harvest began with European settlement [@chapman_salmon_1986] and continues to be threatened from altered river flows, warming waters, and habitat fragmentation caused by dams and urban development.
 
 <!-- Sherman et al. 2023 - extinction risk of coral reef sharks and rays-->
 
@@ -72,11 +129,11 @@ Freshwater and marine fish species are declining globally due to a variety of st
  
  <!-- All salmon are facing threats, Snake river salmon and steelhead face many threats. Some within our control (freshwater habitat, human caused barriers, hydrosystems) and some not (climate change). For them to have a chance we need to remove the threats that we can influence and control.  -->
 
-Nowhere are these declines more evident than in the Columbia River basin, a critical habitat for salmonid species, including Chinook Salmon *O. tshawytscha* and steelhead *O. mykiss*. Historically Chinook Salmon and steelhead returned to the Columbia River basin in the millions, estimated returns range between 5 and 16 million fish annually [@chapman_salmon_1986; @isabDensityDependence; @NPCC1986], with spring and summer (sp/su) Chinook Salmon making up the largest component (2.5-3.0 million) and steelhead returns consisting of approximately 450-550 thousand individuals [@chapman_salmon_1986]. @chapmanHistoricalAbundanceAnadromous2003 later decomposed total Columbia River returns into Snake River specific stocks, a major tributary of the Columbia River, using available habitat area as developed by (**PFMC 1979**). @chapmanHistoricalAbundanceAnadromous2003 found the Snake River supported 87.5% of spawning habitat, suggesting historic returns of sp/su Chinook Salmon to the Snake River were approximately 1.4-2.2 million with an additional 250-400 thousand steelhead.
+Nowhere are these declines more evident than in the Columbia River basin, a critical habitat for pacific salmonid species, including Chinook Salmon *O. tshawytscha* and steelhead *O. mykiss*. Historically Chinook Salmon and steelhead returned to the Columbia River basin in the millions, estimated returns range between 5 and 16 million fish annually [@chapman_salmon_1986; @isab_density_2015; @npcc_compilation_1986], with spring and summer (sp/su) Chinook Salmon making up the largest component (2.5-3.0 million) and steelhead returns consisting of approximately 450-550 thousand individuals [@chapman_salmon_1986]. @chapman_historical_2003 later decomposed total Columbia River returns into Snake River specific stocks, a major tributary of the Columbia River, using available habitat area as developed by (**need source: PFMC 1979**). @chapman_historical_2003 found the Snake River contained the majority of available Columbia River spawning habitat, suggesting historic returns of sp/su Chinook Salmon to the Snake River were approximately 1.4-2.2 million with an additional 250-400 thousand steelhead.
 
-The Snake River sp/su Chinook Salmon Evolutionarily Significant Unit (ESU) and steelhead Distinct Population Segment (DPS) historically supported 68 sp/su Chinook Salmon and 40 steelhead populations located in central Idaho, southeast Washington, and northeast Oregon [@cbp_vision_2020]. These populations utilized spawning habitat that extended over **X** river kilometers, representing more than **XX%** of the total spawning habitat in the Columbia River Basin (**PFMC 1979**). However, the completion of Dworshak Dam in the Clearwater subbasin and Hell’s Canyon Dam in the upper Snake River basin, both lacking fish passage facilities, reduced the number of accessible populations to 41 for sp/su Chinook Salmon and 24 for steelhead. This habitat loss led to the immediate extinction of 60% of the historical populations. The remaining Snake River populations [\@ref(fig:esu-map)] face continued threats of habitat degradation (**citation**), hydrosystem impacts (**citation**), a rapidly changing climate [@crozier_climate_2021; @nakamura_divergent_2023], and depressed population sizes making recovery difficult (**citation**). The remaining sp/su Chinook Salmon and steelhead populations are distributed across the Tucannon River and Asotin Creek subbasins in Southeast Washington, the Joseph Creek, Grande Ronde River, and Imnaha River subbasins in Northeast Oregon, and the Clearwater River and Salmon River subbasins in central Idaho.
+The abundant Snake River returns started declining soon after European settlement beginning in the 1850's due to overharvest, hydropower development, natural resource extraction and urban growth along the Columbia and Snake rivers [@nehlsen_pacific_1991]. With the largest loss of returns being observed during the construction of hydroelectric dams along the Columbia and Lower Snake rivers beginning with Bonneville Dam in 1933 and ending with Lower Granite Dam in 1978. Between 1980 and 1990 sp/su Chinook Salmon escapement into the Snake River basin ranged between 3,343 to 21,870 adults (57 FR 14653)[@noauthor_federal_1992]. Based on their rapid decline and low numbers relative to their large geographical area of occupancy the Snake River sp/su Chinook Salmon evolutionary significant unit (ESU) was listed as threatened under the Endangered Species Act (ESA) in 1992 (57 FR 14653)[@noauthor_federal_1992]. During the same period, the returning Snake River summer steelhead distinct population segment (DPS) experienced similar rates of decline, with an average annual return of only 9,400 when they were listed as threatened under ESA in 1997 (62 FR 43937) [@noauthor_federal_1997]. 
 
-The historic and abundant Snake River returns started declining soon after European settlement beginning in the 1850's due to overharvest, hydropower development, natural resource extraction and urban growth along the Columbia and Snake rivers [@nehlsen1991]. Between 1980 and 1990 sp/su Chinook Salmon escapement into the Snake River basin ranged between 3,343 to 21,870 adults [@NMFS1992]. Based on their rapid decline and the low numbers observed the Snake River sp/su Chinook Salmon evolutionary significant unit (ESU) was listed as threatened under the Endangered Species Act (ESA) in 1992 (57 FR 14653)[@noauthor_federal_1992]. During the same period, the returning Snake River summer steelhead distinct population segment (DPS) experienced similar rates of decline, with an average annual return of only 9,400 when they were listed as threatened under ESA in 1997 (62 FR 43937) [@noauthor_federal_1997]. 
+The Snake River sp/su Chinook Salmon ESU and steelhead DPS historically supported 68 sp/su Chinook Salmon and 40 steelhead populations located across central Idaho, southeast Washington, and northeast Oregon [@cbp_vision_2020; @\ref(fig:esu_map)]. The historical populations contained **X** river kilometers of spawning habitat that represented more than 88% of the total spawning habitat in the Columbia River Basin [@chapman_historical_2003]. However, habitat accessibility was permanently reduced to 41 sp/su Chinook Salmon and 24 steelhead populations after the completion of Dworshak Dam on the North Fork Clearwater River in 1969 and the three Hell’s Canyon project dams on the upper Snake River River from 1959-1967 which lacked fish passage facilities. The resulting habitat loss led to the immediate extinction of 60% of the historical populations in the Snake River basin. With the remaining populations at historically low abundances and facing continued threats of habitat degradation, hydrosystem impacts, and a rapidly changing climate [@noaa_rebuilding_2022; @crozier_climate_2021; @nakamura_divergent_2023]. 
 
  <!-- @chapman_salmon_1986 estimated 7.5-8.8 million; 5-9 million [@isabDensityDependenceIts2015] or between 10 - 16 million [@NPCC1986]. -->
 
@@ -86,31 +143,13 @@ The historic and abundant Snake River returns started declining soon after Europ
 
 <!-- This decline is attributed to barriers such as dams that impede migration, degraded spawning habitats, and changing ocean conditions that affect survival rates. Addressing these declines is critical not only for preserving biodiversity but also for sustaining the cultural and economic importance of these fish to the region. -->
 
-After the fishes ESA listing in the 1990's regulatory agencies established methods to asses population viability. Population viability and extinction is commonly thought of as a stochastic event with risk conveyed probabilistically, requiring thresholds for population persistence, and determined through "rules of thumb", analytical, or simulation studies [@thompson1991]. Often, population viability occurs at a point when abundance or other metrics indicate the probability of persistence is greater than 0.95. Similarly, population viability evaluations can examine the opposite and determine at which point is the probability of extinction greater than 0.95, thus, indicating the point at which the population is at high risk of extinction and unlikely to recover [@thompson1991]. The viability of Snake River sp/su Chinook Salmon and steelhead is assessed using a combination of minimum abundance thresholds (MAT), productivity, genetic diversity and spatial distribution metrics [@mcelhanyViableSalmonidPopulations2000; @ictrtViabilityCriteriaApplication2007]. Minimum abundance thresholds for each population were developed independently using available habitat and intrinsic potential models [@Cooney and Holzer], with MAT for individual populations ranging from 500-2,000 sp/su Chinook Salmon and 500-1,500 steelhead [@ictrtViabilityCriteriaApplication2007]. At these established MAT levels populations were determined to be viable and have a low risk of extinction [@noaaESARecoveryPlan2017]. Conversely, [@ictrtViabilityCriteriaApplication2007] set a quasi-extinction threshold (QET) for each population at 50 or fewer spawners for four consecutive years to determine the point when extinction was likely.
+After ESA listing of Snake River anadromous fish in the 1990's regulatory agencies established methods to asses population viability. Population viability and extinction is commonly thought of as a stochastic event with risk conveyed probabilistically, requiring thresholds for population persistence, and determined through "rules of thumb", analytical, or simulation studies [@thompson_determining_1991]. Often, population viability occurs at a point when abundance or other metrics indicate the probability of persistence is greater than 0.95. Similarly, population viability evaluations can examine the opposite and determine at which point is the probability of extinction greater than 0.95, thus, indicating the point at which the population is at high risk of extinction and unlikely to recover [@thompson_determining_1991]. The viability of Snake River sp/su Chinook Salmon and steelhead is assessed using a combination of minimum abundance thresholds (MAT), productivity, genetic diversity and spatial distribution metrics [@mcelhany_viable_2000; @ictrt_viability_2007]. Minimum abundance thresholds for each population were developed independently using available habitat and intrinsic potential models [@cooney_appendix_2006], with MAT for individual populations ranging from 500-2,000 sp/su Chinook Salmon and 500-1,500 steelhead [@ictrt_viability_2007]. At these established MAT levels populations were determined to be viable and have a low risk of extinction [@noaa_esa_2017]. Conversely, [@ictrt_viability_2007] set a quasi-extinction threshold (QET) for each population at 50 or fewer spawners for four consecutive years to determine the point when extinction was likely. And recently, in 2020, Columbia River and Snake River fisheries co-managers recognized population viability thresholds were far below desired levels in order to meet ecological and state and tribal harvest needs. In collaboration with the regulatory agencies the co-managers formed the Columbia Basin Partnership (CBP) and developed common abundance goals focused on healthy, harvestable, and sustainable levels capable of supporting ecosystem processes [@cbp_vision_2020]. These established "healthy and harvestable" levels, combined with population viability thresholds, form an agreed upon and complete set of abundance evaluation points to determine a population's recovery status.
 
-Recently, in 2020, Columbia River and Snake River fisheries co-managers recognized population viability thresholds were far below desired levels in order to meet ecological and state and tribal harvest needs. In collaboration with the regulatory agencies the co-managers formed the Columbia Basin Partnership (CBP) and developed common abundance goals focused on healthy, harvestable and sustainable levels which support ecosystem processes [@cbpVisionSalmonSteelhead2020]. These established "healthy and harvestable" levels, combined with population viability thresholds, now provide a complete set of abundance evaluation points which can be used to determine a population's recovery status.
-
-**Need to reference and discuss Ford 2020, WA State of the Salmon, and Storch, maybe others, for us to later compare results and provide a weight of evidence approach to accuracy.**
-
-Three decades have passed since the ESA listing of Snake River sp/su Chinook Salmon and steelhead, and during this time, one of the largest and most expensive species recovery efforts has unfolded. Approximately 17 billion dollars has been spent in the Columbia River basin to protect and restore habitat, improve survival through mainstem hydrosystems, provide fisheries with hatchery production, and to rebuild natural populations supplementation (**citation**), yet, annual fish runs continue to be only 1% of historical levels [@thurow2020]. Our aim for this research is to provide the current and future predicted status of Snake River basin sp/su Chinook Salmon and steelhead populations relative to healthy and harvestable, delisting, and quasi-extinction abundance thresholds. To establish the status of populations we first fit a multivariate dynamic linear model to empirical population abundance estimates similar to @Ford2020, second, we conduct a trend analyses with the most recent 10 years of data to compare patterns across populations, and third, we summarize the percent of populations currently, or predicted, above or below the abundance thresholds, and finally, we discuss our findings in relation to other studies to provide proof of accuracy with a weight of evidence approach.
-
-**Need to merge the above and below paragraphs** 
-
-This study seeks to use the best available abundance information to understand the current status of Snake River populations and identify populations at most risk of falling below the quasi-extinction threshold. We begin by modeling spawner abundance using two independent sources of information, when available, for each population with a state-space model accounting for observation and process error. The model seeks to describe the unknown state process for each population while allowing imperfect observations. Next, we fit a linear regression (i.e., trend line) to each state process for the last 10-year period to describe contemporary trends and the last two generations of returns. Last, we extend the trend lines five years into the future to identify populations at highest risk of reaching quasi-extinction.   
-
-
-<!-- Methe et al. 2021 - A guide to state-space modeling of ecological time series-->
-
-<!-- Methe et al. 2021 and Holmes et al. 2012 suggest AICb for model selection of state-space models. -->
+Three decades have passed since the ESA listing of Snake River sp/su Chinook Salmon and steelhead, and during this time, one of the largest and most expensive species recovery efforts has unfolded. Approximately 17 billion dollars has been spent in the Columbia River basin to protect and restore habitat, improve survival through mainstem hydrosystems, provide fisheries with hatchery production, and to rebuild natural populations supplementation (**citation**), yet, annual fish runs continue to be only 1% of historical levels [@thurow_wild_2019; @storch_review_2022; @ford_biological_2022]. Our aim for this research is to provide an updated current status and future predicted status of Snake River sp/su Chinook Salmon and steelhead populations relative to healthy and harvestable, delisting, and quasi-extinction abundance thresholds [@cbp_vision_2020]. To establish the current status and trends of Snake River populations we first fit multivariate dynamic linear models (DLM) to empirical population abundance estimates, similar to @ford_biological_2022, to identify common patterns across populations. Second, we use the best fitting DLM to estimate population trends and annual growth rates for the most recent 10 year period to evaluation recovery status. Third, we summarize the percent of populations currently, or predicted, above or below abundance thresholds, and finally, we discuss our findings in relation to other studies regarding Snake River anadromous fish population status.
 
 ```{r load-map-data}
-library(sf)
-library(scales)
-library(ggmap)
-library(maps)
 # Load datasets ----
 # Get states
-
 user_path <- Sys.getenv('OneDrive')
 proj_path <- '/Projects/DFRM Projects/River_Mapping/data/'
 spatial_files <- paste0(user_path, proj_path, 'polygons/SR_pops.rda')
@@ -130,16 +169,40 @@ spsm_pop <- spsm_pop %>%
   mutate(pop = str_to_title(pop)) %>%
   select(mpg = MPG, pop, TRT_POPID)
 
+spsm_esu_dps <- sf::st_read(paste0(user_path, proj_path,'polygons/CHNK_SPSU_ALL/CHNK_SPSU_All.shp'), quiet = TRUE) %>%
+    filter(grepl('Snake', ESU_DPS)) %>%
+    mutate(extant = case_when(
+      grepl('Outside', ESU_DPS) ~ 'Extinct',
+      grepl('North Fork Clearwater', NWR_NAME) ~ 'Extinct',
+      TRUE ~ 'Extant')
+    ) %>%
+    group_by(extant) %>%
+    summarize(shape_area = sum(SHAPE_AREA)) %>%
+    st_transform(crs = 4326)
+
 sth_pop <- sth_pop %>%
     filter(!grepl('NFC', TRT_POPID))
 
+sth_esu_dps <- sf::st_read(paste0(user_path, proj_path,'polygons/STHD_SUWI_ALL/STHD_SUWI_All.shp'), quiet = TRUE) %>%
+    filter(grepl('Snake', ESU_DPS)) %>%
+    mutate(extant = case_when(
+      grepl('Outside', ESU_DPS) ~ 'Extinct',
+      grepl('North Fork Clearwater', NWR_NAME) ~ 'Extinct',
+      TRUE ~ 'Extant')
+    ) %>%
+    group_by(extant) %>%
+    summarize(shape_area = sum(SHAPE_AREA)) %>%
+    st_transform(crs = 4326)
+
 pnw <- st_as_sf(map("state", plot = FALSE, fill = TRUE)) %>% filter(ID %in% c('idaho', 'oregon', 'washington')) %>%
   st_transform(crs = 4326)
+
 ```
 
 
-```{r esu-map, fig.cap = 'Population boundaries of sp/sm Chinook Salmon (A) and steelhead (B) still accessible within the Snake River Basin ESU/DPS; populations belonging to the same major population groups are shown in similar colors.'}
+```{r esu-map, fig.cap = 'Currently accessible and extant spring-summer Chinook Salmon (A) and steelhead (B) populations within the Snake River Basin evolutionary significant unit (ESU) or distinct population segment (DPS) are grouped in similar colors while the grey shape indicates extict populations.'}
 spsm_map <- ggplot() +
+  geom_sf(data = spsm_esu_dps, fill = 'grey80') +
   geom_sf(data = spsm_pop, aes(fill = mpg),
           colour = 'black', size = 1, inherit.aes = FALSE) +
   # ggrepel::geom_label_repel(
@@ -151,7 +214,7 @@ spsm_map <- ggplot() +
   #   inherit.aes = FALSE,
   #   show.legend = FALSE
   # ) +
-  guides(fill = guide_legend(nrow = 3)) +
+  guides(fill = guide_legend(ncol = 2)) +
   scale_fill_brewer(palette = 'Dark2') +
   labs(fill = '') +
   theme_void() +
@@ -160,6 +223,7 @@ spsm_map <- ggplot() +
 
 
 sth_map <- ggplot() +
+  geom_sf(data = sth_esu_dps, fill = 'grey80') +
   geom_sf(data = sth_pop, aes(fill = MPG),
           colour = 'black', size = 1, inherit.aes = FALSE) +
   # ggrepel::geom_label_repel(
@@ -171,7 +235,7 @@ sth_map <- ggplot() +
   #   inherit.aes = FALSE,
   #   show.legend = FALSE
   # ) +
-  guides(fill = guide_legend(nrow = 3)) +
+  guides(fill = guide_legend(ncol = 2)) +
   scale_fill_brewer(palette = 'Dark2') +
   labs(fill = '') +
   theme_void() +
@@ -180,7 +244,8 @@ sth_map <- ggplot() +
 
 inset <- ggplot() +
   geom_sf(data = pnw) +
-  geom_sf(data = sth_pop, fill = 'grey75', color = NA) +
+  geom_sf(data = sth_esu_dps, fill = 'grey80') +
+  geom_sf(data = sth_pop, fill = 'grey25', color = NA) +
   theme_nothing()
 
 map_fig <- cowplot::plot_grid(spsm_map, sth_map, labels = c('A', 'B'), label_size = 12)
@@ -192,12 +257,18 @@ map_final <- cowplot::ggdraw(map_fig) +
             width = .15,
             height = .2)
 
-print(map_final)
+map_final
 ```
 
 # Methods
 
 ## Data
+
+This study seeks to use the best available abundance information to understand the current status of Snake River populations. We begin by modeling spawner abundance using two independent sources of information, when available, for each population with a state-space model accounting for observation and process error. The model seeks to describe the unknown state process for each population while allowing imperfect observations. Next, we fit a linear regression (i.e., trend line) to each state process for the last 10-year period to describe contemporary trends and the last two generations of returns. Last, we extend the trend lines five years into the future to identify populations at highest risk of reaching quasi-extinction.   
+
+Time-series abundance estimates of natural-origin fish returning to accessible populations within the Snake River Basin were provided from two independent observation sources [\@ref(tab:chn-obs); \@ref(tab:sth-obs)]. Both time-series estimates were obtained from [StreamNet's Coordinated Assessments](https://cax.streamnet.org) natural-origin spawner abundance (NOSA) dataset. We first subset the dataset to include only those records from Snake River Basin ESU/DPS populations. The first population time-series were primarily derived from observations of redds and weir collections, and intended to represent NOSA including jacks (NOSAij). The NOSAij estimates were generated and submitted to Coordinated Assessments by Idaho Department of Fish Game, Washington Department of Fish and Game, Oregon Department of Fish and Game, and Nez Perce Tribe biologists. Specifc details regarding the estimation of NOSAij for each population can be found in agency reports [**need citations**] or by contacting the contributing source listed in Coordinated Assessments metadata. The second population time-series represents escapement of natural-origin fish (including jack) to the population. Escapement estimates were derived from PIT-tag observations and a Bayesian hierarchical patch occupancy model described in @waterhouse_bayesian_2020 slightly modified by estimating time-varying transition probabilities which can account for 1) differential adult run timings among populations in the basin and 2) potentially inconsistent trapping and tagging rates at Lower Granite Dam. Further details regarding the escapement estimates can be found in @See2020 and @See2019. 
+
+Abundance trends for individual sp/su Chinook Salmon and steelhead populations were analyzed using data from StreamNet's Coordinated Assessments [database](https://cax.streamnet.org) and passive integrated transponder (PIT) tag model results. For most combinations of return years and sp/su Chinook Salmon populations, data originated from the Coordinated Assessments database and were produced by the state or tribal co-managers responsible for monitoring those populations. The dataset was retrieved from Coordinated Assessments on January X, 2025, and filtered to only include Snake River sp/su Chinook Salmon and steelhead populations with natural-origin spawner abundance estimates, including jacks (NOSAij). For many Snake River populations, multiple NOSAij estimates were available for the same year due to variations in estimation methods (e.g., spawning ground surveys, mark-recapture) and/or data generators. In these cases, we selected annual estimates labeled as the method used by the National Oceanic and Atmospheric Administration (NOAA) technical recovery team. Steelhead abundance data were filtered from Coordinated Assessments by selecting estimates generated through the STate-space Adult Dam Escapement Model (STADEM) [@see_state-space_2021] and the Dam Adult Branch Occupancy Model (DABOM) [@see_pit_2016; @kinzer_snake_2020], as indicated in the "Comments" field. Population data for sp/su Chinook Salmon returning to Big Sheep Creek, Lookingglass Creek, Little Salmon River, and Panther Creek were unavailable in the Coordinated Assessments database. For these populations, we included estimates derived from the STADEM and DABOM models but obtained from @kinzerSnakeRiverBasin2020.
 
 <!--
 ### ESU/DPS Aggregated Abundance and Status
@@ -206,54 +277,134 @@ We derived natural-origin steelhead abundance at LGD from daily window count dat
 
 <!-- The Idaho Department of Fish and Game (IDFG) provided abundance estimates of adult natural-origin spring/summer (sp/su) Chinook Salmon and natural-origin steelhead returning to the Snake River, which were used in the aggregated trend analyses. Data from 1962–1997 originated from an unpublished internal IDFG dataset (Timothy Copeland, pers. comm.). Data for return years 1998–2024 were published in IDFG annual reports [@camachoWildAdultSteelhead2019; @lawryWildAdultSteelhead2020a] **(Update)**. For each year in the dataset, natural-origin adult abundance constituted a subset of the total spring/summer (sp/su) Chinook Salmon passing the furthest upstream completed dam on the lower Snake River. Total fish counts were recorded as individuals ascended the fish ladder and passed a viewing window (USACE report). These total counts were then partitioned into natural-origin and hatchery-origin components, as well as adult and jack groups. The methods used to apportion the 1998–2024 returns into these components varied by year. Generally, this process relied on genetic and scale analyses of fish samples collected at Lower Granite Dam, combined with origin proportions calculated from spawning ground survey data [@camachoWildAdultSteelhead2019; @lawryWildAdultSteelhead2020a]. However, the methods used to differentiate adult, jack, and origin groups for return years prior to 1998 remain unknown. -->
 
-Time-series abundance estimates of natural-origin fish returning to accessible populations within the Snake River Basin were provided from two independent observation sources (\@ref(tab:sample-size)). Both time-series estimates were obtained from [StreamNet's Coordinated Assessments](https://cax.streamnet.org) natural-origin spawner abundance (NOSA) dataset. We first subset the dataset to include only those records from Snake River Basin ESU/DPS populations. The first population time-series were primarily derived from observations of redds and weir collections, and intended to represent NOSA including jacks (NOSAij). The NOSAij estimates were generated and submitted to Coordinated Assessments by Idaho Department of Fish Game, Washington Department of Fish and Game, Oregon Department of Fish and Game, and Nez Perce Tribe biologists. Specifc details regarding the estimation of NOSAij for each population can be found in agency reports [**need citations**] or by contacting the contributing source listed in Coordinated Assessments metadata. The second population time-series represents escapement of natural-origin fish (including jack) to the population. Escapement estimates were derived from PIT-tag observations and a Bayesian hierarchical patch occupancy model described in @Waterhouse2020 slightly modified by estimating time-varying transition probabilities which can account for 1) differential adult run timings among populations in the basin and 2) potentially inconsistent trapping and tagging rates at Lower Granite Dam. Further details regarding the escapement estimates can be found in @See2020 and @See2019. 
 
 
-[Insert table with summary statistics for full dataset.]
+```{r load-mod_fits}
+# load model fits
+load(paste0('../data/output/', 'Chinook_salmon', '_model_fits_',yr,'.rda'))
+chn_mod_inputs <- mod_inputs
+chn_mod_fit <- mod_fit[-c(3:6)] # remove duplicate model runs
+
+#load(paste0('../data/output/', 'Chinook_salmon', '_best_fit_',yr,'.rda'))
+
+# load model fits
+load(paste0('../data/output/', 'Steelhead', '_model_fits_',yr,'.rda'))
+sth_mod_inputs <- mod_inputs
+sth_mod_fit <- mod_fit[-c(3:6)]
+
+#load(paste0('../data/output/', 'Steelhead', '_best_fit_',yr,'.rda'))
+
+rm(mod_inputs, mod_fit)
+```
+
+
+```{r chn-obs, tab.cap="Summary of abundance time-series used in modeling Snake River spring/summer Chinook Salmon populations (n = 48). Time-series length and data sources varied by population, with observations spanning from 1980 to 2024. Abundance estimates were primarily based on spawning ground surveys and weir counts, with PIT-tag detections included for select populations. The 10th, 50th (median), and 90th percentiles of observed abundance values are provided to summarize distributional characteristics across years."}
+chn_mod_inputs$dat %>%
+  filter(!is.na(nosaij)) %>%
+  filter(spawningyear >= 1980) %>%
+  group_by(mpg, pop, method) %>%
+  summarise(obs_year = paste0(min(spawningyear),'-',max(spawningyear)),
+            n = n(),
+            p_10 = quantile(nosaij, probs = .10),
+            p_50 = quantile(nosaij, probs =  .50),
+            p_90 = quantile(nosaij, probs =  .90)
+            #min_nosaij = min(nosaij),
+            #max_nosaij = max(nosaij),
+            #avg_nosaij = mean(nosaij),
+            #sd_nosaij = sd(nosaij)
+            ) %>%
+  mutate(method = case_when(
+    method == 2 ~ 'PIT-tag',
+    method == 1 ~ 'SGS and Weir')
+  ) %>%
+  arrange(mpg, pop) %>%
+  kable(
+    col.names = c('MPG', 'Population', 'Method', 'Years', '# Years', '10%', '50%', '90%'),
+    booktabs = TRUE,
+    digits = 0,
+    label = NA,
+    format = 'latex'
+  ) %>%
+  collapse_rows(columns = 1:2, valign = "top", latex_hline = "none") %>%
+  kable_styling(font_size = 8)
+```
+
+
+```{r sth-obs, tab.cap="Summary of abundance time-series used in modeling Snake River summer steelhead populations (n = 25). Time-series length and data sources varied by population, with observations spanning from 2010 to 2024. Abundance estimates were primarily based on PIT-tag detections, with spawning ground surveys and weir counts included for select populations. The 10th, 50th (median), and 90th percentiles of observed abundance values are provided to summarize distributional characteristics across years."}
+sth_mod_inputs$dat %>%
+  filter(!is.na(nosaij)) %>%
+  filter(spawningyear >= 2010) %>%
+  group_by(mpg, pop, method) %>%
+  summarise(obs_year = paste0(min(spawningyear),'-',max(spawningyear)),
+            n = n(),
+            p_10 = quantile(nosaij, probs = .10),
+            p_50 = quantile(nosaij, probs =  .50),
+            p_90 = quantile(nosaij, probs =  .90)
+            #min_nosaij = min(nosaij),
+            #max_nosaij = max(nosaij),
+            #avg_nosaij = mean(nosaij),
+            #sd_nosaij = sd(nosaij)
+            ) %>%
+  mutate(method = case_when(
+    method == 2 ~ 'PIT-tag',
+    method == 1 ~ 'SGS and Weir')
+  ) %>%
+  arrange(mpg, pop) %>%
+  kable(
+    col.names = c('MPG', 'Population', 'Method', 'Years', '# Years', '10%', '50%', '90%'),
+    booktabs = TRUE,
+    digits = 0,
+    label = NA,
+    format = 'latex'
+  ) %>%
+  collapse_rows(columns = 1:2, valign = "top", latex_hline = "none") %>%
+  kable_styling(font_size = 8)
+```
+
 [Figure of stochasiticity across time, and the synchronization after 1980.]
 
 
 
-### Population Abundance and Status
+## Objective 1: Abundance Patterns
 
-Abundance trends for individual sp/su Chinook Salmon and steelhead populations were analyzed using data from StreamNet's Coordinated Assessments [database](https://cax.streamnet.org) and passive integrated transponder (PIT) tag model results. For most combinations of return years and sp/su Chinook Salmon populations, data originated from the Coordinated Assessments database and were produced by the state or tribal co-managers responsible for monitoring those populations. The dataset was retrieved from Coordinated Assessments on January X, 2025, and filtered to only include Snake River sp/su Chinook Salmon and steelhead populations with natural-origin spawner abundance estimates, including jacks (NOSAij). For many Snake River populations, multiple NOSAij estimates were available for the same year due to variations in estimation methods (e.g., spawning ground surveys, mark-recapture) and/or data generators. In these cases, we selected annual estimates labeled as the method used by the National Oceanic and Atmospheric Administration (NOAA) technical recovery team. Steelhead abundance data were filtered from Coordinated Assessments by selecting estimates generated through the STate-space Adult Dam Escapement Model (STADEM) [@seeStateSpaceModelEstimate2021] and the Dam Adult Branch Occupancy Model (DABOM) [@seePITTagBased2016; @kinzerSnakeRiverBasin2020], as indicated in the "Comments" field. Population data for sp/su Chinook Salmon returning to Big Sheep Creek, Lookingglass Creek, Little Salmon River, and Panther Creek were unavailable in the Coordinated Assessments database. For these populations, we included estimates derived from the STADEM and DABOM models but obtained from @kinzerSnakeRiverBasin2020.
+<!-- Methe et al. 2021 - A guide to state-space modeling of ecological time series-->
 
-## Objective 1: Model Abundance
+<!-- Methe et al. 2021 and Holmes et al. 2012 suggest AICb for model selection of state-space models. -->
 
-The reported population abundance data generated by fisheries comanagers are not the exact truth, and in many cases, they are reported without levels of certainty (i.e., precision estimates) or measurement error. Reported estimates instead are generally the result of incomplete observations (i.e., spatial and temporal coverage is incomplete) and the product of combining information from multiple data collection activities and fish metrics together (i.e., redd count surveys, mark/recapture events, carcass collections), with each item having the possibility of being incorrect or biasing the abundance estimate from the unknown truth. To better understand the true unknown abundance and underlying trends contained within the data we removed measurement error using a multivariate dynamic linear model (DLM) [@zuur2006]. A DLM is a time series model constructed as a type of state-space model that separates observation and state processes, and assumes the processes change dynamically following linear models [@royle_dorazio]. Dynamic linear models are capable of capturing the serial correlation in the data and can share covariance across multiple time-series, thus, effectively allowing information to be shared from data rich populations with long time-series, to data poor populations with short datasets or missing years.
+The reported population abundance data generated by fisheries comanagers are not the exact truth, and in many cases, they are reported without levels of certainty (i.e., precision estimates) or measurement error. Reported estimates instead are generally the result of incomplete observations (i.e., spatial and temporal coverage is incomplete) and the product of combining information from multiple data collection activities and fish metrics together (i.e., redd count surveys, mark/recapture events, carcass collections), with each item having the possibility of being incorrect or biasing the abundance estimate from the unknown truth. To better understand the true unknown abundance and underlying trends contained within the data we removed measurement error using a multivariate dynamic linear model (DLM) [@zuur_estimating_2003]. A DLM is a time series model constructed as a type of state-space model that separates observation and state processes, and assumes the processes change dynamically following linear models [@royle_hierarchical_2008]. Dynamic linear models are capable of capturing the serial correlation in the data and can share covariance across multiple time-series, thus, effectively allowing information to be shared from data rich populations with long time-series, to data poor populations with short datasets or missing years.
 
-Our DLM was fit to natural-log transformed abundance for each fish population simultaneously using shared parameters across all populations. We followed the methods described in @ford_2020, where the model was fit with a single variance and covariance across all populations for the process error, and a single variance term for observational error using the statistical software R [@R-base] and the MARSS package **(Holmes et al. 2012)**. We chose to include only those Snake River populations in the DLM with greater than 5 years of abundances to reduce risks of parameter bias and overfitting. More in depth model details and fitting procedures are described in the @ford_2020. 
+Our DLM was fit to natural-log transformed abundance for each fish population simultaneously using shared parameters across all populations. We followed the methods described in @ford_biological_2022, where the model was fit with a single variance and covariance across all populations for the process error, and a single variance term for observational error using the statistical software R [@R-base] and the MARSS package [@holmes_marss_2012; @R-MARSS]. We chose to include only those Snake River populations in the DLM with greater than 5 years of abundances to reduce risks of parameter bias and overfitting. More in depth model details and fitting procedures are described in the @ford_biological_2022. 
 
 The unobserved state process model follows the linear equation,
 
 $$
 x_t = x_{t-1} + u + w_t; \\
-w_t \sim MVN(0,\bf{Q})
+w_t \sim MVN(0,\mathbf{Q})
 $$
-where, $x_t$ is an $m \space X \space 1$ matrix of true unknown states for return year $t$. Parameter $u$ is $m \space X \space 1$ and represents drift between subsequent return years for each state $m$. Process error ($w_t$) is assumed multivariate normal with mean zero and the $m \space X \space \m$ variance-covariance matrix $\bf{Q}$.
+where, $x_t$ is an $m \space X \space 1$ matrix of true unknown states for return year $t$. Parameter $u$ is $m \space X \space 1$ and represents drift between subsequent return years for each state $m$. Process error ($w_t$) is assumed multivariate normal with mean zero and the $m \space X \space m$ variance-covariance matrix $\bf{Q}$.
 
 The observation model is represented as,
 
 $$
-y_t = \bf{Z}x_t + a + v_t; \\
-v_t \sim MVN(0,\bf{R})
+y_t = \mathbf{Z}x_t + a + v_t; \\
+v_t \sim MVN(0,\mathbf{R})
 $$
-where, $y_t$ is an $n \space X \space 1$ matrix of observed abundance at return year $t$ for $n$ independent time-series. Return year abundances for each $n$ and $t$ observation is mapped to the unknown state ($x_t$) with the $n \space X \space m$ matrix $\bf{Z}$. Parameter $a$ is $n \space X \space 1$ and provides a y-intercept scaling (i.e., bias correction) for the $m^{th}$ state and each $n^{th}$ time-series. Observational error ($v_t$) is modeled multivariate normal with mean zero and the $n \space X \space \n$ variance-covariance matrix $\bf{R}$.
+where, $y_t$ is an $n \space X \space 1$ matrix of observed abundance at return year $t$ for $n$ independent time-series. Return year abundances for each $n$ and $t$ observation is mapped to the unknown state ($x_t$) with the $n \space X \space m$ matrix $\bf{Z}$. Parameter $a$ is $n \space X \space 1$ and provides a y-intercept scaling (i.e., bias correction) for the $m^{th}$ state and each $n^{th}$ time-series. Observational error ($v_t$) is modeled multivariate normal with mean zero and the $n \space X \space n$ variance-covariance matrix $\bf{R}$.
 
-We modeled four different scenarios to represent true unknown states for Snake River Chinook Salmon and steelhead populations. The scenarios included an individual state for each of the `r n` time-series, states for each of the `r n_pops` populations, states for each of the `r n_mpgs` major population groups, and a single state for the entire Snake River Basin. Parameters $u$ and $a$ were set to unequal across the modeled states and time-series mapped to each state.
+We modeled four different scenarios to represent true unknown states for Snake River Chinook Salmon and steelhead populations. The scenarios included an individual state for each of the $n$ time-series, states for each of the populations, states for each of the major population groups (MPGs), and a single state for the entire Snake River Basin. Parameters $u$ and $a$ were set to unequal across the modeled states and time-series mapped to each state.
 
 We modeled three different variance-covariance matrices for process error and two variance-covariance matrices of observation error for each of the four state scenarios. The first process error matrix was assumed to have equal variance and covariance terms for each state, the second and third options assumed no covariance and either equal or unequal variances on the diagonal. The observation error matrix was assumed to have either equal or unequal variance on the diagonal, and off diagonal covariance terms equal to zero.     
 
-The different combinations resulted in 24 model runs fit with the MARSS package [@holmes] and the statistical programming language R [@R-base]. The best model was selected as having the lowest bootstrapped AIC (AICb) value of all successfull (i.e., converged) model runs [@holmes]. Residuals from selected models were examined visually for assumption violations of heterogeneity and normality.
+The different combinations resulted in 24 model runs fit with the MARSS package [@holmes_marss_2012] and the statistical programming language R [@R-base]. The best model was selected as having the lowest bootstrapped AIC (AICb) value of all successfull (i.e., converged) model runs [@holmes_marss_2012; @R-MARSS]. Residuals from selected models were examined visually for assumption violations of heterogeneity and normality.
  
+## Objective 2: Recent 10-year Trend
 
-## Objective 2: Trend Analysis
+@ford_biological_2022 examined sp/su Chinook Salmon and steelhead 15-year (2004-2019) population trends using the fitted slope parameter from a linear regression model with year as the independent variable. From our initial examination of abundance data at the aggregate (i.e., Lower Granite Dam) and population levels, it appeared that abundance was relatively low in the beginning and end of the 15-year time period used in @ford_biological_2022. We hypothesized that linear models fit to the last 15 years of population data would effectively be anchored at similar beginning and end points, resulting in less steep trends and potential insignificant slope parameters. We decided to alter the dBSA approach, and instead capture the magnitude of the more recent downward trend that we are currently experiencing. To do so, we choose to use only the last 10-years of abundance returns beginning in 2011. We based our rational on a visual change point (i.e., trend/slope switches direction from positive to negative) in sp/su Chinook Salmon and steelhead returns starting around 2011, and the desire to include two generations of returns to capture contemporary patterns in population trends.
 
-@ford_2020 examined sp/su Chinook Salmon and steelhead 15-year (2004-2019) population trends using the fitted slope parameter from a linear regression model with year as the independent variable. From our initial examination of abundance data at the aggregate (i.e., Lower Granite Dam) and population levels, it appeared that abundance was relatively low in the beginning and end of the 15-year time period used in @ford_2020. We hypothesized that linear models fit to the last 15 years of population data would effectively be anchored at similar beginning and end points, resulting in less steep trends and potential insignificant slope parameters. We decided to alter the dBSA approach, and instead capture the magnitude of the more recent downward trend that we are currently experiencing. To do so, we choose to use only the last 10-years of abundance returns beginning in 2011. We based our rational on a visual change point (i.e., trend/slope switches direction from positive to negative) in sp/su Chinook Salmon and steelhead returns starting around 2011, and the desire to include two generations of returns to capture contemporary patterns in population trends.
+We estimated the population trend using a linear regression model with year and population as predictor variables, and the natural-log transformed abundance (i.e., state process) from the DLM model as the response. First, the full linear model was fit including an interaction term for year and population to allow for different population y-intercept and slope parameters. We then fit a reduced model, excluding the interaction term, which constrained populations to a common slope parameter while allowing for different population y-intercept parameters. The best fitting model was determined with an F-test [@casella_statistical_2021] 
 
-We estimated the population trend using a linear regression model with year and population as predictor variables, and the natural-log transformed abundance (i.e., state process) from the DLM model as the response. First, the full linear model was fit including an interaction term for year and population to allow for different population y-intercept and slope parameters. We then fit a reduced model, excluding the interaction term, which constrained populations to a common slope parameter while allowing for different population y-intercept parameters. The best fitting model was determined with an F-test [@casellaStatisticalInference2021] 
 
-## Objectives 3 & 4: Proportion Below QET
+## Objective 3: Population Status
 
 The proportion of populations currently meeting the QET was calculated as the number of populations below the threshold divided by the total populations included in the DLM analysis. We determined populations were currently below the QET threshold if the DLM abundance estimates fell below 50 spawners for each of the last four years (**2017-2020**). The number of future populations meeting the QET threshold was determined with predictions from the trend analysis (i.e., objective 2) and the best fitting linear model. A population was classified as below the QET when returns within the next 5-years of predictions fell below 50 in a single year, because all subsequent predictions would also be below 50 due to the linear model.
 
@@ -263,554 +414,162 @@ The proportion of populations currently meeting the QET was calculated as the nu
 
 # Results
 
-In recent years, sp/su Chinook Salmon and steelhead returns to the Snake River basin have decreased quickly and are expected to continue declining into the future. In the last 10 years, abundances at LGD ranged from 4,108 to 26,351 from 2011-2020 for sp/su Chinook Salmon, and steelhead ranged from 8,287 to 45,789. A moving average suggests potential declines in sp/su Chinook Salmon abundance began as early as 2010 (Figure \@ref(fig:idfg-trend-plot)), and around 2015 for steelhead (Figure \@ref(fig:std-trend-plot)). @mantuaPacificInterdecadalClimate1997 and @crozierClimateChangeThreatens2021 have shown returning abundance is highly correlated with ocean metrics (e.g., pacific decadal oscillation and sea surface temperature), and as such, the recent decreases in abundance are expected given the additional stress of poor ocean conditions. 
+## Dynamic Linear Model
 
-returning fish continuously fail in reaching abundance thresholds and goals. Sp/su Chinook Salmon returning to the Snake River have only exceeded the aggregated MAT (i.e., sum of population MAT) in three years post ESA listing, and in more recent years returns have been closer to the aggregated QET--similar to the levels observed in the mid-1990's (Figure \@ref(fig:plot-idfg-spsm)). Steelhead returns to the basin follow a similar annual abundance pattern, but have exceeded the aggregated MAT in more years and remain above the QET (Figure \@ref(fig:plot-idfg-std)). Neither species, however, has had abundances near aggregated healthy and harvestable goals set by the CBP at any point since the construction of LGD in 1975.
+The best fitting model for sp/su Chinook Salmon included separate state processes for each major population group [\@ref(tab:chn-mod-results)], whereas summer steelhead was best represented by a single basin-wide process [\@ref(tab:sth-mod-results)]. For both species, the difference in AICc values between the top two models exceeded 10.00, a threshold commonly interpreted to indicate the second ranked model has little to no support as compared to the first ranked model [@burnham_multimodel_2004]. For sp/su Chinook Salmon, the process error matrix included two parameters: one for an equal variance and the other for an equal covariance across the seven MPG processes. In contrast, the best fitting model for summer steelhead included only a single basin-wide process, as such, process error consisted of a single variance parameter. Observational error for both species was best modeled with unique variance parameters for each time-series.   
 
+We evaluated model assumptions by visually examining residual plots for patterns indicating autocorrelation, non-normality, or heteroscedasticity. Overall, these diagnostic checks supported the adequacy of the model structure and parameter estimates [\@ref(fig:chn-resids); \@ref(fig:sth-resids)]. However, in a few populations residuals did show evidence of serial correlation and any future models may benefit from additional terms. model convergence was confirmed with MARSS package output indicating the optimization algorithm reached a stable peak in the likelihood [@holmes_2021].
 
+```{r chn-mod-results, tab.cap = "Candidate dynamic linear models fitted to 48 spring/summer Chinook Salmon abundance time-series to evaluate population dynamics and identify models best explaining Snake River trends. The number of state processes estimated in each model is indicated in column U. Unique state process error parameters are denoted in column Q, and observation error parameters in column R. Model fit is summarized using log-likelihood (logLik), corrected Akaike Information Criterion (AICc), and relative model support ($\\Delta$AIC)."}
+# summarize model results and select best model
+chn_mod_results <- summarize_ModelFits(mod_fit = chn_mod_fit)
 
- Figures \@ref(fig:plot-idfg-spsm), \@ref(fig:plot-idfg-std), \@ref(fig:idfg-trend-plot), and \@ref(fig:std-trend-plot).
-
-<!-- was to review the National Oceanic and Atmospheric Administration's Northwest Fisheries Science Center's draft Biological Status Report (dBSR; December 2020). To critically review their findings, we conducted similar analyses as those shared in the dBSR to better understand the current status and future direction of Snake River salmon and steelhead trends. After completing the initial review, we questioned how current and future population status related to QET, and if all populations were performing equally. To answer these new questions, our research included four main objectives: 1) fit a multivariate dynamic linear model to empirical population abundance estimates similar to NOAA's dBSR, 2) conduct a trend analyses with the most recent 10 years of data to compare patterns across populations, 3) estimate the proportion of populations currently meeting the QET, and 4) use the trend analysis results to predict future population status assuming recent environmental patterns and trends continue. -->
-
-
-```{r create-idfg-plot}
-load(file='../data/IDFG_historic/idfg_chn_data.rda')
-
-# new_df <- tribble(~Year, ~species, ~run_cmb, ~origin, ~group, ~IDFG_total,
-#                   2021, 'Chinook', 'Sp/sm', 'Wild', 'Adult', 6556,  #email to Jay Hesse on 1/31/2022 from Jonathan Ebel
-#                   2022, 'Chinook', 'Sp/sm', 'Wild', 'Adult', 9739)
-# 
-# tmp <- bind_rows(idfg_dat, new_df) %>%
-#   mutate(estimate = ifelse(Year == 2022, 'Forcast', 'Estimate'))
-
-idfg_spsm <- idfg_dat %>% #idfg_chn_data %>%
-  filter(species == 'Chinook',
-         run_cmb == 'Sp/sm',
-         origin == 'Wild',
-         group == 'Adult') %>%
-  mutate(geomean5 = zoo::rollapply(IDFG_total, width = 5, FUN = function(x){exp(mean(log(x)))}, fill = NA),
-         geomean10 = zoo::rollapply(IDFG_total, width = 10, FUN = function(x){exp(mean(log(x)))}, fill = NA, align = 'right'),         
-         ma5 = zoo::rollmean(IDFG_total, 5, fill = NA),
-         ma10 = zoo::rollmean(IDFG_total, 10, fill = NA, align = 'right'),
-         ma15 = zoo::rollmean(IDFG_total, 15, fill = NA, align = 'right'),
-         mu = mean(IDFG_total))
+chn_mod_results %>%
+  #slice(1:10) %>%
+  select(model_id, U, Q, R, logLik, AICc, deltaAIC) %>%
+  kable(col.names = c('Model Id', 'U', 'Q', 'R', 'logLik', 'AICc', '$\\Delta$AIC'),
+        booktabs = TRUE, 
+        digits = 2,
+        escape = FALSE,
+        label = NA,
+        latex = TRUE)
+# %>%
+#   kable_classic(full_width =T)
 ```
 
 
-```{r idfg-chn-trend, eval=FALSE}
-time_series <- ts(idfg_spsm$IDFG_total[idfg_spsm$Year>=1975], start = 1)
-plot(time_series, type = "l", main = "Time Series", xlab = "Time", ylab = "Value")
+```{r shd-mod-results, tab.cap = "Candidate dynamic linear models fitted to 25 summer steelhead abundance time-series to evaluate population dynamics and identify models best explaining Snake River trends. The number of state processes estimated in each model is indicated in column U. Unique state process error parameters are denoted in column Q, and observation error parameters in column R. Model fit is summarized using log-likelihood (logLik), corrected Akaike Information Criterion (AICc), and relative model support ($\\Delta$AIC)."}
+sth_mod_results <- summarize_ModelFits(sth_mod_fit)
 
-# only works for timeseries with seasonal frequency, more than one observations (monthly) per period (year)
-decomp <- decompose(time_series)
-plot(decomp)
-
-#Mann-Kendall Test
-mk_test <- trend::mk.test(time_series)
-print(mk_test) #Ho: reject the null or no trend, and find the alternative true: increasing or decreasing trend
-
-# Augmented Dickey-Fuller (ADF) Test: test for stationarity
-tseries::adf.test(time_series) #Ho: non-stationary, trend present
-
-# Linear regression
-time <- 1:length(time_series)
-fit <- lm(time_series ~ time)
-summary(fit) # significant slope
-plot(time_series, type = "l", main = "Time Series with Trend")
-abline(fit, col = "red", lwd = 2)
-
-# Moving average
-smoothed <- stats::filter(idfg_spsm$IDFG_total, rep(1/5, 5), sides = 2)
-lines(smoothed, col = "blue", lwd = 2)
-
-
-# Fit a linear model for forecasting
-forecast_fit <- forecast::tslm(time_series ~ trend)
-forecasted <- forecast::forecast(forecast_fit, h = 10)  # Forecast the next 10 points
-plot(forecasted)
-
-
-install.packages("changepoint")
-library(changepoint)
-
-# Detect changes in the mean
-cpt_mean <- changepoint::cpt.mean(time_series, method = "PELT")  # Use PELT for efficiency
-plot(cpt_mean, main = "Change Point Detection (Mean)")
-
-# Detect changes in the variance (if applicable)
-cpt_var <- changepoint::cpt.var(time_series, method = "PELT")
-plot(cpt_var, main = "Change Point Detection (Variance)")
-
-# Get the change points
-mean_change_points <- changepoint::cpts(cpt_mean)
-print(mean_change_points)
-
+sth_mod_results %>%
+  #slice(1:10) %>%
+  select(model_id, U, Q, R, logLik, AICc, deltaAIC) %>%
+  kable(col.names = c('Model Id', 'u', 'Q', 'R', 'logLik', 'AICc', '$\\Delta$AIC'),
+        booktabs = TRUE,
+        escape = FALSE,
+        label = NA,
+        latex = TRUE)
+# %>%
+#   kable_classic(full_width = TRUE)
 ```
 
 
-```{r plot-idfg-spsm-base}
-idfg_spsm_plot <- idfg_spsm %>%
-  filter(Year >= 1975) %>%
-  ggplot(aes(x = Year, y =IDFG_total)) +
-  geom_col() +
-  #geom_line(aes(y = ma15)) +
-  #geom_col(aes(fill = estimate), colour = 'black') +
-  #scale_fill_manual(values = c('grey75', 'salmon')) +
-  scale_x_continuous(breaks = seq(1975, 2020, 5)) +
-  labs(#title = 'Natural-origin Spring/Summer Chinook Salmon',
-       #subtitle = 'Adult escapement at Lower Granite Dam',
-       caption = 'Data Source: Idaho Department of Fish and Game',
-       x = 'Spawn Year',
-       y = 'Escapement') +
-  theme_rk() +
-  theme(legend.position = 'none')
-
-#idfg_spsm_plot
-#ggsave('../figures/idfg_spsm_lgr_2levels.png', idfg_spsm_plot, width = 7, height = 5)
+```{r best-mod-fits}
+chn_best_model <- chn_mod_fit[[chn_mod_results$model_id[which.min(chn_mod_results$AICc)]]]
+sth_best_model <- sth_mod_fit[[sth_mod_results$model_id[which.min(sth_mod_results$AICc)]]]
 ```
 
 
-```{r plot-idfg-spsm, fig.cap = "Annual estimates of adult (jacks excluded) natural-origin spring/summer Chinook Salmon returning to the Snake River basin have only exceeded the aggregated delisting index goal of 29,250 individuals three times (2001-2003) since ESA listing in 1992."}
-lgr_plot <- idfg_spsm_plot +
-  geom_hline(yintercept = 179000, colour = 'green3', size = 1) +
-  annotate('label', x = 2011, y = 179000, label = 'Health and Harvestable = 179,000', vjust = 1.5, colour = 'green3') +
-  geom_hline(yintercept = 29250, colour = 'navy', size = 1) +
-  annotate('label', x = 2011, y = 29250, label = 'Aggregated MAT = 29,250', vjust = -.5, colour = 'navy') +
-  geom_hline(yintercept = 1850, colour = 'firebrick', size = 1) +
-  annotate('label', x = 2011, y = 1850, label = 'Quasi-Extinction = 1,850', vjust = -.5, colour = 'firebrick') +
-  #annotate('label', x = 1992, y = 60000, label = 'ESA Listing', vjust = -.5, colour = 'black') +
-  #geom_segment(aes(x = 1992, y = 60000, xend = 1992, yend = 35000), arrow = arrow(length = unit(0.5, "cm"))) +
-  scale_y_continuous(expand = c(0,0), limits = c(0, 200000), breaks = seq(0, 200000, 20000), labels = scales::comma)
-
-#ggsave('../figures/idfg_spsm_lgr_3levels_21.png', lgr_plot, width = 7, height = 5)
+```{r mod-u, eval = FALSE}
+drift_df <- bind_rows(
+  tibble(.rownames = rownames(chn_best_model$par$U),
+         x0 = chn_best_model$par$x0[,1],
+         u = chn_best_model$par$U[,1]) %>%
+    mutate(spp = 'Chinook Salmon'),
+  tibble(.rownames = 'Snake Basin',
+         x0 = sth_best_model$par$x0[,1],
+         u = sth_best_model$par$U[,1]) %>%
+    mutate(spp = 'Steelhead')
+) %>%
+  mutate(drift = exp(u),
+         growth = (drift - 1) * 100)
 ```
 
-```{r load-std-idfg-data}
-#load(file='../data/window_count/cleaned_window_counts.rda')
-load(file='../data/IDFG_historic/idfg_std_data.rda')
+The estimated annual percent change in abundance over the full time series, calculated as $(e^u - 1) \times 100$, ranged from `r round(min(drift_df$growth),2)`\% and `r round(max(drift_df$growth),2)`\% for spring-summer Chinook Salmon (1980-2024) and summer steelhead (2010-2024) [\@ref(fig:chn-state); \@ref(fig:sth-state)]. Among the Chinook Salmon populations, those within the Lower Snake major population group (i.e., Asotin Creek and Tucannon River) exhibited the fastest rate of decline, with an estimated annual decrease of -5.8\%. In contrast, the highest positive growth was observed in populations from the South Fork Salmon River major population group. Summer steelhead had the steepest overall decline, with an estimated annual growth rate of `r round(drift_df$growth[drift_growth$spp == 'Steelhead'],2)`\%.
 
-# new_df <- tribble(~Spawn_Year, ~dam, ~origin, ~IDFG_total,
-#                   2021, 'LWG', 'Wild', 15478,  #email to Jay Hesse on 1/31/2022 from Jonathan Ebel
-#                   2021, 'LWG', 'Hatchery', 45837,
-#                   2021, 'LWG', 'Total', 61315)
+```{r chn-state, out.width='100%', eval = TRUE, fig.cap = "Estimated abundance (natural-log) trends for the seven state processes (xtT) estimated from the best fitting Snake River spring/summer Chinook Salmon model (grey shading represents 95% CI's). The abundance trend for each process across the full time-series is shown by the dashed line and generated from the estimated u and x0 parameters."}
+include_graphics(paste0(fig_path,'Chinook_salmon/Chinook_salmon_states_',yr,'.png'))
 
-# idfg_std_data <- bind_rows(idfg_std_data, new_df) %>%
-#   mutate(estimate = ifelse(Spawn_Year == 2022, 'Forcast', 'Estimate'))
-
-std_nor_win <- idfg_std_data %>%
-  filter(dam == 'LWG',
-         origin == 'Wild') %>%
-  mutate(geomean5 = zoo::rollapply(IDFG_total, width = 5, FUN = function(x){exp(mean(log(x)))}, fill = NA),
-         geomean10 = zoo::rollapply(IDFG_total, width = 10, FUN = function(x){exp(mean(log(x)))}, fill = NA, align = 'right'),  
-         ma5 = zoo::rollmean(IDFG_total, 5, fill = NA),
-         ma10 = zoo::rollmean(IDFG_total, 10, fill = NA, align = 'right'),
-         ma15 = zoo::rollmean(IDFG_total, 15, fill = NA, align = 'right'),
-         mu = mean(IDFG_total))
+# autoplot(chn_best_model, plot.type = 'xtT') +
+#   geom_abline(data = drift_df[drift_df$spp != 'Steelhead',], aes(intercept = x0, slope = u), size = 1, linetype = 1, colour = 'blue') +
+#   geom_text(data = drift_df[drift_df$spp != 'Steelhead',], aes(x = 6, y = -Inf, label = paste0("x0 = ", round(x0,2))), vjust = -1.5) +
+#   geom_text(data = drift_df[drift_df$spp != 'Steelhead',], aes(x = 6, y = -Inf, label = paste0("u = ", round(u,2))), vjust = -.5) +
+#   scale_x_continuous(labels = seq(1980, yr, 10), breaks = seq(1, 45, 10)) +
+#   #scale_y_continuous(limits = c(-1,10)) +
+#   facet_wrap(~.rownames) +
+#   theme_rk() +
+#   labs(x = 'Spawn Year',
+#        y = 'LN(Abundance)',
+#        title = '',
+#        caption = '')
 ```
 
+```{r sth-state, out.width = '100%', eval = TRUE, fig.cap = "Estimated abundance (natural-log) trend for a single state process (xtT) as estimated from the best fitting Snake River summer steelhed model (grey shading represents 95% CI's). The abundance trend for each process across the full time-series is shown by the dashed line and generated from the estimated u and x0 parameters."}
+include_graphics(paste0(fig_path,'Steelhead/Steelhead_states_',yr,'.png'))
 
-```{r idfg-sth-base-plot}
-win_sth_plot <-  std_nor_win %>%
-  ggplot(aes(x = Spawn_Year, y =IDFG_total)) +
-  geom_col(fill = 'grey75', colour = 'black') +
-  scale_x_continuous(breaks = seq(1975, 2020, 5)) +
-  labs(caption = "Data Source: Idaho Department of Fish and Game",
-       x = 'Spawn Year',
-       y = 'Escapement') +
-  theme_rk()
-```
-
-
-```{r plot-idfg-std, fig.cap = "Annual estimates of natural-origin steelhead returning to the Snake River basin have exceeded the aggregated delisting index goal of 20,000 individuals in most years since ESA listing in 1997."}
-sth_threshold <- win_sth_plot +
-  geom_hline(yintercept = 137480, colour = 'green3', size = 1) +
-  annotate('label', x = 2011, y = 137480, label = 'Desired = 137,480', vjust = 1.5, colour = 'green3') +
-  geom_hline(yintercept = 20000, colour = 'navy', size = 1) +
-  annotate('label', x = 2011, y = 20000, label = 'Delisting Index = 20,000', vjust = -.5, colour = 'navy') +
-  geom_hline(yintercept = 1200, colour = 'firebrick', size = 1) +
-  annotate('label', x = 2011, y = 1200, label = 'Critical = 1,200', vjust = -.5, colour = 'firebrick') +
-  annotate('label', x = 1997, y = 40000, label = 'ESA Listing', vjust = -.5, colour = 'black') +
-  geom_segment(aes(x = 1997, y = 40000, xend = 1997, yend = 25000), arrow = arrow(length = unit(0.5, "cm"))) +
-  scale_y_continuous(expand = c(0,0), limits = c(0, 160000), breaks = seq(0, 160000, 20000), labels = scales::comma)
-
-#ggsave('../figures/idfg_sthd_lgr_3levels_21.png', sth_threshold, width = 7, height = 5)
+# autoplot(sth_best_model, plot.type = 'xtT') +
+#   geom_abline(data = drift_df[drift_df$spp == 'Steelhead',], aes(intercept = x0, slope = u), size = 1, linetype = 1, colour = 'blue') +
+#   geom_text(data = drift_df[drift_df$spp == 'Steelhead',], aes(x = 2, y = -Inf, label = paste0("x0 = ", round(x0,2))), vjust = -1.5) +
+#   geom_text(data = drift_df[drift_df$spp == 'Steelhead',], aes(x = 2, y = -Inf, label = paste0("u = ", round(u,2))), vjust = -.5) +
+#   scale_x_continuous(labels = seq(2010, yr, 3), breaks = seq(1, 15, 3)) +
+#   scale_y_continuous(limits = c(4,8)) +
+#   facet_wrap(~.rownames) +
+#   theme_rk() +
+#   labs(x = 'Spawn Year',
+#        y = 'LN(Abundance)',
+#        title = '',
+#        caption = '')
 ```
 
 
-```{r idfg-trend-plot, fig.cap = "A 10-year moving average model (red line) indicates the abundance of natural-origin spring/summer Chinook Salmon adults (jacks excluded) started declining 2010, after a long period of growth from 2000 to 2010.", fig.height=4}
-spsm_trend_plot <- idfg_spsm_plot +
-  #geom_line(aes(y = ma5), colour = 'violet', size = 2)  +
-  geom_line(aes(y = ma10), colour = 'maroon', size = 2)  +
-  #geom_line(aes(y = ma15), colour = 'orchid', size = 2)  +
-  #geom_hline(aes(yintercept = mu), colour = 'black') +
-  scale_y_continuous(expand = c(0,0), limits = c(0, 70000), breaks = seq(0, 70000, 5000), labels = scales::comma)
-  # geom_line(aes(y = geomean5, colour = 'mediumseagreen'), size = 1) +
-  # geom_line(aes(y = ma5, colour = 'orchid'), size = 1) +
-  # scale_colour_identity(labels = c('5-yr Moving Geomean', '5-yr Moving Average'),
-  #                       breaks = c('mediumseagreen', 'orchid'),
-  #                       name = 'Model Fit',
-  #                       guide = 'legend')
+## Recent 10-year Trends
 
-spsm_trend_plot
-#ggsave('../figures/lgr_spsm_trends.png', trend_plot, width = 7, height = 5)
+After fitting a linear regression line to the last 10-years of estimated state processes we found summer steelhead had decreased annually by 11\% and six spring-summer Chinook Salmon major population groups also decreased [@\ref(fig:chn-sa-slope), @\ref(fig:sth-sa-slope)]. Again, the Chinook Salmon South Fork Salmon River major population group had the highest, and only positive, rate of growth at 5.13\% annually. The remaining six major population groups in the last 10 years have decreased at annual rates of 5\% and higher, with the most severe decrease being 13\% in the Lower Snake populations.    
+
+```{r chn-sa-slope, out.width = '100%', eval = TRUE, fig.cap = 'Estimated slope parameters for natural-origin Snake River spring/summer Chinook Salmon abundance trends indicate an average annual decline of 6% for the last 10-years.'}
+include_graphics(paste0(fig_path,'Chinook_salmon/Chinook_salmon_slope_',yr,'.png'))
 ```
 
 
-```{r std-trend-plot, fig.cap = "A 10-year moving average model (red line) indicates the abundance of natural-origin steelhead at Lower Granite Dam started declining in 2015, after a period of growth beginning in 2000.", fig.height=4}
-std_trend_plot <- win_sth_plot +
-  geom_line(aes(y = ma10), colour = 'maroon', size = 2)  +
-  scale_y_continuous(expand = c(0,0), limits = c(0, 60000), breaks = seq(0, 60000, 5000), labels = scales::comma)
-
-std_trend_plot
-```
-
-
-
-## Spring/summer Chinook Salmon
-
-```{r load-spsm-data}
-load('../data/QET_data/spsm_mod_fits.rda')
-```
-
-
-```{r spsm-sa-plot, fig.cap = 'Spring/summer Chinook Salmon natural-origin spawner abundance estimates (including jacks; NOSAij) are shown by the grey points for Snake River populations. The blue line shows prediction results from a dynamic linear model fit to all populations.', fig.width=7.5, fig.height=8}
-# plot spawner abundance
-spsm_mod_fits %>%
-  complete(spawningyear, nesting(pop)) %>%
-  ggplot(aes(x = spawningyear, group = pop)) +
-  geom_line(aes(y = nosaij),colour = 'grey50') +
-  geom_point(aes(y = nosaij), shape = 21, fill = 'grey50', colour = 'black') +
-  geom_line(aes(y = exp_states), size = 1, colour = 'blue') +
-  #scale_x_continuous() +
-  #scale_y_continuous(expand = c(0,0)) +
-  facet_wrap(~pop, ncol = 4, scales = 'free_y', labeller = label_wrap_gen(width = 20)) +
-  theme_rk() +
-  labs(#title = plot_title,
-       #subtitle = 'Modeled (blue lines) and empirical (grey points) natural-origin spawner abundance estimates (NOSAij) for Snake River Basin populations.',
-       x = 'Spawn Year',
-       y = 'NOSAij',
-       caption = 'Data Source: StreamNet Coordinated Assessments (3/22/2021); 2020 data provided through personal communication with ODFW, IDFG and NPT')
-```
-
-
-```{r spsm-qet}
-qet_df <- spsm_mod_fits %>%
-  select(pop, Empirical = nosaij, Modeled = exp_states, spawningyear) %>%
-  pivot_longer(cols = c(Empirical, Modeled), names_to = 'type', values_to = 'ests') %>%
-  #bind_rows(forecast_df) %>%
-filter(spawningyear >= 2011) %>%
-  mutate(QET = ests <= 50) %>%
-  filter(!is.na(ests))
-
-qet_value <- 'Modeled'
-
-pop_qet <- qet_df %>%
-  filter(spawningyear >= 2017) %>%
-  group_by(pop, type, QET) %>%
-  tally() %>%
-  pivot_wider(names_from = QET, values_from = n, names_prefix = "QET_", values_fill = 0) %>%
-  mutate(p = QET_TRUE/(QET_TRUE + QET_FALSE)) %>%
-  arrange(desc(p)) %>%
-  filter(type == qet_value)
-
-qet_num <- 4
-all_pops <- unique(pop_qet$pop)
-npops <- length(all_pops)
-qet_pops <- pop_qet$pop[pop_qet$QET_TRUE >= qet_num]
-current_pops <- qet_pops
-nqet <- nrow(pop_qet[pop_qet$QET_TRUE >= qet_num,])
-qet_percent <- nqet/npops
-```
-
-```{r spsm-qet-plot, fig.cap= paste0('Spring/summer Chinook Salmon natural-origin spawner abundance (NOSAij) estimates for Snake River Basin populations relative to the quasi-extinction threshold (QET; dashed line, 4 years below 50 NOSAij) for the last 10-years (2011-2020). During the last four consecutive years ', round(qet_percent*100),'% of the ',npops ,' populations had more than ',qet_num ,' years of abundances below the the QET.'), fig.width=7.5, fig.height=8}
-qet_df %>%
-  filter(type == qet_value) %>%
-  complete(spawningyear, nesting(pop)) %>%
-  ggplot(aes(x = as.integer(spawningyear), y = ests, group = pop)) +
-  geom_line(colour = 'grey50') +
-  geom_point(aes(fill = QET, shape = type), size = 3, colour = 'black') +
-  #geom_point(aes(y = nosaij), shape = 1) +
-  #geom_point(aes(y = nosaij)) +
-  geom_hline(yintercept = 50, linetype = 2) +
-  scale_x_continuous(breaks = scales::pretty_breaks()) +
-  scale_shape_manual(values = c('Empirical' = 21, 'Modeled' = 21, 'Forecast' = 23)) +
-  scale_fill_manual(values = c('FALSE'='grey50', 'TRUE'='red')) +
-  facet_wrap(~pop, ncol = 4, scales = 'free_y', labeller = label_wrap_gen(width = 20)) +
-  theme_rk() +
-  guides(fill = 'none') +
-  guides(shape = 'none') +
-  labs(x = 'Spawn Year',
-       y = 'NOSAij')
-```
-
-
-```{r spsm-slope}
-sa_dat <- spsm_mod_fits %>%
-  filter(spawningyear >= 2011) %>%
-  #filter(spawningyear %in% 1983:1992) %>%
-  filter(!is.na(states))
-
-# model abundance decrease
-sa_mod1 <-lm(states ~ spawningyear + pop + pop:spawningyear, data = sa_dat)
-#summary(spsm_mod1)
-sa_mod2 <- lm(states ~ spawningyear + pop, data = sa_dat)
-#summary(spsm_mod2)
-#anova(sa_mod1, sa_mod2) # slopes are not different!
-
-grp_slope <- broom::tidy(sa_mod2) %>%
-  filter(term == 'spawningyear')
-```
-
-
-```{r spsm-slope-plot, fig.cap = paste('Modeled natural-origin spawner abundance growth for last 10-years (',min(sa_dat$spawningyear),'-',max(sa_dat$spawningyear),') across Snake Basin populations. Population abundance on average declined by approximately',round((1-exp(grp_slope$estimate))*100),'% each year across the time period.'), fig.width=7.5, fig.height=7}
-sa_dat %>%
-  nest(data = -pop) %>%
-  mutate(
-    fit = map(data, ~ lm(states ~ spawningyear, data = .x)),
-    tidied = map(fit, broom::tidy)
-  ) %>%
-  unnest(tidied) %>%
-  filter(term == 'spawningyear') %>%
-  #mutate(grp_mod = ifelse(pop %in% exclude_pops, 0, 1)) %>%
-  ggplot(aes(x = fct_reorder(pop, estimate), y = estimate)) +
-  geom_pointrange(aes(y = estimate,
-                      ymin = estimate - 1.96*std.error,
-                      ymax = estimate + 1.96*std.error),
-                  shape = 21, fill = 'blue', colour = 'blue') +
-  #scale_fill_manual(values = c('white', 'black'), labels = c('Excluded', 'Included')) +
-  geom_hline(data = grp_slope, aes(yintercept = estimate), colour = 'black') +
-  geom_hline(data = grp_slope, aes(yintercept = estimate - 1.96*std.error), colour = 'black', linetype = 2) +
-  geom_hline(data = grp_slope, aes(yintercept = estimate + 1.96*std.error), colour = 'black', linetype = 2) +
-  coord_flip() +
-  theme_rk() +
-  labs(x = '',
-       y = 'Slope (log scale)')
-```
-
-```{r spsm-qet-pred}
-# Projections
-new_dat <- tibble(pop = rep(unique(sa_dat$pop),each = 5),
-                  spawningyear = rep(2021:2025, 31))
-
-new_predicts <- cbind(new_dat,states = predict(sa_mod2, new_dat)) %>%
-  mutate(type = 'Prediction',
-         ests = exp(states),
-         QET = ests <= 50) %>%
-         filter(!is.na(ests)) %>%
-  bind_rows(qet_df %>%
-              filter(type == qet_value))
-
-pop_qet <- new_predicts %>%
-  filter(spawningyear >= 2021) %>%
-  group_by(pop, type, QET) %>%
-  tally() %>%
-  pivot_wider(names_from = QET, values_from = n, names_prefix = "QET_", values_fill = 0) %>%
-  mutate(p = QET_TRUE/(QET_TRUE + QET_FALSE))
-
-qet_num <- 1
-all_pops <- unique(pop_qet$pop)
-npops <- length(all_pops)
-qet_pops <- pop_qet$pop[pop_qet$QET_TRUE >= qet_num]
-nqet <- nrow(pop_qet[pop_qet$QET_TRUE >= qet_num,])
-qet_percent <- nqet/npops
-```
-
-
-```{r spsm-qet-pred-plot, fig.cap = paste0('Future predictions of natural-origin spawner abundance (NOSAij) for Snake River Basin show ',nqet,' populations (',round(qet_percent*100),'%) will start to drop below the the quasi-extinction threshold (QET; dashed line; 50 spawners) within the next 5 years.'), fig.width=7.5, fig.height=8}
-new_predicts %>%
-  #complete(spawningyear, nesting(pop)) %>%
-  ggplot(aes(x = as.integer(spawningyear), y = ests, group = pop)) +
-  geom_line(colour = 'grey50') +
-  geom_point(aes(fill = QET, shape = type), size = 3, colour = 'black') +
-  #geom_point(aes(y = nosaij), shape = 1) +
-  #geom_point(aes(y = nosaij)) +
-  geom_hline(yintercept = 50, linetype = 2) +
-  scale_x_continuous(breaks = scales::pretty_breaks()) +
-  scale_shape_manual(values = c('Empirical' = 23, 'Modeled' = 21, 'Prediction' = 24)) +
-  scale_fill_manual(values = c('FALSE'='grey50', 'TRUE'='red')) +
-  facet_wrap(~pop, ncol = 4, scales = 'free_y', labeller = label_wrap_gen(width = 20)) +
-  theme_rk() +
-  guides(fill = 'none') +
-  labs(x = 'Spawn Year',
-       y = 'NOSAij')
-```
-
-
-## Summer Steelhead
-
-```{r load-std-data}
-load('../data/QET_data/steelhead_mod_fits.rda')
-```
-
-
-```{r std-sa-plot, fig.cap = 'Steelhead natural-origin spawner abundance estimates are shown by the grey points for Snake River populations. The blue line shows prediction results from a dynamic linear model fit to all populations.', fig.width=7.5, fig.height=7}
-# plot spawner abundance
-steelhead_mod_fits %>%
-  complete(spawningyear, nesting(pop)) %>%
-  ggplot(aes(x = spawningyear, group = pop)) +
-  geom_line(aes(y = nosaij),colour = 'grey50') +
-  geom_point(aes(y = nosaij), shape = 21, fill = 'grey50', colour = 'black') +
-  geom_line(aes(y = exp_states), size = 1, colour = 'blue') +
-  scale_x_continuous(labels = seq(2010,2020,4), breaks = seq(2010,2020, by = 4)) +
-  #scale_y_continuous(expand = c(0,0)) +
-  facet_wrap(~pop, ncol = 4, scales = 'free_y', labeller = label_wrap_gen(width = 20)) +
-  theme_rk() +
-  labs(#title = plot_title,
-       #subtitle = 'Modeled (blue lines) and empirical (grey points) natural-origin spawner abundance estimates (NOSAij) for Snake River Basin populations.',
-       x = 'Spawn Year',
-       y = 'NOSAij',
-       caption = 'Data Source: Nez Perce Tribe; Kinzer et al. 2020')
-```
-
-
-```{r std-qet}
-qet_df <- steelhead_mod_fits %>%
-  select(pop, Empirical = nosaij, Modeled = exp_states, spawningyear) %>%
-  pivot_longer(cols = c(Empirical, Modeled), names_to = 'type', values_to = 'ests') %>%
-  filter(spawningyear >= 2011) %>%
-  mutate(QET = ests <= 50) %>%
-  filter(!is.na(ests))
-
-qet_value <- 'Modeled'
-
-pop_qet <- qet_df %>%
-  filter(spawningyear >= 2017) %>%
-  group_by(pop, type, QET) %>%
-  tally() %>%
-  pivot_wider(names_from = QET, values_from = n, names_prefix = "QET_", values_fill = 0) %>%
-  mutate(p = QET_TRUE/(QET_TRUE + QET_FALSE)) %>%
-  arrange(desc(p)) %>%
-  filter(type == qet_value)
-
-qet_num <- 4
-all_pops <- unique(pop_qet$pop)
-npops <- length(all_pops)
-qet_pops <- pop_qet$pop[pop_qet$QET_TRUE >= qet_num]
-current_pops <- qet_pops
-nqet <- nrow(pop_qet[pop_qet$QET_TRUE >= qet_num,])
-qet_percent <- nqet/npops
-```
-
-
-```{r std-qet-plot, fig.cap = paste0('Steelhead natural-origin spawner abundance (NOSAij) estimates for Snake River Basin populations relative to the quasi-extinction threshold (QET; dashed line, 4 years below 50 NOSAij) for the last 10-years (2011-2020). During the last four consecutive years ', round(qet_percent*100),'% of the ',npops ,' populations had more than ',qet_num ,' years of abundances below the the QET.'), fig.width=7.5, fig.height=7}
-
-qet_df %>%
-  filter(type == qet_value) %>%
-  complete(spawningyear, nesting(pop)) %>%
-  ggplot(aes(x = as.integer(spawningyear), y = ests, group = pop)) +
-  geom_line(colour = 'grey50') +
-  geom_point(aes(fill = QET, shape = type), size = 3, colour = 'black') +
-  geom_hline(yintercept = 50, linetype = 2) +
-  scale_x_continuous(breaks = scales::pretty_breaks()) +
-  scale_shape_manual(values = c('Empirical' = 21, 'Modeled' = 21, 'Forecast' = 23)) +
-  scale_fill_manual(values = c('FALSE'='grey50', 'TRUE'='red')) +
-  facet_wrap(~pop, ncol = 4, scales = 'free_y', labeller = label_wrap_gen(width = 20)) +
-  theme_rk() +
-  guides(fill = 'none') +
-  guides(shape = 'none') +
-  labs(x = 'Spawn Year',
-       y = 'NOSAij')
-```
-
-
-```{r std-slope}
-# Is abundance decreasing equally for all pops?
-sa_dat <- steelhead_mod_fits %>%
-  filter(spawningyear >= 2011) %>%
-  filter(!is.na(states))
-
-# model abundance decrease
-
-sa_mod1 <-lm(states ~ spawningyear + pop + pop:spawningyear, data = sa_dat)
-#summary(spsm_mod1)
-sa_mod2 <- lm(states ~ spawningyear + pop, data = sa_dat)
-#summary(spsm_mod2)
-#anova(sa_mod1, sa_mod2) # some slopes are different!
-
-grp_slope <- broom::tidy(sa_mod2) %>%
-  filter(term == 'spawningyear')
-```
-
-
-```{r std-slope-plot, fig.cap =  paste('Modeled natural-origin spawner abundance growth for last 10-years (2011-2020) across Snake Basin populations. Population abundance on average declined by approximately',round((1-exp(grp_slope$estimate))*100) ,'% each year across the time period.'), fig.width=7.5, fig.height=7}
-sa_dat %>%
-  nest(data = -pop) %>%
-  mutate(
-    fit = map(data, ~ lm(states ~ spawningyear, data = .x)),
-    tidied = map(fit, broom::tidy)
-  ) %>%
-  unnest(tidied) %>%
-  filter(term == 'spawningyear') %>%
-  #mutate(grp_mod = ifelse(pop %in% exclude_pops, 0, 1)) %>%
-  ggplot(aes(x = fct_reorder(pop, estimate), y = estimate)) +
-  geom_pointrange(aes(y = estimate,
-                      ymin = estimate - 1.96*std.error,
-                      ymax = estimate + 1.96*std.error),
-                  shape = 21, fill = 'blue', colour = 'blue') +
-  geom_hline(data = grp_slope, aes(yintercept = estimate), colour = 'black') +
-  geom_hline(data = grp_slope, aes(yintercept = estimate - 1.96*std.error), colour = 'black', linetype = 2) +
-  geom_hline(data = grp_slope, aes(yintercept = estimate + 1.96*std.error), colour = 'black', linetype = 2) +
-  coord_flip() +
-  theme_rk() +
-  labs(x = '',
-       y = 'Slope (log scale)')
-```
-
-
-```{r std-qet-pred}
-# Projections
-new_dat <- tibble(pop = rep(unique(sa_dat$pop),each = 5),
-                  spawningyear = rep(2021:2025, 16))
-
-new_predicts <- cbind(new_dat,states = predict(sa_mod2, new_dat)) %>%
-  mutate(type = 'Prediction',
-         ests = exp(states),
-         QET = ests <= 50) %>%
-  filter(!is.na(ests)) %>%
-  bind_rows(qet_df %>%
-              filter(type == qet_value))
-
-pop_qet <- new_predicts %>%
-  filter(spawningyear >= 2021) %>%
-  group_by(pop, type, QET) %>%
-  tally() %>%
-  pivot_wider(names_from = QET, values_from = n, names_prefix = "QET_", values_fill = 0) %>%
-  mutate(p = QET_TRUE/(QET_TRUE + QET_FALSE))
-
-qet_num <- 1
-all_pops <- unique(pop_qet$pop)
-npops <- length(all_pops)
-qet_pops <- pop_qet$pop[pop_qet$QET_TRUE >= qet_num]
-nqet <- nrow(pop_qet[pop_qet$QET_TRUE >= qet_num,])
-qet_percent <- nqet/npops
-```
-
-
-```{r std-qet-pred-plot, fig.cap = paste0('Future predictions of natural-origin spawner abundance (NOSAij) for Snake River Basin show ',nqet,' populations (',round(qet_percent*100),'%) will start to drop below the the quasi-extinction threshold (QET; dashed line; 50 spawners) within the next 5 years.'), fig.width=7.5, fig.height=7}
-new_predicts %>%
-  #complete(spawningyear, nesting(pop)) %>%
-  ggplot(aes(x = as.integer(spawningyear), y = ests, group = pop)) +
-  geom_line(colour = 'grey50') +
-  geom_point(aes(fill = QET, shape = type), size = 3, colour = 'black') +
-  #geom_point(aes(y = nosaij), shape = 1) +
-  #geom_point(aes(y = nosaij)) +
-  geom_hline(yintercept = 50, linetype = 2) +
-  scale_x_continuous(breaks = scales::pretty_breaks()) +
-  scale_shape_manual(values = c('Empirical' = 23, 'Modeled' = 21, 'Prediction' = 24)) +
-  scale_fill_manual(values = c('FALSE'='grey50', 'TRUE'='red')) +
-  facet_wrap(~pop, ncol = 4, scales = 'free_y', labeller = label_wrap_gen(width = 20)) +
-  theme_rk() +
-  guides(fill = 'none') +
-  #guides(shape = 'none') +
-  labs(x = 'Spawn Year',
-       y = 'NOSAij',
-       shape = 'Estimate Type')
+```{r sth-sa-slope, out.width = '100%', eval = TRUE, fig.cap = 'Modeled abundance trends of natural-origin Snake River summer steelhead indicate an annual 11% decline for the last 10-years.'}
+include_graphics(paste0(fig_path,'Steelhead/Steelhead_slope_',yr,'.png'))
 ```
 
 # Conclusions
 
-<!-- Need to compare and contract across other findings; Storch et al., WDFWs.... -->
+Despite over three decades of restoration efforts and the ESA-listing status Snake River sp/su Chinook Salmon and summer steelhead all of the extant populations are below healthy and harvestable levels and viable abundance thresholds. Seven populations (4 Chinook Salmon and 3 steelhead) are currently meeting quasi-extintion status of 50 or fewer spawners for the last 4 consecutive years. Another 13 extant populations are expected to fall below the QET within the next 5-years if the 10-year abundance trends continue. Since ESA-listing and the hundreds of millions of dollars spent on recovery Snake River sp/su Chinook Salmon and steelhead populations have only lost ground in their fight against extinction.
+
+In recent years, sp/su Chinook Salmon and steelhead returns to the Snake River basin have decreased quickly and are expected to continue declining into the future. In the last 10 years, abundances at LGD ranged from 4,108 to 26,351 from 2011-2020 for sp/su Chinook Salmon, and steelhead ranged from 8,287 to 45,789. A moving average suggests potential declines in sp/su Chinook Salmon abundance began as early as 2010 (Figure), and around 2015 for steelhead (Figure ). @mantua_pacific_1997 and @crozier_climate_2021 have shown returning abundance is highly correlated with ocean metrics (e.g., pacific decadal oscillation and sea surface temperature), and as such, the recent decreases in abundance are expected given the additional stress of poor ocean conditions. 
+
+returning fish continuously fail in reaching abundance thresholds and goals. Sp/su Chinook Salmon returning to the Snake River have only exceeded the aggregated MAT (i.e., sum of population MAT) in three years post ESA listing, and in more recent years returns have been closer to the aggregated QET--similar to the levels observed in the mid-1990's (Figure ). Steelhead returns to the basin follow a similar annual abundance pattern, but have exceeded the aggregated MAT in more years and remain above the QET (Figure ). Neither species, however, has had abundances near aggregated healthy and harvestable goals set by the CBP at any point since the construction of LGD in 1975.
+
+
+<!-- - Seven state processes and trends, aligned with major population groups, represent spring/summer Chinook Salmon populations -->
+<!-- - Spring/summer Chinook Salmon populations have declined by an average of 6% annually for the last 10-years -->
+<!-- - All populations below critical abundance thresholds -->
+<!--   - 4 populations currently below the QET50 -->
+<!--   - 8 populations below 50 in 2024 -->
+<!--   - 2 populations predicted to fall below 50 by 2029 -->
+<!--   - 20 populations remain above 50 in 2029 -->
+
+```{r chn-qet-map, out.width = '100%', eval = TRUE, fig.cap = 'Current status of natural-origin Snake River spring/summer Chinook Salmon relative to the quasi-extinction threshold (QET) and Columbia Basin Partnership goals.'}
+include_graphics(paste0(fig_path,'Chinook_salmon/','Chinook_salmon_map_',yr,'.png'))
+```
+
+
+<!-- - A single state process and trend represents all summer steelhead populations -->
+<!-- - Summer steelhead have declined by 11% annually for the last 10-years -->
+<!-- - All populations below critical abundance thresholds -->
+<!--   - 3 populations currently below the QET50 -->
+<!--   - 3 populations predicted to fall below 50 by 2029 -->
+<!--   - 16 populations remain above 50 in 2029 -->
+
+```{r sth-qet-map, out.width = '100%', eval = TRUE, fig.cap = 'Current status of natural-origin Snake River summer steelhead relative to the quasi-extinction threshold (QET) and Columbia Basin Partnership goals.'}
+include_graphics(paste0(fig_path,'Steelhead/Steelhead_map_',yr,'.png'))
+```
+
+
+<!-- was to review the National Oceanic and Atmospheric Administration's Northwest Fisheries Science Center's draft Biological Status Report (dBSR; December 2020). To critically review their findings, we conducted similar analyses as those shared in the dBSR to better understand the current status and future direction of Snake River salmon and steelhead trends. After completing the initial review, we questioned how current and future population status related to QET, and if all populations were performing equally. To answer these new questions, our research included four main objectives: 1) fit a multivariate dynamic linear model to empirical population abundance estimates similar to NOAA's dBSR, 2) conduct a trend analyses with the most recent 10 years of data to compare patterns across populations, 3) estimate the proportion of populations currently meeting the QET, and 4) use the trend analysis results to predict future population status assuming recent environmental patterns and trends continue. -->
+
+
+
+
+
+<!-- Need to put into context of climate change -->
+
+<!-- we should include some assumptions and possible outcomes if violated -->
+
+<!-- Need to compare and contrast across other findings; Storch et al., WDFWs.... -->
 
 <!-- Unfortunately, many climate prediction models suggest a continued warming phase in the northern hemisphere that will increase the vulnerability and risk of extinction for Columbia River anadromous fish [@crozierClimateVulnerabilityAssessment2019a]. Additionally, intensive population modeling by @crozierClimateChangeThreatens2021 suggests that a continued reduction in ocean survival, largely driven by climate change, will perpetuate the decline of Snake River sp/su Chinook Salmon populations with most reaching QET in the next 10-30 years.  -->
 
@@ -832,5 +591,25 @@ Our linear predictions assume the current 10-year trend will continue, ignores s
 In the last 30 years since ESA listing of salmon and steelhead, billions of dollars were spent to recover and increase salmon and steelhead returns to the the Snake River. The actions we have taken included small and large scale habitat restoration projects, major hydrosystem over halls and passage improvements, and we have released millions of hatchery fish to jump start recovery. Although each of these actions have provided small localized benefits, our analysis shows Snake River anadromous populations are acting similarly, which suggests common drivers of survival for all populations (i.e., hydrosystem and ocean). Climate change scenarios predict worsen ocean conditions for salmon and steelhead, of which, our actions can not immediately change or improve. We can, however, change and improve migration and rearing conditions for all salmon and steelhead in the Lower Snake River and Columbia River.
 
 
+<!-- Need comparison to other snake river status reports -->
+
+# Code and Data Availability
+
+The code and processed data to reproduce the analyses, summaries, tables, and figures are available on the GitHub project repository [https://github.com/ryankinzer/SRAFS.git](https://github.com/ryankinzer/SRAFS.git). Raw time-series observation data are available from Stream Net's Coordinated Assessments Indicators of Fish Population Health web application; [https://cax.streamnet.org](https://cax.streamnet.org).
+
+# Acknowledgements
+
+Providing the current status of Snake River fish stocks would not be possible without the gigantic efforts of hundreds of biologists, technicians, and field crews who have collected monitoring data across the basin over the past three decades. We are especially grateful to the many tribal, state, and federal agency staff whose long-term dedication to data collection, stewardship, and recovery efforts have provided the foundation for this analysis. We also thank the regional biologists and data managers who ensured the consistency and integrity of datasets spanning multiple generations of monitoring programs. Evan Brown, Rebecca Waskovich and Luciano Chiramonte from Idaho Department of Fish and Game, Joseph Feldhaus and Kasey Bliesner from Oregon Department of Fish and Wildlife, and Ethan Crawford and Michael Gallinat from Washington Department of Fish and Wildlife deserve a special thanks for meeting our data requests and helping us understand the methods and nuances. We thank our, now retired, program manager, David Johnson, for encouraging this work and using it to guide future recovery decisions and inform policy makers. Manuscript review and guidance pre-journal submittal were generously provided by **placeholder**, **placeholder**, **placeholder**, and **placeholder**. We also extend our gratitude to the anonymous journal reviewers whose thoughtful feedback greatly improved the quality and clarity of this manuscript.
+
 \newpage
 # References
+
+# Supplemental Material
+
+```{r chn-resids, fig.pos = "htbp", out.width = '100%', eval = TRUE, fig.cap = 'Residuals from the best fitting spring-summer Chinook Salmon MARSS model.'}
+include_graphics(paste0(fig_path,'Chinook_salmon/Chinook_salmon_residuals_',yr,'.png'))
+```
+
+```{r sth-resids, fig.pos = "htbp", out.width = '100%', eval = TRUE, fig.cap = 'Residuals from the best fitting summer steelhead MARSS model.'}
+include_graphics(paste0(fig_path,'Steelhead/Steelhead_residuals_',yr,'.png'))
+```

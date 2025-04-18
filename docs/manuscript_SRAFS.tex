@@ -1,0 +1,524 @@
+\documentclass[10pt,a4paper]{article}
+
+% Line numbers
+
+% Font setup
+
+  \usepackage[default,tabular,lf]{sourcesanspro}
+  \usepackage[cmintegrals]{newtxsf}
+  \usepackage[italic,eulergreek]{mathastext}
+
+% Encoding & language
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+%\usepackage[australian]{babel}
+
+% Geometry & spacing
+\usepackage{geometry}
+\geometry{left=2cm,right=2cm,top=2.5cm,bottom=2.5cm}
+\usepackage{microtype}
+\usepackage{setspace}
+\setstretch{1.2}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\parindent}{0pt}
+\setlength{\emergencystretch}{3em}
+
+% Graphics & tables
+\usepackage{graphicx,float,booktabs,longtable}
+\usepackage{multirow}
+\usepackage{array}
+%\usepackage{tabu}
+\setcounter{topnumber}{2}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{4}
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.85}
+\renewcommand{\textfraction}{0.15}
+\renewcommand{\floatpagefraction}{0.8}
+
+\usepackage{longtable,booktabs}
+% Fix footnotes in tables (if needed)
+\IfFileExists{footnote.sty}{
+  \usepackage{footnote}
+  \makesavenoteenv{longtable}
+}{}
+
+% Automatically reduce font size in tables
+%\usepackage{etoolbox}
+%\AtBeginEnvironment{longtable}{\footnotesize}
+%\AtBeginEnvironment{tabular}{\footnotesize}
+
+% Hyperlinks
+\usepackage{xcolor}
+\definecolor{darkblue}{rgb}{0,0,.6}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=darkblue,
+  citecolor=darkblue,
+  urlcolor=darkblue,
+  breaklinks=true,
+  bookmarksopen=true,
+  bookmarksnumbered=true
+}
+\urlstyle{same}
+
+% Header/Footer
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\textsf{\nouppercase{\leftmark}}}
+\rhead{\textsf{\thepage}}
+\setlength{\headheight}{15pt}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% Captions
+\usepackage{caption}
+\DeclareCaptionStyle{italic}[justification=centering]{labelfont={bf},textfont={it},labelsep=colon}
+\captionsetup[figure]{style=italic,format=hang,singlelinecheck=true}
+\captionsetup[table]{style=italic,format=hang,singlelinecheck=true}
+
+% Bibliography
+\usepackage[style=authoryear-comp,backend=biber,natbib=true]{biblatex}
+\ExecuteBibliographyOptions{bibencoding=utf8,minnames=1,maxnames=3,maxbibnames=99,dashed=false,terseinits=true,giveninits=true,uniquename=false,uniquelist=false,doi=false,isbn=false,url=true,sortcites=false}
+\DeclareFieldFormat{url}{\texttt{\url{#1}}}
+\DeclareFieldFormat[article]{volume}{\mkbibbold{#1}}
+\DeclareFieldFormat[article]{number}{\mkbibparens{#1}}
+\DeclareFieldFormat[article]{title}{\MakeCapital{#1}}
+\DeclareFieldFormat[inproceedings]{pages}{\lowercase{pp.~}#1}
+\renewbibmacro{in:}{\ifentrytype{article}{}{\printtext{\bibstring{in}\intitlepunct}}}
+\AtEveryBibitem{\clearfield{month}}
+\AtEveryCitekey{\clearfield{month}}
+\addbibresource{abundance-decline.bib}
+\addbibresource{packages.bib}
+
+% Section titles
+\usepackage[compact,sf,bf]{titlesec}
+\titleformat{\section}[block]{\fontsize{15}{17}\bfseries\sffamily}{\thesection}{0.4em}{}
+\titleformat{\subsection}[block]{\fontsize{12}{14}\bfseries\sffamily}{\thesubsection}{0.4em}{}
+\titlespacing{\section}{0pt}{*3}{*1}
+\titlespacing{\subsection}{0pt}{*1}{*0.5}
+
+% Title block with optional branding
+\usepackage{titling}
+\usepackage[absolute,overlay]{textpos}
+\setlength{\TPHorizModule}{1cm}
+\setlength{\TPVertModule}{1cm}
+
+% Abstract box styling
+\usepackage{tcolorbox}
+\newenvironment{abstractbox}
+  {\begin{tcolorbox}[colback=gray!5!white,colframe=gray!50!black,
+  width=\textwidth, boxrule=1.0pt, sharp corners, left=4pt, right=4pt, top=4pt, bottom=4pt]}
+  {\end{tcolorbox}}
+
+% Title metadata
+\title{Three Decades of ESA-Listing: Are Snake River Spring/summer Chinook Salmon and Steelhead on the Path to Recovery?}
+
+\author{%
+\textbf{Ryan N. Kinzer}, \emph{Research Scientist}\textsuperscript{1}\\[0.5em]
+\textbf{Jay Hesse}, \emph{Director of Biological Services}\textsuperscript{1}\\[0.5em]
+\textbf{Jason Vogel}, \emph{Research Division Director}\textsuperscript{1}\\[0.5em]
+\textsuperscript{1} Nez Perce Tribe, Department of Fisheries Resources Management\\
+}
+
+\date{\textbf{11 April, 2025}}
+
+% Start document
+\begin{document}
+
+% Optional branding
+
+\maketitle
+
+  \vspace*{-1.5cm}
+  \begin{textblock}{4}(2,0.8)\includegraphics[height=2.0cm]{../templates/NPT.png}\end{textblock}
+  \begin{textblock}{4}(17,0.8)\includegraphics[height=2.0cm]{../templates/DFRM.png}\end{textblock}
+
+
+  \vspace{1em}
+  \rule{\linewidth}{0.2pt}
+
+% Line spacing override
+
+% Content
+
+\section{Background}\label{background}
+
+Freshwater and marine fish species are declining globally due to a variety of stressors, including habitat loss, overfishing, climate change, and pollution. Freshwater species have experienced an alarming 83\% decline in monitored populations since 1970, with significant losses observed in the Pacific region \autocite{wwf_living_2022}. A recent study conducted for the International Union for the Conservation of Nature (IUCN)'s Red List of Threatened Species found 25\% of all freshwater species are at high risk of extinction \autocite{sayer_one-quarter_2025}. Similarly, marine species such as Atlantic Cod \emph{Gadus morhua})* and Bluefin Tuna \emph{Thunnus thynnus} have suffered steep population declines from over exploitation and environmental changes \autocite{fao_state_2020}. The downward patterns and root causes are shared with most North American diadromous fish as well \autocite{waldman_north_2022}, and mirrored by populations of anadromous salmonids along the western coast of the United States, where fish abundance has been negatively impacted since commercial harvest began with European settlement \autocite{chapman_salmon_1986} and continues to be threatened from altered river flows, warming waters, and habitat fragmentation caused by dams and urban development.
+
+Nowhere are these declines more evident than in the Columbia River basin, a critical habitat for pacific salmonid species, including Chinook Salmon \emph{O. tshawytscha} and steelhead \emph{O. mykiss}. Historically Chinook Salmon and steelhead returned to the Columbia River basin in the millions, estimated returns range between 5 and 16 million fish annually \autocite{chapman_salmon_1986,isab_density_2015,npcc_compilation_1986}, with spring and summer (sp/su) Chinook Salmon making up the largest component (2.5-3.0 million) and steelhead returns consisting of approximately 450-550 thousand individuals \autocite{chapman_salmon_1986}. \textcite{chapman_historical_2003} later decomposed total Columbia River returns into Snake River specific stocks, a major tributary of the Columbia River, using available habitat area as developed by (\textbf{need source: PFMC 1979}). \textcite{chapman_historical_2003} found the Snake River contained the majority of available Columbia River spawning habitat, suggesting historic returns of sp/su Chinook Salmon to the Snake River were approximately 1.4-2.2 million with an additional 250-400 thousand steelhead.
+
+The abundant Snake River returns started declining soon after European settlement beginning in the 1850's due to overharvest, hydropower development, natural resource extraction and urban growth along the Columbia and Snake rivers \autocite{nehlsen_pacific_1991}. With the largest loss of returns being observed during the construction of hydroelectric dams along the Columbia and Lower Snake rivers beginning with Bonneville Dam in 1933 and ending with Lower Granite Dam in 1978. Between 1980 and 1990 sp/su Chinook Salmon escapement into the Snake River basin ranged between 3,343 to 21,870 adults (57 FR 14653)\autocite{noauthor_federal_1992}. Based on their rapid decline and low numbers relative to their large geographical area of occupancy the Snake River sp/su Chinook Salmon evolutionary significant unit (ESU) was listed as threatened under the Endangered Species Act (ESA) in 1992 (57 FR 14653)\autocite{noauthor_federal_1992}. During the same period, the returning Snake River summer steelhead distinct population segment (DPS) experienced similar rates of decline, with an average annual return of only 9,400 when they were listed as threatened under ESA in 1997 (62 FR 43937) \autocite{noauthor_federal_1997}.
+
+The Snake River sp/su Chinook Salmon ESU and steelhead DPS historically supported 68 sp/su Chinook Salmon and 40 steelhead populations located across central Idaho, southeast Washington, and northeast Oregon {[}\textcite{cbp_vision_2020}; @\ref(fig:esu\_map){]}. The historical populations contained \textbf{X} river kilometers of spawning habitat that represented more than 88\% of the total spawning habitat in the Columbia River Basin \autocite{chapman_historical_2003}. However, habitat accessibility was permanently reduced to 41 sp/su Chinook Salmon and 24 steelhead populations after the completion of Dworshak Dam on the North Fork Clearwater River in 1969 and the three Hell's Canyon project dams on the upper Snake River River from 1959-1967 which lacked fish passage facilities. The resulting habitat loss led to the immediate extinction of 60\% of the historical populations in the Snake River basin. With the remaining populations at historically low abundances and facing continued threats of habitat degradation, hydrosystem impacts, and a rapidly changing climate \autocite{noaa_rebuilding_2022,crozier_climate_2021,nakamura_divergent_2023}.
+
+After ESA listing of Snake River anadromous fish in the 1990's regulatory agencies established methods to asses population viability. Population viability and extinction is commonly thought of as a stochastic event with risk conveyed probabilistically, requiring thresholds for population persistence, and determined through ``rules of thumb'', analytical, or simulation studies \autocite{thompson_determining_1991}. Often, population viability occurs at a point when abundance or other metrics indicate the probability of persistence is greater than 0.95. Similarly, population viability evaluations can examine the opposite and determine at which point is the probability of extinction greater than 0.95, thus, indicating the point at which the population is at high risk of extinction and unlikely to recover \autocite{thompson_determining_1991}. The viability of Snake River sp/su Chinook Salmon and steelhead is assessed using a combination of minimum abundance thresholds (MAT), productivity, genetic diversity and spatial distribution metrics \autocite{mcelhany_viable_2000,ictrt_viability_2007}. Minimum abundance thresholds for each population were developed independently using available habitat and intrinsic potential models \autocite{cooney_appendix_2006}, with MAT for individual populations ranging from 500-2,000 sp/su Chinook Salmon and 500-1,500 steelhead \autocite{ictrt_viability_2007}. At these established MAT levels populations were determined to be viable and have a low risk of extinction \autocite{noaa_esa_2017}. Conversely, \autocite{ictrt_viability_2007} set a quasi-extinction threshold (QET) for each population at 50 or fewer spawners for four consecutive years to determine the point when extinction was likely. And recently, in 2020, Columbia River and Snake River fisheries co-managers recognized population viability thresholds were far below desired levels in order to meet ecological and state and tribal harvest needs. In collaboration with the regulatory agencies the co-managers formed the Columbia Basin Partnership (CBP) and developed common abundance goals focused on healthy, harvestable, and sustainable levels capable of supporting ecosystem processes \autocite{cbp_vision_2020}. These established ``healthy and harvestable'' levels, combined with population viability thresholds, form an agreed upon and complete set of abundance evaluation points to determine a population's recovery status.
+
+Three decades have passed since the ESA listing of Snake River sp/su Chinook Salmon and steelhead, and during this time, one of the largest and most expensive species recovery efforts has unfolded. Approximately 17 billion dollars has been spent in the Columbia River basin to protect and restore habitat, improve survival through mainstem hydrosystems, provide fisheries with hatchery production, and to rebuild natural populations supplementation (\textbf{citation}), yet, annual fish runs continue to be only 1\% of historical levels \autocite{thurow_wild_2019,storch_review_2022,ford_biological_2022}. Our aim for this research is to provide an updated current status and future predicted status of Snake River sp/su Chinook Salmon and steelhead populations relative to healthy and harvestable, delisting, and quasi-extinction abundance thresholds \autocite{cbp_vision_2020}. To establish the current status and trends of Snake River populations we first fit multivariate dynamic linear models (DLM) to empirical population abundance estimates, similar to \textcite{ford_biological_2022}, to identify common patterns across populations. Second, we use the best fitting DLM to estimate population trends and annual growth rates for the most recent 10 year period to evaluation recovery status. Third, we summarize the percent of populations currently, or predicted, above or below abundance thresholds, and finally, we discuss our findings in relation to other studies regarding Snake River anadromous fish population status.
+
+\begin{figure}
+\centering
+\includegraphics{manuscript_SRAFS_files/figure-latex/esu-map-1.pdf}
+\caption{\label{fig:esu-map}Currently accessible and extant spring-summer Chinook Salmon (A) and steelhead (B) populations within the Snake River Basin evolutionary significant unit (ESU) or distinct population segment (DPS) are grouped in similar colors while the grey shape indicates extict populations.}
+\end{figure}
+
+\section{Methods}\label{methods}
+
+\subsection{Data}\label{data}
+
+This study seeks to use the best available abundance information to understand the current status of Snake River populations. We begin by modeling spawner abundance using two independent sources of information, when available, for each population with a state-space model accounting for observation and process error. The model seeks to describe the unknown state process for each population while allowing imperfect observations. Next, we fit a linear regression (i.e., trend line) to each state process for the last 10-year period to describe contemporary trends and the last two generations of returns. Last, we extend the trend lines five years into the future to identify populations at highest risk of reaching quasi-extinction.
+
+Time-series abundance estimates of natural-origin fish returning to accessible populations within the Snake River Basin were provided from two independent observation sources {[}\ref{tab:chn-obs}; \ref{tab:sth-obs}{]}. Both time-series estimates were obtained from \href{https://cax.streamnet.org}{StreamNet's Coordinated Assessments} natural-origin spawner abundance (NOSA) dataset. We first subset the dataset to include only those records from Snake River Basin ESU/DPS populations. The first population time-series were primarily derived from observations of redds and weir collections, and intended to represent NOSA including jacks (NOSAij). The NOSAij estimates were generated and submitted to Coordinated Assessments by Idaho Department of Fish Game, Washington Department of Fish and Game, Oregon Department of Fish and Game, and Nez Perce Tribe biologists. Specifc details regarding the estimation of NOSAij for each population can be found in agency reports {[}\textbf{need citations}{]} or by contacting the contributing source listed in Coordinated Assessments metadata. The second population time-series represents escapement of natural-origin fish (including jack) to the population. Escapement estimates were derived from PIT-tag observations and a Bayesian hierarchical patch occupancy model described in \textcite{waterhouse_bayesian_2020} slightly modified by estimating time-varying transition probabilities which can account for 1) differential adult run timings among populations in the basin and 2) potentially inconsistent trapping and tagging rates at Lower Granite Dam. Further details regarding the escapement estimates can be found in \textcite{See2020} and \textcite{See2019}.
+
+Abundance trends for individual sp/su Chinook Salmon and steelhead populations were analyzed using data from StreamNet's Coordinated Assessments \href{https://cax.streamnet.org}{database} and passive integrated transponder (PIT) tag model results. For most combinations of return years and sp/su Chinook Salmon populations, data originated from the Coordinated Assessments database and were produced by the state or tribal co-managers responsible for monitoring those populations. The dataset was retrieved from Coordinated Assessments on January X, 2025, and filtered to only include Snake River sp/su Chinook Salmon and steelhead populations with natural-origin spawner abundance estimates, including jacks (NOSAij). For many Snake River populations, multiple NOSAij estimates were available for the same year due to variations in estimation methods (e.g., spawning ground surveys, mark-recapture) and/or data generators. In these cases, we selected annual estimates labeled as the method used by the National Oceanic and Atmospheric Administration (NOAA) technical recovery team. Steelhead abundance data were filtered from Coordinated Assessments by selecting estimates generated through the STate-space Adult Dam Escapement Model (STADEM) \autocite{see_state-space_2021} and the Dam Adult Branch Occupancy Model (DABOM) \autocite{see_pit_2016,kinzer_snake_2020}, as indicated in the ``Comments'' field. Population data for sp/su Chinook Salmon returning to Big Sheep Creek, Lookingglass Creek, Little Salmon River, and Panther Creek were unavailable in the Coordinated Assessments database. For these populations, we included estimates derived from the STADEM and DABOM models but obtained from \textcite{kinzerSnakeRiverBasin2020}.
+
+\begin{table}
+\centering
+\caption{Summary of abundance time-series used in modeling Snake River spring/summer Chinook Salmon populations (n = 48). Time-series length and data sources varied by population, with observations spanning from 1980 to 2024. Abundance estimates were primarily based on spawning ground surveys and weir counts, with PIT-tag detections included for select populations. The 10th, 50th (median), and 90th percentiles of observed abundance values are provided to summarize distributional characteristics across years.}
+\centering
+\fontsize{8}{10}\selectfont
+\begin{tabular}[t]{llllrrrr}
+\toprule
+MPG & Population & Method & Years & \# Years & 10\% & 50\% & 90\%\\
+\midrule
+Dry Clearwater & Upper South Fork Clearwater & PIT-tag & 2012-2024 & 12 & 144 & 273 & 757\\
+
+ & Big Sheep Creek & PIT-tag & 2011-2024 & 13 & 20 & 49 & 120\\
+
+ &  & SGS and Weir & 1980-2024 & 45 & 36 & 129 & 527\\
+
+ & \multirow[t]{-2}{*}{\raggedright\arraybackslash Catherine Creek} & PIT-tag & 2015-2024 & 9 & 90 & 132 & 361\\
+
+ &  & SGS and Weir & 1980-2024 & 45 & 14 & 56 & 187\\
+
+ & \multirow[t]{-2}{*}{\raggedright\arraybackslash Grande Ronde River Upper Mainstem} & PIT-tag & 2018-2024 & 6 & 16 & 33 & 71\\
+
+ &  & SGS and Weir & 1980-2024 & 45 & 189 & 417 & 1028\\
+
+ & \multirow[t]{-2}{*}{\raggedright\arraybackslash Imnaha River Mainstem} & PIT-tag & 2011-2024 & 13 & 222 & 483 & 1062\\
+
+ & Lookingglass Creek & PIT-tag & 2010-2024 & 14 & 38 & 88 & 228\\
+
+ & Minam River & SGS and Weir & 1980-2024 & 45 & 141 & 327 & 684\\
+
+ & Wallowa/Lostine Rivers & SGS and Weir & 1980-2023 & 44 & 72 & 300 & 1018\\
+
+ &  & SGS and Weir & 1980-2024 & 45 & 61 & 279 & 652\\
+
+\multirow[t]{-12}{*}[7\dimexpr\aboverulesep+\belowrulesep+\cmidrulewidth]{\raggedright\arraybackslash Grande Ronde / Imnaha} & \multirow[t]{-2}{*}{\raggedright\arraybackslash Wenaha River} & PIT-tag & 2019-2024 & 5 & 119 & 133 & 404\\
+
+ &  & SGS and Weir & 1984-2016 & 33 & 0 & 4 & 18\\
+
+ & \multirow[t]{-2}{*}{\raggedright\arraybackslash Asotin Creek} & PIT-tag & 2010-2024 & 14 & 0 & 19 & 123\\
+
+\multirow[t]{-3}{*}[1\dimexpr\aboverulesep+\belowrulesep+\cmidrulewidth]{\raggedright\arraybackslash Lower Snake} & Tucannon River & SGS and Weir & 1980-2024 & 45 & 26 & 213 & 611\\
+
+ &  & SGS and Weir & 1980-2024 & 45 & 85 & 244 & 880\\
+
+ & \multirow[t]{-2}{*}{\raggedright\arraybackslash Bear Valley Creek} & PIT-tag & 2015-2024 & 9 & 10 & 232 & 648\\
+
+ &  & SGS and Weir & 1980-2024 & 45 & 38 & 131 & 417\\
+
+ & \multirow[t]{-2}{*}{\raggedright\arraybackslash Big Creek} & PIT-tag & 2012-2024 & 12 & 198 & 585 & 1121\\
+
+ & Camas Creek & SGS and Weir & 1980-2024 & 44 & 9 & 43 & 104\\
+
+ & Chamberlain Creek & SGS and Weir & 1985-2024 & 36 & 30 & 187 & 526\\
+
+ & Loon Creek & SGS and Weir & 1980-2024 & 44 & 10 & 53 & 107\\
+
+ & Marsh Creek & SGS and Weir & 1980-2024 & 45 & 31 & 167 & 578\\
+
+ & Middle Fork Salmon River Lower Mainstem & SGS and Weir & 1987-2024 & 37 & 0 & 3 & 23\\
+
+ & Middle Fork Salmon River Upper Mainstem & SGS and Weir & 1995-2024 & 30 & 21 & 57 & 154\\
+
+\multirow[t]{-11}{*}[8\dimexpr\aboverulesep+\belowrulesep+\cmidrulewidth]{\raggedright\arraybackslash Middle Fork Salmon River} & Sulphur Creek & SGS and Weir & 1980-2024 & 45 & 6 & 41 & 182\\
+
+ &  & SGS and Weir & 1987-2024 & 38 & 62 & 212 & 503\\
+
+ & \multirow[t]{-2}{*}{\raggedright\arraybackslash East Fork South Fork Salmon River} & PIT-tag & 2010-2024 & 14 & 243 & 629 & 1079\\
+
+ &  & SGS and Weir & 1996-2024 & 29 & 161 & 434 & 1045\\
+
+ & \multirow[t]{-2}{*}{\raggedright\arraybackslash Secesh River} & PIT-tag & 2010-2024 & 14 & 270 & 666 & 1191\\
+
+ &  & SGS and Weir & 1980-2024 & 45 & 162 & 551 & 1235\\
+
+\multirow[t]{-6}{*}[2\dimexpr\aboverulesep+\belowrulesep+\cmidrulewidth]{\raggedright\arraybackslash South Fork Salmon River} & \multirow[t]{-2}{*}{\raggedright\arraybackslash South Fork Salmon River} & PIT-tag & 2010-2024 & 14 & 213 & 675 & 2534\\
+
+ & East Fork Salmon River & SGS and Weir & 1980-2024 & 45 & 18 & 219 & 630\\
+
+ &  & SGS and Weir & 1980-2024 & 45 & 60 & 142 & 363\\
+
+ & \multirow[t]{-2}{*}{\raggedright\arraybackslash Lemhi River} & PIT-tag & 2010-2024 & 14 & 129 & 235 & 665\\
+
+ &  & SGS and Weir & 1991-2024 & 34 & 6 & 52 & 184\\
+
+ & \multirow[t]{-2}{*}{\raggedright\arraybackslash North Fork Salmon River} & PIT-tag & 2016-2024 & 7 & 40 & 60 & 211\\
+
+ & Pahsimeroi River & SGS and Weir & 1980-2024 & 37 & 24 & 122 & 354\\
+
+ & Panther Creek & PIT-tag & 2018-2024 & 6 & 93 & 166 & 303\\
+
+ & Salmon River Lower Mainstem & SGS and Weir & 1980-2024 & 45 & 19 & 98 & 230\\
+
+ & Salmon River Upper Mainstem & SGS and Weir & 1980-2024 & 45 & 100 & 326 & 679\\
+
+ &  & SGS and Weir & 1980-2024 & 45 & 13 & 77 & 229\\
+
+ & \multirow[t]{-2}{*}{\raggedright\arraybackslash Valley Creek} & PIT-tag & 2010-2024 & 14 & 87 & 242 & 484\\
+
+ &  & SGS and Weir & 1980-2024 & 44 & 3 & 23 & 148\\
+
+\multirow[t]{-13}{*}[8\dimexpr\aboverulesep+\belowrulesep+\cmidrulewidth]{\raggedright\arraybackslash Upper Salmon River} & \multirow[t]{-2}{*}{\raggedright\arraybackslash Yankee Fork} & PIT-tag & 2012-2024 & 12 & 35 & 62 & 279\\
+
+ & Lochsa River & PIT-tag & 2017-2024 & 7 & 160 & 245 & 461\\
+
+\multirow[t]{-2}{*}[1\dimexpr\aboverulesep+\belowrulesep+\cmidrulewidth]{\raggedright\arraybackslash Wet Clearwater} & Lolo Creek & PIT-tag & 2012-2024 & 12 & 41 & 78 & 257\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}
+\centering
+\caption{Summary of abundance time-series used in modeling Snake River summer steelhead populations (n = 25). Time-series length and data sources varied by population, with observations spanning from 2010 to 2024. Abundance estimates were primarily based on PIT-tag detections, with spawning ground surveys and weir counts included for select populations. The 10th, 50th (median), and 90th percentiles of observed abundance values are provided to summarize distributional characteristics across years.}
+\centering
+\fontsize{8}{10}\selectfont
+\begin{tabular}[t]{llllrrrr}
+\toprule
+MPG & Population & Method & Years & \# Years & 10\% & 50\% & 90\%\\
+\midrule
+ & Clearwater River Lower Mainstem & SGS and Weir & 2010-2024 & 15 & 147 & 254 & 785\\
+
+ & Lochsa River & SGS and Weir & 2017-2024 & 8 & 289 & 439 & 941\\
+
+ & Lolo Creek & SGS and Weir & 2012-2024 & 13 & 104 & 187 & 589\\
+
+ & Selway River & SGS and Weir & 2017-2024 & 8 & 232 & 408 & 802\\
+
+\multirow[t]{-5}{*}[4\dimexpr\aboverulesep+\belowrulesep+\cmidrulewidth]{\raggedright\arraybackslash Clearwater River} & South Fork Clearwater River & SGS and Weir & 2012-2024 & 13 & 131 & 353 & 1040\\
+
+ & Grande Ronde River Lower Mainstem & SGS and Weir & 2019-2023 & 5 & 281 & 418 & 467\\
+
+ &  & SGS and Weir & 2013-2024 & 12 & 356 & 539 & 1301\\
+
+ & \multirow[t]{-2}{*}{\raggedright\arraybackslash Grande Ronde River Upper Mainstem} & PIT-tag & 2010-2018 & 9 & 1300 & 2556 & 3589\\
+
+ &  & SGS and Weir & 2011-2024 & 14 & 372 & 747 & 2045\\
+
+ & \multirow[t]{-2}{*}{\raggedright\arraybackslash Joseph Creek} & PIT-tag & 2010-2017 & 8 & 1487 & 1990 & 3735\\
+
+\multirow[t]{-6}{*}[3\dimexpr\aboverulesep+\belowrulesep+\cmidrulewidth]{\raggedright\arraybackslash Grande Ronde River} & Wallowa River & SGS and Weir & 2014-2024 & 11 & 359 & 508 & 956\\
+
+Imnaha River & Imnaha River & SGS and Weir & 2011-2024 & 14 & 683 & 1241 & 2881\\
+
+ & Asotin Creek & SGS and Weir & 2010-2024 & 15 & 224 & 366 & 1312\\
+
+ &  & SGS and Weir & 2010-2024 & 15 & 232 & 452 & 841\\
+
+\multirow[t]{-3}{*}[1\dimexpr\aboverulesep+\belowrulesep+\cmidrulewidth]{\raggedright\arraybackslash Lower Snake} & \multirow[t]{-2}{*}{\raggedright\arraybackslash Tucannon River} & PIT-tag & 2010-2023 & 14 & 347 & 611 & 1196\\
+
+ & East Fork Salmon River & SGS and Weir & 2011-2019 & 8 & 0 & 14 & 40\\
+
+ & Lemhi River & SGS and Weir & 2010-2024 & 15 & 49 & 161 & 416\\
+
+ & Middle Fork Salmon River Lower Mainstem & SGS and Weir & 2011-2024 & 14 & 84 & 244 & 586\\
+
+ & Middle Fork Salmon River Upper Mainstem & SGS and Weir & 2020-2024 & 5 & 19 & 29 & 53\\
+
+ & North Fork Salmon River & SGS and Weir & 2017-2024 & 7 & 17 & 57 & 378\\
+
+ & Pahsimeroi River & SGS and Weir & 2011-2024 & 14 & 9 & 33 & 140\\
+
+ & Panther Creek & SGS and Weir & 2018-2024 & 7 & 101 & 137 & 196\\
+
+ & Salmon River Upper Mainstem & SGS and Weir & 2010-2024 & 15 & 36 & 106 & 297\\
+
+ & Secesh River & SGS and Weir & 2010-2024 & 15 & 27 & 57 & 252\\
+
+\multirow[t]{-10}{*}[9\dimexpr\aboverulesep+\belowrulesep+\cmidrulewidth]{\raggedright\arraybackslash Salmon River} & South Fork Salmon River & SGS and Weir & 2010-2024 & 15 & 154 & 445 & 1511\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+{[}Figure of stochasiticity across time, and the synchronization after 1980.{]}
+
+\subsection{Dynamic Linear Model}\label{dynamic-linear-model}
+
+The reported population abundance data generated by fisheries comanagers are not the exact truth, and in many cases, they are reported without levels of certainty (i.e., precision estimates) or measurement error. Reported estimates instead are generally the result of incomplete observations (i.e., spatial and temporal coverage is incomplete) and the product of combining information from multiple data collection activities and fish metrics together (i.e., redd count surveys, mark/recapture events, carcass collections), with each item having the possibility of being incorrect or biasing the abundance estimate from the unknown truth. To better understand the true unknown abundance and underlying trends contained within the data we removed measurement error using a multivariate dynamic linear model (DLM) \autocite{zuur_estimating_2003}. A DLM is a time series model constructed as a type of state-space model that separates observation and state processes, and assumes the processes change dynamically following linear models \autocite{royle_hierarchical_2008}. Dynamic linear models are capable of capturing the serial correlation in the data and can share covariance across multiple time-series, thus, effectively allowing information to be shared from data rich populations with long time-series, to data poor populations with short datasets or missing years.
+
+Our DLM was fit to natural-log transformed abundance for each fish population simultaneously using shared parameters across all populations. We followed the methods described in \textcite{ford_biological_2022}, where the model was fit with a single variance and covariance across all populations for the process error, and a single variance term for observational error using the statistical software R \autocite{R-base} and the MARSS package \autocite{holmes_marss_2012,R-MARSS}. We chose to include only those Snake River populations in the DLM with greater than 5 years of abundances to reduce risks of parameter bias and overfitting. More in depth model details and fitting procedures are described in the \textcite{ford_biological_2022}.
+
+The unobserved state process model follows the linear equation,
+
+\[
+x_t = x_{t-1} + u + w_t; \\
+w_t \sim MVN(0,\mathbf{Q})
+\]
+where, \(x_t\) is an \(m \space X \space 1\) matrix of true unknown states for return year \(t\). Parameter \(u\) is \(m \space X \space 1\) and represents drift between subsequent return years for each state \(m\). Process error (\(w_t\)) is assumed multivariate normal with mean zero and the \(m \space X \space m\) variance-covariance matrix \(\bf{Q}\).
+
+The observation model is represented as,
+
+\[
+y_t = \mathbf{Z}x_t + a + v_t; \\
+v_t \sim MVN(0,\mathbf{R})
+\]
+where, \(y_t\) is an \(n \space X \space 1\) matrix of observed abundance at return year \(t\) for \(n\) independent time-series. Return year abundances for each \(n\) and \(t\) observation is mapped to the unknown state (\(x_t\)) with the \(n \space X \space m\) matrix \(\bf{Z}\). Parameter \(a\) is \(n \space X \space 1\) and provides a y-intercept scaling (i.e., bias correction) for the \(m^{th}\) state and each \(n^{th}\) time-series. Observational error (\(v_t\)) is modeled multivariate normal with mean zero and the \(n \space X \space n\) variance-covariance matrix \(\bf{R}\).
+
+We modeled four different scenarios to represent true unknown states for Snake River Chinook Salmon and steelhead populations. The scenarios included an individual state for each of the \(n\) time-series, states for each of the populations, states for each of the major population groups (MPGs), and a single state for the entire Snake River Basin. Parameters \(u\) and \(a\) were set to unequal across the modeled states and time-series mapped to each state.
+
+We modeled three different variance-covariance matrices for process error and two variance-covariance matrices of observation error for each of the four state scenarios. The first process error matrix was assumed to have equal variance and covariance terms for each state, the second and third options assumed no covariance and either equal or unequal variances on the diagonal. The observation error matrix was assumed to have either equal or unequal variance on the diagonal, and off diagonal covariance terms equal to zero.
+
+The different combinations resulted in 24 model runs fit with the MARSS package \autocite{holmes_marss_2012} and the statistical programming language R \autocite{R-base}. The best model was selected as having the lowest bootstrapped AIC (AICb) value of all successfull (i.e., converged) model runs \autocite{holmes_marss_2012,R-MARSS}. Residuals from selected models were examined visually for assumption violations of heterogeneity and normality.
+
+\subsection{Annual Growth Rate}\label{annual-growth-rate}
+
+\textcite{ford_biological_2022} examined sp/su Chinook Salmon and steelhead 15-year (2004-2019) population trends using the fitted slope parameter from a linear regression model with year as the independent variable. From our initial examination of abundance data at the aggregate (i.e., Lower Granite Dam) and population levels, it appeared that abundance was relatively low in the beginning and end of the 15-year time period used in \textcite{ford_biological_2022}. We hypothesized that linear models fit to the last 15 years of population data would effectively be anchored at similar beginning and end points, resulting in less steep trends and potential insignificant slope parameters. We decided to alter the dBSA approach, and instead capture the magnitude of the more recent downward trend that we are currently experiencing. To do so, we choose to use only the last 10-years of abundance returns beginning in 2011. We based our rational on a visual change point (i.e., trend/slope switches direction from positive to negative) in sp/su Chinook Salmon and steelhead returns starting around 2011, and the desire to include two generations of returns to capture contemporary patterns in population trends.
+
+We estimated the population trend using a linear regression model with year and population as predictor variables, and the natural-log transformed abundance (i.e., state process) from the DLM model as the response. First, the full linear model was fit including an interaction term for year and population to allow for different population y-intercept and slope parameters. We then fit a reduced model, excluding the interaction term, which constrained populations to a common slope parameter while allowing for different population y-intercept parameters. The best fitting model was determined with an F-test \autocite{casella_statistical_2021}
+
+\subsection{Above Abundance Thresholds}\label{above-abundance-thresholds}
+
+The proportion of populations currently meeting the QET was calculated as the number of populations below the threshold divided by the total populations included in the DLM analysis. We determined populations were currently below the QET threshold if the DLM abundance estimates fell below 50 spawners for each of the last four years (\textbf{2017-2020}). The number of future populations meeting the QET threshold was determined with predictions from the trend analysis (i.e., objective 2) and the best fitting linear model. A population was classified as below the QET when returns within the next 5-years of predictions fell below 50 in a single year, because all subsequent predictions would also be below 50 due to the linear model.
+
+\section{Results}\label{results}
+
+\subsection{Dynamic Linear Model}\label{dynamic-linear-model-1}
+
+The best fitting model for sp/su Chinook Salmon included separate state processes for each major population group {[}\ref{tab:chn-mod-results}{]}, whereas summer steelhead was best represented by a single basin-wide process {[}\ref{tab:sth-mod-results}{]}. For both species, the difference in AICc values between the top two models exceeded 10.00, a threshold commonly interpreted to indicate the second ranked model has little to no support as compared to the first ranked model \autocite{burnham_multimodel_2004}. For sp/su Chinook Salmon, the process error matrix included two parameters: one for an equal variance and the other for an equal covariance across the seven MPG processes. In contrast, the best fitting model for summer steelhead included only a single basin-wide process, as such, process error consisted of a single variance parameter. Observational error for both species was best modeled with unique variance parameters for each time-series.
+
+We evaluated model assumptions by visually examining residual plots for patterns indicating autocorrelation, non-normality, or heteroscedasticity. Overall, these diagnostic checks supported the adequacy of the model structure and parameter estimates {[}\ref{fig:chn-resids}; \ref{fig:sth-resids}{]}. However, in a few populations residuals did show evidence of serial correlation and any future models may benefit from additional terms. model convergence was confirmed with MARSS package output indicating the optimization algorithm reached a stable peak in the likelihood \autocite{holmes_2021}.
+
+\begin{table}
+
+\caption{Candidate dynamic linear models fitted to 48 spring/summer Chinook Salmon abundance time-series to evaluate population dynamics and identify models best explaining Snake River trends. The number of state processes estimated in each model is indicated in column U. Unique state process error parameters are denoted in column Q, and observation error parameters in column R. Model fit is summarized using log-likelihood (logLik), corrected Akaike Information Criterion (AICc), and relative model support ($\Delta$AIC).}
+\centering
+\begin{tabular}[t]{rrrrrrr}
+\toprule
+Model Id & U & Q & R & logLik & AICc & $\Delta$AIC\\
+\midrule
+4 & 7 & 2 & 48 & -1409.39 & 3048.45 & 0.00\\
+2 & 1 & 1 & 48 & -1466.43 & 3146.20 & 97.75\\
+10 & 34 & 2 & 48 & -1434.48 & 3163.32 & 114.87\\
+8 & 7 & 7 & 48 & -1483.20 & 3207.85 & 159.39\\
+6 & 7 & 1 & 48 & -1497.10 & 3221.52 & 173.07\\
+\addlinespace
+3 & 7 & 2 & 1 & -1592.07 & 3307.45 & 259.00\\
+1 & 1 & 1 & 1 & -1644.39 & 3396.90 & 348.45\\
+9 & 34 & 2 & 1 & -1619.06 & 3421.60 & 373.15\\
+7 & 7 & 7 & 1 & -1658.74 & 3451.76 & 403.30\\
+5 & 7 & 1 & 1 & -1675.38 & 3471.89 & 423.44\\
+\addlinespace
+14 & 34 & 34 & 48 & -1652.97 & 3680.66 & 632.20\\
+12 & 34 & 1 & 48 & -1710.60 & 3713.10 & 664.65\\
+13 & 34 & 34 & 1 & -1787.79 & 3833.66 & 785.20\\
+11 & 34 & 1 & 1 & -1894.17 & 3969.55 & 921.09\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}
+
+\caption{Candidate dynamic linear models fitted to 25 summer steelhead abundance time-series to evaluate population dynamics and identify models best explaining Snake River trends. The number of state processes estimated in each model is indicated in column U. Unique state process error parameters are denoted in column Q, and observation error parameters in column R. Model fit is summarized using log-likelihood (logLik), corrected Akaike Information Criterion (AICc), and relative model support ($\Delta$AIC).}
+\centering
+\begin{tabular}[t]{rrrrrrr}
+\toprule
+Model Id & u & Q & R & logLik & AICc & $\Delta$AIC\\
+\midrule
+2 & 1 & 1 & 25 & -173.6063 & 477.5700 & 0.00000\\
+4 & 5 & 2 & 25 & -172.4959 & 490.7482 & 13.17829\\
+10 & 22 & 2 & 25 & -152.4930 & 508.5072 & 30.93727\\
+6 & 5 & 1 & 25 & -197.1921 & 537.0077 & 59.43771\\
+8 & 5 & 5 & 25 & -195.7174 & 546.7564 & 69.18648\\
+\addlinespace
+1 & 1 & 1 & 1 & -290.3841 & 645.4864 & 167.91640\\
+12 & 22 & 1 & 25 & -227.4331 & 654.7353 & 177.16530\\
+3 & 5 & 2 & 1 & -290.2449 & 657.8599 & 180.28994\\
+9 & 22 & 2 & 1 & -279.5091 & 683.3980 & 205.82803\\
+7 & 5 & 5 & 1 & -304.4895 & 694.1822 & 216.61226\\
+\addlinespace
+5 & 5 & 1 & 1 & -313.8774 & 702.5548 & 224.98481\\
+13 & 22 & 22 & 1 & -258.2618 & 705.6388 & 228.06887\\
+11 & 22 & 1 & 1 & -300.5271 & 722.4827 & 244.91276\\
+14 & 22 & 22 & 25 & -221.9866 & 728.4811 & 250.91111\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Over the full time-series State processes
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{manuscript_SRAFS_files/figure-latex/chn-state-1} \caption{Estimated abundance (natural-log) trends for the seven state processes (xtT) estimated from the best fitting Snake River spring/summer Chinook Salmon model (grey shading represents 95\% CI's). The abundance trend for each process across the full time-series is shown by the dashed line and generated from the estimated drift (u) and initial abundance (x0) parameters.}\label{fig:chn-state}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{manuscript_SRAFS_files/figure-latex/sth-state-1} \caption{Estimated abundance (natural-log) trend for a single state process (xtT) as estimated from the best fitting Snake River summer steelhed model (grey shading represents 95\% CI's). The abundance trend for each process across the full time-series is shown by the dashed line and generated from the estimated drift (u) and initial abundance (x0) parameters.}\label{fig:sth-state}
+\end{figure}
+
+\subsection{Annual Growth Rate}\label{annual-growth-rate-1}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{../figures/Chinook_salmon/Chinook_salmon_slope_2024} \caption{Estimated slope parameters for natural-origin Snake River spring/summer Chinook Salmon abundance trends indicate an average annual decline of 6\% for the last 10-years.}\label{fig:chn-sa-slope}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{../figures/Steelhead/Steelhead_slope_2024} \caption{Modeled abundance trends of natural-origin Snake River summer steelhead indicate an annual 11\% decline for the last 10-years.}\label{fig:sth-sa-slope}
+\end{figure}
+
+\subsection{Population Status}\label{population-status}
+
+In recent years, sp/su Chinook Salmon and steelhead returns to the Snake River basin have decreased quickly and are expected to continue declining into the future. In the last 10 years, abundances at LGD ranged from 4,108 to 26,351 from 2011-2020 for sp/su Chinook Salmon, and steelhead ranged from 8,287 to 45,789. A moving average suggests potential declines in sp/su Chinook Salmon abundance began as early as 2010 (Figure), and around 2015 for steelhead (Figure ). \textcite{mantua_pacific_1997} and \textcite{crozier_climate_2021} have shown returning abundance is highly correlated with ocean metrics (e.g., pacific decadal oscillation and sea surface temperature), and as such, the recent decreases in abundance are expected given the additional stress of poor ocean conditions.
+
+returning fish continuously fail in reaching abundance thresholds and goals. Sp/su Chinook Salmon returning to the Snake River have only exceeded the aggregated MAT (i.e., sum of population MAT) in three years post ESA listing, and in more recent years returns have been closer to the aggregated QET--similar to the levels observed in the mid-1990's (Figure ). Steelhead returns to the basin follow a similar annual abundance pattern, but have exceeded the aggregated MAT in more years and remain above the QET (Figure ). Neither species, however, has had abundances near aggregated healthy and harvestable goals set by the CBP at any point since the construction of LGD in 1975.
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{../figures/Chinook_salmon/Chinook_salmon_map_2024} \caption{Current status of natural-origin Snake River spring/summer Chinook Salmon relative to the quasi-extinction threshold (QET) and Columbia Basin Partnership goals.}\label{fig:chn-qet-map}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{../figures/Steelhead/Steelhead_map_2024} \caption{Current status of natural-origin Snake River summer steelhead relative to the quasi-extinction threshold (QET) and Columbia Basin Partnership goals.}\label{fig:sth-qet-map}
+\end{figure}
+
+\section{Conclusions}\label{conclusions}
+
+The best fitting models for sp/su Chinook Salmon and steelhead describe biological processes that are logical and match our expectations and understanding of the system. Populations within an MPG are geographically close, often have similar habitat and rearing conditions, exposed to relatively similar migration distances, and managed with similar goals and objectives \autocite{copeland_how_2024}. It stands to reason populations with these similar underlying traits would have a similar trend. Beginning in the late 1970's, after the last mainstem dam was constructed on the Lower Snake River, populations became more synchronous and showed less annual run-size diversity (@ref(fig.synchronicity)). Thus, a common process variance and co-variance between MPG processes match our expectation that populations respond similarly to out-of-basin factors. Last, observations in each time-series are often generated by data collected at different spatial and temporal scales within the population, and analyzed by different people and agencies using different methods. Unequal variances across time-series also make sense.
+
+The Lower Snake River and Clearwater River populations showed the fastest rate of decline over the last 10 years. These areas are lowest in elevation and contain some of the most degraded habitat in the basin.
+
+The models indicated population time-series have been largely stationary since 1980 when the analysis began, with short periods of increases and decreases. Currently, the Snake River Basin is experiencing a declining trend that has, or will, push many populations to below the quasi-extinction threshold if continued. Species recovery after reaching this depressed state will be difficult and will require a major improvement in their environment to increase productivity. Productivity increases may come from a cooler climate and more hospitable ocean conditions, restored habitat and migration corridors, or the combination of many items. The model is clear, however, despite the fish management actions taken over the last 45 years, populations have seen little to no improvement, and recently started declining at a faster rate than previously observed.
+
+Our analysis was intended to offer us a greater understanding of NOAA's dBSA, but instead yielded dire results that call for action. We learned that all sp/su Chinook Salmon populations experienced the same rate of decline (19\%) from 2011-2020, and the decline was remarkably similar to the common steelhead population decline (18\%). We also learned that 13 sp/su Chinook Salmon populations (42\%) are currently at levels considered ``quasi-extinct'', and 24 (77\%) will be at the extinction risk threshold if current trends continue. Fewer steelhead populations (n = 3, 19\%) are experiencing an immediate risk of extinction, but their rate of decline suggest seven (44\%) populations will reach QET within 5-years.
+
+Our linear predictions assume the current 10-year trend will continue, ignores serial correlation, and disregards important environmental drivers that may be cyclical (e.g., pacific decadal oscillation). Spawn year 2021 returns of sp/su Chinook Salmon and steelhead have returned in higher numbers than we predicted and provide a good example to discuss. The higher realized returns in 2021, resulting from recently improved ocean conditions, were not predicted by our model, but they were also not unexpected. Given our model and assumptions, our predictions should be viewed more as a long-term average trend. We did not attempt to predict actual annual returns by capturing year-to-year variability, management changes, and fluctuating environmental conditions. Instead, we were interested in understanding the average return across years and populations; thus, actual returns are expected to be higher and lower than our results. And although the higher returns of 2021 are welcomed, they still fall short of delisting criteria thresholds, and healthy and harvestable goals.
+
+In the last 30 years since ESA listing of salmon and steelhead, billions of dollars were spent to recover and increase salmon and steelhead returns to the the Snake River. The actions we have taken included small and large scale habitat restoration projects, major hydrosystem over halls and passage improvements, and we have released millions of hatchery fish to jump start recovery. Although each of these actions have provided small localized benefits, our analysis shows Snake River anadromous populations are acting similarly, which suggests common drivers of survival for all populations (i.e., hydrosystem and ocean). Climate change scenarios predict worsen ocean conditions for salmon and steelhead, of which, our actions can not immediately change or improve. We can, however, change and improve migration and rearing conditions for all salmon and steelhead in the Lower Snake River and Columbia River.
+
+\section{Code and Data Availability}\label{code-and-data-availability}
+
+The code and processed data to reproduce the analyses, summaries, tables, and figures are available on the GitHub project repository \url{https://github.com/ryankinzer/SRAFS.git}. Raw time-series observation data are available from Stream Net's Coordinated Assessments Indicators of Fish Population Health web application; \url{https://cax.streamnet.org}.
+
+\section{Acknowledgements}\label{acknowledgements}
+
+Providing the current status of Snake River fish stocks would not be possible without the gigantic efforts of hundreds of biologists, technicians, and field crews who have collected monitoring data across the basin over the past three decades. We are especially grateful to the many tribal, state, and federal agency staff whose long-term dedication to data collection, stewardship, and recovery efforts have provided the foundation for this analysis. We also thank the regional biologists and data managers who ensured the consistency and integrity of datasets spanning multiple generations of monitoring programs. Evan Brown, Rebecca Waskovich and Luciano Chiramonte from Idaho Department of Fish and Game, Joseph Feldhaus and Kasey Bliesner from Oregon Department of Fish and Wildlife, and Ethan Crawford and Michael Gallinat from Washington Department of Fish and Wildlife deserve a special thanks for meeting our data requests and helping us understand the methods and nuances. We thank our, now retired, program manager, David Johnson, for encouraging this work and using it to guide future recovery decisions and inform policy makers. Manuscript review and guidance pre-journal submittal were generously provided by \textbf{placeholder}, \textbf{placeholder}, \textbf{placeholder}, and \textbf{placeholder}. We also extend our gratitude to the anonymous journal reviewers whose thoughtful feedback greatly improved the quality and clarity of this manuscript.
+
+\newpage
+
+\section{References}\label{references}
+
+\section{Supplemental Material}\label{supplemental-material}
+
+\begin{figure}[htbp]
+\includegraphics[width=1\linewidth]{../figures/Chinook_salmon/Chinook_salmon_residuals_2024} \caption{Residuals from the best fitting spring-summer Chinook Salmon MARSS model.}\label{fig:chn-resids}
+\end{figure}
+
+\begin{figure}[htbp]
+\includegraphics[width=1\linewidth]{../figures/Steelhead/Steelhead_residuals_2024} \caption{Residuals from the best fitting summer steelhead MARSS model.}\label{fig:sth-resids}
+\end{figure}
+
+% Bibliography
+\printbibliography
+
+
+\end{document}

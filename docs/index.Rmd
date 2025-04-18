@@ -32,8 +32,7 @@ institute:
 - npt_mccall: Nez Perce Tribe, Department of Fisheries Resources Management, 14054 Burr Dr., McCall, Idaho, 83638, USA
 csl: "../templates/american-fisheries-society.csl"
 bibliography:
-- references.bib
-- abundance_decline.bib
+- abundance-decline.bib
 link-citations: true
 always_allow_html: yes
 ---
@@ -74,15 +73,20 @@ Updates for the `r yr` analysis:
 
 ## Spring/summer Chinook Salmon
 
-Highlights:
+
+```{r chn-lgr, fig.cap = 'Natural-origin (wild) and hatchery-origin returns of Snake River spring/summer Chinook Salmon past Lower Granite Dam.'}
+include_graphics(paste0(fig_path,'Chinook_salmon/','Chinook_salmon_lgr_',yr,'.png'))
+```
+
+
+QET Highlights:
 
 - Seven state processes and trends, aligned with major population groups, represent spring/summer Chinook Salmon populations
 - Spring/summer Chinook Salmon populations have declined by an average of 6% annually for the last 10-years
 - All populations below critical abundance thresholds
-  - 4 populations currently below the QET50
-  - 8 populations below 50 in 2024
-  - 2 populations predicted to fall below 50 by 2029
-  - 20 populations remain above 50 in 2029
+  - 4 populations (12%) currently meeting QET
+  - 8 populations (24%) below 50 spawners in 2024
+  - 10 populations (29%) predicted to be at or below 50 by 2029
 
 
 ```{r chn-qet-map, fig.cap = 'Current status of natural-origin Snake River spring/summer Chinook Salmon relative to the quasi-extinction threshold (QET) and Columbia Basin Partnership goals.'}
@@ -97,14 +101,14 @@ include_graphics(paste0(fig_path,'Chinook_salmon/','Chinook_salmon_slope_',yr,'.
 
 ## Summer Steelhead
 
-Highlights:
+QET Highlights:
 
 - A single state process and trend represents all summer steelhead populations
 - Summer steelhead have declined by 11% annually for the last 10-years
 - All populations below critical abundance thresholds
-  - 3 populations currently below the QET50
-  - 3 populations predicted to fall below 50 by 2029
-  - 16 populations remain above 50 in 2029
+  - 3 populations (14%) currently meeting QET
+  - 3 populations (14%) below 50 spawners in 2024
+  - 6 populations (27%) predicted to by at or below 50 by 2029
 
 
 ```{r sth-qet-map, fig.cap = 'Current status of natural-origin Snake River summer steelhead relative to the quasi-extinction threshold (QET) and Columbia Basin Partnership goals.'}
@@ -177,30 +181,33 @@ load(paste0('../data/output/', gsub(' ','_', spp), '_model_fits_',yr,'.rda'))
 
 ### Observations
 
-```{r chn-obs, tab.cap="The method of time-series observations used for Snake River spring/summer Chinook Salmon abundance modeling differed across populations with the first observation beginning in 1980 and last observation in 2024."}
+```{r chn-obs, tab.cap="Summary of abundance time-series used in modeling Snake River spring/summer Chinook Salmon populations (n = 48). Time-series length and data sources varied by population, with observations spanning from 1980 to 2024. Abundance estimates were primarily based on spawning ground surveys and weir counts, with PIT-tag detections included for select populations. The 10th, 50th (median), and 90th percentiles of observed abundance values are provided to summarize distributional characteristics across years."}
 mod_inputs$dat %>%
   filter(!is.na(nosaij)) %>%
   filter(spawningyear >= 1980) %>%
   group_by(mpg, pop, method) %>%
-  summarise(min_year = min(spawningyear),
-            max_year = max(spawningyear),
+  summarise(obs_year = paste0(min(spawningyear),'-',max(spawningyear)),
             n = n(),
-            min_nosaij = min(nosaij),
-            max_nosaij = max(nosaij),
-            avg_nosaij = mean(nosaij),
-            sd_nosaij = sd(nosaij)) %>%
+            p_10 = quantile(nosaij, probs = .10),
+            p_50 = quantile(nosaij, probs =  .50),
+            p_90 = quantile(nosaij, probs =  .90)
+            #min_nosaij = min(nosaij),
+            #max_nosaij = max(nosaij),
+            #avg_nosaij = mean(nosaij),
+            #sd_nosaij = sd(nosaij)
+            ) %>%
   mutate(method = case_when(
-    method == 2 ~ 'PIT-tag Observations',
-    method == 1 ~ 'SGS and Weir Expansions')
+    method == 2 ~ 'PIT-tag',
+    method == 1 ~ 'SGS and Weir')
   ) %>%
   arrange(mpg, pop) %>%
   kable(
-    col.names = c('MPG', 'Population', 'Method', 'First', 'Last', 'n', 'min', 'max', 'average', 'sd'),
+    col.names = c('MPG', 'Population', 'Method', 'Years', '# Years', '10%', '50%', '90%'),
     booktabs = TRUE,
     digits = 0,
     label = NA
   ) %>%
-  kable_classic(full_width = T) %>%
+  kable_classic(full_width = TRUE) %>%
   collapse_rows(columns = 1:2, valign = "top")
 ```
 
@@ -277,30 +284,33 @@ load(paste0('../data/output/', gsub(' ','_', spp), '_model_fits_',yr,'.rda'))
 
 ### Observations
 
-```{r sth-obs, tab.cap="The method of time-series observations used for Snake River summer steelhead abundance modeling were primarily based on PIT-tag observations with the first beginning in 2010 and the last observation in 2024. Three populations included a secondary time-series based on spawning ground survey expansions."}
+```{r sth-obs, tab.cap="Summary of abundance time-series used in modeling Snake River summer steelhead populations (n = 25). Time-series length and data sources varied by population, with observations spanning from 2010 to 2024. Abundance estimates were primarily based on PIT-tag detections, with spawning ground surveys and weir counts included for select populations. The 10th, 50th (median), and 90th percentiles of observed abundance values are provided to summarize distributional characteristics across years."}
 mod_inputs$dat %>%
   filter(!is.na(nosaij)) %>%
-  filter(spawningyear >= 1980) %>%
+  filter(spawningyear >= 2010) %>%
   group_by(mpg, pop, method) %>%
-  summarise(min_year = min(spawningyear),
-            max_year = max(spawningyear),
+  summarise(obs_year = paste0(min(spawningyear),'-',max(spawningyear)),
             n = n(),
-            min_nosaij = min(nosaij),
-            max_nosaij = max(nosaij),
-            avg_nosaij = mean(nosaij),
-            sd_nosaij = sd(nosaij)) %>%
+            p_10 = quantile(nosaij, probs = .10),
+            p_50 = quantile(nosaij, probs =  .50),
+            p_90 = quantile(nosaij, probs =  .90)
+            #min_nosaij = min(nosaij),
+            #max_nosaij = max(nosaij),
+            #avg_nosaij = mean(nosaij),
+            #sd_nosaij = sd(nosaij)
+            ) %>%
   mutate(method = case_when(
-    method == 1 ~ 'PIT-tag Observations',
-    method == 2 ~ 'SGS and Weir Expansions')
+    method == 2 ~ 'PIT-tag',
+    method == 1 ~ 'SGS and Weir')
   ) %>%
   arrange(mpg, pop) %>%
   kable(
-    col.names = c('MPG', 'Population', 'Method', 'First', 'Last', 'n', 'min', 'max', 'average', 'sd'),
+    col.names = c('MPG', 'Population', 'Method', 'Years', '# Years', '10%', '50%', '90%'),
     booktabs = TRUE,
     digits = 0,
     label = NA
   ) %>%
-  kable_classic(full_width = T) %>%
+  kable_classic(full_width = TRUE) %>%
   collapse_rows(columns = 1:2, valign = "top")
 ```
 

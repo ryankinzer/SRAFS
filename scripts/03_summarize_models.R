@@ -16,29 +16,12 @@ model_run <- 'multiple' #multiple' # or single
 #df <- readRDS(paste0('./data/input/',spp,'_data_', yr,'.rds'))
 
 # load model fits
-load(paste0('./data/output/', spp, '_', model_run,'_trends_',yr,'.rda'))
+load(paste0('./data/output/', gsub(' ', '_', spp,),'_model_fits_',yr,'.rda'))
 
+mod_fit <- mod_fit[-c(3:6)]
 
 # summarize model results and select best model
-mod_results <- tibble(
-  model_id = seq_along(mod_fit),
-  logLik = sapply(mod_fit, function(x) logLik(x)),
-  AICc = sapply(mod_fit, function(x) x$AICc),
-  converged = sapply(mod_fit, function(x) x$convergence),
-  n_samps = sapply(mod_fit, function(x) x$samp.size),
-  n_params = sapply(mod_fit, function(x) x$num.params),
-  U = sapply(mod_fit, function(x) length(x$par$U)),
-  Q = sapply(mod_fit, function(x) length(x$par$Q)),
-  A = sapply(mod_fit, function(x) length(x$par$A)),
-  R = sapply(mod_fit, function(x) length(x$par$R))
-) %>%
-  arrange(AICc) %>%
-  mutate(deltaAIC = AICc - min(AICc))
-
-print(mod_results)
-mod_results <- mod_results %>% filter(!(model_id %in% c(3, 4, 5, 6))) # a single process only has a single variance (no model runs for diag and unequal or equalvarcov)
-# converged; 0 is good, 1 is not enough, 10 is bad
-
+mod_results <- summarize_ModelFits(mod_fit = mod_fit)
 best_model_id <- mod_results$model_id[which.min(mod_results$AICc)]
 best_model <- mod_fit[[best_model_id]]
 summary(best_model)
@@ -47,7 +30,6 @@ summary(best_model)
 
 # get CIs and extract pararameter estimates
 fitCI <- MARSSparamCIs(best_model)
-#fitCI <- MARSSparamCIs(best_model, method = 'parametric', nboot = 10)
 
 # Get model estimates
 time_df <- tibble(spawningyear = as.numeric(colnames(mod_inputs$mod_mat)),
@@ -133,6 +115,8 @@ abline(a = 0, b = 1)
 
 resids <- residuals(best_model)
 autoplot(resids, plot.type = 'all')
+
+#fitCI <- MARSSparamCIs(best_model, method = 'parametric', nboot = 1000, silent = FALSE)
 
 save(fitCI, xtT, best_mod_fits, file = paste0('./data/output/',gsub(' ','_',spp), '_best_fit_',yr,'.rda'))
 
