@@ -101,6 +101,10 @@ include_graphics(paste0(fig_path,'Chinook_salmon/','Chinook_salmon_slope_',yr,'.
 
 ## Summer Steelhead
 
+```{r sth-lgr, fig.cap = 'Natural-origin (wild) and hatchery-origin returns of Snake River summer steelhead past Lower Granite Dam.'}
+include_graphics(paste0(fig_path,'Steelhead/','Steelhead_lgr_',yr,'.png'))
+```
+
 QET Highlights:
 
 - A single state process and trend represents all summer steelhead populations

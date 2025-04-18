@@ -2,6 +2,7 @@
 # Ryan N. Kinzer
 
 library(tidyverse)
+library(patchwork)
 source('./R/theme_rk.R')
 
 # set meta data for plots
@@ -46,8 +47,7 @@ if(spp == 'Chinook salmon'){
   select(spawnyear = ChinookRunYear, Wild_Large = WildSpSuChinookAdults, Wild_Small = WildSpSuChinookJacks, Hatchery_Large = HatcherySpSuChinookAdults, Hatchery_Small = HatcherySpSuChinookJacks)
 } else {
   master_dam <- master_dam %>%
-    select(spawnyear = ChinookRunYear, Wild_Large = WildSteelheadAdults, Hatchery_Large = HatcherySteelheadAdults) %>%
-    mutate(spawnyear = spawnyear - 1)
+    select(spawnyear = ChinookRunYear, Wild_Large = WildSteelheadAdults, Hatchery_Large = HatcherySteelheadAdults)
 }
   
 master_dam <- master_dam %>%
@@ -63,6 +63,15 @@ idfg_dat <- bind_rows(master_dam[!(master_dam$spawnyear %in% yrs),], origin_size
     TRUE ~ 'Adult')
   )
 
+if(spp == 'Chinook salmon'){
+  idfg_dat <- idfg_dat %>%
+    filter(size == 'Adult')
+} else {
+  idfg_dat <- idfg_dat %>%
+    group_by(spawnyear, origin) %>%
+    summarise(est = sum(est, na.rm = TRUE))
+}
+
 # total at LGR
 
 lgr_mgt_total <- mgt_targets %>%
@@ -72,7 +81,6 @@ lgr_mgt_total <- mgt_targets %>%
   mutate(grp = 'Total (Wild + Hatchery)')
 
 t2 <- idfg_dat %>%
-  filter(size == 'Adult') %>%
   mutate(grp = 'Total (Wild + Hatchery)') %>%
   ggplot(aes(x = spawnyear)) +
   geom_col(aes(y = est, fill = origin), colour = 'black') +
@@ -85,7 +93,7 @@ t2 <- idfg_dat %>%
   scale_x_continuous(breaks = seq(1960, 2020, 5)) +
   scale_y_continuous(expand = c(0,0), limits = c(0, 350000),
                      label = scales::comma,
-                     breaks = seq(25000,325000, by = 100000)#,
+                     breaks = c(lgr_mgt_total$target, seq(25000,325000, by = 100000))#,
                      # sec.axis = sec_axis(~./scaleFactor, name = 'Percent Hatchery',
                      #                     labels = function(b){paste0(round(b * 100,0),"%")},
                      #                     breaks = seq(0,1, by = .1))
@@ -105,7 +113,6 @@ t2 <- idfg_dat %>%
 
 # hatchery fraction
 phos_line <- idfg_dat %>%
-  filter(size == 'Adult') %>%
   group_by(spawnyear) %>%
   mutate(total = sum(est),
          p = est/total) %>%
@@ -130,16 +137,15 @@ lgr_mgt_total <- mgt_targets %>%
          grepl('Spring/summer|Summer', run)) %>%
   filter(origin == 'Hatchery')
 
-h <- idfg_dat %>%
+hat_fig <- idfg_dat %>%
   filter(origin == 'Hatchery') %>%
-  filter(size == 'Adult') %>%
   ggplot(aes(x = spawnyear, y =est)) +
   geom_col(fill = 'grey80', colour = 'black') +
   geom_hline(data = lgr_mgt_total, 
              aes(yintercept = target, colour = goal_label), size = 1) +
   geom_label(data = lgr_mgt_total, 
-             aes(x = c(1980,2010), y = target, label = goal_label, colour = goal_label)) +
-  scale_y_continuous(expand = c(0,0), limits = c(0, 260000), label = scales::comma, breaks = c(235000, 90000,11638)) +
+             aes(x = c(1980,2010), y = target, label = goal_label, colour = goal_label, vjust = c(.5,0))) +
+  scale_y_continuous(expand = c(0,0), limits = c(0, 260000), label = scales::comma, breaks = lgr_mgt_total$target) + #c(235000, 90000,11638)) +
   scale_color_manual(values = c('firebrick', 'darkgreen')) +
   #scale_x_continuous(breaks = seq(1975, 2020, 5)) +
   facet_wrap(~origin, ncol = 2) +
@@ -160,9 +166,8 @@ lgr_mgt_total <- mgt_targets %>%
   filter(CBP_goals != 'Medium')
   
 
-w <- idfg_dat %>%
+nat_fig <- idfg_dat %>%
   filter(origin == 'Wild') %>%
-  filter(size == 'Adult') %>%
   #  filter(Year >= 1975) %>%
   ggplot(aes(x = spawnyear, y = est)) +
   geom_col(fill = 'grey60', colour = 'black') +
@@ -170,8 +175,8 @@ w <- idfg_dat %>%
   geom_hline(data = lgr_mgt_total, 
              aes(yintercept = target, colour = goal_label), size = 1) +
   geom_label(data = lgr_mgt_total, 
-             aes(x = 1980, y = target, label = goal_label, colour = goal_label), vjust = c(.5,.5, 0)) +
-  scale_y_continuous(expand = c(0,0), limits = c(0, 260000), label = scales::comma, breaks = c(235000,43000,1850)) +
+             aes(x = 1980, y = target, label = goal_label, colour = goal_label), vjust = c(0,.5, 0)) +
+  scale_y_continuous(expand = c(0,0), limits = c(0, 260000), label = scales::comma, breaks = lgr_mgt_total$target) + #c(235000,43000,1850)
   scale_color_manual(values = c('firebrick', 'navy', 'darkgreen')) +  
   facet_wrap(~origin, ncol = 2) +
   labs(#title = 'Natural-origin Spring/Summer Chinook Salmon',
@@ -183,7 +188,7 @@ w <- idfg_dat %>%
   theme(legend.position = 'none')
 
 
-lgr_plots <- t_phos / (w | h)
+lgr_plots <- t_phos / (nat_fig | hat_fig)
 
 lgr_plots
 ggsave(paste0(fig_path,'/',gsub(' ','_',spp) ,'_lgr_',yr,'.png'), width = w, height = h, dpi = dp)
