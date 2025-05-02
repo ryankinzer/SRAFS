@@ -9,11 +9,11 @@ source('./R/theme_rk.R')
 version <- '24'
 yr <- 2024
 
-#spp <- 'Chinook salmon'
-#run <- 'Spring-summer'
+spp <- 'Chinook salmon'
+run <- 'Spring-summer'
 
-spp <- 'Steelhead'
-run <- 'Summer'
+#spp <- 'Steelhead'
+#run <- 'Summer'
 
 fig_path <- here::here('figures',gsub(' ','_',spp))
 # set figure dimensions
@@ -402,14 +402,70 @@ best_mod_fits %>%
 
 ggsave(paste0(fig_path,'/',gsub(' ','_',spp) ,'_residuals_',yr,'.png'), width = w, height = h, dpi = dp)
 
-# QET numbers
 
-qet_df <- best_mod_fits %>%
-  filter(spawningyear > yr-10 ) %>%
+#  Population targets
+
+mod_dat <- best_mod_fits %>%
   arrange(pop, spawningyear, source) %>%
   group_by(pop, spawningyear) %>%
   slice(1) %>%
   ungroup() %>%
+  mutate(exp_fit = exp(.fitted))
+
+if(spp == 'Chinook salmon'){
+  target_dat <- mod_dat %>%  
+    filter(spawningyear >= 1980)
+  
+  mgt_targets <- readxl::read_excel('./data/input/mgt_targets.xlsx',
+                                    sheet = 'pop_targets') %>%
+    filter(grepl('Spring/summer', run)) %>%
+    filter(pop %in% unique(target_dat$pop)) %>%
+    filter(CBP_goals != 'Medium') %>%
+    mutate(CBP_goals = case_when(
+      CBP_goals == 'High' ~ 'Healthy and Harvestable',
+      CBP_goals == 'Low' ~ 'Minimum Viable Abundance',
+      CBP_goals == 'Critical' ~ 'Quasi-Extinction (50 spawners)')) %>%
+    mutate(CBP_goals = factor(CBP_goals, levels = c('Healthy and Harvestable', 'Minimum Viable Abundance', 'Quasi-Extinction (50 spawners)')))
+} else {
+  target_dat <- mod_dat %>%  
+    filter(spawningyear >= 2010)
+  
+  mgt_targets <- readxl::read_excel('./data/input/mgt_targets.xlsx',
+                                    sheet = 'pop_targets') %>%
+    filter(grepl('Summer', run)) %>%
+    filter(pop %in% unique(target_dat$pop)) %>%
+    filter(CBP_goals != 'Medium') %>%
+    mutate(CBP_goals = case_when(
+      CBP_goals == 'High' ~ 'Healthy and Harvestable',
+      CBP_goals == 'Low' ~ 'Minimum Viable Abundance',
+      CBP_goals == 'Critical' ~ 'Quasi-Extinction (50 spawners)')) %>%
+    mutate(CBP_goals = factor(CBP_goals, levels = c('Healthy and Harvestable', 'Minimum Viable Abundance', 'Quasi-Extinction (50 spawners)')))
+}
+  
+
+ggplot() +
+  geom_line(data = target_dat, aes(x = spawningyear, y = exp_fit)) +
+  geom_point(data = target_dat, aes(x = spawningyear, y = exp_fit), fill = 'red', size = 3, colour = 'black') +
+  geom_hline(data = mgt_targets,
+             aes(yintercept = target, colour = CBP_goals),
+             size = 1) +
+  scale_x_continuous(breaks = scales::pretty_breaks()) +
+  scale_color_manual(values = c('darkgreen', 'navy', 'firebrick')) +
+  #guides(colour = guide_legend(ncol = 1)) +
+  facet_wrap(~pop, scales = 'free_y', drop = TRUE) +
+  theme_rk() +
+  theme(legend.position = c(.9,0),
+        legend.justification = c(.9,0)) +
+  labs(x = 'Spawn Year',
+       y = 'Abundance',
+       colour = 'Abundance Evaluation Thresholds')
+
+ggsave(paste0(fig_path,'/',gsub(' ','_',spp) ,'_pop_thresholds_',yr,'.png'), width = w, height = h, dpi = dp)
+
+# QET numbers
+
+qet_df <- mod_dat %>%
+  filter(spawningyear > yr-10 ) %>%
   mutate(Modeled = exp(.fitted)) %>%
   select(mpg, pop, Empirical = nosaij, Modeled, spawningyear) %>%
   pivot_longer(cols = c(Empirical, Modeled), names_to = 'type', values_to = 'ests') %>%

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.4.9)  11 APR 2025 14:11
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.4.9)  2 MAY 2025 15:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -8,8 +8,8 @@ LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-03-26>
 (c:/Users/ryank/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2024/06/29 v1.4n Standard LaTeX document class
-(c:/Users/ryank/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/size10.clo
-File: size10.clo 2024/06/29 v1.4n Standard LaTeX file (size option)
+(c:/Users/ryank/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/size12.clo
+File: size12.clo 2024/06/29 v1.4n Standard LaTeX file (size option)
 )
 \c@part=\count197
 \c@section=\count198
@@ -413,7 +413,7 @@ LaTeX Font Info:    Overwriting math alphabet `\MathEulerBold' in version `bold'
 (   mathastext:   ) The italic option is in effect.
 (   mathastext:   ) Greek letters will use the Euler font.
 (   mathastext:   ) Use \MathastextEulerScale{<factor>} to scale the font.
-(   mathastext:   ) \HUGE has been (re)-defined.
+(   mathastext:   ) \Huge and \HUGE have been (re)-defined.
 (   mathastext:   ) mathastext has declared larger sizes for subscripts.
 (   mathastext:   ) To keep LaTeX defaults, use option `defaultmathsizes'.
 
@@ -430,7 +430,7 @@ File: T1SourceSansPro-TLF.fd 2020/01/19 (autoinst) Font definitions for T1/Sourc
 LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/m/n' aliased to
 (Font)              `T1/SourceSansPro-TLF/regular/n' on input line 116.
 LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/regular/n' will be
-(Font)              scaled to size 10.0pt on input line 116.
+(Font)              scaled to size 12.0pt on input line 116.
 ) (c:/Users/ryank/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2024/02/08 v1.3d Input encoding file
 \inpenc@prehook=\toks28
@@ -1263,12 +1263,12 @@ LaTeX Info: Command `\ddddot' is already robust on input line 128.
 * \topmargin=-38.1381pt
 * \headheight=15.0pt
 * \headsep=25.0pt
-* \topskip=10.0pt
+* \topskip=12.0pt
 * \footskip=30.0pt
-* \marginparwidth=57.0pt
-* \marginparsep=11.0pt
+* \marginparwidth=35.0pt
+* \marginparsep=10.0pt
 * \columnsep=10.0pt
-* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
 * \hoffset=0.0pt
 * \voffset=0.0pt
 * \mag=1000
@@ -1335,28 +1335,7 @@ Package biblatex Warning: The following entry could not be found
 
 Package biblatex Warning: The following entry could not be found
 (biblatex)                in the database:
-(biblatex)                See2019
-(biblatex)                Please verify the spelling and rerun
-(biblatex)                LaTeX afterwards.
-
-
-Package biblatex Warning: The following entry could not be found
-(biblatex)                in the database:
-(biblatex)                See2020
-(biblatex)                Please verify the spelling and rerun
-(biblatex)                LaTeX afterwards.
-
-
-Package biblatex Warning: The following entry could not be found
-(biblatex)                in the database:
 (biblatex)                holmes_2021
-(biblatex)                Please verify the spelling and rerun
-(biblatex)                LaTeX afterwards.
-
-
-Package biblatex Warning: The following entry could not be found
-(biblatex)                in the database:
-(biblatex)                kinzerSnakeRiverBasin2020
 (biblatex)                Please verify the spelling and rerun
 (biblatex)                LaTeX afterwards.
 
@@ -1366,11 +1345,11 @@ Package biblatex Info: Reference segment=0 on input line 128.
 LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/m/n' aliased to
 (Font)              `T1/SourceSansPro-TLF/regular/n' on input line 132.
 LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/regular/n' will be
-(Font)              scaled to size 17.28pt on input line 132.
+(Font)              scaled to size 20.74pt on input line 132.
 LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/m/n' aliased to
 (Font)              `T1/SourceSansPro-TLF/regular/n' on input line 132.
 LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/regular/n' will be
-(Font)              scaled to size 12.0pt on input line 132.
+(Font)              scaled to size 14.4pt on input line 132.
 LaTeX Font Info:    Trying to load font information for OT1+SourceSansPro-TLF on input line 132.
 (c:/Users/ryank/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/sourcesanspro/OT1SourceSansPro-TLF.fd
 File: OT1SourceSansPro-TLF.fd 2020/01/19 (autoinst) Font definitions for OT1/SourceSansPro-TLF.
@@ -1378,7 +1357,7 @@ File: OT1SourceSansPro-TLF.fd 2020/01/19 (autoinst) Font definitions for OT1/Sou
 LaTeX Font Info:    Font shape `OT1/SourceSansPro-TLF/m/n' aliased to
 (Font)              `OT1/SourceSansPro-TLF/regular/n' on input line 132.
 LaTeX Font Info:    Font shape `OT1/SourceSansPro-TLF/regular/n' will be
-(Font)              scaled to size 12.0pt on input line 132.
+(Font)              scaled to size 14.4pt on input line 132.
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `SourceSansPro-TLF' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
@@ -1386,11 +1365,11 @@ Package microtype Info: Loading generic protrusion settings for font family
 LaTeX Font Info:    Font shape `OT1/SourceSansPro-TLF/m/n' aliased to
 (Font)              `OT1/SourceSansPro-TLF/regular/n' on input line 132.
 LaTeX Font Info:    Font shape `OT1/SourceSansPro-TLF/regular/n' will be
-(Font)              scaled to size 10.0pt on input line 132.
+(Font)              scaled to size 12.0pt on input line 132.
 LaTeX Font Info:    Font shape `OT1/SourceSansPro-TLF/m/n' aliased to
 (Font)              `OT1/SourceSansPro-TLF/regular/n' on input line 132.
 LaTeX Font Info:    Font shape `OT1/SourceSansPro-TLF/regular/n' will be
-(Font)              scaled to size 8.0pt on input line 132.
+(Font)              scaled to size 10.0pt on input line 132.
 LaTeX Font Info:    Trying to load font information for U+ntxsfmia on input line 132.
 (c:/Users/ryank/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/newtxsf/untxsfmia.fd
 File: untxsfmia.fd 2014/11/16 Fontinst v1.933 font definitions for U/ntxsfmia.
@@ -1406,7 +1385,11 @@ File: untxsyc.fd 2012/04/12 Fontinst v1.933 font definitions for U/ntxsyc.
 LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/m/n' aliased to
 (Font)              `T1/SourceSansPro-TLF/regular/n' on input line 132.
 LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/regular/n' will be
-(Font)              scaled to size 8.0pt on input line 132.
+(Font)              scaled to size 10.0pt on input line 132.
+LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/m/it' aliased to
+(Font)              `T1/SourceSansPro-TLF/regular/it' on input line 132.
+LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/regular/it' will be
+(Font)              scaled to size 14.4pt on input line 132.
 LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/m/it' aliased to
 (Font)              `T1/SourceSansPro-TLF/regular/it' on input line 132.
 LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/regular/it' will be
@@ -1415,10 +1398,6 @@ LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/m/it' aliased to
 (Font)              `T1/SourceSansPro-TLF/regular/it' on input line 132.
 LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/regular/it' will be
 (Font)              scaled to size 10.0pt on input line 132.
-LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/m/it' aliased to
-(Font)              `T1/SourceSansPro-TLF/regular/it' on input line 132.
-LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/regular/it' will be
-(Font)              scaled to size 8.0pt on input line 132.
 LaTeX Font Info:    Trying to load font information for U+zeur on input line 132.
 (c:/Users/ryank/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/eulervm/uzeur.fd
 File: uzeur.fd 2005/01/11 v4.0 (WaS)
@@ -1428,13 +1407,13 @@ File: mt-eur.cfg 2006/07/31 v1.1 microtype config. file: AMS Euler Roman (RS)
 LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/b/n' aliased to
 (Font)              `T1/SourceSansPro-TLF/bold/n' on input line 132.
 LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/bold/n' will be
-(Font)              scaled to size 12.0pt on input line 132.
-<../templates/NPT.png, id=67, 110.814pt x 108.405pt>
+(Font)              scaled to size 14.4pt on input line 132.
+<../templates/NPT.png, id=71, 110.814pt x 108.405pt>
 File: ../templates/NPT.png Graphic file (type png)
 <use ../templates/NPT.png>
 Package pdftex.def Info: ../templates/NPT.png  used on input line 135.
 (pdftex.def)             Requested size: 58.16975pt x 56.9055pt.
-<../templates/DFRM.png, id=69, 102.6234pt x 102.6234pt>
+<../templates/DFRM.png, id=73, 102.6234pt x 102.6234pt>
 File: ../templates/DFRM.png Graphic file (type png)
 <use ../templates/DFRM.png>
 Package pdftex.def Info: ../templates/DFRM.png  used on input line 136.
@@ -1443,44 +1422,35 @@ LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/b/n' aliased to
 (Font)              `T1/SourceSansPro-TLF/bold/n' on input line 146.
 LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/bold/n' will be
 (Font)              scaled to size 15.0pt on input line 146.
-LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/b/n' aliased to
-(Font)              `T1/SourceSansPro-TLF/bold/n' on input line 150.
-LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/bold/n' will be
-(Font)              scaled to size 10.0pt on input line 150.
 
 
 [1
 
 {c:/Users/ryank/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/Users/ryank/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/sourcesanspro/a_emkxm5.enc} <../templates/NPT.png> <../templates/DFRM.png>]
 
-LaTeX Warning: Reference `(' on page 2 undefined on input line 154.
-
-<manuscript_SRAFS_files/figure-latex/esu-map-1.pdf, id=127, 469.755pt x 325.215pt>
+[2]
+LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/b/n' aliased to
+(Font)              `T1/SourceSansPro-TLF/bold/n' on input line 158.
+LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/bold/n' will be
+(Font)              scaled to size 12.0pt on input line 158.
+<manuscript_SRAFS_files/figure-latex/esu-map-1.pdf, id=143, 469.755pt x 325.215pt>
 File: manuscript_SRAFS_files/figure-latex/esu-map-1.pdf Graphic file (type pdf)
 <use manuscript_SRAFS_files/figure-latex/esu-map-1.pdf>
 Package pdftex.def Info: manuscript_SRAFS_files/figure-latex/esu-map-1.pdf  used on input line 162.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 
 
-[2]
+[3]
 
-LaTeX Warning: Reference `tab:chn-obs' on page 3 undefined on input line 172.
-
-
-LaTeX Warning: Reference `tab:sth-obs' on page 3 undefined on input line 172.
-
-
-LaTeX Warning: Citation 'See2020' on page 3 undefined on input line 172.
-
-
-LaTeX Warning: Citation 'See2019' on page 3 undefined on input line 172.
-
-
-
-[3 <./manuscript_SRAFS_files/figure-latex/esu-map-1.pdf>]
-
-LaTeX Warning: Citation 'kinzerSnakeRiverBasin2020' on page 4 undefined on input line 174.
-
+[4 <./manuscript_SRAFS_files/figure-latex/esu-map-1.pdf>]
+LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/m/n' aliased to
+(Font)              `T1/SourceSansPro-TLF/regular/n' on input line 180.
+LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/regular/n' will be
+(Font)              scaled to size 8.0pt on input line 180.
+LaTeX Font Info:    Font shape `OT1/SourceSansPro-TLF/m/n' aliased to
+(Font)              `OT1/SourceSansPro-TLF/regular/n' on input line 181.
+LaTeX Font Info:    Font shape `OT1/SourceSansPro-TLF/regular/n' will be
+(Font)              scaled to size 8.0pt on input line 181.
 LaTeX Font Info:    Font shape `OT1/SourceSansPro-TLF/m/n' aliased to
 (Font)              `OT1/SourceSansPro-TLF/regular/n' on input line 181.
 LaTeX Font Info:    Font shape `OT1/SourceSansPro-TLF/regular/n' will be
@@ -1500,139 +1470,190 @@ LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/regular/n' will be
 LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/m/it' aliased to
 (Font)              `T1/SourceSansPro-TLF/regular/it' on input line 181.
 LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/regular/it' will be
+(Font)              scaled to size 8.0pt on input line 181.
+LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/m/it' aliased to
+(Font)              `T1/SourceSansPro-TLF/regular/it' on input line 181.
+LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/regular/it' will be
 (Font)              scaled to size 6.2pt on input line 181.
 LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/m/it' aliased to
 (Font)              `T1/SourceSansPro-TLF/regular/it' on input line 181.
 LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/regular/it' will be
 (Font)              scaled to size 5.5pt on input line 181.
-
-LaTeX Warning: Citation 'R-base' on page 4 undefined on input line 352.
-
-LaTeX Font Info:    Font shape `OT1/SourceSansPro-TLF/m/n' aliased to
-(Font)              `OT1/SourceSansPro-TLF/regular/n' on input line 356.
-LaTeX Font Info:    Font shape `OT1/SourceSansPro-TLF/regular/n' will be
-(Font)              scaled to size 6.0pt on input line 356.
-LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/m/n' aliased to
-(Font)              `T1/SourceSansPro-TLF/regular/n' on input line 356.
-LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/regular/n' will be
-(Font)              scaled to size 6.0pt on input line 356.
-LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/m/it' aliased to
-(Font)              `T1/SourceSansPro-TLF/regular/it' on input line 356.
-LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/regular/it' will be
-(Font)              scaled to size 6.0pt on input line 356.
 LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/b/n' aliased to
-(Font)              `T1/SourceSansPro-TLF/bold/n' on input line 358.
+(Font)              `T1/SourceSansPro-TLF/bold/n' on input line 356.
 LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/bold/n' will be
-(Font)              scaled to size 8.0pt on input line 358.
+(Font)              scaled to size 10.0pt on input line 356.
 LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/b/n' aliased to
-(Font)              `T1/SourceSansPro-TLF/bold/n' on input line 358.
+(Font)              `T1/SourceSansPro-TLF/bold/n' on input line 356.
 LaTeX Font Info:    Font shape `T1/SourceSansPro-TLF/bold/n' will be
-(Font)              scaled to size 6.0pt on input line 358.
+(Font)              scaled to size 8.0pt on input line 356.
 
-
-[4]
 
 [5]
 
-LaTeX Warning: Citation 'R-base' on page 6 undefined on input line 374.
-
-
-
 [6]
 
-LaTeX Warning: Reference `tab:chn-mod-results' on page 7 undefined on input line 390.
+LaTeX Warning: Citation 'R-base' on page 7 undefined on input line 372.
 
 
-LaTeX Warning: Reference `tab:sth-mod-results' on page 7 undefined on input line 390.
+LaTeX Warning: Citation 'R-base' on page 7 undefined on input line 372.
 
-
-LaTeX Warning: Citation 'holmes_2021' on page 7 undefined on input line 392.
-
-<manuscript_SRAFS_files/figure-latex/chn-state-1.pdf, id=202, 469.755pt x 325.215pt>
-File: manuscript_SRAFS_files/figure-latex/chn-state-1.pdf Graphic file (type pdf)
-<use manuscript_SRAFS_files/figure-latex/chn-state-1.pdf>
-Package pdftex.def Info: manuscript_SRAFS_files/figure-latex/chn-state-1.pdf  used on input line 453.
-(pdftex.def)             Requested size: 483.69687pt x 334.86601pt.
 
 
 [7]
-<manuscript_SRAFS_files/figure-latex/sth-state-1.pdf, id=212, 469.755pt x 325.215pt>
-File: manuscript_SRAFS_files/figure-latex/sth-state-1.pdf Graphic file (type pdf)
-<use manuscript_SRAFS_files/figure-latex/sth-state-1.pdf>
-Package pdftex.def Info: manuscript_SRAFS_files/figure-latex/sth-state-1.pdf  used on input line 457.
-(pdftex.def)             Requested size: 483.69687pt x 334.86601pt.
-<../figures/Chinook_salmon/Chinook_salmon_slope_2024.png, id=213, 1156.32pt x 722.7pt>
-File: ../figures/Chinook_salmon/Chinook_salmon_slope_2024.png Graphic file (type png)
-<use ../figures/Chinook_salmon/Chinook_salmon_slope_2024.png>
-Package pdftex.def Info: ../figures/Chinook_salmon/Chinook_salmon_slope_2024.png  used on input line 463.
-(pdftex.def)             Requested size: 483.69687pt x 302.30788pt.
-<../figures/Steelhead/Steelhead_slope_2024.png, id=214, 1156.32pt x 722.7pt>
-File: ../figures/Steelhead/Steelhead_slope_2024.png Graphic file (type png)
-<use ../figures/Steelhead/Steelhead_slope_2024.png>
-Package pdftex.def Info: ../figures/Steelhead/Steelhead_slope_2024.png  used on input line 467.
-(pdftex.def)             Requested size: 483.69687pt x 302.30788pt.
+
+LaTeX Warning: Reference `tab:chn-mod-results' on page 8 undefined on input line 390.
+
+
+LaTeX Warning: Reference `tab:sth-mod-results' on page 8 undefined on input line 390.
+
 
 
 [8]
-<../figures/Chinook_salmon/Chinook_salmon_map_2024.png, id=224, 1156.32pt x 722.7pt>
+
+LaTeX Warning: Citation 'holmes_2021' on page 9 undefined on input line 392.
+
+<../figures/Chinook_salmon/Chinook_salmon_states_2024.png, id=218, 1156.32pt x 722.7pt>
+File: ../figures/Chinook_salmon/Chinook_salmon_states_2024.png Graphic file (type png)
+<use ../figures/Chinook_salmon/Chinook_salmon_states_2024.png>
+Package pdftex.def Info: ../figures/Chinook_salmon/Chinook_salmon_states_2024.png  used on input line 453.
+(pdftex.def)             Requested size: 483.69687pt x 302.30788pt.
+<../figures/Steelhead/Steelhead_states_2024.png, id=219, 1156.32pt x 722.7pt>
+File: ../figures/Steelhead/Steelhead_states_2024.png Graphic file (type png)
+<use ../figures/Steelhead/Steelhead_states_2024.png>
+Package pdftex.def Info: ../figures/Steelhead/Steelhead_states_2024.png  used on input line 457.
+(pdftex.def)             Requested size: 483.69687pt x 302.30788pt.
+
+
+[9]
+<../figures/Chinook_salmon/Chinook_salmon_slope_2024.png, id=232, 1156.32pt x 722.7pt>
+File: ../figures/Chinook_salmon/Chinook_salmon_slope_2024.png Graphic file (type png)
+<use ../figures/Chinook_salmon/Chinook_salmon_slope_2024.png>
+Package pdftex.def Info: ../figures/Chinook_salmon/Chinook_salmon_slope_2024.png  used on input line 465.
+(pdftex.def)             Requested size: 483.69687pt x 302.30788pt.
+<../figures/Steelhead/Steelhead_slope_2024.png, id=233, 1156.32pt x 722.7pt>
+File: ../figures/Steelhead/Steelhead_slope_2024.png Graphic file (type png)
+<use ../figures/Steelhead/Steelhead_slope_2024.png>
+Package pdftex.def Info: ../figures/Steelhead/Steelhead_slope_2024.png  used on input line 469.
+(pdftex.def)             Requested size: 483.69687pt x 302.30788pt.
+<../figures/Chinook_salmon/Chinook_salmon_map_2024.png, id=236, 1156.32pt x 722.7pt>
 File: ../figures/Chinook_salmon/Chinook_salmon_map_2024.png Graphic file (type png)
 <use ../figures/Chinook_salmon/Chinook_salmon_map_2024.png>
-Package pdftex.def Info: ../figures/Chinook_salmon/Chinook_salmon_map_2024.png  used on input line 477.
+Package pdftex.def Info: ../figures/Chinook_salmon/Chinook_salmon_map_2024.png  used on input line 479.
 (pdftex.def)             Requested size: 483.69687pt x 302.30788pt.
-<../figures/Steelhead/Steelhead_map_2024.png, id=225, 1156.32pt x 722.7pt>
+
+
+[10]
+<../figures/Steelhead/Steelhead_map_2024.png, id=248, 1156.32pt x 722.7pt>
 File: ../figures/Steelhead/Steelhead_map_2024.png Graphic file (type png)
 <use ../figures/Steelhead/Steelhead_map_2024.png>
-Package pdftex.def Info: ../figures/Steelhead/Steelhead_map_2024.png  used on input line 481.
+Package pdftex.def Info: ../figures/Steelhead/Steelhead_map_2024.png  used on input line 487.
 (pdftex.def)             Requested size: 483.69687pt x 302.30788pt.
 
 
-[9 <./manuscript_SRAFS_files/figure-latex/chn-state-1.pdf>]
+[11 <../figures/Chinook_salmon/Chinook_salmon_states_2024.png>]
 
-[10 <./manuscript_SRAFS_files/figure-latex/sth-state-1.pdf>]
+[12 <../figures/Steelhead/Steelhead_states_2024.png>]
 
-[11 <../figures/Chinook_salmon/Chinook_salmon_slope_2024.png> <../figures/Steelhead/Steelhead_slope_2024.png>]
+[13 <../figures/Chinook_salmon/Chinook_salmon_slope_2024.png> <../figures/Steelhead/Steelhead_slope_2024.png>]
 
-[12 <../figures/Chinook_salmon/Chinook_salmon_map_2024.png> <../figures/Steelhead/Steelhead_map_2024.png>]
+[14 <../figures/Chinook_salmon/Chinook_salmon_map_2024.png> <../figures/Steelhead/Steelhead_map_2024.png>]
 
-[13]
-<../figures/Chinook_salmon/Chinook_salmon_residuals_2024.png, id=276, 1156.32pt x 722.7pt>
-File: ../figures/Chinook_salmon/Chinook_salmon_residuals_2024.png Graphic file (type png)
-<use ../figures/Chinook_salmon/Chinook_salmon_residuals_2024.png>
-Package pdftex.def Info: ../figures/Chinook_salmon/Chinook_salmon_residuals_2024.png  used on input line 513.
-(pdftex.def)             Requested size: 483.69687pt x 302.30788pt.
-<../figures/Steelhead/Steelhead_residuals_2024.png, id=277, 1156.32pt x 722.7pt>
-File: ../figures/Steelhead/Steelhead_residuals_2024.png Graphic file (type png)
-<use ../figures/Steelhead/Steelhead_residuals_2024.png>
-Package pdftex.def Info: ../figures/Steelhead/Steelhead_residuals_2024.png  used on input line 517.
-(pdftex.def)             Requested size: 483.69687pt x 302.30788pt.
+[15]
+
+[16]
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmtt' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 
-
-[14 <../figures/Chinook_salmon/Chinook_salmon_residuals_2024.png>]
-
-[15 <../figures/Steelhead/Steelhead_residuals_2024.png>]
-Overfull \hbox (7.1082pt too wide) in paragraph at lines 522--522
-\T1/SourceSansPro-TLF/regular/n/10 (-20) gon, Idaho, and Wash-ing-ton. en. \T1/SourceSansPro-TLF/regular/it/10 (-20) Fish-eries \T1/SourceSansPro-TLF/bold/n/10 (-20) 16\T1/SourceSansPro-TLF/regular/n/10 (-20) .(2). _eprint: https://afspubs.onlinelibrary.wiley.com/doi/pdf/10.1577/1548-
+Overfull \hbox (16.5695pt too wide) in paragraph at lines 526--526
+\T1/SourceSansPro-TLF/regular/n/12 (-20) en. \T1/SourceSansPro-TLF/regular/it/12 (-20) Eco-log-i-cal Mono-graphs \T1/SourceSansPro-TLF/bold/n/12 (-20) 91\T1/SourceSansPro-TLF/regular/n/12 (-20) .(4). _eprint: https://onlinelibrary.wiley.com/doi/pdf/10.1002/ecm.1470,
  []
 
 
-Overfull \hbox (114.50285pt too wide) in paragraph at lines 522--522
-\T1/SourceSansPro-TLF/regular/n/10 (-20) Sources. en. \T1/SourceSansPro-TLF/regular/it/10 (-20) North Amer-i-can Jour-nal of Fish-eries Man-age-ment \T1/SourceSansPro-TLF/bold/n/10 (-20) 41\T1/SourceSansPro-TLF/regular/n/10 (-20) .(4). _eprint: https://afspubs.onlinelibrary.wiley.com/doi/pdf/10.1002/nafm.10649.
+Underfull \hbox (badness 5175) in paragraph at lines 526--526
+[][]\T1/SourceSansPro-TLF/regular/n/12 (+20) Chapman, DW (1986). Salmon and Steel-head Abun-dance in the Columbia River in the
+ []
+
+
+Underfull \hbox (badness 2717) in paragraph at lines 526--526
+\T1/SourceSansPro-TLF/regular/n/12 (+20) Nine-teenth Cen-tury. en. \T1/SourceSansPro-TLF/regular/it/12 (+20) Trans-ac-tions of the Amer-i-can Fish-eries So-ci-ety \T1/SourceSansPro-TLF/bold/n/12 (+20) 115\T1/SourceSansPro-TLF/regular/n/12 (+20) .(5). _eprint:
+ []
+
+
+Overfull \hbox (119.45271pt too wide) in paragraph at lines 526--526
+\T1/SourceSansPro-TLF/regular/n/12 (-20) https://afspubs.onlinelibrary.wiley.com/doi/pdf/10.1577/1548-8659%281986%29115%3C662%3ASASAIT%3E2.0.CO%3B2
+ []
+
+
+Overfull \hbox (4.5923pt too wide) in paragraph at lines 526--526
+\T1/SourceSansPro-TLF/regular/n/12 (-20) tex.ids= chap-manSalmonSteel-head-Abun-dance, pp. 662^^U670. [][]$\T1/cmtt/m/n/12 https : / / afspubs . onlinelibrary .
+ []
+
+
+Overfull \hbox (106.99399pt too wide) in paragraph at lines 526--526
+\T1/SourceSansPro-TLF/regular/n/12 (-20) Salmon Align with Fea-si-bil-ity? en. \T1/SourceSansPro-TLF/regular/it/12 (-20) Fish-eries \T1/SourceSansPro-TLF/bold/n/12 (-20) n/a\T1/SourceSansPro-TLF/regular/n/12 (-20) .(n/a). _eprint: https://onlinelibrary.wiley.com/doi/pdf/10.1002/fsh.11108.
  []
 
 
 
-[16]
-Overfull \hbox (150.23767pt too wide) in paragraph at lines 522--522
-\T1/SourceSansPro-TLF/regular/n/10 (-20) mate steel-head move-ment and abun-dance. en. \T1/SourceSansPro-TLF/regular/it/10 (-20) Eco-log-i-cal Ap-pli-ca-tions \T1/SourceSansPro-TLF/bold/n/10 (-20) 0\T1/SourceSansPro-TLF/regular/n/10 (-20) .(0). _eprint: https://esajournals.onlinelibrary.wiley.com/doi/pdf/10.1002/eap.2202,
+[17
+
+]
+Underfull \hbox (badness 5161) in paragraph at lines 526--526
+\T1/SourceSansPro-TLF/regular/n/12 (+20) at Risk from Cal-i-for-nia, Ore-gon, Idaho, and Wash-ing-ton. en. \T1/SourceSansPro-TLF/regular/it/12 (+20) Fish-eries \T1/SourceSansPro-TLF/bold/n/12 (+20) 16\T1/SourceSansPro-TLF/regular/n/12 (+20) .(2). _eprint:
+ []
+
+
+Overfull \hbox (129.27397pt too wide) in paragraph at lines 526--526
+\T1/SourceSansPro-TLF/regular/n/12 (-20) https://afspubs.onlinelibrary.wiley.com/doi/pdf/10.1577/1548-8446%281991%29016%3C0004%3APSATCS%3E2.0.CO%3B2,
  []
 
 
 
-[17] (./manuscript_SRAFS.aux)
+[18]
+Underfull \hbox (badness 1194) in paragraph at lines 526--526
+\T1/SourceSansPro-TLF/regular/n/12 (+20) ment Us-ing Mul-ti-ple Data Sources. en. \T1/SourceSansPro-TLF/regular/it/12 (+20) North Amer-i-can Jour-nal of Fish-eries Man-age-ment
+ []
+
+
+
+[19]
+
+[20]
+<../figures/Chinook_salmon/Chinook_salmon_residuals_2024.png, id=346, 1156.32pt x 722.7pt>
+File: ../figures/Chinook_salmon/Chinook_salmon_residuals_2024.png Graphic file (type png)
+<use ../figures/Chinook_salmon/Chinook_salmon_residuals_2024.png>
+Package pdftex.def Info: ../figures/Chinook_salmon/Chinook_salmon_residuals_2024.png  used on input line 538.
+(pdftex.def)             Requested size: 483.69687pt x 302.30788pt.
+<../figures/Steelhead/Steelhead_residuals_2024.png, id=347, 1156.32pt x 722.7pt>
+File: ../figures/Steelhead/Steelhead_residuals_2024.png Graphic file (type png)
+<use ../figures/Steelhead/Steelhead_residuals_2024.png>
+Package pdftex.def Info: ../figures/Steelhead/Steelhead_residuals_2024.png  used on input line 542.
+(pdftex.def)             Requested size: 483.69687pt x 302.30788pt.
+
+
+[21
+
+ <../figures/Chinook_salmon/Chinook_salmon_residuals_2024.png>]
+<../figures/Chinook_salmon/Chinook_salmon_pop_thresholds_2024.png, id=352, 1156.32pt x 722.7pt>
+File: ../figures/Chinook_salmon/Chinook_salmon_pop_thresholds_2024.png Graphic file (type png)
+<use ../figures/Chinook_salmon/Chinook_salmon_pop_thresholds_2024.png>
+Package pdftex.def Info: ../figures/Chinook_salmon/Chinook_salmon_pop_thresholds_2024.png  used on input line 546.
+(pdftex.def)             Requested size: 483.69687pt x 302.30788pt.
+<../figures/Steelhead/Steelhead_pop_thresholds_2024.png, id=353, 1156.32pt x 722.7pt>
+File: ../figures/Steelhead/Steelhead_pop_thresholds_2024.png Graphic file (type png)
+<use ../figures/Steelhead/Steelhead_pop_thresholds_2024.png>
+Package pdftex.def Info: ../figures/Steelhead/Steelhead_pop_thresholds_2024.png  used on input line 550.
+(pdftex.def)             Requested size: 483.69687pt x 302.30788pt.
+
+
+[22 <../figures/Steelhead/Steelhead_residuals_2024.png>]
+
+[23 <../figures/Chinook_salmon/Chinook_salmon_pop_thresholds_2024.png>]
+
+[24 <../figures/Steelhead/Steelhead_pop_thresholds_2024.png>] (./manuscript_SRAFS.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-03-26>
@@ -1641,24 +1662,24 @@ L3 programming layer <2025-03-26>
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `manuscript_SRAFS.out' has not changed.
-(rerunfilecheck)             Checksum: F5BA4BEAA7FE7A8B87C0EC18C7A4A39A;2199.
+(rerunfilecheck)             Checksum: 144D652E2003CE559F47E806B8BB87EC;2377.
 Package logreq Info: Writing requests to 'manuscript_SRAFS.run.xml'.
 \openout1 = `manuscript_SRAFS.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 38334 strings out of 471607
- 743372 string characters out of 5519715
- 1537744 words of memory out of 5000000
- 63923 multiletter control sequences out of 15000+600000
- 861917 words of font info for 347 fonts, out of 8000000 for 9000
+ 38400 strings out of 471607
+ 745854 string characters out of 5519715
+ 1540305 words of memory out of 5000000
+ 63969 multiletter control sequences out of 15000+600000
+ 863915 words of font info for 354 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 98i,11n,117p,2533b,2017s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <c:/Users/ryank/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk><c:/Users/ryank/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/adobe/sourcesanspro/SourceSansPro-Bold.pfb><c:/Users/ryank/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/adobe/sourcesanspro/SourceSansPro-It.pfb><c:/Users/ryank/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/adobe/sourcesanspro/SourceSansPro-Regular.pfb><c:/Users/ryank/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/euler/eurm10.pfb><c:/Users/ryank/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/newtx/txsys.pfb>
-Output written on manuscript_SRAFS.pdf (17 pages, 9358534 bytes).
+ 98i,12n,117p,2534b,2033s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <c:/Users/ryank/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1200.600pk><c:/Users/ryank/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/adobe/sourcesanspro/SourceSansPro-Bold.pfb><c:/Users/ryank/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/adobe/sourcesanspro/SourceSansPro-It.pfb><c:/Users/ryank/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/adobe/sourcesanspro/SourceSansPro-Regular.pfb><c:/Users/ryank/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/euler/eurm10.pfb><c:/Users/ryank/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/newtx/txsys.pfb>
+Output written on manuscript_SRAFS.pdf (24 pages, 14095426 bytes).
 PDF statistics:
- 433 PDF objects out of 1000 (max. 8388607)
- 328 compressed objects within 4 object streams
- 81 named destinations out of 1000 (max. 500000)
- 70332 words of extra memory for PDF output out of 74296 (max. 10000000)
+ 470 PDF objects out of 1000 (max. 8388607)
+ 358 compressed objects within 4 object streams
+ 92 named destinations out of 1000 (max. 500000)
+ 72398 words of extra memory for PDF output out of 74296 (max. 10000000)
 

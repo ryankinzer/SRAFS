@@ -2379,72 +2379,64 @@
     <bcf:citekey order="3" intorder="1">fao_state_2020</bcf:citekey>
     <bcf:citekey order="4" intorder="1">waldman_north_2022</bcf:citekey>
     <bcf:citekey order="5" intorder="1">chapman_salmon_1986</bcf:citekey>
-    <bcf:citekey order="6" intorder="1">chapman_salmon_1986</bcf:citekey>
-    <bcf:citekey order="6" intorder="2">isab_density_2015</bcf:citekey>
-    <bcf:citekey order="6" intorder="3">npcc_compilation_1986</bcf:citekey>
+    <bcf:citekey order="6" intorder="1">nehlsen_pacific_1991</bcf:citekey>
     <bcf:citekey order="7" intorder="1">chapman_salmon_1986</bcf:citekey>
-    <bcf:citekey order="8" intorder="1">chapman_historical_2003</bcf:citekey>
+    <bcf:citekey order="7" intorder="2">isab_density_2015</bcf:citekey>
+    <bcf:citekey order="7" intorder="3">npcc_compilation_1986</bcf:citekey>
+    <bcf:citekey order="8" intorder="1">chapman_salmon_1986</bcf:citekey>
     <bcf:citekey order="9" intorder="1">chapman_historical_2003</bcf:citekey>
     <bcf:citekey order="10" intorder="1">chapman_historical_2003</bcf:citekey>
-    <bcf:citekey order="11" intorder="1">chapman_historical_2003</bcf:citekey>
-    <bcf:citekey order="12" intorder="1">nehlsen_pacific_1991</bcf:citekey>
-    <bcf:citekey order="13" intorder="1">noauthor_federal_1992</bcf:citekey>
-    <bcf:citekey order="14" intorder="1">noauthor_federal_1992</bcf:citekey>
-    <bcf:citekey order="15" intorder="1">noauthor_federal_1997</bcf:citekey>
-    <bcf:citekey order="16" intorder="1">cbp_vision_2020</bcf:citekey>
-    <bcf:citekey order="17" intorder="1">cbp_vision_2020</bcf:citekey>
-    <bcf:citekey order="18" intorder="1">chapman_historical_2003</bcf:citekey>
-    <bcf:citekey order="19" intorder="1">noaa_rebuilding_2022</bcf:citekey>
-    <bcf:citekey order="19" intorder="2">crozier_climate_2021</bcf:citekey>
-    <bcf:citekey order="19" intorder="3">nakamura_divergent_2023</bcf:citekey>
-    <bcf:citekey order="20" intorder="1">thompson_determining_1991</bcf:citekey>
-    <bcf:citekey order="21" intorder="1">thompson_determining_1991</bcf:citekey>
-    <bcf:citekey order="22" intorder="1">mcelhany_viable_2000</bcf:citekey>
-    <bcf:citekey order="22" intorder="2">ictrt_viability_2007</bcf:citekey>
-    <bcf:citekey order="23" intorder="1">cooney_appendix_2006</bcf:citekey>
+    <bcf:citekey order="11" intorder="1">noauthor_federal_1992</bcf:citekey>
+    <bcf:citekey order="12" intorder="1">noauthor_federal_1992</bcf:citekey>
+    <bcf:citekey order="13" intorder="1">noauthor_federal_1997</bcf:citekey>
+    <bcf:citekey order="14" intorder="1">cbp_vision_2020</bcf:citekey>
+    <bcf:citekey order="15" intorder="1">chapman_historical_2003</bcf:citekey>
+    <bcf:citekey order="16" intorder="1">noaa_rebuilding_2022</bcf:citekey>
+    <bcf:citekey order="16" intorder="2">crozier_climate_2021</bcf:citekey>
+    <bcf:citekey order="16" intorder="3">nakamura_divergent_2023</bcf:citekey>
+    <bcf:citekey order="17" intorder="1">thompson_determining_1991</bcf:citekey>
+    <bcf:citekey order="18" intorder="1">thompson_determining_1991</bcf:citekey>
+    <bcf:citekey order="19" intorder="1">mcelhany_viable_2000</bcf:citekey>
+    <bcf:citekey order="19" intorder="2">ictrt_viability_2007</bcf:citekey>
+    <bcf:citekey order="20" intorder="1">cooney_appendix_2006</bcf:citekey>
+    <bcf:citekey order="21" intorder="1">ictrt_viability_2007</bcf:citekey>
+    <bcf:citekey order="22" intorder="1">noaa_esa_2017</bcf:citekey>
+    <bcf:citekey order="23" intorder="1">ictrt_viability_2007</bcf:citekey>
     <bcf:citekey order="24" intorder="1">ictrt_viability_2007</bcf:citekey>
-    <bcf:citekey order="25" intorder="1">noaa_esa_2017</bcf:citekey>
-    <bcf:citekey order="26" intorder="1">ictrt_viability_2007</bcf:citekey>
+    <bcf:citekey order="25" intorder="1">cbp_vision_2020</bcf:citekey>
+    <bcf:citekey order="26" intorder="1">thurow_wild_2019</bcf:citekey>
+    <bcf:citekey order="26" intorder="2">storch_review_2022</bcf:citekey>
+    <bcf:citekey order="26" intorder="3">ford_biological_2022</bcf:citekey>
     <bcf:citekey order="27" intorder="1">cbp_vision_2020</bcf:citekey>
-    <bcf:citekey order="28" intorder="1">thurow_wild_2019</bcf:citekey>
-    <bcf:citekey order="28" intorder="2">storch_review_2022</bcf:citekey>
-    <bcf:citekey order="28" intorder="3">ford_biological_2022</bcf:citekey>
-    <bcf:citekey order="29" intorder="1">cbp_vision_2020</bcf:citekey>
-    <bcf:citekey order="30" intorder="1">ford_biological_2022</bcf:citekey>
-    <bcf:citekey order="31" intorder="1">ford_biological_2022</bcf:citekey>
-    <bcf:citekey order="32" intorder="1">waterhouse_bayesian_2020</bcf:citekey>
-    <bcf:citekey order="33" intorder="1">waterhouse_bayesian_2020</bcf:citekey>
-    <bcf:citekey order="34" intorder="1">See2020</bcf:citekey>
-    <bcf:citekey order="35" intorder="1">See2019</bcf:citekey>
-    <bcf:citekey order="36" intorder="1">see_state-space_2021</bcf:citekey>
-    <bcf:citekey order="37" intorder="1">see_pit_2016</bcf:citekey>
-    <bcf:citekey order="37" intorder="2">kinzer_snake_2020</bcf:citekey>
-    <bcf:citekey order="38" intorder="1">kinzerSnakeRiverBasin2020</bcf:citekey>
-    <bcf:citekey order="39" intorder="1">zuur_estimating_2003</bcf:citekey>
-    <bcf:citekey order="40" intorder="1">royle_hierarchical_2008</bcf:citekey>
-    <bcf:citekey order="41" intorder="1">ford_biological_2022</bcf:citekey>
-    <bcf:citekey order="42" intorder="1">ford_biological_2022</bcf:citekey>
-    <bcf:citekey order="43" intorder="1">R-base</bcf:citekey>
-    <bcf:citekey order="44" intorder="1">holmes_marss_2012</bcf:citekey>
-    <bcf:citekey order="44" intorder="2">R-MARSS</bcf:citekey>
+    <bcf:citekey order="28" intorder="1">ford_biological_2022</bcf:citekey>
+    <bcf:citekey order="29" intorder="1">ford_biological_2022</bcf:citekey>
+    <bcf:citekey order="30" intorder="1">see_state-space_2021</bcf:citekey>
+    <bcf:citekey order="31" intorder="1">waterhouse_bayesian_2020</bcf:citekey>
+    <bcf:citekey order="31" intorder="2">see_pit_2016</bcf:citekey>
+    <bcf:citekey order="31" intorder="3">kinzer_snake_2020</bcf:citekey>
+    <bcf:citekey order="32" intorder="1">auger-methe_guide_2021</bcf:citekey>
+    <bcf:citekey order="33" intorder="1">zuur_estimating_2003</bcf:citekey>
+    <bcf:citekey order="34" intorder="1">royle_hierarchical_2008</bcf:citekey>
+    <bcf:citekey order="35" intorder="1">auger-methe_guide_2021</bcf:citekey>
+    <bcf:citekey order="35" intorder="2">holmes_marss_2012</bcf:citekey>
+    <bcf:citekey order="36" intorder="1">holmes_marss_2012</bcf:citekey>
+    <bcf:citekey order="37" intorder="1">R-base</bcf:citekey>
+    <bcf:citekey order="38" intorder="1">holmes_marss_2012</bcf:citekey>
+    <bcf:citekey order="38" intorder="2">R-MARSS</bcf:citekey>
+    <bcf:citekey order="39" intorder="1">R-base</bcf:citekey>
+    <bcf:citekey order="40" intorder="1">holmes_marss_2012</bcf:citekey>
+    <bcf:citekey order="40" intorder="2">R-MARSS</bcf:citekey>
+    <bcf:citekey order="41" intorder="1">burnham_multimodel_2004</bcf:citekey>
+    <bcf:citekey order="42" intorder="1">holmes_2021</bcf:citekey>
+    <bcf:citekey order="43" intorder="1">mantua_pacific_1997</bcf:citekey>
+    <bcf:citekey order="43" intorder="2">crozier_climate_2021</bcf:citekey>
+    <bcf:citekey order="44" intorder="1">ford_biological_2022</bcf:citekey>
     <bcf:citekey order="45" intorder="1">ford_biological_2022</bcf:citekey>
     <bcf:citekey order="46" intorder="1">ford_biological_2022</bcf:citekey>
-    <bcf:citekey order="47" intorder="1">holmes_marss_2012</bcf:citekey>
-    <bcf:citekey order="48" intorder="1">R-base</bcf:citekey>
-    <bcf:citekey order="49" intorder="1">holmes_marss_2012</bcf:citekey>
-    <bcf:citekey order="49" intorder="2">R-MARSS</bcf:citekey>
-    <bcf:citekey order="50" intorder="1">ford_biological_2022</bcf:citekey>
-    <bcf:citekey order="51" intorder="1">ford_biological_2022</bcf:citekey>
-    <bcf:citekey order="52" intorder="1">ford_biological_2022</bcf:citekey>
-    <bcf:citekey order="53" intorder="1">ford_biological_2022</bcf:citekey>
-    <bcf:citekey order="54" intorder="1">casella_statistical_2021</bcf:citekey>
-    <bcf:citekey order="55" intorder="1">burnham_multimodel_2004</bcf:citekey>
-    <bcf:citekey order="56" intorder="1">holmes_2021</bcf:citekey>
-    <bcf:citekey order="57" intorder="1">mantua_pacific_1997</bcf:citekey>
-    <bcf:citekey order="58" intorder="1">mantua_pacific_1997</bcf:citekey>
-    <bcf:citekey order="59" intorder="1">crozier_climate_2021</bcf:citekey>
-    <bcf:citekey order="60" intorder="1">crozier_climate_2021</bcf:citekey>
-    <bcf:citekey order="61" intorder="1">copeland_how_2024</bcf:citekey>
+    <bcf:citekey order="47" intorder="1">ford_biological_2022</bcf:citekey>
+    <bcf:citekey order="48" intorder="1">copeland_how_2024</bcf:citekey>
+    <bcf:citekey order="49" intorder="1">crozier_climate_2019</bcf:citekey>
+    <bcf:citekey order="49" intorder="2">crozier_climate_2021</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nyt">
