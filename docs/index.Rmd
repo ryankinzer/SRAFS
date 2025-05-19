@@ -9,7 +9,7 @@ author:
     email: ryank@nezperce.org
     institute: npt_mccall
     correspondence: yes
-date: "`r format(Sys.time(), '%d %B, %Y')`"
+date: "Version: `r format(Sys.time(), '%d %B, %Y')`"
 output:
   bookdown::html_document2:
     theme: cerulean
@@ -41,7 +41,7 @@ always_allow_html: yes
 ```{=html}
 <img src="../templates/NPT.png" style="position:absolute;top:0px;right:100px;width: 150px;" />
 <img src="../templates/DFRM.png" style="position:absolute;top:0px;right:-50px;width: 150px;" />
-<div class="watermark">DRAFT</div>
+<!--<div class="watermark">DRAFT</div>-->
 ```
 
 
@@ -57,6 +57,10 @@ library(knitr)
 library(kableExtra)
 ```
 
+<div style="margin-top: 1em; font-style: italic; font-size:1.0em;">
+<b>Suggested Citation for Annual Results:</b> <br>
+Hesse, J. and Kinzer, R.N., 2025. Snake River Anadromous Fish Status: Quasi-Extinction Threshold Analysis. Version: `r format(Sys.Date(), '%d %B, %Y')`. Available: https://ryankinzer.github.io/SRAFS/
+</div>
 
 # Quasi-Extinction Summary
 
