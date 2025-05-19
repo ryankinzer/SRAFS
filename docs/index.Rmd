@@ -1,7 +1,7 @@
 ---
-title: "Snake River Anadromous Fish Status: Updated QET Analysis"
+title: "Snake River Anadromous Fish Status: Quasi-Extinctinon Threshold Analysis"
 author:
-- Jay Hesse:
+- Jay A. Hesse:
     email: jayh@nezperce.org
     institute: npt_mccall
     correspondence: yes
@@ -29,7 +29,7 @@ output:
   #   toc_depth: 4
   #   reference_docx: "../templates/Word_template_draft.docx"
 institute:
-- npt_mccall: Nez Perce Tribe, Department of Fisheries Resources Management, 14054 Burr Dr., McCall, Idaho, 83638, USA
+- npt_mccall: Nez Perce Tribe, Department of Fisheries Resources Management, P.O. Box 365, Lapwai, Idaho, 83540, USA
 csl: "../templates/american-fisheries-society.csl"
 bibliography:
 - abundance-decline.bib
@@ -59,7 +59,7 @@ library(kableExtra)
 
 <div style="margin-top: 1em; font-style: italic; font-size:1.0em;">
 <b>Suggested Citation for Annual Results:</b> <br>
-Hesse, J. and Kinzer, R.N., 2025. Snake River Anadromous Fish Status: Quasi-Extinction Threshold Analysis. Version: `r format(Sys.Date(), '%d %B, %Y')`. Available: https://ryankinzer.github.io/SRAFS/
+Hesse, J.A. and Kinzer, R.N., 2025. Snake River Anadromous Fish Status: Quasi-Extinction Threshold Analysis. Department of Fisheries Resources Management. Version: `r format(Sys.Date(), '%d %B, %Y')`. Available: https://ryankinzer.github.io/SRAFS/
 </div>
 
 # Quasi-Extinction Summary
