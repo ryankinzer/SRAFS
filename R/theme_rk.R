@@ -13,9 +13,9 @@ theme_rk <- function(){
       axis.title=element_text(size=12),
       axis.text = element_text(size=12),
       strip.text = element_text(size=12,margin = margin(3,0,3,0, "pt")),
-      plot.title = element_text(size = 14, face = 'bold', vjust = 2, hjust = 0),
+      plot.title = element_text(size = 12, face = 'bold', vjust = 2, hjust = 0),
       plot.subtitle = element_text(size = 12, face = 'plain', vjust = 2, hjust = 0),
-      plot.caption = element_text(size = 8, face = 'italic', hjust = 1)
+      plot.caption = element_text(size = 12, face = 'italic', hjust = 1)
       
       #since theme_minimal() already strips axis lines, 
       #we don't need to do that again

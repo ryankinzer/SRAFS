@@ -5,15 +5,17 @@ library(tidyverse)
 library(patchwork)
 source('./R/theme_rk.R')
 
+#theme_rk <- theme_rk2
+
 # set meta data for plots
 version <- '24'
 yr <- 2024
 
-spp <- 'Chinook salmon'
-run <- 'Spring-summer'
+#spp <- 'Chinook salmon'
+#run <- 'Spring-summer'
 
-#spp <- 'Steelhead'
-#run <- 'Summer'
+spp <- 'Steelhead'
+run <- 'Summer'
 
 fig_path <- here::here('figures',gsub(' ','_',spp))
 # set figure dimensions
@@ -90,7 +92,7 @@ t2 <- idfg_dat %>%
   geom_label(data = lgr_mgt_total, 
              aes(x = 1970, y = target, label = goal_label, colour = goal_label)) +
   scale_color_manual(values = c('darkgreen'), guide = 'none') +
-  scale_x_continuous(breaks = seq(1960, 2020, 5)) +
+  scale_x_continuous(breaks = c(seq(1960, 2020, 5),yr)) +
   scale_y_continuous(expand = c(0,0), limits = c(0, 350000),
                      label = scales::comma,
                      breaks = c(lgr_mgt_total$target, seq(25000,325000, by = 100000))#,
@@ -120,6 +122,7 @@ phos_line <- idfg_dat %>%
   ggplot(aes(x = spawnyear, y = p)) +
   geom_line() +
   geom_point() +
+  #scale_x_continuous(breaks = c(seq(1960, 2020, 5),yr)) +
   scale_y_continuous(limits = c(0,1), expand = c(0,0), label = scales::percent) +
   labs(subtitle = 'Percent Wild',
        x = '',
@@ -145,6 +148,7 @@ hat_fig <- idfg_dat %>%
              aes(yintercept = target, colour = goal_label), size = 1) +
   geom_label(data = lgr_mgt_total, 
              aes(x = c(1980,2010), y = target, label = goal_label, colour = goal_label, vjust = c(.5,0))) +
+  scale_x_continuous(breaks = c(seq(1960, 2020, 10),yr)) +
   scale_y_continuous(expand = c(0,0), limits = c(0, 260000), label = scales::comma, breaks = lgr_mgt_total$target) + #c(235000, 90000,11638)) +
   scale_color_manual(values = c('firebrick', 'darkgreen')) +
   #scale_x_continuous(breaks = seq(1975, 2020, 5)) +
@@ -171,7 +175,7 @@ nat_fig <- idfg_dat %>%
   #  filter(Year >= 1975) %>%
   ggplot(aes(x = spawnyear, y = est)) +
   geom_col(fill = 'grey60', colour = 'black') +
-  #scale_x_continuous(breaks = seq(1975, 2020, 5)) +
+  scale_x_continuous(breaks = c(seq(1960, 2020, 10),yr)) +
   geom_hline(data = lgr_mgt_total, 
              aes(yintercept = target, colour = goal_label), size = 1) +
   geom_label(data = lgr_mgt_total, 
