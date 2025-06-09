@@ -1,5 +1,5 @@
 ---
-title: "Snake River Anadromous Fish Status: Quasi-Extinctinon Threshold Analysis"
+title: "Snake River Anadromous Fish Status: Quasi-Extinction Threshold Analysis"
 author:
 - Jay A. Hesse:
     email: jayh@nezperce.org
