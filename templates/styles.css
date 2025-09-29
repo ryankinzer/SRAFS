@@ -1,5 +1,6 @@
 body {
   font-family: Calibri, helvetica, sans-serif;
+    padding-top: 90px; /* adjust as needed based on your logo height */
 }
 
 h1 {
@@ -57,6 +58,7 @@ table caption {
 }
 
 
+
 .watermark {
   opacity: 0.5;
   position: fixed;
@@ -66,3 +68,67 @@ table caption {
   color: #00407d;
 }
 
+/* Screen (default view) */
+
+.logo-wrapper { 
+  /* wrapper doesn't need positioning; the images are fixed */
+  display: flex; 
+  justify-content: flex-end; 
+  gap: 1rem; 
+  margin-bottom: .75rem; 
+}
+
+img.logo {
+  position: fixed;
+  top: 10px;          /* distance from top edge */
+  height: auto;
+  z-index: 9999;      /* keep above content */
+}
+
+img.logo-left {
+  right: 170px;       /* space between the two logos */
+  max-width: 150px;
+}
+
+img.logo-right {
+  right: 10px;        /* pinned to right margin */
+  max-width: 150px;
+}
+
+/* --- Page box for printing --- */
+@page {
+  margin: 1in;
+}
+
+/* Print */
+@media print {
+  html, body { margin:0 !important; padding:0 !important; }
+
+  /* Hide UI + TOC */
+  #TOC, .tocify, .tocify-wrapper, nav, footer, .no-print, .no-print-screen, button, .btn { 
+    display:none !important; 
+  }
+  .toc-content { margin-left:0 !important; width:auto !important; }
+
+  /* Logos in print: shrink and position safely inside the page box */
+  img.logo {
+    position: fixed !important;
+    top: 0.3in;                 /* inside the printable area */
+    max-width: 0.9in !important;
+    height: auto !important;
+    z-index: 1;
+  }
+  img.logo-left { right: 1.6in !important; }
+  img.logo-right { right: 0.5in !important; }
+
+  /* Pagination niceties */
+  table { page-break-inside:auto; }
+  tr, img, figure { page-break-inside:avoid; }
+  h1, h2 { page-break-after:avoid; }
+
+  /* Start each top-level section on a new page (except the first) */
+  .section.level1:not(:first-of-type) { page-break-before: always; }
+
+  /* Color fidelity */
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}

@@ -4,7 +4,7 @@
 # load libs
 library(tidyverse)
 library(MARSS)
-
+source('./R/summarize_ModelFits.R')
 
 # set parameters for script
 yr <- 2024
@@ -119,6 +119,15 @@ autoplot(resids, plot.type = 'all')
 #fitCI <- MARSSparamCIs(best_model, method = 'parametric', nboot = 1000, silent = FALSE)
 
 save(fitCI, xtT, best_mod_fits, file = paste0('./data/output/',gsub(' ','_',spp), '_best_fit_',yr,'.rda'))
+
+best_mod_fits %>%
+  filter(spawningyear >= 2010) %>%
+  mutate(species = spp,
+         abundance = round(nosaij),
+         modeled = round(exp(.fitted))) %>%
+  select(species, mpg, pop, spawningyear, abundance, modeled) %>%
+  write_csv(file = paste0('./data/output/',gsub(' ','_',spp), '_best_fit_',yr,'.csv'))
+
 
 ####----------- Extra - not needed ----------------#####
 

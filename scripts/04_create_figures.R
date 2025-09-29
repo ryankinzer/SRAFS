@@ -11,11 +11,11 @@ source('./R/theme_rk.R')
 version <- '24'
 yr <- 2024
 
-#spp <- 'Chinook salmon'
-#run <- 'Spring-summer'
+spp <- 'Chinook salmon'
+run <- 'Spring-summer'
 
-spp <- 'Steelhead'
-run <- 'Summer'
+#spp <- 'Steelhead'
+#run <- 'Summer'
 
 fig_path <- here::here('figures',gsub(' ','_',spp))
 # set figure dimensions
@@ -376,7 +376,7 @@ mpg_sa <- best_mod_fits %>%
 
 
 map2(mpg_sa$fig, mpg_sa$mpg,
-     ~ggsave(paste0(fig_path,'/',gsub(' ','_',spp) ,'MPG_', gsub(' ','_',.y), '_observations_',yr,'.png'), width = w, height = h, dpi = dp)
+     ~ggsave(paste0(fig_path,'/',gsub(' ','_',spp) ,'MPG_', gsub(' ','_',.y), '_observations_',yr,'.png'), plot = .x,  width = w, height = h, dpi = dp)
 )
 
 
@@ -551,9 +551,9 @@ sa_dat %>%
   facet_wrap(~.rownames, scales = "free_y") +
   theme_rk() +
   labs(
-    title = plot_title,
-    subtitle = 'Modeled natural-origin spawner abundance (NOSAij) estimates for Snake River Basin MPG processes over the last 10-years \n (2015-2024; blue line) with a fitted linear regression model showing the 10-year trend (black line).',
-    caption = data_source,
+    #title = plot_title,
+    #subtitle = 'Modeled natural-origin spawner abundance (NOSAij) estimates for Snake River Basin MPG processes over the last 10-years \n (2015-2024; blue line) with a fitted linear regression model showing the 10-year trend (black line).',
+    #caption = data_source,
     x = 'Spawn Year',
     y = expression(log~(NOSAij))
 )
@@ -768,9 +768,9 @@ mpg_preds <- new_predicts %>%
                      theme_rk() +
                      guides(fill = 'none') +
                      labs(
-                       title = plot_title,
+                       #title = plot_title,
                        subtitle = paste0('Predictions of natural-origin spawner abundance (NOSAij) for ',mpg,' populations. Red points are annual returns below 50 spawners.'),
-                       caption = data_source,
+                       #caption = data_source,
                        #fill = 'Below QET',
                        shape = 'Estimate Type',
                        x = 'Spawn Year',
@@ -781,8 +781,44 @@ mpg_preds <- new_predicts %>%
 
 
 map2(mpg_preds$fig, mpg_preds$mpg,
-     ~ggsave(paste0(fig_path,'/',gsub(' ','_',spp) ,'MPG_', gsub(' ','_',.y), '_predictions_',yr,'.png'), width = w, height = h, dpi = dp)
+     ~ggsave(paste0(fig_path,'/',gsub(' ','_',spp) ,'MPG_', gsub(' ','_',.y), '_predictions_',yr,'.png'), plot = .x, width = w, height = h, dpi = dp)
 )
+
+
+# Extract a single pop
+
+id <- 'Tucannon River'
+
+single_pop <- new_predicts %>%
+  # mutate(area = case_when(
+  #   mpg == 'Lower Snake' ~ 'Lower Snake',
+  #   mpg == 'Grande Ronde / Imnaha' ~ 'Northeast Oregon',
+  #   grepl('Clearwater', mpg) ~ 'Clearwater River',
+  #   grepl('Salmon', mpg) ~ 'Salmon River')) %>%
+  filter(pop == id) %>%
+  ggplot(data = ., aes(x = as.integer(spawningyear), y = ests, group = pop)) +
+                            geom_line(colour = 'grey50') +
+                            geom_point(aes(fill = QET, shape = type), size = 3, colour = 'black') +
+                            geom_hline(yintercept = 50, linetype = 2) +
+                            scale_x_continuous(breaks = scales::pretty_breaks()) +
+                            scale_shape_manual(values = c('Empirical' = 23, 'Modeled' = 21, 'Prediction' = 24)) +
+                            scale_fill_manual(values = c('FALSE'='grey50', 'TRUE'='red')) +
+                            facet_wrap(~pop, scales = 'free_y', ncol = 3) +
+                            theme_rk() +
+                            guides(fill = 'none') +
+                            labs(
+                              #title = plot_title,
+                              #subtitle = paste0('Predictions of natural-origin spawner abundance (NOSAij) for ',mpg,' populations. Red points are annual returns below 50 spawners.'),
+                              #caption = data_source,
+                              #fill = 'Below QET',
+                              shape = 'Estimate Type',
+                              x = 'Spawn Year',
+                              y = 'Abundance'
+                            )
+
+single_pop
+
+ggsave(paste0(fig_path,'/',gsub(' ','_',spp) ,gsub(' ','_',id), '_predictions_',yr,'.png'), plot = single_pop, width = w, height = h, dpi = dp)
 
 
 # Maps

@@ -36,7 +36,7 @@ trt_pops <- trt_pops %>%
 #dat <- read_csv('./data/noaa_cax_data.csv')
 
 # load raw NOSA data from CAX
-dat <- readxl::read_excel('./data/QET_data/ca-data-all 03-05-2025 16 24.xls',
+dat <- readxl::read_excel('./data/input/ca-data-all 03-05-2025 16 24.xls',
                           sheet = 'NOSA')
 
 names(dat) <- tolower(names(dat))
@@ -58,7 +58,7 @@ cax_df <- dat %>%
 
 # Missing Data - 
 
-idfg <- readxl::read_excel('./data/QET_data/IDFG_2024_ChinookNOSA.xlsx',
+idfg <- readxl::read_excel('./data/input/IDFG_2024_ChinookNOSA.xlsx',
                           sheet = 'Sheet1') %>%
   mutate(Population = ifelse(grepl('above Indian', Population), 'Middle Fork Salmon River Upper Mainstem', Population),
          Population = ifelse(grepl('below Indian', Population), 'Middle Fork Salmon River Lower Mainstem', Population),
@@ -66,13 +66,13 @@ idfg <- readxl::read_excel('./data/QET_data/IDFG_2024_ChinookNOSA.xlsx',
   mutate(Population = str_trim(str_remove(Population, " above.*|below.*"))) %>% 
   select(pop = Population, spawningyear = SpawnYear, nosaij = NOSAIJ, tsaij = TSAIJ)
 
-wdfw <- readxl::read_excel('./data/QET_data/wdfw_NOSA_2024.xlsx',
+wdfw <- readxl::read_excel('./data/input/wdfw_NOSA_2024.xlsx',
                            sheet = 'Sheet1') %>%
   filter(COMMONNAME == spp) %>%
   filter(SPAWNINGYEAR %in% c(2023, 2024)) %>%
   select(pop = LOCATIONNAME, spawningyear = SPAWNINGYEAR, nosaij = NOSAIJ, tsaij = TSAIJ)
 
-odfw <- readxl::read_excel('./data/QET_data/ChS_GRIMN_NOSA_TSA_forRK_20250319.xlsx') %>%  #sheet = 'qry_ChS_GRIMN_NOSA_TSA_forRK_20250319'
+odfw <- readxl::read_excel('./data/input/ChS_GRIMN_NOSA_TSA_forRK_20250319.xlsx') %>%  #sheet = 'qry_ChS_GRIMN_NOSA_TSA_forRK_20250319'
   select(pop = CommonPopName, spawningyear = SpawningYear, nosaij = NOSAIJ, tsaij = TSAIJ) %>%
   filter(pop != 'Lostine River spring Chinook') %>%
   mutate(pop = gsub(' spring Chinook| spring/summer Chinook', "", pop),
@@ -81,7 +81,7 @@ odfw <- readxl::read_excel('./data/QET_data/ChS_GRIMN_NOSA_TSA_forRK_20250319.xl
          pop = ifelse(pop == 'Imnaha River', 'Imnaha River Mainstem', pop))
 
 #npt
-npt <- readxl::read_excel('./data/QET_data/NPT_2024_NOSA.xlsx',
+npt <- readxl::read_excel('./data/input/NPT_2024_NOSA.xlsx',
                            sheet = 'Sheet1')
   
 names(npt) <- c('spawningyear', 'East Fork South Fork Salmon River', 'Secesh River', 'JC_weir')
@@ -117,8 +117,8 @@ pop_df <- pop_df %>%
 
 # combine dabom data
 
-dabom <- readxl::read_excel('C://GitHub/SnakeRiverFishStatus/output/syntheses/LGR_Chinook_all_summaries_2025-01-31.xlsx', sheet = 'Pop_Tot_Esc')
-site <- readxl::read_excel('C://GitHub/SnakeRiverFishStatus/output/syntheses/LGR_Chinook_all_summaries_2025-01-31.xlsx',
+dabom <- readxl::read_excel('C://GitHub/SnakeRiverFishStatus/output/syntheses/deprecated/LGR_Chinook_all_summaries_2025-01-31.xlsx', sheet = 'Pop_Tot_Esc')
+site <- readxl::read_excel('C://GitHub/SnakeRiverFishStatus/output/syntheses/deprecated/LGR_Chinook_all_summaries_2025-01-31.xlsx',
                            sheet = 'Site_Esc')
 
 unique(dabom$popid)
@@ -253,6 +253,9 @@ ggplot(data = full_df, aes(x = spawningyear, y = nosaij, colour = method)) +
 #   ggplot() +
 #   geom_col(aes(x = fct_reorder(pop, diff), y = diff, fill = as.factor(target))) + #diff or mu
 #   coord_flip()
+
+
+
 
 source('./R/transform_data.R')
 

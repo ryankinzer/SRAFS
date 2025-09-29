@@ -39,10 +39,18 @@ always_allow_html: yes
 
 <!-- the following inserts the NPT logo into header and sets a watermark -->
 ```{=html}
-<img src="../templates/NPT.png" style="position:absolute;top:0px;right:100px;width: 150px;" />
-<img src="../templates/DFRM.png" style="position:absolute;top:0px;right:-50px;width: 150px;" />
+
+<div class="logo-wrapper no-print-screen">
+  <img src="../templates/NPT.png" class="logo logo-left" alt="NPT">
+  <img src="../templates/DFRM.png" class="logo logo-right" alt="DFRM">
+</div>
+
+<!--<img src="../templates/NPT.png" class="logo" style="position:absolute;top:0px;right:100px;width: 150px;" />-->
+<!--<img src="../templates/DFRM.png" class="logo" style="position:absolute;top:0px;right:-50px;width: 150px;" />-->
 <!--<div class="watermark">DRAFT</div>-->
 ```
+
+
 
 
 ```{r setup, include=FALSE}
@@ -61,6 +69,10 @@ library(kableExtra)
 <b>Suggested Citation for Annual Results:</b> <br>
 Hesse, J.A. and Kinzer, R.N., 2025. Snake River Anadromous Fish Status: Quasi-Extinction Threshold Analysis. Department of Fisheries Resources Management. Version: `r format(Sys.Date(), '%d %B, %Y')`. Available: https://ryankinzer.github.io/SRAFS/
 </div>
+
+
+<button class="no-print" onclick="window.print()">Print This Page</button>
+
 
 # Quasi-Extinction Summary
 

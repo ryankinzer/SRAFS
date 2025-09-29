@@ -32,7 +32,7 @@ trt_pops <- trt_pops %>%
 #dat <- read_csv('./data/noaa_cax_data.csv')
 
 # load raw NOSA data from CAX
-dat <- readxl::read_excel('./data/QET_data/ca-data-all 03-05-2025 16 24.xls',
+dat <- readxl::read_excel('./data/input/ca-data-all 03-05-2025 16 24.xls',
                           sheet = 'NOSA')
 
 names(dat) <- tolower(names(dat))
@@ -71,8 +71,8 @@ methods_df <- cax_df %>%
 
 # combine dabom data
 
-dabom <- readxl::read_excel(paste0('C://GitHub/SnakeRiverFishStatus/output/syntheses/LGR_',spp,'_all_summaries_2025-01-31.xlsx'), sheet = 'Pop_Tot_Esc')
-site <- readxl::read_excel(paste0('C://GitHub/SnakeRiverFishStatus/output/syntheses/LGR_',spp,'_all_summaries_2025-01-31.xlsx'), sheet = 'Site_Esc')
+dabom <- readxl::read_excel(paste0('C://GitHub/SnakeRiverFishStatus/output/syntheses/deprecated/LGR_',spp,'_all_summaries_2025-01-31.xlsx'), sheet = 'Pop_Tot_Esc')
+site <- readxl::read_excel(paste0('C://GitHub/SnakeRiverFishStatus/output/syntheses/deprecated/LGR_',spp,'_all_summaries_2025-01-31.xlsx'), sheet = 'Site_Esc')
 #load('C://GitHub/SnakeRiverIPTDS/output/available_habitat/snake_river_iptds_and_pop_available_habitat.rda')
 
 #unique(dabom$popid)
