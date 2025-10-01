@@ -11,11 +11,11 @@ source('./R/theme_rk.R')
 version <- '24'
 yr <- 2024
 
-spp <- 'Chinook salmon'
-run <- 'Spring-summer'
+#spp <- 'Chinook salmon'
+#run <- 'Spring-summer'
 
-#spp <- 'Steelhead'
-#run <- 'Summer'
+spp <- 'Steelhead'
+run <- 'Summer'
 
 fig_path <- here::here('figures',gsub(' ','_',spp))
 # set figure dimensions
@@ -445,7 +445,8 @@ if(spp == 'Chinook salmon'){
       CBP_goals == 'Critical' ~ 'Quasi-Extinction (50 spawners)')) %>%
     mutate(CBP_goals = factor(CBP_goals, levels = c('Healthy and Harvestable', 'Minimum Viable Abundance', 'Quasi-Extinction (50 spawners)')))
 }
-  
+
+mgt_targets$pop <- factor(mgt_targets$pop, levels = pop_levels)
 
 ggplot() +
   geom_line(data = target_dat, aes(x = spawningyear, y = exp_fit)) +
@@ -466,15 +467,27 @@ ggplot() +
 
 ggsave(paste0(fig_path,'/',gsub(' ','_',spp) ,'_pop_thresholds_',yr,'.png'), width = w, height = h, dpi = dp)
 
+
 # QET numbers
 
 qet_df <- mod_dat %>%
+  left_join(mgt_targets %>%
+              filter(CBP_goals == 'Minimum Viable Abundance') %>%
+              select(pop, status, target)) %>%
   filter(spawningyear > yr-10 ) %>%
   mutate(Modeled = exp(.fitted)) %>%
-  select(mpg, pop, Empirical = nosaij, Modeled, spawningyear) %>%
+  select(mpg, pop, Empirical = nosaij, Modeled, spawningyear, status, target) %>%
   pivot_longer(cols = c(Empirical, Modeled), names_to = 'type', values_to = 'ests') %>%
   #bind_rows(forecast_df) %>%
-  mutate(QET = ests <= 50)
+  mutate(QET = ests <= 50,
+         abund_cat = case_when(
+           ests <= 50 ~ "Below QET50",
+           ests <= target ~ "Below MAT",
+           ests > target ~ "Above MAT",
+           TRUE ~ NA_character_
+         ),
+         abund_cat = factor(abund_cat, levels = c("Above MAT", "Below MAT", "Below QET50"))
+         )
 
 qet_value <- 'Modeled'
 #qet_value <- 'Empirical'
@@ -508,19 +521,29 @@ current_pops <- qet_pops
 nqet <- nrow(pop_qet[pop_qet$QET_TRUE >= qet_num,])
 qet_percent <- nqet/npops
 
+col <- c('#3288bd', '#f3be2a','#E31A1C')
+
 qet_df %>%
   mutate(grp = paste0(pop,type)) %>%
   filter(type == qet_value) %>%
   complete(spawningyear, nesting(pop)) %>%
   ggplot(aes(x = as.integer(spawningyear), y = ests, group = grp)) +
   geom_line(colour = 'grey50') +
-  geom_point(aes(fill = QET, shape = type), size = 3, colour = 'black') +
+  #geom_point(aes(colour = abund_cat, shape = type), size = 3) + #fill = QET colour = 'black'
+  geom_point(aes(fill = QET, shape = type), size = 3) +
   #geom_point(aes(y = nosaij), shape = 1) +
   #geom_point(aes(y = nosaij)) +
   geom_hline(yintercept = 50, linetype = 2) +
+  # geom_hline(data = 
+  #   pop_status <- mgt_targets %>%
+  #     filter(CBP_goals == 'Minimum Viable Abundance') %>%
+  #     select(pop, target),
+  #   aes(yintercept = target), colour = 'navy', size = 1) + 
   scale_x_continuous(breaks = scales::pretty_breaks()) +
+  #scale_y_continuous(expand = expansion(mult = c(.1,.50))) +
   scale_shape_manual(values = c('Empirical' = 20, 'Modeled' = 21, 'Forecast' = 23)) +
   scale_fill_manual(values = c('FALSE'='grey50', 'TRUE'='red')) +
+  #scale_colour_manual(values = col) +
   facet_wrap(~pop, scales = 'free_y', ncol = 4) +
   theme_rk() +
   guides(fill = 'none') +
@@ -532,7 +555,9 @@ qet_df %>%
     #fill = 'Below QET',
     #shape = 'Estimate Type',
     x = 'Spawn Year',
-    y = 'Abundance'
+    y = 'Abundance',
+    fill = '',
+    colour = ''
 )
 
 ggsave(paste0(fig_path,'/',gsub(' ','_',spp) ,'_modeled_',yr,'.png'), width = w, height = h, dpi = dp)
@@ -677,12 +702,24 @@ if(length(unique(xtT$.rownames))>1){
     group_by(pop) %>%
     mutate(ests = exp(last + cumsum(estimate)),
            QET = ests <= 50,
-           type = 'Prediction')
+           type = 'Prediction') %>%
+    left_join(mgt_targets %>%
+                filter(CBP_goals == 'Minimum Viable Abundance') %>%
+                select(pop, status, target))
   
   new_predicts <- bind_rows(qet_df %>%
                               filter(type == qet_value),
-                            new_dat)
-    
+                            new_dat) %>%
+      mutate(abund_cat = case_when(
+        ests <= 50 ~ "Below QET50",
+        ests <= target ~ "Below MAT",
+        ests > target ~ "Above MAT",
+        TRUE ~ NA_character_
+      ),
+      abund_cat = factor(abund_cat, levels = c("Above MAT", "Below MAT", "Below QET50"))
+      )
+  
+  
 } else {
   new_dat <- tibble(
     spawningyear = rep((yr+1):(yr+5), length(unique(xtT$.rownames))),
@@ -697,11 +734,22 @@ if(length(unique(xtT$.rownames))>1){
     group_by(pop) %>%
     mutate(ests = exp(last + cumsum(estimate)),
            QET = ests <= 50,
-           type = 'Prediction')
+           type = 'Prediction') %>%
+    left_join(mgt_targets %>%
+                filter(CBP_goals == 'Minimum Viable Abundance') %>%
+                select(pop, status, target))
   
   new_predicts <- bind_rows(qet_df %>%
                               filter(type == qet_value),
-                            new_dat)
+                            new_dat) %>%
+    mutate(abund_cat = case_when(
+      ests <= 50 ~ "Below QET50",
+      ests <= target ~ "Below MAT",
+      ests > target ~ "Above MAT",
+      TRUE ~ NA_character_
+    ),
+    abund_cat = factor(abund_cat, levels = c("Above MAT", "Below MAT", "Below QET50"))
+    )
 }
 
 
@@ -719,30 +767,46 @@ qet_pops <- pop_qet$pop[pop_qet$QET_TRUE >= qet_num]
 nqet <- nrow(pop_qet[pop_qet$QET_TRUE >= qet_num,])
 qet_percent <- nqet/npops
 
+
 new_predicts %>%
-  #complete(spawningyear, nesting(pop)) %>%
   ggplot(aes(x = as.integer(spawningyear), y = ests, group = pop)) +
-  geom_line(colour = 'grey50') +
-  geom_point(aes(fill = QET, shape = type), size = 3, colour = 'black') +
-  #geom_point(aes(y = nosaij), shape = 1) +
-  #geom_point(aes(y = nosaij)) +
+  geom_line(colour = "grey50") +
+  #geom_point(aes(fill = abund_cat, shape = type), size = 3, colour = "black") +
+  geom_point(aes(fill = QET, shape = type), size = 3, colour = "black") +
   geom_hline(yintercept = 50, linetype = 2) +
+  # geom_hline(
+  #   data = mgt_targets %>%
+  #     filter(CBP_goals == "Minimum Viable Abundance") %>%
+  #     select(pop, target),
+  #   aes(yintercept = target), colour = "navy", size = 1
+  # ) +
   scale_x_continuous(breaks = scales::pretty_breaks()) +
-  scale_shape_manual(values = c('Empirical' = 23, 'Modeled' = 21, 'Prediction' = 24)) +
+  #scale_y_continuous(expand = expansion(mult = c(0, .25))) +
+  ## ensure ALL filled shapes (21–25)
+  scale_shape_manual(values = c(Empirical = 23, Modeled = 21, Prediction = 24)) +
   scale_fill_manual(values = c('FALSE'='grey50', 'TRUE'='red')) +
-  facet_wrap(~pop, scales = 'free_y', ncol = 4) +
+  ## make sure breaks/labels match levels; align names with `col` if it's named
+  # scale_fill_manual(
+  #   name = "",
+  #   breaks = c("Above MAT", "Below MAT", "Below QET50"),
+  #   labels = c("Above MAT", "Below MAT", "Below QET50"),
+  #   values = col,
+  #   drop = FALSE
+  # ) +
+  facet_wrap(~pop, scales = "free_y", ncol = 4) +
   theme_rk() +
-  guides(fill = 'none') +
-  guides(shape = 'none') +
-  labs(
-    #title = plot_title,
+  theme(legend.position = "bottom") +  # override if theme hides legends
+  guides(
+    shape = "none",
+    fill = 'none'
+    #fill  = guide_legend(override.aes = list(shape = 21, size = 4, colour = "black"))
+  ) +
+  labs( #title = plot_title,
     #subtitle = paste0('Future predictions of natural-origin spawner abundance (NOSAij) for Snake River Basin show ',nqet,' populations (',round(qet_percent*100),'%) will start to drop below the the \n quasi-extinction threshold (QET; dashed line; 50 spawners) within the next 5 years. Circle points are modeled estimates from annual data collection and triangles represent future predictions.'),
     #caption = data_source,
     #fill = 'Below QET',
     #shape = 'Estimate Type',
-    x = 'Spawn Year',
-    y = 'Abundance'
-)
+    x = "Spawn Year", y = "Abundance", colour = NULL, fill = NULL, shape = NULL)
 
 ggsave(paste0(fig_path,'/',gsub(' ','_',spp) ,'_predictions_',yr,'.png'), width = w, height = h, dpi = dp)  
 
@@ -785,6 +849,8 @@ map2(mpg_preds$fig, mpg_preds$mpg,
 )
 
 
+save(mgt_targets, mod_dat, new_dat, file = paste0('./data/output/',gsub(' ','_',spp), '_summary_data_',yr,'.rda'))
+
 # Extract a single pop
 
 id <- 'Tucannon River'
@@ -819,6 +885,12 @@ single_pop <- new_predicts %>%
 single_pop
 
 ggsave(paste0(fig_path,'/',gsub(' ','_',spp) ,gsub(' ','_',id), '_predictions_',yr,'.png'), plot = single_pop, width = w, height = h, dpi = dp)
+
+
+###
+
+
+###
 
 
 # Maps

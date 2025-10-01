@@ -79,6 +79,7 @@ Hesse, J.A. and Kinzer, R.N., 2025. Snake River Anadromous Fish Status: Quasi-Ex
 ```{r proj-path}
 yr <- 2024
 fig_path <- here::here('figures','/')
+source('../R/summarize_qet_risk.R')
 ```
 
 Updates for the `r yr` analysis:
@@ -89,20 +90,71 @@ Updates for the `r yr` analysis:
 
 ## Spring/summer Chinook Salmon
 
-
 ```{r chn-lgr, fig.cap = 'Natural-origin (wild) and hatchery-origin returns of Snake River spring/summer Chinook Salmon past Lower Granite Dam.'}
 include_graphics(paste0(fig_path,'Chinook_salmon/','Chinook_salmon_lgr_',yr,'.png'))
 ```
 
 
-QET Highlights:
+```{r chn-create-dataset}
+spp <-'Chinook salmon'
+load(paste0('../data/output/',gsub(' ', '_', spp), '_summary_data_',yr,'.rda'))
 
-- Seven state processes and trends, aligned with major population groups, represent spring/summer Chinook Salmon populations
-- Spring/summer Chinook Salmon populations have declined by an average of 6% annually for the last 10-years
-- All populations below critical abundance thresholds
-  - 4 populations (12%) currently meeting QET
-  - 8 populations (24%) below 50 spawners in 2024
-  - 10 populations (29%) predicted to be at or below 50 by 2029
+
+dat <- bind_rows(
+  mod_dat %>%
+    select(mpg, pop, spawningyear, estimate = exp_fit),
+  new_dat %>%
+    select(mpg, pop, spawningyear, estimate = ests)
+  ) %>%
+  left_join(
+    mgt_targets %>%
+      select(pop, status, CBP_goals, target) %>%
+      pivot_wider(names_from = CBP_goals, values_from = target)
+  ) %>%
+  mutate(abund_cat = case_when(
+    estimate >= `Healthy and Harvestable` ~ "Healthy and Harvestable",
+    estimate >= `Minimum Viable Abundance` ~ "Above Minimum Viable Abundance (MAT)",
+    estimate >= `Quasi-Extinction (50 spawners)` ~ "Critical Abundance (Below MAT)",
+    estimate < `Quasi-Extinction (50 spawners)` ~ "Quasi-Extinction (<50 spawners)",
+    TRUE ~ NA_character_
+  ))
+```
+
+```{r chn-summary, tab.cap = 'The table provides summary counts of spring/summer Chinook salmon populations currently below minimum abundance thresholds, 50 spawners, and meeting the quasi-extinction threshold (4 consecutive years below 50 spawners), and the number of populations predicted to fall below 50 by return year 2029.' }
+# 1) All populations
+sum_all <- summarize_qet_risk(dat, "All Snake River Populations", yr)
+
+# 2) ESA-listed extant only (tweak the filter to match your 'status' values)
+esa_extant <- dat %>%
+  filter(status == 'Extant')
+
+sum_esa <- summarize_qet_risk(esa_extant, "Extant ESA-listed Populations", yr)
+
+summary_table <- bind_rows(sum_all, sum_esa) %>%
+  mutate(Populations = n_pops,
+         `Below Minimum Abundance Threshold` = paste0(n_below_mat, ' (',round(pct_below_mat*100),'%)'),
+         `Current Return Below 50` = paste0(n_below_50, ' (',round(pct_below_50*100),'%)'),
+         `Currently Below Quasi-Extinction Threshold` = paste0(n_qet, ' (',round(pct_qet*100),'%)'),
+         `Predicted Below 50 by 2029` = paste0(n_pred_below_50, ' (',round(pct_pred_below_50*100),'%)')
+         ) %>%
+  select(group, Populations, `Below Minimum Abundance Threshold`, `Current Return Below 50`, `Currently Below Quasi-Extinction Threshold`, `Predicted Below 50 by 2029`)
+  
+
+summary_table %>%
+  mutate(Populations = as.character(Populations)) %>%
+  pivot_longer(-group, names_to = 'Metric', values_to = 'value') %>%
+  pivot_wider(names_from = group, values_from = value) %>%
+  kable()
+```
+
+<!-- - Seven state processes and trends, aligned with major population groups, represent spring/summer Chinook Salmon populations -->
+<!-- - Spring/summer Chinook Salmon populations have declined by an average of 6% annually for the last 10-years -->
+<!-- - All populations below minimum abundance thresholds (MAT) -->
+<!--   - 4 populations (12%) currently meeting QET -->
+<!--   - 8 populations (24%) below 50 spawners in 2024 -->
+<!--   - 10 populations (29%) predicted to be at or below 50 by 2029 -->
+<!-- - ESA-listed extant populations only (n = 28): -->
+<!--   -  -->
 
 
 ```{r chn-qet-map, fig.cap = 'Current status of natural-origin Snake River spring/summer Chinook Salmon relative to the quasi-extinction threshold (QET) and Columbia Basin Partnership goals.'}
@@ -121,15 +173,66 @@ include_graphics(paste0(fig_path,'Chinook_salmon/','Chinook_salmon_slope_',yr,'.
 include_graphics(paste0(fig_path,'Steelhead/','Steelhead_lgr_',yr,'.png'))
 ```
 
-QET Highlights:
+```{r sth-create-dataset}
+spp <-'Steelhead'
+load(paste0('../data/output/',gsub(' ', '_', spp), '_summary_data_',yr,'.rda'))
 
-- A single state process and trend represents all summer steelhead populations
-- Summer steelhead have declined by 11% annually for the last 10-years
-- All populations below critical abundance thresholds
-  - 3 populations (14%) currently meeting QET
-  - 3 populations (14%) below 50 spawners in 2024
-  - 6 populations (27%) predicted to by at or below 50 by 2029
 
+dat <- bind_rows(
+  mod_dat %>%
+    select(mpg, pop, spawningyear, estimate = exp_fit),
+  new_dat %>%
+    select(mpg, pop, spawningyear, estimate = ests)
+  ) %>%
+  left_join(
+    mgt_targets %>%
+      select(pop, status, CBP_goals, target) %>%
+      pivot_wider(names_from = CBP_goals, values_from = target)
+  ) %>%
+  mutate(abund_cat = case_when(
+    estimate >= `Healthy and Harvestable` ~ "Healthy and Harvestable",
+    estimate >= `Minimum Viable Abundance` ~ "Above Minimum Viable Abundance (MAT)",
+    estimate >= `Quasi-Extinction (50 spawners)` ~ "Critical Abundance (Below MAT)",
+    estimate < `Quasi-Extinction (50 spawners)` ~ "Quasi-Extinction (<50 spawners)",
+    TRUE ~ NA_character_
+  ))
+```
+
+```{r sth-summary, tab.cap = 'The table provides summary counts of steelhead populations currently below minimum abundance thresholds, 50 spawners, and meeting the quasi-extinction threshold (4 consecutive years below 50 spawners), and the number of populations predicted to fall below 50 by return year 2029.' }
+# 1) All populations
+sum_all <- summarize_qet_risk(dat, "All Snake River Populations", yr)
+
+# 2) ESA-listed extant only (tweak the filter to match your 'status' values)
+esa_extant <- dat %>%
+  filter(status == 'Extant')
+
+sum_esa <- summarize_qet_risk(esa_extant, "Extant ESA-listed Populations", yr)
+
+summary_table <- bind_rows(sum_all, sum_esa) %>%
+  mutate(Populations = n_pops,
+         `Below Minimum Abundance Threshold` = paste0(n_below_mat, ' (',round(pct_below_mat*100),'%)'),
+         `Current Return Below 50` = paste0(n_below_50, ' (',round(pct_below_50*100),'%)'),
+         `Currently Below Quasi-Extinction Threshold` = paste0(n_qet, ' (',round(pct_qet*100),'%)'),
+         `Predicted Below 50 by 2029` = paste0(n_pred_below_50, ' (',round(pct_pred_below_50*100),'%)')
+         ) %>%
+  select(group, Populations, `Below Minimum Abundance Threshold`, `Current Return Below 50`, `Currently Below Quasi-Extinction Threshold`, `Predicted Below 50 by 2029`)
+  
+
+summary_table %>%
+  mutate(Populations = as.character(Populations)) %>%
+  pivot_longer(-group, names_to = 'Metric', values_to = 'value') %>%
+  pivot_wider(names_from = group, values_from = value) %>%
+  kable()
+```
+
+<!-- - A single state process and trend represents all summer steelhead populations -->
+<!-- - Summer steelhead have declined by 11% annually for the last 10-years -->
+<!-- - All populations below critical abundance thresholds -->
+<!--   - 3 populations (14%) currently meeting QET -->
+<!--   - 3 populations (14%) below 50 spawners in 2024 -->
+<!--   - 6 populations (27%) predicted to by at or below 50 by 2029 -->
+<!-- - ESA-listed extant populations only (n = 24): -->
+<!--   -  -->
 
 ```{r sth-qet-map, fig.cap = 'Current status of natural-origin Snake River summer steelhead relative to the quasi-extinction threshold (QET) and Columbia Basin Partnership goals.'}
 #![](../figures/2024/multiple/Chinook salmon/Chinook_salmon_map_2024.png)
