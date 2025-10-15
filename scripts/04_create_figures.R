@@ -11,13 +11,20 @@ source('./R/theme_rk.R')
 version <- '24'
 yr <- 2024
 
-#spp <- 'Chinook salmon'
+spp <- 'Chinook salmon'
 #run <- 'Spring-summer'
+run <- 'Fall'
 
-spp <- 'Steelhead'
-run <- 'Summer'
+#spp <- 'Steelhead'
+#run <- 'Summer'
 
-fig_path <- here::here('figures',gsub(' ','_',spp))
+
+if(spp == 'Chinook salmon' && run == 'Fall'){
+  fig_path <- here::here('figures',gsub(' ','_',spp),gsub('-','_',run))
+} else {
+  fig_path <- here::here('figures',gsub(' ','_',spp))
+}
+
 # set figure dimensions
 h <- 10
 w <- 16
@@ -34,6 +41,8 @@ mgt_targets <- readxl::read_excel('./data/input/mgt_targets.xlsx',
                                   sheet = 'targets') %>%
   mutate(target = as.numeric(target))
 
+#write_csv(mgt_targets, file = './data/mgt_targets.csv')
+
 origin_size <- readxl::read_excel(path = './data/input/LGDAbundance Live Link_3_17_25.xlsx',
                                   sheet = 'Origin_Size') %>%
   filter(SpeciesName == strsplit(spp, ' ')[[1]][1]) %>%
@@ -44,13 +53,20 @@ origin_size <- readxl::read_excel(path = './data/input/LGDAbundance Live Link_3_
 master_dam <- readxl::read_excel(path = './data/input/LGDAbundance Live Link_3_17_25.xlsx',
                                  sheet = 'Master_Dam_Counts')
 
-if(spp == 'Chinook salmon'){
+if(spp == 'Chinook salmon' && run == 'Spring-summer'){
   master_dam <- master_dam %>%
   select(spawnyear = ChinookRunYear, Wild_Large = WildSpSuChinookAdults, Wild_Small = WildSpSuChinookJacks, Hatchery_Large = HatcherySpSuChinookAdults, Hatchery_Small = HatcherySpSuChinookJacks)
-} else {
-  master_dam <- master_dam %>%
-    select(spawnyear = ChinookRunYear, Wild_Large = WildSteelheadAdults, Hatchery_Large = HatcherySteelheadAdults)
-}
+} else if (spp == 'Chinook salmon' && run == 'Fall'){
+    master_dam <- master_dam %>%
+      select(spawnyear = ChinookRunYear, Wild_Large = WildFallChinookAdults, Hatchery_Large = HatcheryFallChinookAdults)
+  } else if (spp == 'Steelhead' && run == 'Summer'){
+    master_dam <- master_dam %>%
+      select(spawnyear = ChinookRunYear, Wild_Large = WildSteelheadAdults, Hatchery_Large = HatcherySteelheadAdults)
+  } else {
+      stop("Species and run combination did not match any expected case.")
+  }
+
+#write_csv(master_dam, file = './data/idfg_dam_counts_fall_chinook.csv')
   
 master_dam <- master_dam %>%
   pivot_longer(-spawnyear, names_to = 'grp', values_to = 'est') %>%
@@ -65,7 +81,7 @@ idfg_dat <- bind_rows(master_dam[!(master_dam$spawnyear %in% yrs),], origin_size
     TRUE ~ 'Adult')
   )
 
-if(spp == 'Chinook salmon'){
+if(spp == 'Chinook salmon' && run == 'Spring-summer'){
   idfg_dat <- idfg_dat %>%
     filter(size == 'Adult')
 } else {
@@ -76,11 +92,28 @@ if(spp == 'Chinook salmon'){
 
 # total at LGR
 
-lgr_mgt_total <- mgt_targets %>%
-  filter(species == spp,
-         grepl('Spring/summer|Summer', run)) %>%
-  filter(origin == 'Total') %>%
-  mutate(grp = 'Total (Wild + Hatchery)')
+if(spp == 'Chinook salmon' && run == 'Spring-summer'){
+  lgr_mgt_total <- mgt_targets %>%
+    filter(species == spp,
+           run == 'Spring/summer') %>%
+    filter(origin == 'Total') %>%
+    mutate(grp = 'Total (Wild + Hatchery)')
+} else if (spp == 'Chinook salmon' && run == 'Fall'){
+  lgr_mgt_total <- mgt_targets %>%
+    filter(species == spp,
+           run == 'Fall') %>%
+    filter(origin == 'Total') %>%
+    mutate(grp = 'Total (Wild + Hatchery)')
+} else if (spp == 'Steelhead' && run == 'Summer'){
+  lgr_mgt_total <- mgt_targets %>%
+    filter(species == spp,
+           run == 'Summer') %>%
+    filter(origin == 'Total') %>%
+    mutate(grp = 'Total (Wild + Hatchery)')
+} else {
+  stop("Species and run combination did not match any expected case.")
+}
+
 
 t2 <- idfg_dat %>%
   mutate(grp = 'Total (Wild + Hatchery)') %>%
@@ -93,13 +126,14 @@ t2 <- idfg_dat %>%
              aes(x = 1970, y = target, label = goal_label, colour = goal_label)) +
   scale_color_manual(values = c('darkgreen'), guide = 'none') +
   scale_x_continuous(breaks = c(seq(1960, 2020, 5),yr)) +
-  scale_y_continuous(expand = c(0,0), limits = c(0, 350000),
-                     label = scales::comma,
-                     breaks = c(lgr_mgt_total$target, seq(25000,325000, by = 100000))#,
-                     # sec.axis = sec_axis(~./scaleFactor, name = 'Percent Hatchery',
-                     #                     labels = function(b){paste0(round(b * 100,0),"%")},
-                     #                     breaks = seq(0,1, by = .1))
-  ) +
+  # scale_y_continuous(expand = c(0,0), limits = c(0, 350000),
+  #                    label = scales::comma,
+  #                    breaks = c(lgr_mgt_total$target, seq(25000,325000, by = 100000))#,
+  #                    # sec.axis = sec_axis(~./scaleFactor, name = 'Percent Hatchery',
+  #                    #                     labels = function(b){paste0(round(b * 100,0),"%")},
+  #                    #                     breaks = seq(0,1, by = .1))
+  # ) +
+  scale_y_continuous(expand = c(0,0,.1,0), label = scales::comma, breaks = lgr_mgt_total$target) +
   facet_wrap(~grp) +
   labs(
     #title = 'Spring/Summer Chinook Salmon',
@@ -109,7 +143,7 @@ t2 <- idfg_dat %>%
     y = 'Escapement',
     fill = 'Origin') +
   theme_rk() +
-  theme(legend.position = c(0.10, 0.4), #.1, .25
+  theme(legend.position = c(0.90, 0.8), #.1, .25
         legend.background = element_rect(fill = "white", color = "black"))
 
 
@@ -133,12 +167,36 @@ phos_line <- idfg_dat %>%
         axis.text = element_text(size=8),
         plot.margin = unit(c(0, 0, 0, 0), "points"))
 
-t_phos <- t2 + inset_element(phos_line, left = .7, bottom = .36, right = .95, top = .9)
+t_phos <- t2 + inset_element(phos_line, left = .05, bottom = .4, right = .4, top = .9) #left = .7, bottom = .36, right = .95, top = .9
+t_phos
 
-lgr_mgt_total <- mgt_targets %>%
-  filter(species == spp,
-         grepl('Spring/summer|Summer', run)) %>%
-  filter(origin == 'Hatchery')
+if(spp == 'Chinook salmon' && run == 'Spring-summer'){
+  lgr_mgt_total <- mgt_targets %>%
+    filter(species == spp,
+           run == 'Spring/summer') %>%
+    filter(origin == 'Hatchery')
+  
+  caption <- 'Data Source: Idaho Department of Fish and Game'
+  
+} else if (spp == 'Chinook salmon' && run == 'Fall'){
+  lgr_mgt_total <- mgt_targets %>%
+    filter(species == spp,
+           run == 'Fall') %>%
+    filter(origin == 'Hatchery')
+  
+  caption <- 'Data Source: Nez Perce Tribe'
+  
+} else if (spp == 'Steelhead' && run == 'Summer'){
+  lgr_mgt_total <- mgt_targets %>%
+    filter(species == spp,
+           run == 'Summer') %>%
+    filter(origin == 'Hatchery')
+  
+  caption <- 'Data Source: Idaho Department of Fish and Game'
+  
+} else {
+  stop("Species and run combination did not match any expected case.")
+}
 
 hat_fig <- idfg_dat %>%
   filter(origin == 'Hatchery') %>%
@@ -149,25 +207,42 @@ hat_fig <- idfg_dat %>%
   geom_label(data = lgr_mgt_total, 
              aes(x = c(1980,2010), y = target, label = goal_label, colour = goal_label, vjust = c(.5,0))) +
   scale_x_continuous(breaks = c(seq(1960, 2020, 10),yr)) +
-  scale_y_continuous(expand = c(0,0), limits = c(0, 260000), label = scales::comma, breaks = lgr_mgt_total$target) + #c(235000, 90000,11638)) +
+  #scale_y_continuous(expand = c(0,0), limits = c(0, 260000), label = scales::comma, breaks = lgr_mgt_total$target) + #c(235000, 90000,11638)) +
+  scale_y_continuous(expand = c(0,0,.1,0), label = scales::comma, breaks = lgr_mgt_total$target) +
   scale_color_manual(values = c('firebrick', 'darkgreen')) +
   #scale_x_continuous(breaks = seq(1975, 2020, 5)) +
   facet_wrap(~origin, ncol = 2) +
   labs(#title = 'Natural-origin Spring/Summer Chinook Salmon',
     #subtitle = 'Adult escapement at Lower Granite Dam',
-    caption = 'Data Source: Idaho Department of Fish and Game',
+    caption = caption,
     x = 'Spawn Year',
     y = 'Escapement') +
   theme_rk() +
   theme(legend.position = 'none')
 
 
-lgr_mgt_total <- mgt_targets %>%
-  mutate(origin = ifelse(origin == 'Wild/natural', 'Wild', origin)) %>%
-  filter(species == spp,
-         grepl('Spring/summer|Summer', run),
-         origin == 'Wild') %>%
-  filter(CBP_goals != 'Medium')
+if(spp == 'Chinook salmon' && run == 'Spring-summer'){
+  lgr_mgt_total <- mgt_targets %>%
+    filter(species == spp,
+           run == 'Spring/summer') %>%
+    filter(origin == 'Wild') %>%
+    filter(CBP_goals != 'Medium')
+} else if (spp == 'Chinook salmon' && run == 'Fall'){
+  lgr_mgt_total <- mgt_targets %>%
+    filter(species == spp,
+           run == 'Fall') %>%
+    filter(origin == 'Wild/natural') %>%
+    filter(CBP_goals != 'Medium') %>%
+    mutate(origin = 'Wild')
+} else if (spp == 'Steelhead' && run == 'Summer'){
+  lgr_mgt_total <- mgt_targets %>%
+    filter(species == spp,
+           run == 'Summer') %>%
+    filter(origin == 'Wild') %>%
+    filter(CBP_goals != 'Medium')
+} else {
+  stop("Species and run combination did not match any expected case.")
+}
   
 
 nat_fig <- idfg_dat %>%
@@ -180,7 +255,7 @@ nat_fig <- idfg_dat %>%
              aes(yintercept = target, colour = goal_label), size = 1) +
   geom_label(data = lgr_mgt_total, 
              aes(x = 1980, y = target, label = goal_label, colour = goal_label), vjust = c(0,.5, 0)) +
-  scale_y_continuous(expand = c(0,0), limits = c(0, 260000), label = scales::comma, breaks = lgr_mgt_total$target) + #c(235000,43000,1850)
+  scale_y_continuous(expand = c(0,0,.1,0), label = scales::comma, breaks = lgr_mgt_total$target) + #c(235000,43000,1850) #limits = c(0, max(lgr_mgt_total$target)),
   scale_color_manual(values = c('firebrick', 'navy', 'darkgreen')) +  
   facet_wrap(~origin, ncol = 2) +
   labs(#title = 'Natural-origin Spring/Summer Chinook Salmon',
@@ -195,7 +270,16 @@ nat_fig <- idfg_dat %>%
 lgr_plots <- t_phos / (nat_fig | hat_fig)
 
 lgr_plots
-ggsave(paste0(fig_path,'/',gsub(' ','_',spp) ,'_lgr_',yr,'.png'), width = w, height = h, dpi = dp)
+ggsave(paste0(fig_path,'/',gsub(' ','_',spp),'_',gsub('-','_',run),'_lgr_',yr,'.png'), width = w, height = h, dpi = dp)
+
+# quick data summary
+
+idfg_dat %>%
+  filter(between(spawnyear,2020,2024)) %>%
+  pivot_wider(names_from = origin, values_from = est)
+  #group_by(origin) %>%
+  #summarise(mu = mean(est))
+
 
 # load QET data----
 load(paste0('./data/output/',gsub(' ', '_', spp), '_best_fit_',yr,'.rda'))
@@ -466,6 +550,28 @@ ggplot() +
        colour = 'Abundance Evaluation Thresholds')
 
 ggsave(paste0(fig_path,'/',gsub(' ','_',spp) ,'_pop_thresholds_',yr,'.png'), width = w, height = h, dpi = dp)
+
+
+id = 'Imnaha River'
+
+ggplot() +
+  geom_line(data = target_dat %>% filter(pop == id), aes(x = spawningyear, y = exp_fit)) +
+  geom_point(data = target_dat %>% filter(pop == id), aes(x = spawningyear, y = exp_fit), fill = 'red', size = 3, colour = 'black') +
+  geom_hline(data = mgt_targets %>% filter(pop == id),
+             aes(yintercept = target, colour = CBP_goals),
+             size = 1) +
+  scale_x_continuous(breaks = scales::pretty_breaks()) +
+  scale_color_manual(values = c('darkgreen', 'navy', 'firebrick')) +
+  #guides(colour = guide_legend(ncol = 1)) +
+  facet_wrap(~pop, scales = 'free_y', drop = TRUE) +
+  theme_rk() +
+  theme(legend.position = c(.95,.75),
+        legend.justification = c(.9,0)) +
+  labs(x = 'Spawn Year',
+       y = 'Abundance',
+       colour = 'Abundance Evaluation Thresholds')
+
+ggsave(paste0(fig_path,'/',gsub(' ','_',spp) ,gsub(' ','_',id),'_pop_thresholds_',yr,'.png'), width = w, height = h, dpi = dp)
 
 
 # QET numbers
@@ -853,7 +959,7 @@ save(mgt_targets, mod_dat, new_dat, file = paste0('./data/output/',gsub(' ','_',
 
 # Extract a single pop
 
-id <- 'Tucannon River'
+id <- 'Imnaha River'
 
 single_pop <- new_predicts %>%
   # mutate(area = case_when(
@@ -870,7 +976,6 @@ single_pop <- new_predicts %>%
                             scale_shape_manual(values = c('Empirical' = 23, 'Modeled' = 21, 'Prediction' = 24)) +
                             scale_fill_manual(values = c('FALSE'='grey50', 'TRUE'='red')) +
                             facet_wrap(~pop, scales = 'free_y', ncol = 3) +
-                            theme_rk() +
                             guides(fill = 'none') +
                             labs(
                               #title = plot_title,
@@ -880,7 +985,14 @@ single_pop <- new_predicts %>%
                               shape = 'Estimate Type',
                               x = 'Spawn Year',
                               y = 'Abundance'
-                            )
+                            ) +
+  theme_rk() +
+  theme(strip.background = element_rect(colour = 'black', fill = 'grey80'),
+        axis.title=element_text(size=24),
+        axis.text = element_text(size=24),
+        strip.text = element_text(size=24,margin = margin(3,0,3,0, "pt")),
+        legend.text = element_text(size = 16),
+        legend.title = element_text(size = 16))
 
 single_pop
 
@@ -907,7 +1019,7 @@ proj_path <- '/Projects/DFRM Projects/River_Mapping/data/'
 spatial_files <- paste0(user_path, proj_path, 'polygons/SR_pops.rda')
 load(spatial_files) ; rm(fall_pop)
 
-mgt_targets <- readxl::read_excel('./data/input/mgt_targets.xlsx', sheet = 'pop_targets')
+#mgt_targets <- readxl::read_excel('./data/input/mgt_targets.xlsx', sheet = 'pop_targets')
 
 if(spp == 'Chinook salmon'){
   trt_pops <- spsm_pop %>%
@@ -924,9 +1036,9 @@ if(spp == 'Chinook salmon'){
     )) %>%
     mutate(pop = str_to_title(pop)) %>%
     select(mpg = MPG, pop, TRT_POPID) %>%
-    left_join(mgt_targets <- mgt_targets %>%
-                filter(species == 'Chinook salmon') %>%
-                select(pop, CBP_goals, target) %>%
+    left_join(mgt_targets %>%
+                #filter(species == 'Chinook salmon') %>%
+                select(pop, status, CBP_goals, target) %>%
                 pivot_wider(names_from = CBP_goals, values_from = target),
               by = 'pop')
   
@@ -953,9 +1065,9 @@ if(spp == 'Chinook salmon'){
     )) %>%
     mutate(pop = str_to_title(pop)) %>%
     select(mpg = MPG, pop, TRT_POPID) %>%
-    left_join(mgt_targets <- mgt_targets %>%
-              filter(species == 'Steelhead') %>%
-              select(pop, CBP_goals, target) %>%
+    left_join(mgt_targets %>%
+              #filter(species == 'Steelhead') %>%
+              select(pop, status, CBP_goals, target) %>%
               pivot_wider(names_from = CBP_goals, values_from = target),
             by = 'pop')
   
@@ -1026,21 +1138,27 @@ pnw_rivers <- st_intersection(pnw_rivers %>%
 
 map_qet <- left_join(new_predicts,
                  trt_pops %>%
-                   select(pop, High, Low, Medium, Critical) %>%
+                   select(pop, `Healthy and Harvestable`, `Minimum Viable Abundance`, `Quasi-Extinction (50 spawners)`) %>%
                    st_drop_geometry(),
                  by = 'pop') %>%
   filter(spawningyear >= yr) %>%
   group_by(pop) %>%
   mutate(QET = case_when(
     pop %in% current_pops ~ 'Currently Below QET50',
-    any(ests[spawningyear >= yr]) >= High ~ 'Above Healthy and Harvestable',
-    any(ests[spawningyear >= yr]) >= Low ~ 'Above Minimum Abundance',
-    ests[spawningyear == yr] <= Critical ~ paste0("Below 50 Spawners in ", yr),
-    ests[spawningyear == yr + 5] > Critical ~ paste0("Predicted Above 50 in ", yr+5),
-    ests[spawningyear == yr + 5] <= Critical ~ paste0("Predicted Below 50 by ", yr+5)
+    any(ests[spawningyear >= yr] >= `Healthy and Harvestable`) ~ 'Above Healthy and Harvestable',
+    any(ests[spawningyear >= yr] >= `Minimum Viable Abundance`) ~ 'Above Minimum Abundance',
+    ests[spawningyear == yr] <= `Quasi-Extinction (50 spawners)` ~ paste0("Below 50 Spawners in ", yr),
+    ests[spawningyear == yr + 5] > `Quasi-Extinction (50 spawners)` ~ paste0("Predicted Above 50 in ", yr+5),
+    ests[spawningyear == yr + 5] <= `Quasi-Extinction (50 spawners)` ~ paste0("Predicted Below 50 by ", yr+5)
   )) %>%
   select(pop, QET) %>%
   distinct()
+
+
+# estimate >= `Healthy and Harvestable` ~ "Healthy and Harvestable",
+# estimate >= `Minimum Viable Abundance` ~ "Above Minimum Viable Abundance (MAT)",
+# estimate >= `Quasi-Extinction (50 spawners)` ~ "Critical Abundance (Below MAT)",
+# estimate < `Quasi-Extinction (50 spawners)` ~ "Quasi-Extinction (<50 spawners)",
 
 map_qet %>%
   ungroup() %>%
@@ -1190,6 +1308,7 @@ tmp <- ggplot() +
   #geom_sf(data = npt1863, fill = NA, linewidth = 1, color = 'green') +
   geom_sf(data = pnw_rivers, inherit.aes = FALSE, color = 'blue') +
   geom_sf(data = offices, inherit.aes = FALSE, size = 2, color = 'black') +
+  #ggrepel::geom_label_repel(data = offices, aes(x = lon, y = lat, label = city), size = 2, color = 'black') +
   scale_color_manual(values = 'black') +
   scale_fill_manual(values = brbg) +
   theme_nothing()
