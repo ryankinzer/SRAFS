@@ -98,26 +98,6 @@ include_graphics(paste0(fig_path,'Chinook_salmon/','Chinook_salmon_Spring_summer
 ```{r chn-create-dataset}
 spp <-'Chinook salmon'
 load(paste0('../data/output/',gsub(' ', '_', spp), '_summary_data_',yr,'.rda'))
-
-
-dat <- bind_rows(
-  mod_dat %>%
-    select(mpg, pop, spawningyear, estimate = exp_fit),
-  new_dat %>%
-    select(mpg, pop, spawningyear, estimate = ests)
-  ) %>%
-  left_join(
-    mgt_targets %>%
-      select(pop, status, CBP_goals, target) %>%
-      pivot_wider(names_from = CBP_goals, values_from = target)
-  ) %>%
-  mutate(abund_cat = case_when(
-    estimate >= `Healthy and Harvestable` ~ "Healthy and Harvestable",
-    estimate >= `Minimum Viable Abundance` ~ "Above Minimum Viable Abundance (MAT)",
-    estimate >= `Quasi-Extinction (50 spawners)` ~ "Critical Abundance (Below MAT)",
-    estimate < `Quasi-Extinction (50 spawners)` ~ "Quasi-Extinction (<50 spawners)",
-    TRUE ~ NA_character_
-  ))
 ```
 
 ```{r chn-summary, tab.cap = 'The table provides summary counts of spring/summer Chinook salmon populations currently below minimum abundance thresholds, 50 spawners, and meeting the quasi-extinction threshold (4 consecutive years below 50 spawners), and the number of populations predicted to fall below 50 by return year 2029.' }

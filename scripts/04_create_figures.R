@@ -204,7 +204,7 @@ if(spp == 'Chinook salmon' && run == 'Spring-summer'){
            run == 'Fall') %>%
     filter(origin == 'Hatchery')
   
-  yaxis_lims <- c(0, 75000)
+  yaxis_lims <- c(0, 110000)
   caption <- 'Data Source: Nez Perce Tribe'
   
 } else if (spp == 'Steelhead' && run == 'Summer'){
@@ -213,7 +213,7 @@ if(spp == 'Chinook salmon' && run == 'Spring-summer'){
            run == 'Summer') %>%
     filter(origin == 'Hatchery')
   
-  yaxis_lims <- c(0, 260000)
+  yaxis_lims <- c(0, 290000)
   caption <- 'Data Source: Idaho Department of Fish and Game'
   
 } else {
@@ -235,7 +235,6 @@ hat_fig <- idfg_dat %>%
                      label = scales::comma,
                      breaks = lgr_mgt_total$target) +
   scale_color_manual(values = c('firebrick', 'darkgreen')) +
-  #scale_x_continuous(breaks = seq(1975, 2020, 5)) +
   facet_wrap(~origin, ncol = 2) +
   labs(#title = 'Natural-origin Spring/Summer Chinook Salmon',
     #subtitle = 'Adult escapement at Lower Granite Dam',
@@ -987,8 +986,89 @@ map2(mpg_preds$fig, mpg_preds$mpg,
      ~ggsave(paste0(fig_path,'/',gsub(' ','_',spp) ,'MPG_', gsub(' ','_',.y), '_predictions_',yr,'.png'), plot = .x, width = w, height = h, dpi = dp)
 )
 
+# combine all dat
+dat <- bind_rows(
+  mod_dat %>%
+    select(mpg, pop, spawningyear, estimate = exp_fit),
+  new_dat %>%
+    select(mpg, pop, spawningyear, estimate = ests)
+) %>%
+  left_join(
+    mgt_targets %>%
+      select(pop, hatchery_program, status, CBP_goals, target) %>%
+      pivot_wider(names_from = CBP_goals, values_from = target)
+  ) %>%
+  mutate(abund_cat = case_when(
+    estimate >= `Healthy and Harvestable` ~ "Healthy and Harvestable",
+    estimate >= `Minimum Viable Abundance` ~ "Above Minimum Viable Abundance (MAT)",
+    estimate >= `Quasi-Extinction (50 spawners)` ~ "Critical Abundance (Below MAT)",
+    estimate < `Quasi-Extinction (50 spawners)` ~ "Quasi-Extinction (<50 spawners)",
+    TRUE ~ NA_character_
+  ))
 
-save(mgt_targets, mod_dat, new_dat, file = paste0('./data/output/',gsub(' ','_',spp), '_summary_data_',yr,'.rda'))
+
+last_5 <- yr - 4
+
+mpg_levels <- c('Lower Snake',
+                'Dry Clearwater',
+                'Wet Clearwater',
+                'Grande Ronde / Imnaha',
+                'South Fork Salmon River',
+                'Middle Fork Salmon River',
+                'Upper Salmon River')
+
+qet_levels <- c(
+  'Above Healthy and Harvestable',
+  'Above Minimum Viable Abundance (MAT)',
+  'Critical Abundance (Below MAT)',
+  'Quasi-Extinction (<50 spawners)',
+  'Extinct'
+)
+
+tmp_df <- dat %>%
+  filter(between(spawningyear,last_5,yr)) %>%
+  mutate(pop_hat = ifelse(hatchery_program, paste0(pop,"*"), as.character(pop)),
+         mpg = factor(mpg, levels = mpg_levels),
+         abund_cat = factor(abund_cat, levels = qet_levels))
+
+tmp_df %>%
+  filter(estimate <= 50) %>%
+  distinct(pop) %>%
+  pull()
+
+col_map <- c(
+  'Above Healthy and Harvestable'           = '#99d594',
+  'Above Minimum Viable Abundance (MAT)'    = '#3288bd',
+  'Critical Abundance (Below MAT)'          = '#f3be2a',
+  'Quasi-Extinction (<50 spawners)'         = '#fc8d59',
+  'Extinct'                                 = '#E31A1C'
+)
+
+fig_heat <- tmp_df %>%
+  ggplot(aes(x = spawningyear, y = pop_hat, fill = abund_cat)) +
+  geom_tile(colour = 'black') +
+  facet_grid(mpg~., scales = 'free_y', space = 'free') +
+  #facet_wrap(~mpg, scales = 'free_y', ncol = 1) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_y_discrete(expand = c(0,0)) +
+  scale_fill_manual(values = col_map,
+                    #limits = qet_levels,
+                    drop = TRUE) +
+  guides(fill = guide_legend(nrow = 1)) +
+  theme_rk() +
+  theme(legend.position = 'bottom',
+        strip.text.y = element_text(angle = 0)) +
+  labs(x = 'Spawn Year',
+       y = '',
+       fill = '')
+
+fig_heat
+
+ggsave(paste0(fig_path,'/',gsub(' ','_',spp) ,'_heatmap_',yr,'.png'), plot = fig_heat, width = w, height = h, dpi = dp)  
+
+
+# Save data
+save(dat, mgt_targets, mod_dat, new_dat, file = paste0('./data/output/',gsub(' ','_',spp), '_summary_data_',yr,'.rda'))
 
 # Extract a single pop
 
