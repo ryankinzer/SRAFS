@@ -91,7 +91,7 @@ Updates for the `r yr` analysis:
 ## Spring/summer Chinook Salmon
 
 ```{r chn-lgr, fig.cap = 'Natural-origin (wild) and hatchery-origin returns of Snake River spring/summer Chinook Salmon past Lower Granite Dam.'}
-include_graphics(paste0(fig_path,'Chinook_salmon/','Chinook_salmon_lgr_',yr,'.png'))
+include_graphics(paste0(fig_path,'Chinook_salmon/','Chinook_salmon_Spring_summer_lgr_',yr,'.png'))
 ```
 
 
@@ -170,7 +170,7 @@ include_graphics(paste0(fig_path,'Chinook_salmon/','Chinook_salmon_slope_',yr,'.
 ## Summer Steelhead
 
 ```{r sth-lgr, fig.cap = 'Natural-origin (wild) and hatchery-origin returns of Snake River summer steelhead past Lower Granite Dam.'}
-include_graphics(paste0(fig_path,'Steelhead/','Steelhead_lgr_',yr,'.png'))
+include_graphics(paste0(fig_path,'Steelhead/','Steelhead_Summer_lgr_',yr,'.png'))
 ```
 
 ```{r sth-create-dataset}

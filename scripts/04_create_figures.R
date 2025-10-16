@@ -98,22 +98,37 @@ if(spp == 'Chinook salmon' && run == 'Spring-summer'){
            run == 'Spring/summer') %>%
     filter(origin == 'Total') %>%
     mutate(grp = 'Total (Wild + Hatchery)')
+  
+  yaxis_lims <- c(0, 325000)
+  
 } else if (spp == 'Chinook salmon' && run == 'Fall'){
   lgr_mgt_total <- mgt_targets %>%
     filter(species == spp,
            run == 'Fall') %>%
     filter(origin == 'Total') %>%
     mutate(grp = 'Total (Wild + Hatchery)')
+  
+  yaxis_lims <- c(0, 150000)
+  
 } else if (spp == 'Steelhead' && run == 'Summer'){
   lgr_mgt_total <- mgt_targets %>%
     filter(species == spp,
            run == 'Summer') %>%
     filter(origin == 'Total') %>%
     mutate(grp = 'Total (Wild + Hatchery)')
+  
+  yaxis_lims <- c(0, 325000)
+  
 } else {
   stop("Species and run combination did not match any expected case.")
 }
 
+
+.simpleCap <- function(x) {
+  s <- strsplit(x, " ")[[1]]
+  paste(toupper(substring(s, 1, 1)), substring(s, 2),
+        sep = "", collapse = " ")
+}
 
 t2 <- idfg_dat %>%
   mutate(grp = 'Total (Wild + Hatchery)') %>%
@@ -133,22 +148,26 @@ t2 <- idfg_dat %>%
   #                    #                     labels = function(b){paste0(round(b * 100,0),"%")},
   #                    #                     breaks = seq(0,1, by = .1))
   # ) +
-  scale_y_continuous(expand = c(0,0,.1,0), label = scales::comma, breaks = lgr_mgt_total$target) +
+  scale_y_continuous(expand = c(0,0,.1,0),
+                     limits = yaxis_lims,
+                     label = scales::comma,
+                     breaks = lgr_mgt_total$target) +
   facet_wrap(~grp) +
   labs(
-    #title = 'Spring/Summer Chinook Salmon',
+    title = .simpleCap(paste0(run, ' ', spp)),
     #subtitle = 'Adult escapement at Lower Granite Dam',
     # caption = 'Data Source: Idaho Department of Fish and Game; Lawry et al. 2020',
     x = 'Spawn Year',
     y = 'Escapement',
     fill = 'Origin') +
   theme_rk() +
-  theme(legend.position = c(0.90, 0.8), #.1, .25
+  theme(legend.position = c(0.90, 0.75), #.1, .25
         legend.background = element_rect(fill = "white", color = "black"))
 
 
 # hatchery fraction
 phos_line <- idfg_dat %>%
+  filter(spawnyear != 2024) %>%
   group_by(spawnyear) %>%
   mutate(total = sum(est),
          p = est/total) %>%
@@ -167,7 +186,7 @@ phos_line <- idfg_dat %>%
         axis.text = element_text(size=8),
         plot.margin = unit(c(0, 0, 0, 0), "points"))
 
-t_phos <- t2 + inset_element(phos_line, left = .05, bottom = .4, right = .4, top = .9) #left = .7, bottom = .36, right = .95, top = .9
+t_phos <- t2 + inset_element(phos_line, left = .05, bottom = .35, right = .4, top = .70) #left = .7, bottom = .36, right = .95, top = .9
 t_phos
 
 if(spp == 'Chinook salmon' && run == 'Spring-summer'){
@@ -176,6 +195,7 @@ if(spp == 'Chinook salmon' && run == 'Spring-summer'){
            run == 'Spring/summer') %>%
     filter(origin == 'Hatchery')
   
+  yaxis_lims <- c(0, 260000)
   caption <- 'Data Source: Idaho Department of Fish and Game'
   
 } else if (spp == 'Chinook salmon' && run == 'Fall'){
@@ -184,6 +204,7 @@ if(spp == 'Chinook salmon' && run == 'Spring-summer'){
            run == 'Fall') %>%
     filter(origin == 'Hatchery')
   
+  yaxis_lims <- c(0, 75000)
   caption <- 'Data Source: Nez Perce Tribe'
   
 } else if (spp == 'Steelhead' && run == 'Summer'){
@@ -192,6 +213,7 @@ if(spp == 'Chinook salmon' && run == 'Spring-summer'){
            run == 'Summer') %>%
     filter(origin == 'Hatchery')
   
+  yaxis_lims <- c(0, 260000)
   caption <- 'Data Source: Idaho Department of Fish and Game'
   
 } else {
@@ -208,7 +230,10 @@ hat_fig <- idfg_dat %>%
              aes(x = c(1980,2010), y = target, label = goal_label, colour = goal_label, vjust = c(.5,0))) +
   scale_x_continuous(breaks = c(seq(1960, 2020, 10),yr)) +
   #scale_y_continuous(expand = c(0,0), limits = c(0, 260000), label = scales::comma, breaks = lgr_mgt_total$target) + #c(235000, 90000,11638)) +
-  scale_y_continuous(expand = c(0,0,.1,0), label = scales::comma, breaks = lgr_mgt_total$target) +
+  scale_y_continuous(expand = c(0,0,.1,0),
+                     limits = yaxis_lims,
+                     label = scales::comma,
+                     breaks = lgr_mgt_total$target) +
   scale_color_manual(values = c('firebrick', 'darkgreen')) +
   #scale_x_continuous(breaks = seq(1975, 2020, 5)) +
   facet_wrap(~origin, ncol = 2) +
@@ -225,8 +250,10 @@ if(spp == 'Chinook salmon' && run == 'Spring-summer'){
   lgr_mgt_total <- mgt_targets %>%
     filter(species == spp,
            run == 'Spring/summer') %>%
-    filter(origin == 'Wild') %>%
-    filter(CBP_goals != 'Medium')
+    filter(origin == 'Wild/natural') %>%
+    filter(CBP_goals != 'Medium') %>%
+    mutate(origin = 'Wild')
+
 } else if (spp == 'Chinook salmon' && run == 'Fall'){
   lgr_mgt_total <- mgt_targets %>%
     filter(species == spp,
@@ -234,12 +261,15 @@ if(spp == 'Chinook salmon' && run == 'Spring-summer'){
     filter(origin == 'Wild/natural') %>%
     filter(CBP_goals != 'Medium') %>%
     mutate(origin = 'Wild')
+
 } else if (spp == 'Steelhead' && run == 'Summer'){
   lgr_mgt_total <- mgt_targets %>%
     filter(species == spp,
            run == 'Summer') %>%
-    filter(origin == 'Wild') %>%
-    filter(CBP_goals != 'Medium')
+    filter(origin == 'Wild/natural') %>%
+    filter(CBP_goals != 'Medium') %>%
+    mutate(origin = 'Wild')
+
 } else {
   stop("Species and run combination did not match any expected case.")
 }
@@ -255,7 +285,10 @@ nat_fig <- idfg_dat %>%
              aes(yintercept = target, colour = goal_label), size = 1) +
   geom_label(data = lgr_mgt_total, 
              aes(x = 1980, y = target, label = goal_label, colour = goal_label), vjust = c(0,.5, 0)) +
-  scale_y_continuous(expand = c(0,0,.1,0), label = scales::comma, breaks = lgr_mgt_total$target) + #c(235000,43000,1850) #limits = c(0, max(lgr_mgt_total$target)),
+  scale_y_continuous(expand = c(0,0,.1,0),
+                     limits = yaxis_lims,
+                     label = scales::comma,
+                     breaks = lgr_mgt_total$target) +
   scale_color_manual(values = c('firebrick', 'navy', 'darkgreen')) +  
   facet_wrap(~origin, ncol = 2) +
   labs(#title = 'Natural-origin Spring/Summer Chinook Salmon',
