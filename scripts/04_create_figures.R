@@ -12,7 +12,7 @@ version <- '24'
 yr <- 2024
 
 spp <- 'Chinook salmon'
-#run <- 'Spring-summer'
+run <- 'Spring-summer'
 run <- 'Fall'
 
 #spp <- 'Steelhead'
@@ -74,20 +74,52 @@ master_dam <- master_dam %>%
 
 yrs <- unique(origin_size$spawnyear)
 
-idfg_dat <- bind_rows(master_dam[!(master_dam$spawnyear %in% yrs),], origin_size) %>%
-  mutate(size = case_when(
-    size == 'Large' ~ 'Adult',
-    size == 'Small' ~ 'Jack',
-    TRUE ~ 'Adult')
-  )
-
 if(spp == 'Chinook salmon' && run == 'Spring-summer'){
+
+  # idfg_dat <- bind_rows(master_dam[!(master_dam$spawnyear %in% yrs),], origin_size) %>%
+  #   mutate(size = case_when(
+  #     size == 'Large' ~ 'Adult',
+  #     size == 'Small' ~ 'Jack',
+  #     TRUE ~ 'Adult')
+  #   )
+  
+  idfg_dat <- master_dam %>%
+    mutate(size = case_when(
+      size == 'Large' ~ 'Adult',
+      size == 'Small' ~ 'Jack',
+      TRUE ~ 'Adult')
+    )
+
   idfg_dat <- idfg_dat %>%
     filter(size == 'Adult')
-} else {
+
+} else if(spp == 'Steelhead') {
+
+  # idfg_dat <- bind_rows(master_dam[!(master_dam$spawnyear %in% yrs),], origin_size) %>%
+  #   mutate(size = case_when(
+  #     size == 'Large' ~ 'Adult',
+  #     size == 'Small' ~ 'Jack',
+  #     TRUE ~ 'Adult')
+  #   )
+  
+  idfg_dat <- master_dam %>%
+    mutate(size = case_when(
+      size == 'Large' ~ 'Adult',
+      size == 'Small' ~ 'Jack',
+      TRUE ~ 'Adult')
+    )
+
   idfg_dat <- idfg_dat %>%
     group_by(spawnyear, origin) %>%
     summarise(est = sum(est, na.rm = TRUE))
+
+} else if(spp == 'Chinook salmon' && run == 'Fall'){
+  idfg_dat <- master_dam %>%
+    mutate(size = case_when(
+      size == 'Large' ~ 'Adult',
+      size == 'Small' ~ 'Jack',
+      TRUE ~ 'Adult')
+    )
 }
 
 # total at LGR
@@ -108,7 +140,7 @@ if(spp == 'Chinook salmon' && run == 'Spring-summer'){
     filter(origin == 'Total') %>%
     mutate(grp = 'Total (Wild + Hatchery)')
   
-  yaxis_lims <- c(0, 150000)
+  yaxis_lims <- c(0, 125000)
   
 } else if (spp == 'Steelhead' && run == 'Summer'){
   lgr_mgt_total <- mgt_targets %>%
@@ -204,7 +236,7 @@ if(spp == 'Chinook salmon' && run == 'Spring-summer'){
            run == 'Fall') %>%
     filter(origin == 'Hatchery')
   
-  yaxis_lims <- c(0, 110000)
+  yaxis_lims <- c(0, 50000)
   caption <- 'Data Source: Nez Perce Tribe'
   
 } else if (spp == 'Steelhead' && run == 'Summer'){
@@ -584,7 +616,7 @@ ggplot() +
 ggsave(paste0(fig_path,'/',gsub(' ','_',spp) ,'_pop_thresholds_',yr,'.png'), width = w, height = h, dpi = dp)
 
 
-id = 'Imnaha River'
+id = 'Tucannon River'
 
 ggplot() +
   geom_line(data = target_dat %>% filter(pop == id), aes(x = spawningyear, y = exp_fit)) +
@@ -593,6 +625,7 @@ ggplot() +
              aes(yintercept = target, colour = CBP_goals),
              size = 1) +
   scale_x_continuous(breaks = scales::pretty_breaks()) +
+  scale_y_continuous(labels = scales::comma) +
   scale_color_manual(values = c('darkgreen', 'navy', 'firebrick')) +
   #guides(colour = guide_legend(ncol = 1)) +
   facet_wrap(~pop, scales = 'free_y', drop = TRUE) +
@@ -906,6 +939,8 @@ nqet <- nrow(pop_qet[pop_qet$QET_TRUE >= qet_num,])
 qet_percent <- nqet/npops
 
 
+write_csv(new_predicts, file = paste0('./data/output/',gsub(' ','_',spp) ,'_predictions_',yr,'.csv'))
+
 new_predicts %>%
   ggplot(aes(x = as.integer(spawningyear), y = ests, group = pop)) +
   geom_line(colour = "grey50") +
@@ -1009,13 +1044,22 @@ dat <- bind_rows(
 
 last_5 <- yr - 4
 
-mpg_levels <- c('Lower Snake',
-                'Dry Clearwater',
-                'Wet Clearwater',
-                'Grande Ronde / Imnaha',
-                'South Fork Salmon River',
-                'Middle Fork Salmon River',
-                'Upper Salmon River')
+if(spp == 'Chinook salmon' && run == 'Spring-summer'){
+  mpg_levels <- c('Lower Snake',
+                  'Dry Clearwater',
+                  'Wet Clearwater',
+                  'Grande Ronde / Imnaha',
+                  'South Fork Salmon River',
+                  'Middle Fork Salmon River',
+                  'Upper Salmon River')
+} else if (spp == 'Steelhead' && run == 'Summer'){
+  mpg_levels <- c('Lower Snake',
+                  'Clearwater River',
+                  'Grande Ronde River',
+                  'Imnaha River',
+                  'Salmon River')
+  }
+
 
 qet_levels <- c(
   'Above Healthy and Harvestable',
@@ -1072,7 +1116,7 @@ save(dat, mgt_targets, mod_dat, new_dat, file = paste0('./data/output/',gsub(' '
 
 # Extract a single pop
 
-id <- 'Imnaha River'
+id <- 'Tucannon River'
 
 single_pop <- new_predicts %>%
   # mutate(area = case_when(
@@ -1434,6 +1478,84 @@ ggsave(paste0(fig_path,'/','_basin_map_.png'), width = w, height = h, dpi = dp)
 #saveRDS(map_dat, here::here("data","map_data","spsm_qet_map.rds"))
 
 
+#--------------------------------------------------------------------------------------
+# court litigation
+#--------------------------------------------------------------------------------------
+
+jf_pops <- tibble(
+  'pop' = c('Big Creek', 'Loon Creek', 'Camas Creek', 'Sulphur Creek', 'Secesh River', 'Marsh Creek', 'Bear Valley Creek', 'Valley Creek'),
+  'jf_status' = c('Increase, Significant', 'Increase, Significant', 'Increase, Significant', 'Decrease, Overlapping', 'Decrease, Overlapping', 'Decrease, Overlapping', 'Decrease, Overlapping', 'Increase, Overlapping')
+)
+
+trt_pops <- left_join(trt_pops, jf_pops) %>%
+  mutate(jf_status = ifelse(is.na(jf_status), 'Not Modeled', jf_status))
+
+
+load(paste0(user_path, proj_path,"flowlines/large_rivers.rda"))
+# load(paste0(user_path, proj_path,"flowlines/SR_streams.rda"))
+# 
+pnw_rivers <- pnw_rivers %>% st_transform(crs = 4326)
+
+col <- c('tomato2', 'palegreen1', 'palegreen4', 'grey95')
+
+map_fig <- ggplot() +
+  #base_map +
+  geom_sf(data = pnw, fill = NA, inherit.aes = FALSE) +
+  # geom_sf(data = full_esu_dps, fill = 'grey80', inherit.aes = FALSE) +
+  geom_sf(data = trt_pops, aes(fill = jf_status),
+          colour = 'black', size = 1, inherit.aes = FALSE) +
+  geom_sf(data = pnw_rivers, colour = 'dodgerblue', inherit.aes = FALSE) +
+  # geom_sf(data = icc, aes(colour = 'NPT ICC Boundary'), fill = NA, linewidth = 1.25, inherit.aes = FALSE) +
+  #coord_sf(xlim = xlim, ylim = ylim) +
+  ggrepel::geom_label_repel(
+    data = trt_pops[trt_pops$jf_status!='Not Modeled',],
+    aes(label = pop, geometry = geometry,
+        fill = jf_status,
+    ),
+    #alpha = .75,
+    size = 2,
+    stat = "sf_coordinates",
+    force = 6,
+    box.padding = 0.8,
+    point.padding = 1.0,
+    #min.segment.length = 2,
+    #colour = "white",
+    #segment.colour = "magenta",
+    inherit.aes = FALSE,
+    show.legend = FALSE
+  ) +
+  #geom_sf(data = SR_streams, colour = 'cyan', inherit.aes = FALSE) +
+  #scale_fill_viridis_d() + 
+  #scale_fill_manual(values = c('violetred3','violet', 'lightgreen', 'grey75')) +
+  scale_fill_manual(values = col, drop = FALSE) +
+  scale_color_manual(values = 'black') +
+  #scale_fill_brewer(palette = 'YlOrRd', direction = -1) +
+  #scale_fill_manual(values = c('firebrick', 'orange', 'yellow','limegreen', 'grey75'), drop = FALSE) +
+  #geom_point(data = sites, aes(x = Longitude, y = Latitude)) +
+  #geom_label(data = sites, aes(x = Longitude, y = Latitude, label = SiteID), size = 2) +
+  labs(
+    #title = plot_title,
+    #subtitle = 'Snake River Basin Populations',
+    fill = "Directional Change",
+    colour = ''
+  ) +
+  guides(guide_legend(ncol = 1)) +
+  theme_void() +
+  theme(#plot.title=element_text(colour = 'white', hjust=.10, vjust=-1, face='bold', margin=margin(t=0,b=-40)),
+    #plot.subtitle = element_text(colour = 'white', hjust=.10, vjust=-1, face='bold', margin=margin(t=0,b=-50)),
+    legend.position = c(0.90,0.85),
+    legend.key = element_blank(),
+    legend.margin = margin(0, 0, 0, 0),
+    legend.spacing.y = unit(1, "pt"),
+    panel.background = element_rect(fill = "white", colour = NA),
+    plot.background  = element_rect(fill = "white", colour = NA)
+    #legend.background = element_rect(fill=scales::alpha('white', 0.4), colour = NA)
+  ) # fill = 'transparent'
+
+map_fig
+
+ggsave('./figures/faulkner_fig3_map.png', map_fig, width = w, height = h, dpi = dp)
+#----------------------------------------------------------------------------------------------------------------
 
 
 # 

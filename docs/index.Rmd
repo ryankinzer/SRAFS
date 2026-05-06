@@ -77,8 +77,9 @@ Hesse, J.A. and Kinzer, R.N., 2025. Snake River Anadromous Fish Status: Quasi-Ex
 # Quasi-Extinction Summary
 
 ```{r proj-path}
+archive <- FALSE
 yr <- 2024
-fig_path <- here::here('figures','/')
+fig_path <- here::here('figures',yr,'/')
 source('../R/summarize_qet_risk.R')
 ```
 
@@ -97,7 +98,7 @@ include_graphics(paste0(fig_path,'Chinook_salmon/','Chinook_salmon_Spring_summer
 
 ```{r chn-create-dataset}
 spp <-'Chinook salmon'
-load(paste0('../data/output/',gsub(' ', '_', spp), '_summary_data_',yr,'.rda'))
+load(paste0('../data/output/',yr,'/',gsub(' ', '_', spp), '_summary_data_',yr,'.rda'))
 ```
 
 ```{r chn-summary, tab.cap = 'The table provides summary counts of spring/summer Chinook salmon populations currently below minimum abundance thresholds, 50 spawners, and meeting the quasi-extinction threshold (4 consecutive years below 50 spawners), and the number of populations predicted to fall below 50 by return year 2029.' }
@@ -106,7 +107,7 @@ sum_all <- summarize_qet_risk(dat, "All Snake River Populations", yr)
 
 # 2) ESA-listed extant only (tweak the filter to match your 'status' values)
 esa_extant <- dat %>%
-  filter(status == 'Extant')
+  filter(status != 'Extirpated')
 
 sum_esa <- summarize_qet_risk(esa_extant, "Extant ESA-listed Populations", yr)
 
@@ -155,7 +156,7 @@ include_graphics(paste0(fig_path,'Steelhead/','Steelhead_Summer_lgr_',yr,'.png')
 
 ```{r sth-create-dataset}
 spp <-'Steelhead'
-load(paste0('../data/output/',gsub(' ', '_', spp), '_summary_data_',yr,'.rda'))
+load(paste0('../data/output/',yr,'/',gsub(' ', '_', spp), '_summary_data_',yr,'.rda'))
 
 
 dat <- bind_rows(
@@ -278,7 +279,7 @@ include_graphics(paste0(fig_path,'Steelhead/', 'Steelhead_slope_',yr,'.png'))
 spp <- 'Chinook salmon'
 run <- 'Spring/summer'
 # load model fits
-load(paste0('../data/output/', gsub(' ','_', spp), '_model_fits_',yr,'.rda'))
+load(paste0('../data/output/',yr,'/', gsub(' ','_', spp), '_model_fits_',yr,'.rda'))
 ```
 
 
@@ -382,7 +383,7 @@ spp <- 'Steelhead'
 run <- 'Summer'
 
 # load model fits
-load(paste0('../data/output/', gsub(' ','_', spp), '_model_fits_',yr,'.rda'))
+load(paste0('../data/output/',yr,'/', gsub(' ','_', spp), '_model_fits_',yr,'.rda'))
 ```
 
 ### Observations
@@ -475,4 +476,33 @@ include_graphics(paste0(fig_path,gsub(' ','_', spp),'/',gsub(' ','_', spp),'_obs
 ```{r sth-qet-pred, fig.cap = 'Estimated and predicted population abundance trends for natural-origin Snake River summer steelhead. Red points and triangles indicated an estimated annual return of 50 or fewer spawners.'}
 #![](../figures/2024/multiple/Chinook salmon/Chinook_salmon_qet_pred_fig_2024.png)
 include_graphics(paste0(fig_path,gsub(' ','_', spp),'/',gsub(' ','_', spp),'_predictions_',yr,'.png'))
+```
+
+```{r archive}
+if(archive){
+  source('../R/render_and_archive.R')
+}
+```
+
+# Version Archive
+```{r archive_list, results = 'asis'}
+files <- list.files("archive", full.names = TRUE)
+
+info <- file.info(files)
+
+dat <- data.frame(
+  File = basename(files),
+  Modified = format(info$mtime, "%Y-%m-%d %H:%M")
+)
+
+dat$Link <- paste0(
+  "<a href='archive/",
+  dat$File,
+  "' target='_blank'>Open</a>"
+)
+
+knitr::kable(
+  dat[, c("File", "Modified", "Link")],
+  escape = FALSE
+)
 ```

@@ -1,0 +1,331 @@
+mpg,pop,spawningyear,status,target,type,ests,QET,abund_cat
+Clearwater River,Clearwater River Lower Mainstem,2015,Extant,1500,Modeled,720.4011019,FALSE,Below MAT
+Clearwater River,Clearwater River Lower Mainstem,2016,Extant,1500,Modeled,503.8899104,FALSE,Below MAT
+Clearwater River,Clearwater River Lower Mainstem,2017,Extant,1500,Modeled,215.385302,FALSE,Below MAT
+Clearwater River,Clearwater River Lower Mainstem,2018,Extant,1500,Modeled,140.2324205,FALSE,Below MAT
+Clearwater River,Clearwater River Lower Mainstem,2019,Extant,1500,Modeled,138.7959648,FALSE,Below MAT
+Clearwater River,Clearwater River Lower Mainstem,2020,Extant,1500,Modeled,129.5187886,FALSE,Below MAT
+Clearwater River,Clearwater River Lower Mainstem,2021,Extant,1500,Modeled,223.037194,FALSE,Below MAT
+Clearwater River,Clearwater River Lower Mainstem,2022,Extant,1500,Modeled,137.7416268,FALSE,Below MAT
+Clearwater River,Clearwater River Lower Mainstem,2023,Extant,1500,Modeled,191.9097352,FALSE,Below MAT
+Clearwater River,Clearwater River Lower Mainstem,2024,Extant,1500,Modeled,198.5798106,FALSE,Below MAT
+Clearwater River,Clearwater River Lower Mainstem,2025,Extant,1500,Prediction,176.6941404,FALSE,Below MAT
+Clearwater River,Clearwater River Lower Mainstem,2026,Extant,1500,Prediction,157.2205109,FALSE,Below MAT
+Clearwater River,Clearwater River Lower Mainstem,2027,Extant,1500,Prediction,139.8930886,FALSE,Below MAT
+Clearwater River,Clearwater River Lower Mainstem,2028,Extant,1500,Prediction,124.475338,FALSE,Below MAT
+Clearwater River,Clearwater River Lower Mainstem,2029,Extant,1500,Prediction,110.7567924,FALSE,Below MAT
+Clearwater River,Lochsa River,2015,Extant,1000,Modeled,2037.38022,FALSE,Above MAT
+Clearwater River,Lochsa River,2016,Extant,1000,Modeled,1425.060753,FALSE,Above MAT
+Clearwater River,Lochsa River,2017,Extant,1000,Modeled,609.1353176,FALSE,Below MAT
+Clearwater River,Lochsa River,2018,Extant,1000,Modeled,396.5940071,FALSE,Below MAT
+Clearwater River,Lochsa River,2019,Extant,1000,Modeled,392.5315389,FALSE,Below MAT
+Clearwater River,Lochsa River,2020,Extant,1000,Modeled,366.2945784,FALSE,Below MAT
+Clearwater River,Lochsa River,2021,Extant,1000,Modeled,630.7757804,FALSE,Below MAT
+Clearwater River,Lochsa River,2022,Extant,1000,Modeled,389.5497454,FALSE,Below MAT
+Clearwater River,Lochsa River,2023,Extant,1000,Modeled,542.7436153,FALSE,Below MAT
+Clearwater River,Lochsa River,2024,Extant,1000,Modeled,561.6073837,FALSE,Below MAT
+Clearwater River,Lochsa River,2025,Extant,1000,Prediction,499.7120989,FALSE,Below MAT
+Clearwater River,Lochsa River,2026,Extant,1000,Prediction,444.6383523,FALSE,Below MAT
+Clearwater River,Lochsa River,2027,Extant,1000,Prediction,395.6343359,FALSE,Below MAT
+Clearwater River,Lochsa River,2028,Extant,1000,Prediction,352.0310988,FALSE,Below MAT
+Clearwater River,Lochsa River,2029,Extant,1000,Prediction,313.233416,FALSE,Below MAT
+Clearwater River,Lolo Creek,2015,Extant,500,Modeled,610.1256296,FALSE,Above MAT
+Clearwater River,Lolo Creek,2016,Extant,500,Modeled,426.7569109,FALSE,Below MAT
+Clearwater River,Lolo Creek,2017,Extant,500,Modeled,182.4151749,FALSE,Below MAT
+Clearwater River,Lolo Creek,2018,Extant,500,Modeled,118.7663284,FALSE,Below MAT
+Clearwater River,Lolo Creek,2019,Extant,500,Modeled,117.5497583,FALSE,Below MAT
+Clearwater River,Lolo Creek,2020,Extant,500,Modeled,109.6926868,FALSE,Below MAT
+Clearwater River,Lolo Creek,2021,Extant,500,Modeled,188.8957527,FALSE,Below MAT
+Clearwater River,Lolo Creek,2022,Extant,500,Modeled,116.6568132,FALSE,Below MAT
+Clearwater River,Lolo Creek,2023,Extant,500,Modeled,162.5331329,FALSE,Below MAT
+Clearwater River,Lolo Creek,2024,Extant,500,Modeled,168.1821858,FALSE,Below MAT
+Clearwater River,Lolo Creek,2025,Extant,500,Prediction,149.6466668,FALSE,Below MAT
+Clearwater River,Lolo Creek,2026,Extant,500,Prediction,133.1539651,FALSE,Below MAT
+Clearwater River,Lolo Creek,2027,Extant,500,Prediction,118.4789397,FALSE,Below MAT
+Clearwater River,Lolo Creek,2028,Extant,500,Prediction,105.4212629,FALSE,Below MAT
+Clearwater River,Lolo Creek,2029,Extant,500,Prediction,93.80268507,FALSE,Below MAT
+Clearwater River,Selway River,2015,Extant,1000,Modeled,1756.238708,FALSE,Above MAT
+Clearwater River,Selway River,2016,Extant,1000,Modeled,1228.414231,FALSE,Above MAT
+Clearwater River,Selway River,2017,Extant,1000,Modeled,525.0797142,FALSE,Below MAT
+Clearwater River,Selway River,2018,Extant,1000,Modeled,341.8673353,FALSE,Below MAT
+Clearwater River,Selway River,2019,Extant,1000,Modeled,338.365454,FALSE,Below MAT
+Clearwater River,Selway River,2020,Extant,1000,Modeled,315.7489756,FALSE,Below MAT
+Clearwater River,Selway River,2021,Extant,1000,Modeled,543.7339733,FALSE,Below MAT
+Clearwater River,Selway River,2022,Extant,1000,Modeled,335.7951232,FALSE,Below MAT
+Clearwater River,Selway River,2023,Extant,1000,Modeled,467.8495142,FALSE,Below MAT
+Clearwater River,Selway River,2024,Extant,1000,Modeled,484.1102396,FALSE,Below MAT
+Clearwater River,Selway River,2025,Extant,1000,Prediction,430.7559888,FALSE,Below MAT
+Clearwater River,Selway River,2026,Extant,1000,Prediction,383.2819609,FALSE,Below MAT
+Clearwater River,Selway River,2027,Extant,1000,Prediction,341.0400908,FALSE,Below MAT
+Clearwater River,Selway River,2028,Extant,1000,Prediction,303.4537374,FALSE,Below MAT
+Clearwater River,Selway River,2029,Extant,1000,Prediction,270.0098119,FALSE,Below MAT
+Clearwater River,South Fork Clearwater River,2015,Extant,1000,Modeled,1042.168369,FALSE,Above MAT
+Clearwater River,South Fork Clearwater River,2016,Extant,1000,Modeled,728.9524191,FALSE,Below MAT
+Clearwater River,South Fork Clearwater River,2017,Extant,1000,Modeled,311.5871814,FALSE,Below MAT
+Clearwater River,South Fork Clearwater River,2018,Extant,1000,Modeled,202.8672534,FALSE,Below MAT
+Clearwater River,South Fork Clearwater River,2019,Extant,1000,Modeled,200.7892045,FALSE,Below MAT
+Clearwater River,South Fork Clearwater River,2020,Extant,1000,Modeled,187.3683761,FALSE,Below MAT
+Clearwater River,South Fork Clearwater River,2021,Extant,1000,Modeled,322.6567921,FALSE,Below MAT
+Clearwater River,South Fork Clearwater River,2022,Extant,1000,Modeled,199.2639463,FALSE,Below MAT
+Clearwater River,South Fork Clearwater River,2023,Extant,1000,Modeled,277.626249,FALSE,Below MAT
+Clearwater River,South Fork Clearwater River,2024,Extant,1000,Modeled,287.2755145,FALSE,Below MAT
+Clearwater River,South Fork Clearwater River,2025,Extant,1000,Prediction,255.6146064,FALSE,Below MAT
+Clearwater River,South Fork Clearwater River,2026,Extant,1000,Prediction,227.4430771,FALSE,Below MAT
+Clearwater River,South Fork Clearwater River,2027,Extant,1000,Prediction,202.3763588,FALSE,Below MAT
+Clearwater River,South Fork Clearwater River,2028,Extant,1000,Prediction,180.0722675,FALSE,Below MAT
+Clearwater River,South Fork Clearwater River,2029,Extant,1000,Prediction,160.2263313,FALSE,Below MAT
+Grande Ronde River,Grande Ronde River Lower Mainstem,2015,Extant,1000,Modeled,1679.004009,FALSE,Above MAT
+Grande Ronde River,Grande Ronde River Lower Mainstem,2016,Extant,1000,Modeled,1174.391846,FALSE,Above MAT
+Grande Ronde River,Grande Ronde River Lower Mainstem,2017,Extant,1000,Modeled,501.9881074,FALSE,Below MAT
+Grande Ronde River,Grande Ronde River Lower Mainstem,2018,Extant,1000,Modeled,326.8329208,FALSE,Below MAT
+Grande Ronde River,Grande Ronde River Lower Mainstem,2019,Extant,1000,Modeled,323.4850429,FALSE,Below MAT
+Grande Ronde River,Grande Ronde River Lower Mainstem,2020,Extant,1000,Modeled,301.863177,FALSE,Below MAT
+Grande Ronde River,Grande Ronde River Lower Mainstem,2021,Extant,1000,Modeled,519.8220019,FALSE,Below MAT
+Grande Ronde River,Grande Ronde River Lower Mainstem,2022,Extant,1000,Modeled,321.0277483,FALSE,Below MAT
+Grande Ronde River,Grande Ronde River Lower Mainstem,2023,Extant,1000,Modeled,447.2747391,FALSE,Below MAT
+Grande Ronde River,Grande Ronde River Lower Mainstem,2024,Extant,1000,Modeled,462.8203611,FALSE,Below MAT
+Grande Ronde River,Grande Ronde River Lower Mainstem,2025,Extant,1000,Prediction,411.8124881,FALSE,Below MAT
+Grande Ronde River,Grande Ronde River Lower Mainstem,2026,Extant,1000,Prediction,366.4262415,FALSE,Below MAT
+Grande Ronde River,Grande Ronde River Lower Mainstem,2027,Extant,1000,Prediction,326.0420563,FALSE,Below MAT
+Grande Ronde River,Grande Ronde River Lower Mainstem,2028,Extant,1000,Prediction,290.1086506,FALSE,Below MAT
+Grande Ronde River,Grande Ronde River Lower Mainstem,2029,Extant,1000,Prediction,258.1354998,FALSE,Below MAT
+Grande Ronde River,Grande Ronde River Upper Mainstem,2015,Extant,1500,Modeled,3415.122066,FALSE,Above MAT
+Grande Ronde River,Grande Ronde River Upper Mainstem,2016,Extant,1500,Modeled,2388.732538,FALSE,Above MAT
+Grande Ronde River,Grande Ronde River Upper Mainstem,2017,Extant,1500,Modeled,1021.052155,FALSE,Below MAT
+Grande Ronde River,Grande Ronde River Upper Mainstem,2018,Extant,1500,Modeled,664.7835941,FALSE,Below MAT
+Grande Ronde River,Grande Ronde River Upper Mainstem,2019,Extant,1500,Modeled,372.7264956,FALSE,Below MAT
+Grande Ronde River,Grande Ronde River Upper Mainstem,2020,Extant,1500,Modeled,347.8133119,FALSE,Below MAT
+Grande Ronde River,Grande Ronde River Upper Mainstem,2021,Extant,1500,Modeled,598.9502061,FALSE,Below MAT
+Grande Ronde River,Grande Ronde River Upper Mainstem,2022,Extant,1500,Modeled,369.8951474,FALSE,Below MAT
+Grande Ronde River,Grande Ronde River Upper Mainstem,2023,Extant,1500,Modeled,515.3596735,FALSE,Below MAT
+Grande Ronde River,Grande Ronde River Upper Mainstem,2024,Extant,1500,Modeled,533.271677,FALSE,Below MAT
+Grande Ronde River,Grande Ronde River Upper Mainstem,2025,Extant,1500,Prediction,474.4992973,FALSE,Below MAT
+Grande Ronde River,Grande Ronde River Upper Mainstem,2026,Extant,1500,Prediction,422.2042777,FALSE,Below MAT
+Grande Ronde River,Grande Ronde River Upper Mainstem,2027,Extant,1500,Prediction,375.672742,FALSE,Below MAT
+Grande Ronde River,Grande Ronde River Upper Mainstem,2028,Extant,1500,Prediction,334.2694911,FALSE,Below MAT
+Grande Ronde River,Grande Ronde River Upper Mainstem,2029,Extant,1500,Prediction,297.429332,FALSE,Below MAT
+Grande Ronde River,Joseph Creek,2015,Extant,500,Modeled,3094.628451,FALSE,Above MAT
+Grande Ronde River,Joseph Creek,2016,Extant,500,Modeled,2164.560894,FALSE,Above MAT
+Grande Ronde River,Joseph Creek,2017,Extant,500,Modeled,925.2310719,FALSE,Above MAT
+Grande Ronde River,Joseph Creek,2018,Extant,500,Modeled,456.9749428,FALSE,Below MAT
+Grande Ronde River,Joseph Creek,2019,Extant,500,Modeled,452.2939691,FALSE,Below MAT
+Grande Ronde River,Joseph Creek,2020,Extant,500,Modeled,422.0624645,FALSE,Below MAT
+Grande Ronde River,Joseph Creek,2021,Extant,500,Modeled,726.8105949,FALSE,Above MAT
+Grande Ronde River,Joseph Creek,2022,Extant,500,Modeled,448.8582013,FALSE,Below MAT
+Grande Ronde River,Joseph Creek,2023,Extant,500,Modeled,625.375644,FALSE,Above MAT
+Grande Ronde River,Joseph Creek,2024,Extant,500,Modeled,647.1113973,FALSE,Above MAT
+Grande Ronde River,Joseph Creek,2025,Extant,500,Prediction,575.7926336,FALSE,Above MAT
+Grande Ronde River,Joseph Creek,2026,Extant,500,Prediction,512.3339789,FALSE,Above MAT
+Grande Ronde River,Joseph Creek,2027,Extant,500,Prediction,455.8691629,FALSE,Below MAT
+Grande Ronde River,Joseph Creek,2028,Extant,500,Prediction,405.6273881,FALSE,Below MAT
+Grande Ronde River,Joseph Creek,2029,Extant,500,Prediction,360.9228072,FALSE,Below MAT
+Grande Ronde River,Wallowa River,2015,Extant,1000,Modeled,1738.229561,FALSE,Above MAT
+Grande Ronde River,Wallowa River,2016,Extant,1000,Modeled,1215.817599,FALSE,Above MAT
+Grande Ronde River,Wallowa River,2017,Extant,1000,Modeled,519.6953449,FALSE,Below MAT
+Grande Ronde River,Wallowa River,2018,Extant,1000,Modeled,338.3616962,FALSE,Below MAT
+Grande Ronde River,Wallowa River,2019,Extant,1000,Modeled,334.8957245,FALSE,Below MAT
+Grande Ronde River,Wallowa River,2020,Extant,1000,Modeled,312.5111642,FALSE,Below MAT
+Grande Ronde River,Wallowa River,2021,Extant,1000,Modeled,538.1583161,FALSE,Below MAT
+Grande Ronde River,Wallowa River,2022,Extant,1000,Modeled,332.3517509,FALSE,Below MAT
+Grande Ronde River,Wallowa River,2023,Extant,1000,Modeled,463.0520054,FALSE,Below MAT
+Grande Ronde River,Wallowa River,2024,Extant,1000,Modeled,479.1459871,FALSE,Below MAT
+Grande Ronde River,Wallowa River,2025,Extant,1000,Prediction,426.3388513,FALSE,Below MAT
+Grande Ronde River,Wallowa River,2026,Extant,1000,Prediction,379.3516403,FALSE,Below MAT
+Grande Ronde River,Wallowa River,2027,Extant,1000,Prediction,337.5429346,FALSE,Below MAT
+Grande Ronde River,Wallowa River,2028,Extant,1000,Prediction,300.3420061,FALSE,Below MAT
+Grande Ronde River,Wallowa River,2029,Extant,1000,Prediction,267.2410275,FALSE,Below MAT
+Imnaha River,Imnaha River,2015,Extant,1000,Modeled,3504.501222,FALSE,Above MAT
+Imnaha River,Imnaha River,2016,Extant,1000,Modeled,2451.249453,FALSE,Above MAT
+Imnaha River,Imnaha River,2017,Extant,1000,Modeled,1047.774708,FALSE,Above MAT
+Imnaha River,Imnaha River,2018,Extant,1000,Modeled,682.1820342,FALSE,Below MAT
+Imnaha River,Imnaha River,2019,Extant,1000,Modeled,675.1941757,FALSE,Below MAT
+Imnaha River,Imnaha River,2020,Extant,1000,Modeled,630.0639348,FALSE,Below MAT
+Imnaha River,Imnaha River,2021,Extant,1000,Modeled,1084.998506,FALSE,Above MAT
+Imnaha River,Imnaha River,2022,Extant,1000,Modeled,670.0651876,FALSE,Below MAT
+Imnaha River,Imnaha River,2023,Extant,1000,Modeled,933.5742268,FALSE,Below MAT
+Imnaha River,Imnaha River,2024,Extant,1000,Modeled,966.0218274,FALSE,Below MAT
+Imnaha River,Imnaha River,2025,Extant,1000,Prediction,859.5556414,FALSE,Below MAT
+Imnaha River,Imnaha River,2026,Extant,1000,Prediction,764.8231951,FALSE,Below MAT
+Imnaha River,Imnaha River,2027,Extant,1000,Prediction,680.5313021,FALSE,Below MAT
+Imnaha River,Imnaha River,2028,Extant,1000,Prediction,605.5292989,FALSE,Below MAT
+Imnaha River,Imnaha River,2029,Extant,1000,Prediction,538.7933379,FALSE,Below MAT
+Lower Snake,Asotin Creek,2015,Extant,500,Modeled,1190.046698,FALSE,Above MAT
+Lower Snake,Asotin Creek,2016,Extant,500,Modeled,832.3870165,FALSE,Above MAT
+Lower Snake,Asotin Creek,2017,Extant,500,Modeled,355.7997992,FALSE,Below MAT
+Lower Snake,Asotin Creek,2018,Extant,500,Modeled,231.6530728,FALSE,Below MAT
+Lower Snake,Asotin Creek,2019,Extant,500,Modeled,229.2801594,FALSE,Below MAT
+Lower Snake,Asotin Creek,2020,Extant,500,Modeled,213.9549845,FALSE,Below MAT
+Lower Snake,Asotin Creek,2021,Extant,500,Modeled,368.4401307,FALSE,Below MAT
+Lower Snake,Asotin Creek,2022,Extant,500,Modeled,227.538475,FALSE,Below MAT
+Lower Snake,Asotin Creek,2023,Extant,500,Modeled,317.0199852,FALSE,Below MAT
+Lower Snake,Asotin Creek,2024,Extant,500,Modeled,328.0384319,FALSE,Below MAT
+Lower Snake,Asotin Creek,2025,Extant,500,Prediction,291.8850037,FALSE,Below MAT
+Lower Snake,Asotin Creek,2026,Extant,500,Prediction,259.7160794,FALSE,Below MAT
+Lower Snake,Asotin Creek,2027,Extant,500,Prediction,231.0925228,FALSE,Below MAT
+Lower Snake,Asotin Creek,2028,Extant,500,Prediction,205.6235957,FALSE,Below MAT
+Lower Snake,Asotin Creek,2029,Extant,500,Prediction,182.9616233,FALSE,Below MAT
+Lower Snake,Tucannon River,2015,Extant,1000,Modeled,1481.582313,FALSE,Above MAT
+Lower Snake,Tucannon River,2016,Extant,1000,Modeled,1036.303772,FALSE,Above MAT
+Lower Snake,Tucannon River,2017,Extant,1000,Modeled,442.9630287,FALSE,Below MAT
+Lower Snake,Tucannon River,2018,Extant,1000,Modeled,288.4030485,FALSE,Below MAT
+Lower Snake,Tucannon River,2019,Extant,1000,Modeled,285.4488228,FALSE,Below MAT
+Lower Snake,Tucannon River,2020,Extant,1000,Modeled,266.3693126,FALSE,Below MAT
+Lower Snake,Tucannon River,2021,Extant,1000,Modeled,458.6999671,FALSE,Below MAT
+Lower Snake,Tucannon River,2022,Extant,1000,Modeled,283.2804634,FALSE,Below MAT
+Lower Snake,Tucannon River,2023,Extant,1000,Modeled,394.6830018,FALSE,Below MAT
+Lower Snake,Tucannon River,2024,Extant,1000,Modeled,287.616608,FALSE,Below MAT
+Lower Snake,Tucannon River,2025,Extant,1000,Prediction,255.9181076,FALSE,Below MAT
+Lower Snake,Tucannon River,2026,Extant,1000,Prediction,227.7131291,FALSE,Below MAT
+Lower Snake,Tucannon River,2027,Extant,1000,Prediction,202.6166482,FALSE,Below MAT
+Lower Snake,Tucannon River,2028,Extant,1000,Prediction,180.2860743,FALSE,Below MAT
+Lower Snake,Tucannon River,2029,Extant,1000,Prediction,160.4165743,FALSE,Below MAT
+Salmon River,East Fork Salmon River,2015,Extant,1000,Modeled,15.21439031,TRUE,Below QET50
+Salmon River,East Fork Salmon River,2016,Extant,1000,Modeled,10.64181849,TRUE,Below QET50
+Salmon River,East Fork Salmon River,2017,Extant,1000,Modeled,4.54879378,TRUE,Below QET50
+Salmon River,East Fork Salmon River,2018,Extant,1000,Modeled,2.961615097,TRUE,Below QET50
+Salmon River,East Fork Salmon River,2019,Extant,1000,Modeled,2.931278111,TRUE,Below QET50
+Salmon River,East Fork Salmon River,2020,Extant,1000,Modeled,2.735350344,TRUE,Below QET50
+Salmon River,East Fork Salmon River,2021,Extant,1000,Modeled,4.71039663,TRUE,Below QET50
+Salmon River,East Fork Salmon River,2022,Extant,1000,Modeled,2.909011197,TRUE,Below QET50
+Salmon River,East Fork Salmon River,2023,Extant,1000,Modeled,4.053005483,TRUE,Below QET50
+Salmon River,East Fork Salmon River,2024,Extant,1000,Modeled,4.19387302,TRUE,Below QET50
+Salmon River,East Fork Salmon River,2025,Extant,1000,Prediction,3.731662279,TRUE,Below QET50
+Salmon River,East Fork Salmon River,2026,Extant,1000,Prediction,3.320392224,TRUE,Below QET50
+Salmon River,East Fork Salmon River,2027,Extant,1000,Prediction,2.954448633,TRUE,Below QET50
+Salmon River,East Fork Salmon River,2028,Extant,1000,Prediction,2.628836034,TRUE,Below QET50
+Salmon River,East Fork Salmon River,2029,Extant,1000,Prediction,2.33910951,TRUE,Below QET50
+Salmon River,Lemhi River,2015,Extant,1000,Modeled,412.2898366,FALSE,Below MAT
+Salmon River,Lemhi River,2016,Extant,1000,Modeled,288.3791936,FALSE,Below MAT
+Salmon River,Lemhi River,2017,Extant,1000,Modeled,123.2662898,FALSE,Below MAT
+Salmon River,Lemhi River,2018,Extant,1000,Modeled,80.25584856,FALSE,Below MAT
+Salmon River,Lemhi River,2019,Extant,1000,Modeled,79.43375639,FALSE,Below MAT
+Salmon River,Lemhi River,2020,Extant,1000,Modeled,74.12437326,FALSE,Below MAT
+Salmon River,Lemhi River,2021,Extant,1000,Modeled,127.6455131,FALSE,Below MAT
+Salmon River,Lemhi River,2022,Extant,1000,Modeled,78.83035249,FALSE,Below MAT
+Salmon River,Lemhi River,2023,Extant,1000,Modeled,109.8310832,FALSE,Below MAT
+Salmon River,Lemhi River,2024,Extant,1000,Modeled,113.648407,FALSE,Below MAT
+Salmon River,Lemhi River,2025,Extant,1000,Prediction,101.1231078,FALSE,Below MAT
+Salmon River,Lemhi River,2026,Extant,1000,Prediction,89.97823374,FALSE,Below MAT
+Salmon River,Lemhi River,2027,Extant,1000,Prediction,80.06164687,FALSE,Below MAT
+Salmon River,Lemhi River,2028,Extant,1000,Prediction,71.23797648,FALSE,Below MAT
+Salmon River,Lemhi River,2029,Extant,1000,Prediction,63.38677122,FALSE,Below MAT
+Salmon River,Middle Fork Salmon River Lower Mainstem,2015,Extant,1000,Modeled,577.8081326,FALSE,Below MAT
+Salmon River,Middle Fork Salmon River Lower Mainstem,2016,Extant,1000,Modeled,404.1521972,FALSE,Below MAT
+Salmon River,Middle Fork Salmon River Lower Mainstem,2017,Extant,1000,Modeled,172.7528995,FALSE,Below MAT
+Salmon River,Middle Fork Salmon River Lower Mainstem,2018,Extant,1000,Modeled,112.4754429,FALSE,Below MAT
+Salmon River,Middle Fork Salmon River Lower Mainstem,2019,Extant,1000,Modeled,111.3233128,FALSE,Below MAT
+Salmon River,Middle Fork Salmon River Lower Mainstem,2020,Extant,1000,Modeled,103.8824193,FALSE,Below MAT
+Salmon River,Middle Fork Salmon River Lower Mainstem,2021,Extant,1000,Modeled,178.8902102,FALSE,Below MAT
+Salmon River,Middle Fork Salmon River Lower Mainstem,2022,Extant,1000,Modeled,110.4776658,FALSE,Below MAT
+Salmon River,Middle Fork Salmon River Lower Mainstem,2023,Extant,1000,Modeled,153.9239813,FALSE,Below MAT
+Salmon River,Middle Fork Salmon River Lower Mainstem,2024,Extant,1000,Modeled,159.2738118,FALSE,Below MAT
+Salmon River,Middle Fork Salmon River Lower Mainstem,2025,Extant,1000,Prediction,141.7200932,FALSE,Below MAT
+Salmon River,Middle Fork Salmon River Lower Mainstem,2026,Extant,1000,Prediction,126.1009867,FALSE,Below MAT
+Salmon River,Middle Fork Salmon River Lower Mainstem,2027,Extant,1000,Prediction,112.2032768,FALSE,Below MAT
+Salmon River,Middle Fork Salmon River Lower Mainstem,2028,Extant,1000,Prediction,99.83724679,FALSE,Below MAT
+Salmon River,Middle Fork Salmon River Lower Mainstem,2029,Extant,1000,Prediction,88.8340887,FALSE,Below MAT
+Salmon River,Middle Fork Salmon River Upper Mainstem,2015,Extant,1000,Modeled,130.8704071,FALSE,Below MAT
+Salmon River,Middle Fork Salmon River Upper Mainstem,2016,Extant,1000,Modeled,91.53827991,FALSE,Below MAT
+Salmon River,Middle Fork Salmon River Upper Mainstem,2017,Extant,1000,Modeled,39.12759446,TRUE,Below QET50
+Salmon River,Middle Fork Salmon River Upper Mainstem,2018,Extant,1000,Modeled,25.47507758,TRUE,Below QET50
+Salmon River,Middle Fork Salmon River Upper Mainstem,2019,Extant,1000,Modeled,25.21412636,TRUE,Below QET50
+Salmon River,Middle Fork Salmon River Upper Mainstem,2020,Extant,1000,Modeled,23.52880436,TRUE,Below QET50
+Salmon River,Middle Fork Salmon River Upper Mainstem,2021,Extant,1000,Modeled,40.51766203,TRUE,Below QET50
+Salmon River,Middle Fork Salmon River Upper Mainstem,2022,Extant,1000,Modeled,25.02259189,TRUE,Below QET50
+Salmon River,Middle Fork Salmon River Upper Mainstem,2023,Extant,1000,Modeled,34.86294664,TRUE,Below QET50
+Salmon River,Middle Fork Salmon River Upper Mainstem,2024,Extant,1000,Modeled,36.07465422,TRUE,Below QET50
+Salmon River,Middle Fork Salmon River Upper Mainstem,2025,Extant,1000,Prediction,32.09883221,TRUE,Below QET50
+Salmon River,Middle Fork Salmon River Upper Mainstem,2026,Extant,1000,Prediction,28.56118933,TRUE,Below QET50
+Salmon River,Middle Fork Salmon River Upper Mainstem,2027,Extant,1000,Prediction,25.41343344,TRUE,Below QET50
+Salmon River,Middle Fork Salmon River Upper Mainstem,2028,Extant,1000,Prediction,22.61259472,TRUE,Below QET50
+Salmon River,Middle Fork Salmon River Upper Mainstem,2029,Extant,1000,Prediction,20.12043912,TRUE,Below QET50
+Salmon River,North Fork Salmon River,2015,Extant,500,Modeled,206.0096016,FALSE,Below MAT
+Salmon River,North Fork Salmon River,2016,Extant,500,Modeled,144.0949485,FALSE,Below MAT
+Salmon River,North Fork Salmon River,2017,Extant,500,Modeled,61.59268794,FALSE,Below MAT
+Salmon River,North Fork Salmon River,2018,Extant,500,Modeled,40.10158369,TRUE,Below QET50
+Salmon River,North Fork Salmon River,2019,Extant,500,Modeled,39.69080742,TRUE,Below QET50
+Salmon River,North Fork Salmon River,2020,Extant,500,Modeled,37.03785844,TRUE,Below QET50
+Salmon River,North Fork Salmon River,2021,Extant,500,Modeled,63.78086229,FALSE,Below MAT
+Salmon River,North Fork Salmon River,2022,Extant,500,Modeled,39.38930352,TRUE,Below QET50
+Salmon River,North Fork Salmon River,2023,Extant,500,Modeled,54.8794942,FALSE,Below MAT
+Salmon River,North Fork Salmon River,2024,Extant,500,Modeled,56.78690323,FALSE,Below MAT
+Salmon River,North Fork Salmon River,2025,Extant,500,Prediction,50.52836452,FALSE,Below MAT
+Salmon River,North Fork Salmon River,2026,Extant,500,Prediction,44.95958532,TRUE,Below QET50
+Salmon River,North Fork Salmon River,2027,Extant,500,Prediction,40.00454658,TRUE,Below QET50
+Salmon River,North Fork Salmon River,2028,Extant,500,Prediction,35.59560739,TRUE,Below QET50
+Salmon River,North Fork Salmon River,2029,Extant,500,Prediction,31.67258158,TRUE,Below QET50
+Salmon River,Pahsimeroi River,2015,Extant,1000,Modeled,83.91385696,FALSE,Below MAT
+Salmon River,Pahsimeroi River,2016,Extant,1000,Modeled,58.69417156,FALSE,Below MAT
+Salmon River,Pahsimeroi River,2017,Extant,1000,Modeled,25.0885394,TRUE,Below QET50
+Salmon River,Pahsimeroi River,2018,Extant,1000,Modeled,16.33457146,TRUE,Below QET50
+Salmon River,Pahsimeroi River,2019,Extant,1000,Modeled,16.16725003,TRUE,Below QET50
+Salmon River,Pahsimeroi River,2020,Extant,1000,Modeled,15.08662476,TRUE,Below QET50
+Salmon River,Pahsimeroi River,2021,Extant,1000,Modeled,25.97984809,TRUE,Below QET50
+Salmon River,Pahsimeroi River,2022,Extant,1000,Modeled,16.04443849,TRUE,Below QET50
+Salmon River,Pahsimeroi River,2023,Extant,1000,Modeled,22.3540553,TRUE,Below QET50
+Salmon River,Pahsimeroi River,2024,Extant,1000,Modeled,23.1309999,TRUE,Below QET50
+Salmon River,Pahsimeroi River,2025,Extant,1000,Prediction,20.58171037,TRUE,Below QET50
+Salmon River,Pahsimeroi River,2026,Extant,1000,Prediction,18.31338046,TRUE,Below QET50
+Salmon River,Pahsimeroi River,2027,Extant,1000,Prediction,16.29504535,TRUE,Below QET50
+Salmon River,Pahsimeroi River,2028,Extant,1000,Prediction,14.49915287,TRUE,Below QET50
+Salmon River,Pahsimeroi River,2029,Extant,1000,Prediction,12.90118742,TRUE,Below QET50
+Salmon River,Panther Creek,2015,Extant,500,Modeled,617.7659635,FALSE,Above MAT
+Salmon River,Panther Creek,2016,Extant,500,Modeled,432.1009993,FALSE,Below MAT
+Salmon River,Panther Creek,2017,Extant,500,Modeled,184.6994796,FALSE,Below MAT
+Salmon River,Panther Creek,2018,Extant,500,Modeled,120.2535867,FALSE,Below MAT
+Salmon River,Panther Creek,2019,Extant,500,Modeled,119.021782,FALSE,Below MAT
+Salmon River,Panther Creek,2020,Extant,500,Modeled,111.0663199,FALSE,Below MAT
+Salmon River,Panther Creek,2021,Extant,500,Modeled,191.2612109,FALSE,Below MAT
+Salmon River,Panther Creek,2022,Extant,500,Modeled,118.117655,FALSE,Below MAT
+Salmon River,Panther Creek,2023,Extant,500,Modeled,164.5684636,FALSE,Below MAT
+Salmon River,Panther Creek,2024,Extant,500,Modeled,170.288257,FALSE,Below MAT
+Salmon River,Panther Creek,2025,Extant,500,Prediction,151.520626,FALSE,Below MAT
+Salmon River,Panther Creek,2026,Extant,500,Prediction,134.8213934,FALSE,Below MAT
+Salmon River,Panther Creek,2027,Extant,500,Prediction,119.9625992,FALSE,Below MAT
+Salmon River,Panther Creek,2028,Extant,500,Prediction,106.7414068,FALSE,Below MAT
+Salmon River,Panther Creek,2029,Extant,500,Prediction,94.97733469,FALSE,Below MAT
+Salmon River,Salmon River Upper Mainstem,2015,Extant,1000,Modeled,264.8401309,FALSE,Below MAT
+Salmon River,Salmon River Upper Mainstem,2016,Extant,1000,Modeled,185.2443999,FALSE,Below MAT
+Salmon River,Salmon River Upper Mainstem,2017,Extant,1000,Modeled,79.18182167,FALSE,Below MAT
+Salmon River,Salmon River Upper Mainstem,2018,Extant,1000,Modeled,51.55346446,FALSE,Below MAT
+Salmon River,Salmon River Upper Mainstem,2019,Extant,1000,Modeled,51.02538208,FALSE,Below MAT
+Salmon River,Salmon River Upper Mainstem,2020,Extant,1000,Modeled,47.61482572,TRUE,Below QET50
+Salmon River,Salmon River Upper Mainstem,2021,Extant,1000,Modeled,81.99487687,FALSE,Below MAT
+Salmon River,Salmon River Upper Mainstem,2022,Extant,1000,Modeled,50.63777716,FALSE,Below MAT
+Salmon River,Salmon River Upper Mainstem,2023,Extant,1000,Modeled,70.55152923,FALSE,Below MAT
+Salmon River,Salmon River Upper Mainstem,2024,Extant,1000,Modeled,73.00364045,FALSE,Below MAT
+Salmon River,Salmon River Upper Mainstem,2025,Extant,1000,Prediction,64.95783968,FALSE,Below MAT
+Salmon River,Salmon River Upper Mainstem,2026,Extant,1000,Prediction,57.79877427,FALSE,Below MAT
+Salmon River,Salmon River Upper Mainstem,2027,Extant,1000,Prediction,51.42871629,FALSE,Below MAT
+Salmon River,Salmon River Upper Mainstem,2028,Extant,1000,Prediction,45.76070847,TRUE,Below QET50
+Salmon River,Salmon River Upper Mainstem,2029,Extant,1000,Prediction,40.71737719,TRUE,Below QET50
+Salmon River,Secesh River,2015,Extant,500,Modeled,185.8771346,FALSE,Below MAT
+Salmon River,Secesh River,2016,Extant,500,Modeled,130.0131447,FALSE,Below MAT
+Salmon River,Secesh River,2017,Extant,500,Modeled,55.57348911,FALSE,Below MAT
+Salmon River,Secesh River,2018,Extant,500,Modeled,36.18262165,TRUE,Below QET50
+Salmon River,Secesh River,2019,Extant,500,Modeled,35.81198885,TRUE,Below QET50
+Salmon River,Secesh River,2020,Extant,500,Modeled,33.41830161,TRUE,Below QET50
+Salmon River,Secesh River,2021,Extant,500,Modeled,57.54782222,FALSE,Below MAT
+Salmon River,Secesh River,2022,Extant,500,Modeled,35.53994968,TRUE,Below QET50
+Salmon River,Secesh River,2023,Extant,500,Modeled,49.51634805,TRUE,Below QET50
+Salmon River,Secesh River,2024,Extant,500,Modeled,51.23735387,FALSE,Below MAT
+Salmon River,Secesh River,2025,Extant,500,Prediction,45.59043628,TRUE,Below QET50
+Salmon River,Secesh River,2026,Extant,500,Prediction,40.56587086,TRUE,Below QET50
+Salmon River,Secesh River,2027,Extant,500,Prediction,36.09506758,TRUE,Below QET50
+Salmon River,Secesh River,2028,Extant,500,Prediction,32.11699579,TRUE,Below QET50
+Salmon River,Secesh River,2029,Extant,500,Prediction,28.57735109,TRUE,Below QET50
+Salmon River,South Fork Salmon River,2015,Extant,1000,Modeled,1091.786459,FALSE,Above MAT
+Salmon River,South Fork Salmon River,2016,Extant,1000,Modeled,763.6581615,FALSE,Below MAT
+Salmon River,South Fork Salmon River,2017,Extant,1000,Modeled,326.421983,FALSE,Below MAT
+Salmon River,South Fork Salmon River,2018,Extant,1000,Modeled,212.5258518,FALSE,Below MAT
+Salmon River,South Fork Salmon River,2019,Extant,1000,Modeled,210.3488661,FALSE,Below MAT
+Salmon River,South Fork Salmon River,2020,Extant,1000,Modeled,196.2890661,FALSE,Below MAT
+Salmon River,South Fork Salmon River,2021,Extant,1000,Modeled,338.0186227,FALSE,Below MAT
+Salmon River,South Fork Salmon River,2022,Extant,1000,Modeled,208.7509896,FALSE,Below MAT
+Salmon River,South Fork Salmon River,2023,Extant,1000,Modeled,290.8441557,FALSE,Below MAT
+Salmon River,South Fork Salmon River,2024,Extant,1000,Modeled,300.952827,FALSE,Below MAT
+Salmon River,South Fork Salmon River,2025,Extant,1000,Prediction,267.7845292,FALSE,Below MAT
+Salmon River,South Fork Salmon River,2026,Extant,1000,Prediction,238.2717411,FALSE,Below MAT
+Salmon River,South Fork Salmon River,2027,Extant,1000,Prediction,212.0115855,FALSE,Below MAT
+Salmon River,South Fork Salmon River,2028,Extant,1000,Prediction,188.6455866,FALSE,Below MAT
+Salmon River,South Fork Salmon River,2029,Extant,1000,Prediction,167.8547768,FALSE,Below MAT
