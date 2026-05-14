@@ -7,30 +7,35 @@
 #' @export
 #'
 #' @examples
-summarize_ModelFits <- function(mod_fit){
+summarize_ModelFits <- function(mod_fit, model_grid = NULL){
   
   require(MARSS)
+  require(dplyr)
+  require(tibble)
   
   mod_results <- tibble(
-    model_id = seq_along(mod_fit),
+    fit_index = seq_along(mod_fit),
     logLik = sapply(mod_fit, function(x) logLik(x)),
     AICc = sapply(mod_fit, function(x) x$AICc),
-    #AICb = sapply(mod_fit, function(x) MARSSaic(x, output = 'AICbp')),
     converged = sapply(mod_fit, function(x) x$convergence),
     n_samps = sapply(mod_fit, function(x) x$samp.size),
     n_params = sapply(mod_fit, function(x) x$num.params),
-    U = sapply(mod_fit, function(x) length(x$par$U)),
-    Q = sapply(mod_fit, function(x) length(x$par$Q)),
-    A = sapply(mod_fit, function(x) length(x$par$A)),
-    R = sapply(mod_fit, function(x) length(x$par$R))
-  ) %>%
-    mutate(deltaAIC = AICc - min(AICc)) %>%
-    arrange(AICc)
+    U_n = sapply(mod_fit, function(x) length(x$par$U)),
+    Q_n = sapply(mod_fit, function(x) length(x$par$Q)),
+    A_n = sapply(mod_fit, function(x) length(x$par$A)),
+    R_n = sapply(mod_fit, function(x) length(x$par$R))
+  )
   
-  # mod_results <- mod_results %>%
-  #   filter(!(model_id %in% c(3, 4, 5, 6))) %>%
-  #   mutate(model_id = 1:n()) %>%
-  #   arrange(AICc)# a single process only has a single variance (no model runs for diag and unequal or equalvarcov)
+  if (!is.null(model_grid)) {
+    mod_results <- bind_cols(
+      model_grid %>% select(model_id, Z, Q, R, x0, U, output_file),
+      mod_results
+    )
+  }
+  
+  mod_results <- mod_results %>%
+    mutate(deltaAIC = AICc - min(AICc, na.rm = TRUE)) %>%
+    arrange(AICc)
   
   return(mod_results)
 }

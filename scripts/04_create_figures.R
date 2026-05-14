@@ -8,21 +8,21 @@ source('./R/theme_rk.R')
 #theme_rk <- theme_rk2
 
 # set meta data for plots
-version <- '24'
-yr <- 2024
+version <- '25'
+yr <- 2025
 
 spp <- 'Chinook salmon'
 run <- 'Spring-summer'
-run <- 'Fall'
+#run <- 'Fall'
 
 #spp <- 'Steelhead'
 #run <- 'Summer'
 
 
 if(spp == 'Chinook salmon' && run == 'Fall'){
-  fig_path <- here::here('figures',gsub(' ','_',spp),gsub('-','_',run))
+  fig_path <- here::here('figures',,yr,gsub(' ','_',spp),gsub('-','_',run))
 } else {
-  fig_path <- here::here('figures',gsub(' ','_',spp))
+  fig_path <- here::here('figures',yr,gsub(' ','_',spp))
 }
 
 # set figure dimensions
@@ -43,14 +43,15 @@ mgt_targets <- readxl::read_excel('./data/input/mgt_targets.xlsx',
 
 #write_csv(mgt_targets, file = './data/mgt_targets.csv')
 
-origin_size <- readxl::read_excel(path = './data/input/LGDAbundance Live Link_3_17_25.xlsx',
+# Lower Granite Abundance Estimates.xlsx come from IDFG "https://idahogov.sharepoint.com/sites/IDFG-InSeasonRunDocuments/Data%20Share/Forms/AllItems.aspx?e=2%3ArLgzWn"
+origin_size <- readxl::read_excel(path = paste0('./data/input/',yr,'/Lower Granite Abundance Estimates.xlsx'),
                                   sheet = 'Origin_Size') %>%
   filter(SpeciesName == strsplit(spp, ' ')[[1]][1]) %>%
   group_by(SpawnYear, RearName, Size) %>%
   summarise(est = sum(Estimate)) %>%
   select(spawnyear = SpawnYear, origin = RearName, size = Size, est)
 
-master_dam <- readxl::read_excel(path = './data/input/LGDAbundance Live Link_3_17_25.xlsx',
+master_dam <- readxl::read_excel(path = paste0('./data/input/',yr,'/Lower Granite Abundance Estimates.xlsx'),
                                  sheet = 'Master_Dam_Counts')
 
 if(spp == 'Chinook salmon' && run == 'Spring-summer'){
@@ -72,42 +73,42 @@ master_dam <- master_dam %>%
   pivot_longer(-spawnyear, names_to = 'grp', values_to = 'est') %>%
   separate(grp, into = c('origin', 'size'), sep = '_')
 
-yrs <- unique(origin_size$spawnyear)
+yrs <- c(2024, 2025) #unique(origin_size$spawnyear)
 
 if(spp == 'Chinook salmon' && run == 'Spring-summer'){
 
-  # idfg_dat <- bind_rows(master_dam[!(master_dam$spawnyear %in% yrs),], origin_size) %>%
-  #   mutate(size = case_when(
-  #     size == 'Large' ~ 'Adult',
-  #     size == 'Small' ~ 'Jack',
-  #     TRUE ~ 'Adult')
-  #   )
-  
-  idfg_dat <- master_dam %>%
+  idfg_dat <- bind_rows(master_dam[!(master_dam$spawnyear %in% yrs),], origin_size[origin_size$spawnyear %in% yrs,]) %>%
     mutate(size = case_when(
       size == 'Large' ~ 'Adult',
       size == 'Small' ~ 'Jack',
       TRUE ~ 'Adult')
     )
+  
+  # idfg_dat <- master_dam %>%
+  #   mutate(size = case_when(
+  #     size == 'Large' ~ 'Adult',
+  #     size == 'Small' ~ 'Jack',
+  #     TRUE ~ 'Adult')
+  #   )
 
   idfg_dat <- idfg_dat %>%
     filter(size == 'Adult')
 
 } else if(spp == 'Steelhead') {
 
-  # idfg_dat <- bind_rows(master_dam[!(master_dam$spawnyear %in% yrs),], origin_size) %>%
-  #   mutate(size = case_when(
-  #     size == 'Large' ~ 'Adult',
-  #     size == 'Small' ~ 'Jack',
-  #     TRUE ~ 'Adult')
-  #   )
-  
-  idfg_dat <- master_dam %>%
+  idfg_dat <- bind_rows(master_dam[!(master_dam$spawnyear %in% yrs),], origin_size[origin_size$spawnyear %in% yrs,]) %>%
     mutate(size = case_when(
       size == 'Large' ~ 'Adult',
       size == 'Small' ~ 'Jack',
       TRUE ~ 'Adult')
     )
+  
+  # idfg_dat <- master_dam %>%
+  #   mutate(size = case_when(
+  #     size == 'Large' ~ 'Adult',
+  #     size == 'Small' ~ 'Jack',
+  #     TRUE ~ 'Adult')
+  #   )
 
   idfg_dat <- idfg_dat %>%
     group_by(spawnyear, origin) %>%
@@ -199,7 +200,6 @@ t2 <- idfg_dat %>%
 
 # hatchery fraction
 phos_line <- idfg_dat %>%
-  filter(spawnyear != 2024) %>%
   group_by(spawnyear) %>%
   mutate(total = sum(est),
          p = est/total) %>%
@@ -339,14 +339,14 @@ ggsave(paste0(fig_path,'/',gsub(' ','_',spp),'_',gsub('-','_',run),'_lgr_',yr,'.
 # quick data summary
 
 idfg_dat %>%
-  filter(between(spawnyear,2020,2024)) %>%
+  filter(between(spawnyear,2020,yr)) %>%
   pivot_wider(names_from = origin, values_from = est)
   #group_by(origin) %>%
   #summarise(mu = mean(est))
 
 
 # load QET data----
-load(paste0('./data/output/',gsub(' ', '_', spp), '_best_fit_',yr,'.rda'))
+load(paste0('./data/output/',yr,'/',gsub(' ', '_', spp), '_best_fit_',yr,'.rda'))
 
 # mpg_dat <- best_mod_fits %>%
 #   select(mpg, pop, TRT_POPID) %>%
@@ -411,10 +411,11 @@ best_mod_fits %>%
 ggsave(paste0(fig_path,'/',gsub(' ','_',spp) ,'_centered_',yr,'.png'), width = w, height = h, dpi = dp)
 
 # states
-drift_df <- tibble(.rownames = rownames(fitCI$par$U),
+
+drift_df <- tibble(.rownames = rownames(fitCI$par$x0),
          x0 = fitCI$par$x0[,],
-         u = fitCI$par$U[,1]) %>%
-  mutate(drift = exp(u),
+         U = fitCI$par$U[,1]) %>%
+  mutate(drift = exp(U),
          growth = ifelse(drift>=1, (drift-1)*100, (1-drift)*-100))
 
 pop_cnt <- pop_names %>%
@@ -422,8 +423,7 @@ pop_cnt <- pop_names %>%
   count() %>%
   mutate(strip_labels = paste0(mpg, ' (',n,' populations)'))
 
-
-if(spp == 'Steelhead'){
+if(length(rownames(fitCI$par$x0))==1){
   drift_df$.rownames = 'Snake Basin'
   
   pop_cnt <- pop_names %>%
@@ -437,14 +437,38 @@ if(spp == 'Steelhead'){
 
 drift_df <- left_join(drift_df, pop_cnt, by = c('.rownames' = 'mpg'))
 
+drift_df <- xtT %>%
+  group_by(.rownames) %>%
+  summarise(
+    t_bar = mean(t, na.rm = TRUE),
+    x_bar = mean(.estimate, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  left_join(drift_df, by = ".rownames") %>%
+  mutate(intercept = x_bar - U * t_bar)
+
 xtT %>%
   left_join(pop_cnt, by = c('.rownames' = 'mpg')) %>%
  ggplot(aes(x = t)) +
   geom_ribbon(aes(ymin = .conf.low, ymax = .conf.up), alpha = .25) +
   geom_line(aes(y = .estimate), linewidth = 1) +
-  geom_abline(data = drift_df, aes(intercept = x0, slope = u), size = 1, linetype = 1, colour = 'blue') +
-  geom_text(data = drift_df, aes(x = 0, y = -Inf, label = paste0("x0 = ", round(x0,2))),hjust = 0, vjust = -1.5) +
-  geom_text(data = drift_df, aes(x = 0, y = -Inf, label = paste0("u = ", round(u,2))), hjust = 0, vjust = -.5) +
+  #geom_smooth(aes(y = .estimate), method = 'lm', colour = 'firebrick', se = FALSE) +
+  #geom_abline(data = drift_df, aes(intercept = x0, slope = U), size = 1, linetype = 1, colour = 'blue') +
+  geom_abline(
+    data = drift_df,
+    aes(intercept = intercept, slope = U),
+    linewidth = 1,
+    linetype = 1,
+    colour = "blue"
+  ) +
+  #geom_text(data = drift_df, aes(x = 0, y = -Inf, label = paste0("x0 = ", round(x0,2))),hjust = 0, vjust = -1.5) +
+  geom_text(data = drift_df, aes(x = 0, y = -Inf,
+                                 label = paste0(
+                                   "MARSS drift = ",
+                                   round(100 * (exp(U) - 1), 1),
+                                   "%/year")
+                                 ),
+            hjust = 0, vjust = -.5) +
   scale_colour_brewer(palette = 'Dark2') +
   #scale_x_continuous(breaks = scales::pretty_breaks()) +
   facet_wrap(~strip_labels) +
@@ -457,16 +481,61 @@ xtT %>%
 
 ggsave(paste0(fig_path,'/',gsub(' ','_',spp) ,'_states_',yr,'.png'), width = w, height = h, dpi = dp)
 
+# convert to abundance (not log space)
+drift_line_df <- drift_df %>%
+  tidyr::crossing(t = sort(unique(xtT$t))) %>%
+  mutate(
+    abundance_drift = exp(intercept + U * t)
+  )
+
+xtT %>%
+  left_join(pop_cnt, by = c(".rownames" = "mpg")) %>%
+  mutate(
+    abundance_est = exp(.estimate),
+    abundance_lwr = exp(.conf.low),
+    abundance_upr = exp(.conf.up)
+  ) %>%
+  ggplot(aes(x = t)) +
+  geom_ribbon(aes(ymin = abundance_lwr, ymax = abundance_upr), alpha = 0.25) +
+  geom_line(aes(y = abundance_est), linewidth = 1) +
+  geom_line(
+    data = drift_line_df,
+    aes(x = t, y = abundance_drift),
+    linewidth = 1,
+    linetype = 2,
+    colour = "green"
+  ) +
+  geom_text(
+    data = drift_df,
+    aes(
+      x = 0,
+      y = -Inf,
+      label = paste0(
+        "MARSS drift = ",
+        round(100 * (exp(U) - 1), 1),
+        "%/year"
+      )
+    ),
+    hjust = 0,
+    vjust = -0.5
+  ) +
+  facet_wrap(~strip_labels) +
+  theme_rk() +
+  labs(
+    x = "Time",
+    y = "Abundance"
+  )
+
 # plot spawner abundance
 
 best_mod_fits %>%
-  filter(.,
-         if(spp == 'Chinook salmon'){
-           spawningyear >= 1980
-         } else {
-           spawningyear >= 2010
-         }
-  ) %>%
+#   filter(.,
+#          if(spp == 'Chinook salmon'){
+#            spawningyear >= 1980
+#          } else {
+#            spawningyear >= 2010
+#          }
+#   ) %>%
   #filter(!is.na(TRT_POPID)) %>%
   #filter(pop == 'South Fork Salmon River') %>%
   ggplot(aes(x = spawningyear, group = pop_series, colour = method)) +
@@ -490,13 +559,13 @@ ggsave(paste0(fig_path,'/',gsub(' ','_',spp) ,'_observations_',yr,'.png'), width
 
 
 mpg_sa <- best_mod_fits %>%
-  filter(.,
-         if(spp == 'Chinook salmon'){
-           spawningyear >= 1980
-         } else {
-           spawningyear >= 2010
-         }
-  ) %>%
+  # filter(.,
+  #        if(spp == 'Chinook salmon'){
+  #          spawningyear >= 1980
+  #        } else {
+  #          spawningyear >= 2010
+  #        }
+  # ) %>%
   group_by(pop) %>%
   filter(spawningyear >= min(spawningyear[!is.na(logSA)], na.rm = TRUE)) %>%
   mutate(mpg = gsub('/','-',mpg)) %>%
@@ -529,13 +598,13 @@ map2(mpg_sa$fig, mpg_sa$mpg,
 
 
 best_mod_fits %>%
-  filter(.,
-         if(spp == 'Chinook salmon'){
-            spawningyear >= 1980
-           } else {
-             spawningyear >= 2010
-             }
-         ) %>%
+  # filter(.,
+  #        if(spp == 'Chinook salmon'){
+  #           spawningyear >= 1980
+  #          } else {
+  #            spawningyear >= 2010
+  #            }
+  #        ) %>%
   ggplot(aes(x = spawningyear, group = pop_series, colour = method)) +
   geom_point(aes(y = resids, fill = method), size = 2, shape = 21, colour = 'black') +
   geom_hline(yintercept = 0) +
@@ -558,15 +627,16 @@ ggsave(paste0(fig_path,'/',gsub(' ','_',spp) ,'_residuals_',yr,'.png'), width = 
 #  Population targets
 
 mod_dat <- best_mod_fits %>%
-  arrange(pop, spawningyear, source) %>%
+  arrange(pop, spawningyear, method) %>%
   group_by(pop, spawningyear) %>%
   slice(1) %>%
   ungroup() %>%
   mutate(exp_fit = exp(.fitted))
 
 if(spp == 'Chinook salmon'){
-  target_dat <- mod_dat %>%  
-    filter(spawningyear >= 1980)
+  target_dat <- mod_dat
+  # %>%  
+  #   filter(spawningyear >= 1980)
   
   mgt_targets <- readxl::read_excel('./data/input/mgt_targets.xlsx',
                                     sheet = 'pop_targets') %>%
@@ -579,8 +649,8 @@ if(spp == 'Chinook salmon'){
       CBP_goals == 'Critical' ~ 'Quasi-Extinction (50 spawners)')) %>%
     mutate(CBP_goals = factor(CBP_goals, levels = c('Healthy and Harvestable', 'Minimum Viable Abundance', 'Quasi-Extinction (50 spawners)')))
 } else {
-  target_dat <- mod_dat %>%  
-    filter(spawningyear >= 2010)
+  target_dat <- mod_dat #%>%  
+    #filter(spawningyear >= 2010)
   
   mgt_targets <- readxl::read_excel('./data/input/mgt_targets.xlsx',
                                     sheet = 'pop_targets') %>%
@@ -616,27 +686,27 @@ ggplot() +
 ggsave(paste0(fig_path,'/',gsub(' ','_',spp) ,'_pop_thresholds_',yr,'.png'), width = w, height = h, dpi = dp)
 
 
-id = 'Tucannon River'
-
-ggplot() +
-  geom_line(data = target_dat %>% filter(pop == id), aes(x = spawningyear, y = exp_fit)) +
-  geom_point(data = target_dat %>% filter(pop == id), aes(x = spawningyear, y = exp_fit), fill = 'red', size = 3, colour = 'black') +
-  geom_hline(data = mgt_targets %>% filter(pop == id),
-             aes(yintercept = target, colour = CBP_goals),
-             size = 1) +
-  scale_x_continuous(breaks = scales::pretty_breaks()) +
-  scale_y_continuous(labels = scales::comma) +
-  scale_color_manual(values = c('darkgreen', 'navy', 'firebrick')) +
-  #guides(colour = guide_legend(ncol = 1)) +
-  facet_wrap(~pop, scales = 'free_y', drop = TRUE) +
-  theme_rk() +
-  theme(legend.position = c(.95,.75),
-        legend.justification = c(.9,0)) +
-  labs(x = 'Spawn Year',
-       y = 'Abundance',
-       colour = 'Abundance Evaluation Thresholds')
-
-ggsave(paste0(fig_path,'/',gsub(' ','_',spp) ,gsub(' ','_',id),'_pop_thresholds_',yr,'.png'), width = w, height = h, dpi = dp)
+# id = 'Tucannon River'
+# 
+# ggplot() +
+#   geom_line(data = target_dat %>% filter(pop == id), aes(x = spawningyear, y = exp_fit)) +
+#   geom_point(data = target_dat %>% filter(pop == id), aes(x = spawningyear, y = exp_fit), fill = 'red', size = 3, colour = 'black') +
+#   geom_hline(data = mgt_targets %>% filter(pop == id),
+#              aes(yintercept = target, colour = CBP_goals),
+#              size = 1) +
+#   scale_x_continuous(breaks = scales::pretty_breaks()) +
+#   scale_y_continuous(labels = scales::comma) +
+#   scale_color_manual(values = c('darkgreen', 'navy', 'firebrick')) +
+#   #guides(colour = guide_legend(ncol = 1)) +
+#   facet_wrap(~pop, scales = 'free_y', drop = TRUE) +
+#   theme_rk() +
+#   theme(legend.position = c(.95,.75),
+#         legend.justification = c(.9,0)) +
+#   labs(x = 'Spawn Year',
+#        y = 'Abundance',
+#        colour = 'Abundance Evaluation Thresholds')
+# 
+# ggsave(paste0(fig_path,'/',gsub(' ','_',spp) ,gsub(' ','_',id),'_pop_thresholds_',yr,'.png'), width = w, height = h, dpi = dp)
 
 
 # QET numbers
@@ -758,10 +828,10 @@ sa_dat %>%
 
 if(length(unique(xtT$.rownames))>1){
   sa_mod1 <-lm(.estimate ~ spawningyear + .rownames + .rownames:spawningyear, data = sa_dat)
-  #summary(spsm_mod1)
+  #summary(sa_mod1)
   sa_mod2 <- lm(.estimate ~ spawningyear + .rownames, data = sa_dat)
-  #summary(spsm_mod2)
-  anova(sa_mod1, sa_mod2) # slopes are not different!
+  #summary(sa_mod2)
+  #anova(sa_mod1, sa_mod2) # slopes are not different!
   
   grp_slope <- broom::tidy(sa_mod2) %>%
     filter(term == 'spawningyear')
@@ -939,7 +1009,7 @@ nqet <- nrow(pop_qet[pop_qet$QET_TRUE >= qet_num,])
 qet_percent <- nqet/npops
 
 
-write_csv(new_predicts, file = paste0('./data/output/',gsub(' ','_',spp) ,'_predictions_',yr,'.csv'))
+#write_csv(new_predicts, file = paste0('./data/output/',gsub(' ','_',spp) ,'_predictions_',yr,'.csv'))
 
 new_predicts %>%
   ggplot(aes(x = as.integer(spawningyear), y = ests, group = pop)) +
@@ -1112,7 +1182,7 @@ ggsave(paste0(fig_path,'/',gsub(' ','_',spp) ,'_heatmap_',yr,'.png'), plot = fig
 
 
 # Save data
-save(dat, mgt_targets, mod_dat, new_dat, file = paste0('./data/output/',gsub(' ','_',spp), '_summary_data_',yr,'.rda'))
+save(dat, mgt_targets, mod_dat, new_dat, file = paste0('./data/output/',yr,'/',gsub(' ','_',spp), '_summary_data_',yr,'.rda'))
 
 # Extract a single pop
 
@@ -1153,7 +1223,7 @@ single_pop <- new_predicts %>%
 
 single_pop
 
-ggsave(paste0(fig_path,'/',gsub(' ','_',spp) ,gsub(' ','_',id), '_predictions_',yr,'.png'), plot = single_pop, width = w, height = h, dpi = dp)
+#ggsave(paste0(fig_path,'/',gsub(' ','_',spp) ,gsub(' ','_',id), '_predictions_',yr,'.png'), plot = single_pop, width = w, height = h, dpi = dp)
 
 
 ###
@@ -1189,6 +1259,7 @@ if(spp == 'Chinook salmon'){
       TRT_POPID == 'GRLOS' ~ 'Wallowa/Lostine Rivers',
       TRT_POPID == 'SFSMA' ~ 'South Fork Salmon River',
       TRT_POPID == 'CRPOT' ~ 'Potlatch River',
+      TRT_POPID == 'SCUMA' ~ 'South Fork Clearwater River Upper Mainstem',
       TRUE ~ pop
     )) %>%
     mutate(pop = str_to_title(pop)) %>%
@@ -1302,20 +1373,14 @@ map_qet <- left_join(new_predicts,
   group_by(pop) %>%
   mutate(QET = case_when(
     pop %in% current_pops ~ 'Currently Below QET50',
-    any(ests[spawningyear >= yr] >= `Healthy and Harvestable`) ~ 'Above Healthy and Harvestable',
-    any(ests[spawningyear >= yr] >= `Minimum Viable Abundance`) ~ 'Above Minimum Abundance',
-    ests[spawningyear == yr] <= `Quasi-Extinction (50 spawners)` ~ paste0("Below 50 Spawners in ", yr),
+    any(ests[spawningyear == yr] >= `Healthy and Harvestable`) ~ 'Above Healthy and Harvestable',
+    any(ests[spawningyear == yr] >= `Minimum Viable Abundance`) ~ 'Above Minimum Abundance',
+    any(ests[spawningyear == yr] <= `Quasi-Extinction (50 spawners)`) ~ paste0("Below 50 Spawners in ", yr),
     ests[spawningyear == yr + 5] > `Quasi-Extinction (50 spawners)` ~ paste0("Predicted Above 50 in ", yr+5),
     ests[spawningyear == yr + 5] <= `Quasi-Extinction (50 spawners)` ~ paste0("Predicted Below 50 by ", yr+5)
   )) %>%
   select(pop, QET) %>%
   distinct()
-
-
-# estimate >= `Healthy and Harvestable` ~ "Healthy and Harvestable",
-# estimate >= `Minimum Viable Abundance` ~ "Above Minimum Viable Abundance (MAT)",
-# estimate >= `Quasi-Extinction (50 spawners)` ~ "Critical Abundance (Below MAT)",
-# estimate < `Quasi-Extinction (50 spawners)` ~ "Quasi-Extinction (<50 spawners)",
 
 map_qet %>%
   ungroup() %>%
@@ -1333,7 +1398,8 @@ qet_levels <- c('Above Healthy and Harvestable',
                 'Not Modeled',
                 'Extinct')
 
-map_dat <- left_join(trt_pops, map_qet) %>%
+map_dat <- trt_pops %>%
+  left_join(map_qet) %>%
   mutate(QET = ifelse(is.na(QET), 'Not Modeled', QET)) %>%
   arrange(QET) %>%
   mutate(QET = factor(QET, levels = qet_levels))

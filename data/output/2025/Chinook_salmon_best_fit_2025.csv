@@ -1,0 +1,781 @@
+species,mpg,pop,method,spawningyear,abundance,modeled
+Chinook salmon,Dry Clearwater,South Fork Clearwater River Upper Mainstem,2,2012,1120,892
+Chinook salmon,Dry Clearwater,South Fork Clearwater River Upper Mainstem,2,2013,609,645
+Chinook salmon,Dry Clearwater,South Fork Clearwater River Upper Mainstem,2,2014,768,859
+Chinook salmon,Dry Clearwater,South Fork Clearwater River Upper Mainstem,2,2015,656,538
+Chinook salmon,Dry Clearwater,South Fork Clearwater River Upper Mainstem,2,2016,368,406
+Chinook salmon,Dry Clearwater,South Fork Clearwater River Upper Mainstem,2,2017,75,110
+Chinook salmon,Dry Clearwater,South Fork Clearwater River Upper Mainstem,2,2018,144,155
+Chinook salmon,Dry Clearwater,South Fork Clearwater River Upper Mainstem,2,2019,148,113
+Chinook salmon,Dry Clearwater,South Fork Clearwater River Upper Mainstem,2,2021,152,175
+Chinook salmon,Dry Clearwater,South Fork Clearwater River Upper Mainstem,2,2022,514,400
+Chinook salmon,Dry Clearwater,South Fork Clearwater River Upper Mainstem,2,2023,178,174
+Chinook salmon,Dry Clearwater,South Fork Clearwater River Upper Mainstem,2,2024,158,201
+Chinook salmon,Dry Clearwater,South Fork Clearwater River Upper Mainstem,2,2025,270,248
+Chinook salmon,Grande Ronde / Imnaha,Big Sheep Creek,2,2011,340,120
+Chinook salmon,Grande Ronde / Imnaha,Big Sheep Creek,2,2012,121,95
+Chinook salmon,Grande Ronde / Imnaha,Big Sheep Creek,2,2013,83,70
+Chinook salmon,Grande Ronde / Imnaha,Big Sheep Creek,2,2014,113,115
+Chinook salmon,Grande Ronde / Imnaha,Big Sheep Creek,2,2015,70,79
+Chinook salmon,Grande Ronde / Imnaha,Big Sheep Creek,2,2016,63,82
+Chinook salmon,Grande Ronde / Imnaha,Big Sheep Creek,2,2017,34,27
+Chinook salmon,Grande Ronde / Imnaha,Big Sheep Creek,2,2018,18,29
+Chinook salmon,Grande Ronde / Imnaha,Big Sheep Creek,2,2019,9,21
+Chinook salmon,Grande Ronde / Imnaha,Big Sheep Creek,2,2021,49,30
+Chinook salmon,Grande Ronde / Imnaha,Big Sheep Creek,2,2022,30,54
+Chinook salmon,Grande Ronde / Imnaha,Big Sheep Creek,2,2023,25,30
+Chinook salmon,Grande Ronde / Imnaha,Big Sheep Creek,2,2024,42,45
+Chinook salmon,Grande Ronde / Imnaha,Catherine Creek,1,2011,615,350
+Chinook salmon,Grande Ronde / Imnaha,Catherine Creek,1,2012,328,276
+Chinook salmon,Grande Ronde / Imnaha,Catherine Creek,1,2013,275,203
+Chinook salmon,Grande Ronde / Imnaha,Catherine Creek,1,2014,570,333
+Chinook salmon,Grande Ronde / Imnaha,Catherine Creek,1,2015,256,230
+Chinook salmon,Grande Ronde / Imnaha,Catherine Creek,1,2016,190,239
+Chinook salmon,Grande Ronde / Imnaha,Catherine Creek,1,2017,39,78
+Chinook salmon,Grande Ronde / Imnaha,Catherine Creek,1,2018,31,83
+Chinook salmon,Grande Ronde / Imnaha,Catherine Creek,1,2019,55,60
+Chinook salmon,Grande Ronde / Imnaha,Catherine Creek,1,2020,160,115
+Chinook salmon,Grande Ronde / Imnaha,Catherine Creek,1,2021,111,88
+Chinook salmon,Grande Ronde / Imnaha,Catherine Creek,1,2022,139,157
+Chinook salmon,Grande Ronde / Imnaha,Catherine Creek,1,2023,59,88
+Chinook salmon,Grande Ronde / Imnaha,Catherine Creek,1,2024,145,131
+Chinook salmon,Grande Ronde / Imnaha,Catherine Creek,1,2025,131,128
+Chinook salmon,Grande Ronde / Imnaha,Catherine Creek,2,2011,194,634
+Chinook salmon,Grande Ronde / Imnaha,Catherine Creek,2,2012,625,500
+Chinook salmon,Grande Ronde / Imnaha,Catherine Creek,2,2013,623,368
+Chinook salmon,Grande Ronde / Imnaha,Catherine Creek,2,2014,898,604
+Chinook salmon,Grande Ronde / Imnaha,Catherine Creek,2,2015,521,417
+Chinook salmon,Grande Ronde / Imnaha,Catherine Creek,2,2016,404,434
+Chinook salmon,Grande Ronde / Imnaha,Catherine Creek,2,2017,113,142
+Chinook salmon,Grande Ronde / Imnaha,Catherine Creek,2,2018,107,150
+Chinook salmon,Grande Ronde / Imnaha,Catherine Creek,2,2019,158,109
+Chinook salmon,Grande Ronde / Imnaha,Catherine Creek,2,2021,173,160
+Chinook salmon,Grande Ronde / Imnaha,Catherine Creek,2,2022,230,285
+Chinook salmon,Grande Ronde / Imnaha,Catherine Creek,2,2023,133,159
+Chinook salmon,Grande Ronde / Imnaha,Catherine Creek,2,2024,287,238
+Chinook salmon,Grande Ronde / Imnaha,Catherine Creek,2,2025,269,232
+Chinook salmon,Grande Ronde / Imnaha,Grande Ronde River Upper Mainstem,1,2011,131,113
+Chinook salmon,Grande Ronde / Imnaha,Grande Ronde River Upper Mainstem,1,2012,91,89
+Chinook salmon,Grande Ronde / Imnaha,Grande Ronde River Upper Mainstem,1,2013,129,66
+Chinook salmon,Grande Ronde / Imnaha,Grande Ronde River Upper Mainstem,1,2014,545,108
+Chinook salmon,Grande Ronde / Imnaha,Grande Ronde River Upper Mainstem,1,2015,218,74
+Chinook salmon,Grande Ronde / Imnaha,Grande Ronde River Upper Mainstem,1,2016,43,77
+Chinook salmon,Grande Ronde / Imnaha,Grande Ronde River Upper Mainstem,1,2017,19,25
+Chinook salmon,Grande Ronde / Imnaha,Grande Ronde River Upper Mainstem,1,2018,39,27
+Chinook salmon,Grande Ronde / Imnaha,Grande Ronde River Upper Mainstem,1,2019,7,19
+Chinook salmon,Grande Ronde / Imnaha,Grande Ronde River Upper Mainstem,1,2020,57,37
+Chinook salmon,Grande Ronde / Imnaha,Grande Ronde River Upper Mainstem,1,2021,24,29
+Chinook salmon,Grande Ronde / Imnaha,Grande Ronde River Upper Mainstem,1,2022,98,51
+Chinook salmon,Grande Ronde / Imnaha,Grande Ronde River Upper Mainstem,1,2023,24,28
+Chinook salmon,Grande Ronde / Imnaha,Grande Ronde River Upper Mainstem,1,2024,24,42
+Chinook salmon,Grande Ronde / Imnaha,Grande Ronde River Upper Mainstem,1,2025,2,41
+Chinook salmon,Grande Ronde / Imnaha,Grande Ronde River Upper Mainstem,2,2012,151,182
+Chinook salmon,Grande Ronde / Imnaha,Grande Ronde River Upper Mainstem,2,2013,71,134
+Chinook salmon,Grande Ronde / Imnaha,Grande Ronde River Upper Mainstem,2,2015,315,152
+Chinook salmon,Grande Ronde / Imnaha,Grande Ronde River Upper Mainstem,2,2016,138,158
+Chinook salmon,Grande Ronde / Imnaha,Grande Ronde River Upper Mainstem,2,2017,34,52
+Chinook salmon,Grande Ronde / Imnaha,Grande Ronde River Upper Mainstem,2,2018,160,55
+Chinook salmon,Grande Ronde / Imnaha,Grande Ronde River Upper Mainstem,2,2019,17,40
+Chinook salmon,Grande Ronde / Imnaha,Grande Ronde River Upper Mainstem,2,2021,51,58
+Chinook salmon,Grande Ronde / Imnaha,Grande Ronde River Upper Mainstem,2,2022,150,104
+Chinook salmon,Grande Ronde / Imnaha,Grande Ronde River Upper Mainstem,2,2024,103,87
+Chinook salmon,Grande Ronde / Imnaha,Grande Ronde River Upper Mainstem,2,2025,72,84
+Chinook salmon,Grande Ronde / Imnaha,Imnaha River Mainstem,1,2011,893,847
+Chinook salmon,Grande Ronde / Imnaha,Imnaha River Mainstem,1,2012,674,668
+Chinook salmon,Grande Ronde / Imnaha,Imnaha River Mainstem,1,2013,503,492
+Chinook salmon,Grande Ronde / Imnaha,Imnaha River Mainstem,1,2014,719,807
+Chinook salmon,Grande Ronde / Imnaha,Imnaha River Mainstem,1,2015,540,558
+Chinook salmon,Grande Ronde / Imnaha,Imnaha River Mainstem,1,2016,627,580
+Chinook salmon,Grande Ronde / Imnaha,Imnaha River Mainstem,1,2017,247,190
+Chinook salmon,Grande Ronde / Imnaha,Imnaha River Mainstem,1,2018,183,201
+Chinook salmon,Grande Ronde / Imnaha,Imnaha River Mainstem,1,2019,151,145
+Chinook salmon,Grande Ronde / Imnaha,Imnaha River Mainstem,1,2020,261,278
+Chinook salmon,Grande Ronde / Imnaha,Imnaha River Mainstem,1,2021,190,214
+Chinook salmon,Grande Ronde / Imnaha,Imnaha River Mainstem,1,2022,299,381
+Chinook salmon,Grande Ronde / Imnaha,Imnaha River Mainstem,1,2023,232,212
+Chinook salmon,Grande Ronde / Imnaha,Imnaha River Mainstem,1,2024,334,318
+Chinook salmon,Grande Ronde / Imnaha,Imnaha River Mainstem,1,2025,314,310
+Chinook salmon,Grande Ronde / Imnaha,Imnaha River Mainstem,2,2011,1731,1146
+Chinook salmon,Grande Ronde / Imnaha,Imnaha River Mainstem,2,2012,859,905
+Chinook salmon,Grande Ronde / Imnaha,Imnaha River Mainstem,2,2013,593,665
+Chinook salmon,Grande Ronde / Imnaha,Imnaha River Mainstem,2,2014,1113,1092
+Chinook salmon,Grande Ronde / Imnaha,Imnaha River Mainstem,2,2015,621,755
+Chinook salmon,Grande Ronde / Imnaha,Imnaha River Mainstem,2,2016,762,785
+Chinook salmon,Grande Ronde / Imnaha,Imnaha River Mainstem,2,2017,308,257
+Chinook salmon,Grande Ronde / Imnaha,Imnaha River Mainstem,2,2018,219,272
+Chinook salmon,Grande Ronde / Imnaha,Imnaha River Mainstem,2,2019,176,197
+Chinook salmon,Grande Ronde / Imnaha,Imnaha River Mainstem,2,2021,341,289
+Chinook salmon,Grande Ronde / Imnaha,Imnaha River Mainstem,2,2022,483,516
+Chinook salmon,Grande Ronde / Imnaha,Imnaha River Mainstem,2,2023,234,287
+Chinook salmon,Grande Ronde / Imnaha,Imnaha River Mainstem,2,2024,433,430
+Chinook salmon,Grande Ronde / Imnaha,Imnaha River Mainstem,2,2025,498,419
+Chinook salmon,Grande Ronde / Imnaha,Lookingglass Creek,2,2011,60,274
+Chinook salmon,Grande Ronde / Imnaha,Lookingglass Creek,2,2012,204,216
+Chinook salmon,Grande Ronde / Imnaha,Lookingglass Creek,2,2013,227,159
+Chinook salmon,Grande Ronde / Imnaha,Lookingglass Creek,2,2014,260,261
+Chinook salmon,Grande Ronde / Imnaha,Lookingglass Creek,2,2015,292,180
+Chinook salmon,Grande Ronde / Imnaha,Lookingglass Creek,2,2016,354,187
+Chinook salmon,Grande Ronde / Imnaha,Lookingglass Creek,2,2017,44,61
+Chinook salmon,Grande Ronde / Imnaha,Lookingglass Creek,2,2018,119,65
+Chinook salmon,Grande Ronde / Imnaha,Lookingglass Creek,2,2019,61,47
+Chinook salmon,Grande Ronde / Imnaha,Lookingglass Creek,2,2021,42,69
+Chinook salmon,Grande Ronde / Imnaha,Lookingglass Creek,2,2022,100,123
+Chinook salmon,Grande Ronde / Imnaha,Lookingglass Creek,2,2023,59,69
+Chinook salmon,Grande Ronde / Imnaha,Lookingglass Creek,2,2024,137,103
+Chinook salmon,Grande Ronde / Imnaha,Minam River,1,2011,697,938
+Chinook salmon,Grande Ronde / Imnaha,Minam River,1,2012,584,740
+Chinook salmon,Grande Ronde / Imnaha,Minam River,1,2013,409,544
+Chinook salmon,Grande Ronde / Imnaha,Minam River,1,2014,1037,893
+Chinook salmon,Grande Ronde / Imnaha,Minam River,1,2015,555,617
+Chinook salmon,Grande Ronde / Imnaha,Minam River,1,2016,614,642
+Chinook salmon,Grande Ronde / Imnaha,Minam River,1,2017,187,210
+Chinook salmon,Grande Ronde / Imnaha,Minam River,1,2018,279,222
+Chinook salmon,Grande Ronde / Imnaha,Minam River,1,2019,271,161
+Chinook salmon,Grande Ronde / Imnaha,Minam River,1,2020,490,308
+Chinook salmon,Grande Ronde / Imnaha,Minam River,1,2021,287,237
+Chinook salmon,Grande Ronde / Imnaha,Minam River,1,2022,381,422
+Chinook salmon,Grande Ronde / Imnaha,Minam River,1,2023,224,235
+Chinook salmon,Grande Ronde / Imnaha,Minam River,1,2024,390,352
+Chinook salmon,Grande Ronde / Imnaha,Minam River,1,2025,216,343
+Chinook salmon,Grande Ronde / Imnaha,Minam River,2,2021,311,282
+Chinook salmon,Grande Ronde / Imnaha,Minam River,2,2022,427,503
+Chinook salmon,Grande Ronde / Imnaha,Minam River,2,2023,281,280
+Chinook salmon,Grande Ronde / Imnaha,Minam River,2,2024,534,419
+Chinook salmon,Grande Ronde / Imnaha,Minam River,2,2025,336,408
+Chinook salmon,Grande Ronde / Imnaha,Wallowa/Lostine Rivers,1,2011,1188,1176
+Chinook salmon,Grande Ronde / Imnaha,Wallowa/Lostine Rivers,1,2012,1153,928
+Chinook salmon,Grande Ronde / Imnaha,Wallowa/Lostine Rivers,1,2013,563,682
+Chinook salmon,Grande Ronde / Imnaha,Wallowa/Lostine Rivers,1,2014,1283,1120
+Chinook salmon,Grande Ronde / Imnaha,Wallowa/Lostine Rivers,1,2015,557,774
+Chinook salmon,Grande Ronde / Imnaha,Wallowa/Lostine Rivers,1,2016,750,805
+Chinook salmon,Grande Ronde / Imnaha,Wallowa/Lostine Rivers,1,2017,189,263
+Chinook salmon,Grande Ronde / Imnaha,Wallowa/Lostine Rivers,1,2018,216,279
+Chinook salmon,Grande Ronde / Imnaha,Wallowa/Lostine Rivers,1,2019,180,202
+Chinook salmon,Grande Ronde / Imnaha,Wallowa/Lostine Rivers,1,2020,387,386
+Chinook salmon,Grande Ronde / Imnaha,Wallowa/Lostine Rivers,1,2021,222,297
+Chinook salmon,Grande Ronde / Imnaha,Wallowa/Lostine Rivers,1,2022,1441,529
+Chinook salmon,Grande Ronde / Imnaha,Wallowa/Lostine Rivers,1,2023,425,295
+Chinook salmon,Grande Ronde / Imnaha,Wallowa/Lostine Rivers,1,2024,366,441
+Chinook salmon,Grande Ronde / Imnaha,Wenaha River,1,2011,592,866
+Chinook salmon,Grande Ronde / Imnaha,Wenaha River,1,2012,563,683
+Chinook salmon,Grande Ronde / Imnaha,Wenaha River,1,2013,282,502
+Chinook salmon,Grande Ronde / Imnaha,Wenaha River,1,2014,606,825
+Chinook salmon,Grande Ronde / Imnaha,Wenaha River,1,2015,610,570
+Chinook salmon,Grande Ronde / Imnaha,Wenaha River,1,2016,745,592
+Chinook salmon,Grande Ronde / Imnaha,Wenaha River,1,2017,186,194
+Chinook salmon,Grande Ronde / Imnaha,Wenaha River,1,2018,286,205
+Chinook salmon,Grande Ronde / Imnaha,Wenaha River,1,2019,220,148
+Chinook salmon,Grande Ronde / Imnaha,Wenaha River,1,2020,188,284
+Chinook salmon,Grande Ronde / Imnaha,Wenaha River,1,2021,214,219
+Chinook salmon,Grande Ronde / Imnaha,Wenaha River,1,2022,650,390
+Chinook salmon,Grande Ronde / Imnaha,Wenaha River,1,2023,275,217
+Chinook salmon,Grande Ronde / Imnaha,Wenaha River,1,2024,285,325
+Chinook salmon,Grande Ronde / Imnaha,Wenaha River,1,2025,406,317
+Chinook salmon,Lower Snake,Asotin Creek,1,2011,35,11
+Chinook salmon,Lower Snake,Asotin Creek,1,2012,18,8
+Chinook salmon,Lower Snake,Asotin Creek,1,2013,4,6
+Chinook salmon,Lower Snake,Asotin Creek,1,2014,2,7
+Chinook salmon,Lower Snake,Asotin Creek,1,2015,0,4
+Chinook salmon,Lower Snake,Asotin Creek,1,2016,4,3
+Chinook salmon,Lower Snake,Asotin Creek,2,2011,142,65
+Chinook salmon,Lower Snake,Asotin Creek,2,2012,78,51
+Chinook salmon,Lower Snake,Asotin Creek,2,2013,21,34
+Chinook salmon,Lower Snake,Asotin Creek,2,2014,66,45
+Chinook salmon,Lower Snake,Asotin Creek,2,2015,53,26
+Chinook salmon,Lower Snake,Asotin Creek,2,2016,31,21
+Chinook salmon,Lower Snake,Asotin Creek,2,2017,5,5
+Chinook salmon,Lower Snake,Asotin Creek,2,2018,0,5
+Chinook salmon,Lower Snake,Asotin Creek,2,2019,0,3
+Chinook salmon,Lower Snake,Asotin Creek,2,2021,0,4
+Chinook salmon,Lower Snake,Asotin Creek,2,2022,7,9
+Chinook salmon,Lower Snake,Asotin Creek,2,2023,17,5
+Chinook salmon,Lower Snake,Asotin Creek,2,2024,6,6
+Chinook salmon,Lower Snake,Asotin Creek,2,2025,11,8
+Chinook salmon,Lower Snake,Tucannon River,1,2011,597,338
+Chinook salmon,Lower Snake,Tucannon River,1,2012,234,262
+Chinook salmon,Lower Snake,Tucannon River,1,2013,118,177
+Chinook salmon,Lower Snake,Tucannon River,1,2014,213,231
+Chinook salmon,Lower Snake,Tucannon River,1,2015,173,137
+Chinook salmon,Lower Snake,Tucannon River,1,2016,114,107
+Chinook salmon,Lower Snake,Tucannon River,1,2017,49,27
+Chinook salmon,Lower Snake,Tucannon River,1,2018,29,28
+Chinook salmon,Lower Snake,Tucannon River,1,2019,8,15
+Chinook salmon,Lower Snake,Tucannon River,1,2020,17,27
+Chinook salmon,Lower Snake,Tucannon River,1,2021,25,22
+Chinook salmon,Lower Snake,Tucannon River,1,2022,45,49
+Chinook salmon,Lower Snake,Tucannon River,1,2023,9,24
+Chinook salmon,Lower Snake,Tucannon River,1,2024,67,34
+Chinook salmon,Middle Fork Salmon River,Bear Valley Creek,1,2011,757,652
+Chinook salmon,Middle Fork Salmon River,Bear Valley Creek,1,2012,940,633
+Chinook salmon,Middle Fork Salmon River,Bear Valley Creek,1,2013,505,494
+Chinook salmon,Middle Fork Salmon River,Bear Valley Creek,1,2014,997,806
+Chinook salmon,Middle Fork Salmon River,Bear Valley Creek,1,2015,594,609
+Chinook salmon,Middle Fork Salmon River,Bear Valley Creek,1,2016,469,487
+Chinook salmon,Middle Fork Salmon River,Bear Valley Creek,1,2017,136,130
+Chinook salmon,Middle Fork Salmon River,Bear Valley Creek,1,2018,213,191
+Chinook salmon,Middle Fork Salmon River,Bear Valley Creek,1,2019,90,109
+Chinook salmon,Middle Fork Salmon River,Bear Valley Creek,1,2020,240,234
+Chinook salmon,Middle Fork Salmon River,Bear Valley Creek,1,2021,213,195
+Chinook salmon,Middle Fork Salmon River,Bear Valley Creek,1,2022,370,432
+Chinook salmon,Middle Fork Salmon River,Bear Valley Creek,1,2023,98,176
+Chinook salmon,Middle Fork Salmon River,Bear Valley Creek,1,2024,187,228
+Chinook salmon,Middle Fork Salmon River,Bear Valley Creek,1,2025,390,358
+Chinook salmon,Middle Fork Salmon River,Bear Valley Creek,2,2015,1422,647
+Chinook salmon,Middle Fork Salmon River,Bear Valley Creek,2,2016,454,517
+Chinook salmon,Middle Fork Salmon River,Bear Valley Creek,2,2017,27,138
+Chinook salmon,Middle Fork Salmon River,Bear Valley Creek,2,2018,245,203
+Chinook salmon,Middle Fork Salmon River,Bear Valley Creek,2,2019,134,116
+Chinook salmon,Middle Fork Salmon River,Bear Valley Creek,2,2021,232,207
+Chinook salmon,Middle Fork Salmon River,Bear Valley Creek,2,2022,418,459
+Chinook salmon,Middle Fork Salmon River,Bear Valley Creek,2,2024,425,242
+Chinook salmon,Middle Fork Salmon River,Big Creek,1,2011,297,267
+Chinook salmon,Middle Fork Salmon River,Big Creek,1,2012,385,259
+Chinook salmon,Middle Fork Salmon River,Big Creek,1,2013,195,202
+Chinook salmon,Middle Fork Salmon River,Big Creek,1,2014,287,330
+Chinook salmon,Middle Fork Salmon River,Big Creek,1,2015,253,249
+Chinook salmon,Middle Fork Salmon River,Big Creek,1,2016,214,199
+Chinook salmon,Middle Fork Salmon River,Big Creek,1,2017,48,53
+Chinook salmon,Middle Fork Salmon River,Big Creek,1,2018,68,78
+Chinook salmon,Middle Fork Salmon River,Big Creek,1,2019,53,45
+Chinook salmon,Middle Fork Salmon River,Big Creek,1,2020,97,96
+Chinook salmon,Middle Fork Salmon River,Big Creek,1,2021,87,80
+Chinook salmon,Middle Fork Salmon River,Big Creek,1,2022,170,176
+Chinook salmon,Middle Fork Salmon River,Big Creek,1,2023,78,72
+Chinook salmon,Middle Fork Salmon River,Big Creek,1,2024,48,93
+Chinook salmon,Middle Fork Salmon River,Big Creek,1,2025,149,146
+Chinook salmon,Middle Fork Salmon River,Big Creek,2,2011,687,1054
+Chinook salmon,Middle Fork Salmon River,Big Creek,2,2012,657,1023
+Chinook salmon,Middle Fork Salmon River,Big Creek,2,2013,925,799
+Chinook salmon,Middle Fork Salmon River,Big Creek,2,2014,1143,1303
+Chinook salmon,Middle Fork Salmon River,Big Creek,2,2015,1147,984
+Chinook salmon,Middle Fork Salmon River,Big Creek,2,2016,740,786
+Chinook salmon,Middle Fork Salmon River,Big Creek,2,2017,140,210
+Chinook salmon,Middle Fork Salmon River,Big Creek,2,2018,321,308
+Chinook salmon,Middle Fork Salmon River,Big Creek,2,2019,184,176
+Chinook salmon,Middle Fork Salmon River,Big Creek,2,2021,436,315
+Chinook salmon,Middle Fork Salmon River,Big Creek,2,2022,752,697
+Chinook salmon,Middle Fork Salmon River,Big Creek,2,2023,468,285
+Chinook salmon,Middle Fork Salmon River,Big Creek,2,2024,506,369
+Chinook salmon,Middle Fork Salmon River,Big Creek,2,2025,492,579
+Chinook salmon,Middle Fork Salmon River,Camas Creek,1,2011,9,88
+Chinook salmon,Middle Fork Salmon River,Camas Creek,1,2012,68,85
+Chinook salmon,Middle Fork Salmon River,Camas Creek,1,2013,43,66
+Chinook salmon,Middle Fork Salmon River,Camas Creek,1,2014,90,108
+Chinook salmon,Middle Fork Salmon River,Camas Creek,1,2015,81,82
+Chinook salmon,Middle Fork Salmon River,Camas Creek,1,2016,71,65
+Chinook salmon,Middle Fork Salmon River,Camas Creek,1,2017,31,17
+Chinook salmon,Middle Fork Salmon River,Camas Creek,1,2018,43,26
+Chinook salmon,Middle Fork Salmon River,Camas Creek,1,2019,18,15
+Chinook salmon,Middle Fork Salmon River,Camas Creek,1,2020,6,32
+Chinook salmon,Middle Fork Salmon River,Camas Creek,1,2021,31,26
+Chinook salmon,Middle Fork Salmon River,Camas Creek,1,2022,106,58
+Chinook salmon,Middle Fork Salmon River,Camas Creek,1,2023,40,24
+Chinook salmon,Middle Fork Salmon River,Camas Creek,1,2024,65,31
+Chinook salmon,Middle Fork Salmon River,Camas Creek,1,2025,112,48
+Chinook salmon,Middle Fork Salmon River,Chamberlain Creek,1,2011,547,250
+Chinook salmon,Middle Fork Salmon River,Chamberlain Creek,1,2012,461,242
+Chinook salmon,Middle Fork Salmon River,Chamberlain Creek,1,2013,288,189
+Chinook salmon,Middle Fork Salmon River,Chamberlain Creek,1,2014,711,309
+Chinook salmon,Middle Fork Salmon River,Chamberlain Creek,1,2015,254,233
+Chinook salmon,Middle Fork Salmon River,Chamberlain Creek,1,2016,240,186
+Chinook salmon,Middle Fork Salmon River,Chamberlain Creek,1,2017,NA,50
+Chinook salmon,Middle Fork Salmon River,Chamberlain Creek,1,2018,182,73
+Chinook salmon,Middle Fork Salmon River,Chamberlain Creek,1,2019,0,42
+Chinook salmon,Middle Fork Salmon River,Chamberlain Creek,1,2020,86,90
+Chinook salmon,Middle Fork Salmon River,Chamberlain Creek,1,2021,28,75
+Chinook salmon,Middle Fork Salmon River,Chamberlain Creek,1,2022,278,165
+Chinook salmon,Middle Fork Salmon River,Chamberlain Creek,1,2023,52,67
+Chinook salmon,Middle Fork Salmon River,Chamberlain Creek,1,2024,192,87
+Chinook salmon,Middle Fork Salmon River,Chamberlain Creek,1,2025,98,137
+Chinook salmon,Middle Fork Salmon River,Loon Creek,1,2011,38,85
+Chinook salmon,Middle Fork Salmon River,Loon Creek,1,2012,87,82
+Chinook salmon,Middle Fork Salmon River,Loon Creek,1,2013,107,64
+Chinook salmon,Middle Fork Salmon River,Loon Creek,1,2014,66,105
+Chinook salmon,Middle Fork Salmon River,Loon Creek,1,2015,97,79
+Chinook salmon,Middle Fork Salmon River,Loon Creek,1,2016,102,63
+Chinook salmon,Middle Fork Salmon River,Loon Creek,1,2017,10,17
+Chinook salmon,Middle Fork Salmon River,Loon Creek,1,2018,30,25
+Chinook salmon,Middle Fork Salmon River,Loon Creek,1,2019,10,14
+Chinook salmon,Middle Fork Salmon River,Loon Creek,1,2020,33,30
+Chinook salmon,Middle Fork Salmon River,Loon Creek,1,2021,23,25
+Chinook salmon,Middle Fork Salmon River,Loon Creek,1,2022,84,56
+Chinook salmon,Middle Fork Salmon River,Loon Creek,1,2023,35,23
+Chinook salmon,Middle Fork Salmon River,Loon Creek,1,2024,10,30
+Chinook salmon,Middle Fork Salmon River,Loon Creek,1,2025,73,47
+Chinook salmon,Middle Fork Salmon River,Marsh Creek,1,2011,674,612
+Chinook salmon,Middle Fork Salmon River,Marsh Creek,1,2012,411,594
+Chinook salmon,Middle Fork Salmon River,Marsh Creek,1,2013,375,464
+Chinook salmon,Middle Fork Salmon River,Marsh Creek,1,2014,861,756
+Chinook salmon,Middle Fork Salmon River,Marsh Creek,1,2015,586,571
+Chinook salmon,Middle Fork Salmon River,Marsh Creek,1,2016,411,457
+Chinook salmon,Middle Fork Salmon River,Marsh Creek,1,2017,96,122
+Chinook salmon,Middle Fork Salmon River,Marsh Creek,1,2018,169,179
+Chinook salmon,Middle Fork Salmon River,Marsh Creek,1,2019,75,102
+Chinook salmon,Middle Fork Salmon River,Marsh Creek,1,2020,325,220
+Chinook salmon,Middle Fork Salmon River,Marsh Creek,1,2021,174,183
+Chinook salmon,Middle Fork Salmon River,Marsh Creek,1,2022,497,405
+Chinook salmon,Middle Fork Salmon River,Marsh Creek,1,2023,164,165
+Chinook salmon,Middle Fork Salmon River,Marsh Creek,1,2024,208,214
+Chinook salmon,Middle Fork Salmon River,Marsh Creek,1,2025,535,336
+Chinook salmon,Middle Fork Salmon River,Marsh Creek,2,2021,210,251
+Chinook salmon,Middle Fork Salmon River,Marsh Creek,2,2022,636,557
+Chinook salmon,Middle Fork Salmon River,Marsh Creek,2,2023,176,227
+Chinook salmon,Middle Fork Salmon River,Marsh Creek,2,2024,441,294
+Chinook salmon,Middle Fork Salmon River,Marsh Creek,2,2025,411,462
+Chinook salmon,Middle Fork Salmon River,Middle Fork Salmon River Lower Mainstem,1,2011,3,6
+Chinook salmon,Middle Fork Salmon River,Middle Fork Salmon River Lower Mainstem,1,2012,3,6
+Chinook salmon,Middle Fork Salmon River,Middle Fork Salmon River Lower Mainstem,1,2013,0,5
+Chinook salmon,Middle Fork Salmon River,Middle Fork Salmon River Lower Mainstem,1,2014,3,8
+Chinook salmon,Middle Fork Salmon River,Middle Fork Salmon River Lower Mainstem,1,2015,28,6
+Chinook salmon,Middle Fork Salmon River,Middle Fork Salmon River Lower Mainstem,1,2016,3,5
+Chinook salmon,Middle Fork Salmon River,Middle Fork Salmon River Lower Mainstem,1,2017,3,1
+Chinook salmon,Middle Fork Salmon River,Middle Fork Salmon River Lower Mainstem,1,2018,3,2
+Chinook salmon,Middle Fork Salmon River,Middle Fork Salmon River Lower Mainstem,1,2019,0,1
+Chinook salmon,Middle Fork Salmon River,Middle Fork Salmon River Lower Mainstem,1,2020,12,2
+Chinook salmon,Middle Fork Salmon River,Middle Fork Salmon River Lower Mainstem,1,2021,3,2
+Chinook salmon,Middle Fork Salmon River,Middle Fork Salmon River Lower Mainstem,1,2022,0,4
+Chinook salmon,Middle Fork Salmon River,Middle Fork Salmon River Lower Mainstem,1,2023,0,2
+Chinook salmon,Middle Fork Salmon River,Middle Fork Salmon River Lower Mainstem,1,2024,0,2
+Chinook salmon,Middle Fork Salmon River,Middle Fork Salmon River Upper Mainstem,1,2011,137,119
+Chinook salmon,Middle Fork Salmon River,Middle Fork Salmon River Upper Mainstem,1,2012,146,115
+Chinook salmon,Middle Fork Salmon River,Middle Fork Salmon River Upper Mainstem,1,2013,49,90
+Chinook salmon,Middle Fork Salmon River,Middle Fork Salmon River Upper Mainstem,1,2014,104,147
+Chinook salmon,Middle Fork Salmon River,Middle Fork Salmon River Upper Mainstem,1,2015,110,111
+Chinook salmon,Middle Fork Salmon River,Middle Fork Salmon River Upper Mainstem,1,2016,108,89
+Chinook salmon,Middle Fork Salmon River,Middle Fork Salmon River Upper Mainstem,1,2017,57,24
+Chinook salmon,Middle Fork Salmon River,Middle Fork Salmon River Upper Mainstem,1,2018,43,35
+Chinook salmon,Middle Fork Salmon River,Middle Fork Salmon River Upper Mainstem,1,2019,22,20
+Chinook salmon,Middle Fork Salmon River,Middle Fork Salmon River Upper Mainstem,1,2020,26,43
+Chinook salmon,Middle Fork Salmon River,Middle Fork Salmon River Upper Mainstem,1,2021,26,36
+Chinook salmon,Middle Fork Salmon River,Middle Fork Salmon River Upper Mainstem,1,2022,68,79
+Chinook salmon,Middle Fork Salmon River,Middle Fork Salmon River Upper Mainstem,1,2023,30,32
+Chinook salmon,Middle Fork Salmon River,Middle Fork Salmon River Upper Mainstem,1,2024,38,42
+Chinook salmon,Middle Fork Salmon River,Middle Fork Salmon River Upper Mainstem,1,2025,66,65
+Chinook salmon,Middle Fork Salmon River,Sulphur Creek,1,2011,171,94
+Chinook salmon,Middle Fork Salmon River,Sulphur Creek,1,2012,41,91
+Chinook salmon,Middle Fork Salmon River,Sulphur Creek,1,2013,110,71
+Chinook salmon,Middle Fork Salmon River,Sulphur Creek,1,2014,203,116
+Chinook salmon,Middle Fork Salmon River,Sulphur Creek,1,2015,119,88
+Chinook salmon,Middle Fork Salmon River,Sulphur Creek,1,2016,43,70
+Chinook salmon,Middle Fork Salmon River,Sulphur Creek,1,2017,6,19
+Chinook salmon,Middle Fork Salmon River,Sulphur Creek,1,2018,75,27
+Chinook salmon,Middle Fork Salmon River,Sulphur Creek,1,2019,15,16
+Chinook salmon,Middle Fork Salmon River,Sulphur Creek,1,2020,19,34
+Chinook salmon,Middle Fork Salmon River,Sulphur Creek,1,2021,10,28
+Chinook salmon,Middle Fork Salmon River,Sulphur Creek,1,2022,114,62
+Chinook salmon,Middle Fork Salmon River,Sulphur Creek,1,2023,23,25
+Chinook salmon,Middle Fork Salmon River,Sulphur Creek,1,2024,45,33
+Chinook salmon,Middle Fork Salmon River,Sulphur Creek,1,2025,43,52
+Chinook salmon,South Fork Salmon River,East Fork South Fork Salmon River,1,2011,547,591
+Chinook salmon,South Fork Salmon River,East Fork South Fork Salmon River,1,2012,578,652
+Chinook salmon,South Fork Salmon River,East Fork South Fork Salmon River,1,2013,725,781
+Chinook salmon,South Fork Salmon River,East Fork South Fork Salmon River,1,2014,1081,1061
+Chinook salmon,South Fork Salmon River,East Fork South Fork Salmon River,1,2015,515,528
+Chinook salmon,South Fork Salmon River,East Fork South Fork Salmon River,1,2016,581,506
+Chinook salmon,South Fork Salmon River,East Fork South Fork Salmon River,1,2017,160,170
+Chinook salmon,South Fork Salmon River,East Fork South Fork Salmon River,1,2018,342,285
+Chinook salmon,South Fork Salmon River,East Fork South Fork Salmon River,2,2011,607,702
+Chinook salmon,South Fork Salmon River,East Fork South Fork Salmon River,2,2012,724,774
+Chinook salmon,South Fork Salmon River,East Fork South Fork Salmon River,2,2013,1027,928
+Chinook salmon,South Fork Salmon River,East Fork South Fork Salmon River,2,2014,1223,1260
+Chinook salmon,South Fork Salmon River,East Fork South Fork Salmon River,2,2015,664,627
+Chinook salmon,South Fork Salmon River,East Fork South Fork Salmon River,2,2016,651,601
+Chinook salmon,South Fork Salmon River,East Fork South Fork Salmon River,2,2017,191,202
+Chinook salmon,South Fork Salmon River,East Fork South Fork Salmon River,2,2018,359,339
+Chinook salmon,South Fork Salmon River,East Fork South Fork Salmon River,2,2019,193,194
+Chinook salmon,South Fork Salmon River,East Fork South Fork Salmon River,2,2021,403,394
+Chinook salmon,South Fork Salmon River,East Fork South Fork Salmon River,2,2022,1101,1016
+Chinook salmon,South Fork Salmon River,East Fork South Fork Salmon River,2,2023,441,452
+Chinook salmon,South Fork Salmon River,East Fork South Fork Salmon River,2,2024,501,552
+Chinook salmon,South Fork Salmon River,East Fork South Fork Salmon River,2,2025,663,667
+Chinook salmon,South Fork Salmon River,Secesh River,1,2011,914,811
+Chinook salmon,South Fork Salmon River,Secesh River,1,2012,907,894
+Chinook salmon,South Fork Salmon River,Secesh River,1,2013,861,1072
+Chinook salmon,South Fork Salmon River,Secesh River,1,2014,1489,1455
+Chinook salmon,South Fork Salmon River,Secesh River,1,2015,367,724
+Chinook salmon,South Fork Salmon River,Secesh River,1,2016,534,695
+Chinook salmon,South Fork Salmon River,Secesh River,1,2017,437,233
+Chinook salmon,South Fork Salmon River,Secesh River,1,2018,563,391
+Chinook salmon,South Fork Salmon River,Secesh River,2,2011,817,790
+Chinook salmon,South Fork Salmon River,Secesh River,2,2012,925,870
+Chinook salmon,South Fork Salmon River,Secesh River,2,2013,1227,1043
+Chinook salmon,South Fork Salmon River,Secesh River,2,2014,1538,1417
+Chinook salmon,South Fork Salmon River,Secesh River,2,2015,625,705
+Chinook salmon,South Fork Salmon River,Secesh River,2,2016,552,676
+Chinook salmon,South Fork Salmon River,Secesh River,2,2017,237,227
+Chinook salmon,South Fork Salmon River,Secesh River,2,2018,348,381
+Chinook salmon,South Fork Salmon River,Secesh River,2,2019,213,218
+Chinook salmon,South Fork Salmon River,Secesh River,2,2021,436,443
+Chinook salmon,South Fork Salmon River,Secesh River,2,2022,1048,1143
+Chinook salmon,South Fork Salmon River,Secesh River,2,2023,511,509
+Chinook salmon,South Fork Salmon River,Secesh River,2,2024,705,620
+Chinook salmon,South Fork Salmon River,Secesh River,2,2025,748,750
+Chinook salmon,South Fork Salmon River,South Fork Salmon River,1,2011,1212,476
+Chinook salmon,South Fork Salmon River,South Fork Salmon River,1,2012,828,524
+Chinook salmon,South Fork Salmon River,South Fork Salmon River,1,2013,421,628
+Chinook salmon,South Fork Salmon River,South Fork Salmon River,1,2014,920,853
+Chinook salmon,South Fork Salmon River,South Fork Salmon River,1,2015,329,425
+Chinook salmon,South Fork Salmon River,South Fork Salmon River,1,2016,351,407
+Chinook salmon,South Fork Salmon River,South Fork Salmon River,1,2017,127,137
+Chinook salmon,South Fork Salmon River,South Fork Salmon River,1,2018,172,229
+Chinook salmon,South Fork Salmon River,South Fork Salmon River,1,2019,109,131
+Chinook salmon,South Fork Salmon River,South Fork Salmon River,1,2020,167,274
+Chinook salmon,South Fork Salmon River,South Fork Salmon River,1,2021,166,267
+Chinook salmon,South Fork Salmon River,South Fork Salmon River,1,2022,1002,688
+Chinook salmon,South Fork Salmon River,South Fork Salmon River,1,2023,376,306
+Chinook salmon,South Fork Salmon River,South Fork Salmon River,1,2024,391,374
+Chinook salmon,South Fork Salmon River,South Fork Salmon River,1,2025,539,452
+Chinook salmon,South Fork Salmon River,South Fork Salmon River,2,2011,5870,1978
+Chinook salmon,South Fork Salmon River,South Fork Salmon River,2,2012,3260,2180
+Chinook salmon,South Fork Salmon River,South Fork Salmon River,2,2013,2248,2614
+Chinook salmon,South Fork Salmon River,South Fork Salmon River,2,2014,4005,3549
+Chinook salmon,South Fork Salmon River,South Fork Salmon River,2,2015,1481,1766
+Chinook salmon,South Fork Salmon River,South Fork Salmon River,2,2016,1231,1694
+Chinook salmon,South Fork Salmon River,South Fork Salmon River,2,2017,380,569
+Chinook salmon,South Fork Salmon River,South Fork Salmon River,2,2018,602,954
+Chinook salmon,South Fork Salmon River,South Fork Salmon River,2,2019,329,546
+Chinook salmon,South Fork Salmon River,South Fork Salmon River,2,2021,1291,1109
+Chinook salmon,South Fork Salmon River,South Fork Salmon River,2,2022,3937,2864
+Chinook salmon,South Fork Salmon River,South Fork Salmon River,2,2023,1312,1274
+Chinook salmon,South Fork Salmon River,South Fork Salmon River,2,2024,1353,1554
+Chinook salmon,South Fork Salmon River,South Fork Salmon River,2,2025,1942,1879
+Chinook salmon,Upper Salmon River,East Fork Salmon River,1,2011,660,358
+Chinook salmon,Upper Salmon River,East Fork Salmon River,1,2012,586,331
+Chinook salmon,Upper Salmon River,East Fork Salmon River,1,2013,312,293
+Chinook salmon,Upper Salmon River,East Fork Salmon River,1,2014,787,480
+Chinook salmon,Upper Salmon River,East Fork Salmon River,1,2015,527,308
+Chinook salmon,Upper Salmon River,East Fork Salmon River,1,2016,551,247
+Chinook salmon,Upper Salmon River,East Fork Salmon River,1,2017,210,71
+Chinook salmon,Upper Salmon River,East Fork Salmon River,1,2018,55,90
+Chinook salmon,Upper Salmon River,East Fork Salmon River,1,2019,15,60
+Chinook salmon,Upper Salmon River,East Fork Salmon River,1,2020,120,125
+Chinook salmon,Upper Salmon River,East Fork Salmon River,1,2021,162,93
+Chinook salmon,Upper Salmon River,East Fork Salmon River,1,2022,221,211
+Chinook salmon,Upper Salmon River,East Fork Salmon River,1,2023,20,93
+Chinook salmon,Upper Salmon River,East Fork Salmon River,1,2024,66,102
+Chinook salmon,Upper Salmon River,East Fork Salmon River,1,2025,37,105
+Chinook salmon,Upper Salmon River,East Fork Salmon River,2,2011,348,314
+Chinook salmon,Upper Salmon River,East Fork Salmon River,2,2012,449,290
+Chinook salmon,Upper Salmon River,East Fork Salmon River,2,2013,498,257
+Chinook salmon,Upper Salmon River,East Fork Salmon River,2,2014,571,421
+Chinook salmon,Upper Salmon River,East Fork Salmon River,2,2015,229,270
+Chinook salmon,Upper Salmon River,East Fork Salmon River,2,2017,15,62
+Chinook salmon,Upper Salmon River,Lemhi River,1,2011,330,499
+Chinook salmon,Upper Salmon River,Lemhi River,1,2012,174,461
+Chinook salmon,Upper Salmon River,Lemhi River,1,2013,182,408
+Chinook salmon,Upper Salmon River,Lemhi River,1,2014,534,669
+Chinook salmon,Upper Salmon River,Lemhi River,1,2015,454,430
+Chinook salmon,Upper Salmon River,Lemhi River,1,2016,276,345
+Chinook salmon,Upper Salmon River,Lemhi River,1,2017,76,99
+Chinook salmon,Upper Salmon River,Lemhi River,1,2018,208,125
+Chinook salmon,Upper Salmon River,Lemhi River,1,2019,114,84
+Chinook salmon,Upper Salmon River,Lemhi River,1,2020,202,174
+Chinook salmon,Upper Salmon River,Lemhi River,1,2021,82,130
+Chinook salmon,Upper Salmon River,Lemhi River,1,2022,690,294
+Chinook salmon,Upper Salmon River,Lemhi River,1,2023,314,130
+Chinook salmon,Upper Salmon River,Lemhi River,1,2024,142,142
+Chinook salmon,Upper Salmon River,Lemhi River,1,2025,249,146
+Chinook salmon,Upper Salmon River,Lemhi River,2,2011,320,604
+Chinook salmon,Upper Salmon River,Lemhi River,2,2012,114,558
+Chinook salmon,Upper Salmon River,Lemhi River,2,2013,440,493
+Chinook salmon,Upper Salmon River,Lemhi River,2,2014,675,809
+Chinook salmon,Upper Salmon River,Lemhi River,2,2015,745,520
+Chinook salmon,Upper Salmon River,Lemhi River,2,2016,208,417
+Chinook salmon,Upper Salmon River,Lemhi River,2,2017,87,120
+Chinook salmon,Upper Salmon River,Lemhi River,2,2018,252,152
+Chinook salmon,Upper Salmon River,Lemhi River,2,2019,217,102
+Chinook salmon,Upper Salmon River,Lemhi River,2,2021,178,157
+Chinook salmon,Upper Salmon River,Lemhi River,2,2022,641,355
+Chinook salmon,Upper Salmon River,Lemhi River,2,2023,279,157
+Chinook salmon,Upper Salmon River,Lemhi River,2,2024,210,172
+Chinook salmon,Upper Salmon River,Lemhi River,2,2025,253,176
+Chinook salmon,Upper Salmon River,North Fork Salmon River,1,2011,156,103
+Chinook salmon,Upper Salmon River,North Fork Salmon River,1,2012,113,95
+Chinook salmon,Upper Salmon River,North Fork Salmon River,1,2013,56,84
+Chinook salmon,Upper Salmon River,North Fork Salmon River,1,2014,192,138
+Chinook salmon,Upper Salmon River,North Fork Salmon River,1,2015,183,89
+Chinook salmon,Upper Salmon River,North Fork Salmon River,1,2016,64,71
+Chinook salmon,Upper Salmon River,North Fork Salmon River,1,2017,5,20
+Chinook salmon,Upper Salmon River,North Fork Salmon River,1,2018,54,26
+Chinook salmon,Upper Salmon River,North Fork Salmon River,1,2019,37,17
+Chinook salmon,Upper Salmon River,North Fork Salmon River,1,2020,51,36
+Chinook salmon,Upper Salmon River,North Fork Salmon River,1,2021,5,27
+Chinook salmon,Upper Salmon River,North Fork Salmon River,1,2022,102,61
+Chinook salmon,Upper Salmon River,North Fork Salmon River,1,2023,32,27
+Chinook salmon,Upper Salmon River,North Fork Salmon River,1,2024,21,29
+Chinook salmon,Upper Salmon River,North Fork Salmon River,1,2025,12,30
+Chinook salmon,Upper Salmon River,North Fork Salmon River,2,2016,106,301
+Chinook salmon,Upper Salmon River,North Fork Salmon River,2,2017,631,86
+Chinook salmon,Upper Salmon River,North Fork Salmon River,2,2018,90,109
+Chinook salmon,Upper Salmon River,North Fork Salmon River,2,2019,41,73
+Chinook salmon,Upper Salmon River,North Fork Salmon River,2,2022,199,256
+Chinook salmon,Upper Salmon River,North Fork Salmon River,2,2023,138,113
+Chinook salmon,Upper Salmon River,North Fork Salmon River,2,2024,103,124
+Chinook salmon,Upper Salmon River,Pahsimeroi River,1,2011,423,393
+Chinook salmon,Upper Salmon River,Pahsimeroi River,1,2012,234,363
+Chinook salmon,Upper Salmon River,Pahsimeroi River,1,2013,354,321
+Chinook salmon,Upper Salmon River,Pahsimeroi River,1,2014,559,527
+Chinook salmon,Upper Salmon River,Pahsimeroi River,1,2015,368,338
+Chinook salmon,Upper Salmon River,Pahsimeroi River,1,2016,347,271
+Chinook salmon,Upper Salmon River,Pahsimeroi River,1,2017,80,78
+Chinook salmon,Upper Salmon River,Pahsimeroi River,1,2018,71,99
+Chinook salmon,Upper Salmon River,Pahsimeroi River,1,2019,55,66
+Chinook salmon,Upper Salmon River,Pahsimeroi River,1,2020,122,137
+Chinook salmon,Upper Salmon River,Pahsimeroi River,1,2021,105,102
+Chinook salmon,Upper Salmon River,Pahsimeroi River,1,2022,317,231
+Chinook salmon,Upper Salmon River,Pahsimeroi River,1,2023,133,102
+Chinook salmon,Upper Salmon River,Pahsimeroi River,1,2024,114,112
+Chinook salmon,Upper Salmon River,Pahsimeroi River,1,2025,89,115
+Chinook salmon,Upper Salmon River,Pahsimeroi River,2,2011,51,253
+Chinook salmon,Upper Salmon River,Pahsimeroi River,2,2012,169,233
+Chinook salmon,Upper Salmon River,Pahsimeroi River,2,2013,265,206
+Chinook salmon,Upper Salmon River,Pahsimeroi River,2,2014,292,339
+Chinook salmon,Upper Salmon River,Pahsimeroi River,2,2015,292,217
+Chinook salmon,Upper Salmon River,Pahsimeroi River,2,2016,202,175
+Chinook salmon,Upper Salmon River,Pahsimeroi River,2,2017,31,50
+Chinook salmon,Upper Salmon River,Pahsimeroi River,2,2018,51,63
+Chinook salmon,Upper Salmon River,Pahsimeroi River,2,2019,65,43
+Chinook salmon,Upper Salmon River,Pahsimeroi River,2,2021,104,66
+Chinook salmon,Upper Salmon River,Pahsimeroi River,2,2022,253,149
+Chinook salmon,Upper Salmon River,Pahsimeroi River,2,2023,109,66
+Chinook salmon,Upper Salmon River,Pahsimeroi River,2,2024,102,72
+Chinook salmon,Upper Salmon River,Pahsimeroi River,2,2025,52,74
+Chinook salmon,Upper Salmon River,Panther Creek,2,2018,133,150
+Chinook salmon,Upper Salmon River,Panther Creek,2,2019,104,101
+Chinook salmon,Upper Salmon River,Panther Creek,2,2021,82,155
+Chinook salmon,Upper Salmon River,Panther Creek,2,2022,371,351
+Chinook salmon,Upper Salmon River,Panther Creek,2,2023,199,156
+Chinook salmon,Upper Salmon River,Panther Creek,2,2024,234,170
+Chinook salmon,Upper Salmon River,Panther Creek,2,2025,186,174
+Chinook salmon,Upper Salmon River,Salmon River Lower Mainstem,1,2011,229,117
+Chinook salmon,Upper Salmon River,Salmon River Lower Mainstem,1,2012,183,108
+Chinook salmon,Upper Salmon River,Salmon River Lower Mainstem,1,2013,40,95
+Chinook salmon,Upper Salmon River,Salmon River Lower Mainstem,1,2014,239,156
+Chinook salmon,Upper Salmon River,Salmon River Lower Mainstem,1,2015,57,100
+Chinook salmon,Upper Salmon River,Salmon River Lower Mainstem,1,2016,148,81
+Chinook salmon,Upper Salmon River,Salmon River Lower Mainstem,1,2017,34,23
+Chinook salmon,Upper Salmon River,Salmon River Lower Mainstem,1,2018,21,29
+Chinook salmon,Upper Salmon River,Salmon River Lower Mainstem,1,2019,11,20
+Chinook salmon,Upper Salmon River,Salmon River Lower Mainstem,1,2020,44,41
+Chinook salmon,Upper Salmon River,Salmon River Lower Mainstem,1,2021,71,30
+Chinook salmon,Upper Salmon River,Salmon River Lower Mainstem,1,2022,32,69
+Chinook salmon,Upper Salmon River,Salmon River Lower Mainstem,1,2023,17,30
+Chinook salmon,Upper Salmon River,Salmon River Lower Mainstem,1,2024,17,33
+Chinook salmon,Upper Salmon River,Salmon River Lower Mainstem,1,2025,50,34
+Chinook salmon,Upper Salmon River,Salmon River Upper Mainstem,1,2011,681,626
+Chinook salmon,Upper Salmon River,Salmon River Upper Mainstem,1,2012,650,578
+Chinook salmon,Upper Salmon River,Salmon River Upper Mainstem,1,2013,416,511
+Chinook salmon,Upper Salmon River,Salmon River Upper Mainstem,1,2014,631,839
+Chinook salmon,Upper Salmon River,Salmon River Upper Mainstem,1,2015,284,539
+Chinook salmon,Upper Salmon River,Salmon River Upper Mainstem,1,2016,326,432
+Chinook salmon,Upper Salmon River,Salmon River Upper Mainstem,1,2017,128,124
+Chinook salmon,Upper Salmon River,Salmon River Upper Mainstem,1,2018,100,157
+Chinook salmon,Upper Salmon River,Salmon River Upper Mainstem,1,2019,118,106
+Chinook salmon,Upper Salmon River,Salmon River Upper Mainstem,1,2020,365,218
+Chinook salmon,Upper Salmon River,Salmon River Upper Mainstem,1,2021,350,163
+Chinook salmon,Upper Salmon River,Salmon River Upper Mainstem,1,2022,302,368
+Chinook salmon,Upper Salmon River,Salmon River Upper Mainstem,1,2023,177,163
+Chinook salmon,Upper Salmon River,Salmon River Upper Mainstem,1,2024,130,179
+Chinook salmon,Upper Salmon River,Salmon River Upper Mainstem,1,2025,335,183
+Chinook salmon,Upper Salmon River,Salmon River Upper Mainstem,2,2011,987,421
+Chinook salmon,Upper Salmon River,Salmon River Upper Mainstem,2,2012,804,388
+Chinook salmon,Upper Salmon River,Salmon River Upper Mainstem,2,2013,547,344
+Chinook salmon,Upper Salmon River,Salmon River Upper Mainstem,2,2014,645,564
+Chinook salmon,Upper Salmon River,Salmon River Upper Mainstem,2,2015,603,362
+Chinook salmon,Upper Salmon River,Salmon River Upper Mainstem,2,2016,313,291
+Chinook salmon,Upper Salmon River,Salmon River Upper Mainstem,2,2017,81,83
+Chinook salmon,Upper Salmon River,Salmon River Upper Mainstem,2,2018,26,106
+Chinook salmon,Upper Salmon River,Salmon River Upper Mainstem,2,2019,43,71
+Chinook salmon,Upper Salmon River,Salmon River Upper Mainstem,2,2021,279,109
+Chinook salmon,Upper Salmon River,Salmon River Upper Mainstem,2,2022,115,247
+Chinook salmon,Upper Salmon River,Salmon River Upper Mainstem,2,2023,65,110
+Chinook salmon,Upper Salmon River,Salmon River Upper Mainstem,2,2024,51,120
+Chinook salmon,Upper Salmon River,Salmon River Upper Mainstem,2,2025,156,123
+Chinook salmon,Upper Salmon River,Valley Creek,1,2011,112,225
+Chinook salmon,Upper Salmon River,Valley Creek,1,2012,301,208
+Chinook salmon,Upper Salmon River,Valley Creek,1,2013,131,184
+Chinook salmon,Upper Salmon River,Valley Creek,1,2014,325,302
+Chinook salmon,Upper Salmon River,Valley Creek,1,2015,199,194
+Chinook salmon,Upper Salmon River,Valley Creek,1,2016,153,156
+Chinook salmon,Upper Salmon River,Valley Creek,1,2017,77,45
+Chinook salmon,Upper Salmon River,Valley Creek,1,2018,72,57
+Chinook salmon,Upper Salmon River,Valley Creek,1,2019,8,38
+Chinook salmon,Upper Salmon River,Valley Creek,1,2020,201,79
+Chinook salmon,Upper Salmon River,Valley Creek,1,2021,115,59
+Chinook salmon,Upper Salmon River,Valley Creek,1,2022,166,133
+Chinook salmon,Upper Salmon River,Valley Creek,1,2023,43,59
+Chinook salmon,Upper Salmon River,Valley Creek,1,2024,34,64
+Chinook salmon,Upper Salmon River,Valley Creek,1,2025,81,66
+Chinook salmon,Upper Salmon River,Valley Creek,2,2011,474,452
+Chinook salmon,Upper Salmon River,Valley Creek,2,2012,489,418
+Chinook salmon,Upper Salmon River,Valley Creek,2,2013,323,369
+Chinook salmon,Upper Salmon River,Valley Creek,2,2014,675,606
+Chinook salmon,Upper Salmon River,Valley Creek,2,2015,432,389
+Chinook salmon,Upper Salmon River,Valley Creek,2,2016,237,312
+Chinook salmon,Upper Salmon River,Valley Creek,2,2017,79,90
+Chinook salmon,Upper Salmon River,Valley Creek,2,2018,150,114
+Chinook salmon,Upper Salmon River,Valley Creek,2,2019,104,76
+Chinook salmon,Upper Salmon River,Valley Creek,2,2021,86,117
+Chinook salmon,Upper Salmon River,Valley Creek,2,2022,247,266
+Chinook salmon,Upper Salmon River,Valley Creek,2,2023,90,118
+Chinook salmon,Upper Salmon River,Valley Creek,2,2024,161,129
+Chinook salmon,Upper Salmon River,Valley Creek,2,2025,117,132
+Chinook salmon,Upper Salmon River,Yankee Fork,1,2011,116,68
+Chinook salmon,Upper Salmon River,Yankee Fork,1,2012,236,62
+Chinook salmon,Upper Salmon River,Yankee Fork,1,2013,358,55
+Chinook salmon,Upper Salmon River,Yankee Fork,1,2014,216,91
+Chinook salmon,Upper Salmon River,Yankee Fork,1,2015,34,58
+Chinook salmon,Upper Salmon River,Yankee Fork,1,2016,351,47
+Chinook salmon,Upper Salmon River,Yankee Fork,1,2017,24,13
+Chinook salmon,Upper Salmon River,Yankee Fork,1,2018,10,17
+Chinook salmon,Upper Salmon River,Yankee Fork,1,2019,2,11
+Chinook salmon,Upper Salmon River,Yankee Fork,1,2020,8,24
+Chinook salmon,Upper Salmon River,Yankee Fork,1,2021,4,18
+Chinook salmon,Upper Salmon River,Yankee Fork,1,2022,50,40
+Chinook salmon,Upper Salmon River,Yankee Fork,1,2023,8,18
+Chinook salmon,Upper Salmon River,Yankee Fork,1,2024,8,19
+Chinook salmon,Upper Salmon River,Yankee Fork,1,2025,3,20
+Chinook salmon,Upper Salmon River,Yankee Fork,2,2012,296,159
+Chinook salmon,Upper Salmon River,Yankee Fork,2,2013,287,141
+Chinook salmon,Upper Salmon River,Yankee Fork,2,2014,204,231
+Chinook salmon,Upper Salmon River,Yankee Fork,2,2015,119,149
+Chinook salmon,Upper Salmon River,Yankee Fork,2,2016,118,119
+Chinook salmon,Upper Salmon River,Yankee Fork,2,2017,44,34
+Chinook salmon,Upper Salmon River,Yankee Fork,2,2018,79,43
+Chinook salmon,Upper Salmon River,Yankee Fork,2,2019,28,29
+Chinook salmon,Upper Salmon River,Yankee Fork,2,2021,35,45
+Chinook salmon,Upper Salmon River,Yankee Fork,2,2022,35,102
+Chinook salmon,Upper Salmon River,Yankee Fork,2,2023,37,45
+Chinook salmon,Upper Salmon River,Yankee Fork,2,2024,44,49
+Chinook salmon,Upper Salmon River,Yankee Fork,2,2025,34,50
+Chinook salmon,Wet Clearwater,Lochsa River,2,2017,573,247
+Chinook salmon,Wet Clearwater,Lochsa River,2,2018,298,288
+Chinook salmon,Wet Clearwater,Lochsa River,2,2019,135,181
+Chinook salmon,Wet Clearwater,Lochsa River,2,2021,227,242
+Chinook salmon,Wet Clearwater,Lochsa River,2,2022,387,466
+Chinook salmon,Wet Clearwater,Lochsa River,2,2023,245,207
+Chinook salmon,Wet Clearwater,Lochsa River,2,2024,177,237
+Chinook salmon,Wet Clearwater,Lochsa River,2,2025,217,277
+Chinook salmon,Wet Clearwater,Lolo Creek,2,2012,353,283
+Chinook salmon,Wet Clearwater,Lolo Creek,2,2013,206,218
+Chinook salmon,Wet Clearwater,Lolo Creek,2,2014,155,305
+Chinook salmon,Wet Clearwater,Lolo Creek,2,2015,262,221
+Chinook salmon,Wet Clearwater,Lolo Creek,2,2016,295,205
+Chinook salmon,Wet Clearwater,Lolo Creek,2,2017,38,60
+Chinook salmon,Wet Clearwater,Lolo Creek,2,2018,47,70
+Chinook salmon,Wet Clearwater,Lolo Creek,2,2019,76,44
+Chinook salmon,Wet Clearwater,Lolo Creek,2,2021,68,59
+Chinook salmon,Wet Clearwater,Lolo Creek,2,2022,101,113
+Chinook salmon,Wet Clearwater,Lolo Creek,2,2023,50,50
+Chinook salmon,Wet Clearwater,Lolo Creek,2,2024,53,57
+Chinook salmon,Wet Clearwater,Lolo Creek,2,2025,79,67
+Chinook salmon,Dry Clearwater,South Fork Clearwater River Upper Mainstem,2,2011,NA,986
+Chinook salmon,Dry Clearwater,South Fork Clearwater River Upper Mainstem,2,2020,NA,217
+Chinook salmon,Grande Ronde / Imnaha,Big Sheep Creek,2,2020,NA,40
+Chinook salmon,Grande Ronde / Imnaha,Big Sheep Creek,2,2025,NA,44
+Chinook salmon,Grande Ronde / Imnaha,Catherine Creek,2,2020,NA,208
+Chinook salmon,Grande Ronde / Imnaha,Grande Ronde River Upper Mainstem,2,2011,NA,231
+Chinook salmon,Grande Ronde / Imnaha,Grande Ronde River Upper Mainstem,2,2014,NA,220
+Chinook salmon,Grande Ronde / Imnaha,Grande Ronde River Upper Mainstem,2,2020,NA,76
+Chinook salmon,Grande Ronde / Imnaha,Grande Ronde River Upper Mainstem,2,2023,NA,58
+Chinook salmon,Grande Ronde / Imnaha,Imnaha River Mainstem,2,2020,NA,377
+Chinook salmon,Grande Ronde / Imnaha,Lookingglass Creek,2,2020,NA,90
+Chinook salmon,Grande Ronde / Imnaha,Lookingglass Creek,2,2025,NA,100
+Chinook salmon,Grande Ronde / Imnaha,Minam River,2,2011,NA,1117
+Chinook salmon,Grande Ronde / Imnaha,Minam River,2,2012,NA,881
+Chinook salmon,Grande Ronde / Imnaha,Minam River,2,2013,NA,648
+Chinook salmon,Grande Ronde / Imnaha,Minam River,2,2014,NA,1064
+Chinook salmon,Grande Ronde / Imnaha,Minam River,2,2015,NA,735
+Chinook salmon,Grande Ronde / Imnaha,Minam River,2,2016,NA,764
+Chinook salmon,Grande Ronde / Imnaha,Minam River,2,2017,NA,250
+Chinook salmon,Grande Ronde / Imnaha,Minam River,2,2018,NA,265
+Chinook salmon,Grande Ronde / Imnaha,Minam River,2,2019,NA,191
+Chinook salmon,Grande Ronde / Imnaha,Minam River,2,2020,NA,367
+Chinook salmon,Grande Ronde / Imnaha,Wallowa/Lostine Rivers,1,2025,NA,430
+Chinook salmon,Lower Snake,Asotin Creek,1,2017,NA,1
+Chinook salmon,Lower Snake,Asotin Creek,1,2018,NA,1
+Chinook salmon,Lower Snake,Asotin Creek,1,2019,NA,0
+Chinook salmon,Lower Snake,Asotin Creek,1,2020,NA,1
+Chinook salmon,Lower Snake,Asotin Creek,1,2021,NA,1
+Chinook salmon,Lower Snake,Asotin Creek,1,2022,NA,2
+Chinook salmon,Lower Snake,Asotin Creek,1,2023,NA,1
+Chinook salmon,Lower Snake,Asotin Creek,1,2024,NA,1
+Chinook salmon,Lower Snake,Asotin Creek,1,2025,NA,1
+Chinook salmon,Lower Snake,Asotin Creek,2,2020,NA,5
+Chinook salmon,Lower Snake,Tucannon River,1,2025,NA,40
+Chinook salmon,Middle Fork Salmon River,Bear Valley Creek,2,2011,NA,693
+Chinook salmon,Middle Fork Salmon River,Bear Valley Creek,2,2012,NA,673
+Chinook salmon,Middle Fork Salmon River,Bear Valley Creek,2,2013,NA,525
+Chinook salmon,Middle Fork Salmon River,Bear Valley Creek,2,2014,NA,857
+Chinook salmon,Middle Fork Salmon River,Bear Valley Creek,2,2020,NA,249
+Chinook salmon,Middle Fork Salmon River,Bear Valley Creek,2,2023,NA,187
+Chinook salmon,Middle Fork Salmon River,Bear Valley Creek,2,2025,NA,381
+Chinook salmon,Middle Fork Salmon River,Big Creek,2,2020,NA,379
+Chinook salmon,Middle Fork Salmon River,Marsh Creek,2,2011,NA,842
+Chinook salmon,Middle Fork Salmon River,Marsh Creek,2,2012,NA,817
+Chinook salmon,Middle Fork Salmon River,Marsh Creek,2,2013,NA,638
+Chinook salmon,Middle Fork Salmon River,Marsh Creek,2,2014,NA,1041
+Chinook salmon,Middle Fork Salmon River,Marsh Creek,2,2015,NA,786
+Chinook salmon,Middle Fork Salmon River,Marsh Creek,2,2016,NA,628
+Chinook salmon,Middle Fork Salmon River,Marsh Creek,2,2017,NA,168
+Chinook salmon,Middle Fork Salmon River,Marsh Creek,2,2018,NA,246
+Chinook salmon,Middle Fork Salmon River,Marsh Creek,2,2019,NA,141
+Chinook salmon,Middle Fork Salmon River,Marsh Creek,2,2020,NA,302
+Chinook salmon,Middle Fork Salmon River,Middle Fork Salmon River Lower Mainstem,1,2025,NA,3
+Chinook salmon,South Fork Salmon River,East Fork South Fork Salmon River,1,2019,NA,163
+Chinook salmon,South Fork Salmon River,East Fork South Fork Salmon River,1,2020,NA,341
+Chinook salmon,South Fork Salmon River,East Fork South Fork Salmon River,1,2021,NA,331
+Chinook salmon,South Fork Salmon River,East Fork South Fork Salmon River,1,2022,NA,856
+Chinook salmon,South Fork Salmon River,East Fork South Fork Salmon River,1,2023,NA,381
+Chinook salmon,South Fork Salmon River,East Fork South Fork Salmon River,1,2024,NA,464
+Chinook salmon,South Fork Salmon River,East Fork South Fork Salmon River,1,2025,NA,562
+Chinook salmon,South Fork Salmon River,East Fork South Fork Salmon River,2,2020,NA,405
+Chinook salmon,South Fork Salmon River,Secesh River,1,2019,NA,224
+Chinook salmon,South Fork Salmon River,Secesh River,1,2020,NA,468
+Chinook salmon,South Fork Salmon River,Secesh River,1,2021,NA,455
+Chinook salmon,South Fork Salmon River,Secesh River,1,2022,NA,1174
+Chinook salmon,South Fork Salmon River,Secesh River,1,2023,NA,522
+Chinook salmon,South Fork Salmon River,Secesh River,1,2024,NA,637
+Chinook salmon,South Fork Salmon River,Secesh River,1,2025,NA,770
+Chinook salmon,South Fork Salmon River,Secesh River,2,2020,NA,456
+Chinook salmon,South Fork Salmon River,South Fork Salmon River,2,2020,NA,1142
+Chinook salmon,Upper Salmon River,East Fork Salmon River,2,2016,NA,217
+Chinook salmon,Upper Salmon River,East Fork Salmon River,2,2018,NA,79
+Chinook salmon,Upper Salmon River,East Fork Salmon River,2,2019,NA,53
+Chinook salmon,Upper Salmon River,East Fork Salmon River,2,2020,NA,110
+Chinook salmon,Upper Salmon River,East Fork Salmon River,2,2021,NA,82
+Chinook salmon,Upper Salmon River,East Fork Salmon River,2,2022,NA,185
+Chinook salmon,Upper Salmon River,East Fork Salmon River,2,2023,NA,82
+Chinook salmon,Upper Salmon River,East Fork Salmon River,2,2024,NA,90
+Chinook salmon,Upper Salmon River,East Fork Salmon River,2,2025,NA,92
+Chinook salmon,Upper Salmon River,Lemhi River,2,2020,NA,211
+Chinook salmon,Upper Salmon River,North Fork Salmon River,2,2011,NA,435
+Chinook salmon,Upper Salmon River,North Fork Salmon River,2,2012,NA,402
+Chinook salmon,Upper Salmon River,North Fork Salmon River,2,2013,NA,355
+Chinook salmon,Upper Salmon River,North Fork Salmon River,2,2014,NA,583
+Chinook salmon,Upper Salmon River,North Fork Salmon River,2,2015,NA,374
+Chinook salmon,Upper Salmon River,North Fork Salmon River,2,2020,NA,152
+Chinook salmon,Upper Salmon River,North Fork Salmon River,2,2021,NA,113
+Chinook salmon,Upper Salmon River,North Fork Salmon River,2,2025,NA,127
+Chinook salmon,Upper Salmon River,Pahsimeroi River,2,2020,NA,88
+Chinook salmon,Upper Salmon River,Panther Creek,2,2011,NA,597
+Chinook salmon,Upper Salmon River,Panther Creek,2,2012,NA,552
+Chinook salmon,Upper Salmon River,Panther Creek,2,2013,NA,488
+Chinook salmon,Upper Salmon River,Panther Creek,2,2014,NA,801
+Chinook salmon,Upper Salmon River,Panther Creek,2,2015,NA,514
+Chinook salmon,Upper Salmon River,Panther Creek,2,2016,NA,413
+Chinook salmon,Upper Salmon River,Panther Creek,2,2017,NA,118
+Chinook salmon,Upper Salmon River,Panther Creek,2,2020,NA,208
+Chinook salmon,Upper Salmon River,Salmon River Upper Mainstem,2,2020,NA,147
+Chinook salmon,Upper Salmon River,Valley Creek,2,2020,NA,158
+Chinook salmon,Upper Salmon River,Yankee Fork,2,2011,NA,173
+Chinook salmon,Upper Salmon River,Yankee Fork,2,2020,NA,60
+Chinook salmon,Wet Clearwater,Lochsa River,2,2011,NA,1290
+Chinook salmon,Wet Clearwater,Lochsa River,2,2012,NA,1167
+Chinook salmon,Wet Clearwater,Lochsa River,2,2013,NA,900
+Chinook salmon,Wet Clearwater,Lochsa River,2,2014,NA,1257
+Chinook salmon,Wet Clearwater,Lochsa River,2,2015,NA,910
+Chinook salmon,Wet Clearwater,Lochsa River,2,2016,NA,845
+Chinook salmon,Wet Clearwater,Lochsa River,2,2020,NA,323
+Chinook salmon,Wet Clearwater,Lolo Creek,2,2011,NA,313
+Chinook salmon,Wet Clearwater,Lolo Creek,2,2020,NA,78

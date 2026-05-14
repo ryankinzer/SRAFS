@@ -7,33 +7,40 @@ library(MARSS)
 source('./R/summarize_ModelFits.R')
 
 # set parameters for script
-yr <- 2024
-#spp <- 'Chinook salmon'
-spp <- 'Steelhead'
+yr <- 2025
+spp <- 'Chinook salmon'
+#spp <- 'Steelhead'
 model_run <- 'multiple' #multiple' # or single
 
 # load pre-processed data
 #df <- readRDS(paste0('./data/input/',spp,'_data_', yr,'.rds'))
 
 # load model fits
-load(paste0('./data/output/', gsub(' ', '_', spp,),'_model_fits_',yr,'.rda'))
-
-mod_fit <- mod_fit[-c(3:6)]
+load(paste0('./data/output/',yr,'/',gsub(' ', '_', spp,),'_model_fits_',yr,'.rda'))
 
 # summarize model results and select best model
-mod_results <- summarize_ModelFits(mod_fit = mod_fit)
-best_model_id <- mod_results$model_id[which.min(mod_results$AICc)]
-best_model <- mod_fit[[best_model_id]]
+mod_tbl <- summarize_ModelFits(mod_fit = mod_fit, model_grid)
+best_fit_index <- mod_tbl$fit_index[which.min(mod_tbl$AICc)]
+best_model <- mod_fit[[best_fit_index]]
 summary(best_model)
-
+diag(best_model$par$Q)
+diag(best_model$par$R)
+best_model$par$Q
+best_model$par$R
+#1 - exp(best_model$par$U)
 #plot(best_model$logLik, type = "l")
+
+boot <- MARSSboot(best_model, nboot = 10) #500
+u_boot <- boot$boot.params["U.1",]
+decline_boot <- 1 - exp(u_boot)
+quantile(decline_boot, c(0.025, 0.5, 0.975))
 
 # get CIs and extract pararameter estimates
 fitCI <- MARSSparamCIs(best_model)
 
 # Get model estimates
-time_df <- tibble(spawningyear = as.numeric(colnames(mod_inputs$mod_mat)),
-                  t = 1:dim(mod_inputs$mod_mat)[2])
+time_df <- tibble(spawningyear = as.numeric(colnames(mod_mat)),
+                  t = 1:dim(mod_mat)[2])
 
 xtT <- tsSmooth(fitCI, type = "xtT", interval = "confidence") %>%
   left_join(time_df)
@@ -53,7 +60,7 @@ ytT <- tsSmooth(fitCI, type = 'ytT', interval = 'confidence')
 fitted.ytT <- fitted(best_model, type = 'ytT', interval = "confidence") %>%
   left_join(time_df) %>%
   left_join(tibble(.rownames = rownames(best_model$model$data),
-                   pop_series = rownames(mod_inputs$mod_mat))) %>%
+                   pop_series = rownames(mod_mat))) %>%
   mutate(.rownames = pop_series) %>%
   select(-pop_series)
 
@@ -66,7 +73,7 @@ ggplot(fitted.ytT, aes(x = spawningyear)) +
 
 # autoplot(fitCI, plot.type = 'fitted.ytT')
 
-best_mod_fits <- mod_inputs$dat %>%
+best_mod_fits <- dat %>% #mod_inputs$dat %>%
   full_join(fitted.ytT, by = c('pop_series' = '.rownames', 'spawningyear')) %>%
   mutate(mpg = str_split(pop_series, ' - ', simplify = TRUE)[,2],
          pop = str_split(pop_series, ' - ', simplify = TRUE)[,3],
@@ -116,14 +123,15 @@ abline(a = 0, b = 1)
 resids <- residuals(best_model)
 autoplot(resids, plot.type = 'all')
 
+
 #fitCI <- MARSSparamCIs(best_model, method = 'parametric', nboot = 1000, silent = FALSE)
 
-save(fitCI, xtT, best_mod_fits, file = paste0('./data/output/',gsub(' ','_',spp), '_best_fit_',yr,'.rda'))
+save(fitCI, xtT, best_mod_fits, file = paste0('./data/output/',yr, '/', gsub(' ','_',spp), '_best_fit_',yr,'.rda'))
 
 best_mod_fits %>%
   filter(spawningyear >= 2010) %>%
   mutate(species = spp,
          abundance = round(nosaij),
          modeled = round(exp(.fitted))) %>%
-  select(species, mpg, pop, spawningyear, abundance, modeled) %>%
-  write_csv(file = paste0('./data/output/',gsub(' ','_',spp), '_best_fit_',yr,'.csv'))
+  select(species, mpg, pop, method, spawningyear, abundance, modeled) %>%
+  write_csv(file = paste0('./data/output/',yr,'/',gsub(' ','_',spp), '_best_fit_',yr,'.csv'))

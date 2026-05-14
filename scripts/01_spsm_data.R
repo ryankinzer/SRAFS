@@ -3,11 +3,12 @@
 # Updated: 3/01/2025
 
 library(tidyverse)
+library(rCAX)
 
 # set species
 spp <- 'Chinook salmon' # 'Steelhead'
 run <- 'Spring|Summer|Spring/summer'
-yr <- 2024
+yr <- 2025
 
 # load TRT pop names
 user_path <- Sys.getenv('OneDrive')
@@ -26,6 +27,7 @@ trt_pops <- trt_pops %>%
     TRT_POPID == 'MFUMA' ~ 'Middle Fork Salmon River Upper Mainstem',
     TRT_POPID == 'GRLOS' ~ 'Wallowa/Lostine Rivers',
     TRT_POPID == 'SFSMA' ~ 'South Fork Salmon River',
+    TRT_POPID == 'SCUMA' ~ 'South Fork Clearwater River Upper Mainstem',
     TRUE ~ pop
   )) %>%
   mutate(pop = str_to_title(pop)) %>%
@@ -33,117 +35,227 @@ trt_pops <- trt_pops %>%
 
 
 # load raw NOAA data and subset for species
-#dat <- read_csv('./data/noaa_cax_data.csv')
 
 # load raw NOSA data from CAX
-dat <- readxl::read_excel('./data/input/ca-data-all 03-05-2025 16 24.xls',
-                          sheet = 'NOSA')
+# retrieve key, if needed
+#cax_key = Sys.getenv("CAX_KEY")
 
-names(dat) <- tolower(names(dat))
+# retrieve populations table from CAX
+# cax_pops = rcax_table_query(tablename = "Populations") %>%
+#   filter(esudps == "Salmon, Chinook (Snake River spring/summer-run ESU)") %>%
+#   select(
+#     CommonName      = commonname,
+#     CommonPopName   = trt_pop_id,
+#     Run             = run,
+#     RecoveryDomain  = recoverydomain,
+#     ESUDPS         = esudps,
+#     MajorPopGroup   = majorpopgroup,
+#     PopID           = id,           
+#   )
+
+# retrieve NOSA table, up to 10,000 records (by default, only retrieves 1,000)
+#usethis::edit_r_environ()
+raw_dat = rcax_hli("NOSA", qlist = list(limit = 10000))
+
+
+dat <- raw_dat %>%
+  filter(grepl('Snake River', esapopname)) %>%
+  filter(species == spp) %>%
+  filter(run == run) %>%
+  mutate(
+    method = case_when(
+      !is.na(protmethname) ~ protmethname,
+      !is.na(methodadjustments) ~ methodadjustments,
+      !is.na(metacomments) ~ metacomments
+    ),
+    across(c('nosaij', 'nosaej', 'tsaij', 'tsaej'), as.integer)
+  ) %>%
+  select(
+    species,
+    run,
+    pop = locationname,
+    spawningyear,
+    nosaij,
+    tsaij,
+    nosaej,
+    tsaej,
+    estimatetype,
+    popfit,
+    popfitnotes,
+    method,
+    agency,
+    contains('protmeth'),
+    methodadjustments,
+    metacomments,
+    popfit,
+    bestvalue
+  ) %>%
+  left_join(trt_pops,
+            by = 'pop') %>%
+  select(mpg, pop, TRT_POPID, spawningyear, everything()) %>%
+  arrange(pop, spawningyear, estimatetype)
+
+
+odfw_dat <- readxl::read_excel(paste0('./data/input/',yr,'/','GRIMN_Chs_NOSA_forRK_20260508.xlsx'),
+                               sheet = 'NOSA') %>%
+  filter(SpawningYear == yr) %>%
+  janitor::clean_names() %>%
+  rename_with(~gsub("_","",.x)) %>%
+  mutate(
+    method = case_when(
+      !is.na(protmethname) ~ protmethname,
+      !is.na(methodadjustments) ~ methodadjustments,
+      !is.na(metacomments) ~ metacomments
+    ),
+    across(c('nosaij', 'nosaej', 'tsaij', 'tsaej'), as.integer),
+    locationname = case_when(
+      commonpopname == 'Catherine Creek spring Chinook' ~ 'Catherine Creek',
+      commonpopname == 'Upper Grande Ronde spring Chinook' ~ 'Grande Ronde River Upper Mainstem',
+      commonpopname == 'Imnaha River spring/summer Chinook' ~ 'Imnaha River Mainstem',
+      commonpopname == 'Wallowa-Lostine spring Chinook' ~ 'Wallowa/Lostine Rivers',
+      commonpopname == 'Minam River spring Chinook' ~ 'Minam River',
+      commonpopname == 'Wenaha River spring Chinook' ~ 'Wenaha River'     
+    ),
+    agency = 'ODFW'
+  ) %>%
+  select(
+    species = commonname,
+    run,
+    pop = locationname,
+    spawningyear,
+    nosaij,
+    tsaij,
+    nosaej,
+    tsaej,
+    estimatetype,
+    popfit,
+    popfitnotes,
+    method,
+    agency,
+    contains('protmeth'),
+    methodadjustments,
+    metacomments,
+    popfit,
+    bestvalue
+  ) %>%
+  left_join(trt_pops,
+            by = 'pop') %>%
+  select(mpg, pop, TRT_POPID, spawningyear, everything()) %>%
+  arrange(pop, spawningyear, estimatetype) %>%
+  filter(!is.na(mpg))
+
+dat <- bind_rows(dat, odfw_dat) %>%
+  arrange(pop, spawningyear, estimatetype)
 
 cax_df <- dat %>%
-  filter(estimatetype == 'NOSA') %>%
   filter(popfit == 'Same') %>%
-  filter(grepl('Snake River', esu_dps)) %>%
-  filter(commonname == spp) %>%
-  filter(run == run) %>%
-  #filter(spawningyear >= 1980) %>%
-  mutate(method = ifelse(is.na(metacomments),methodadjustments, metacomments)) %>%
-  select(pop = locationname, spawningyear, nosaij, tsaij, nosaej, tsaej) %>%
-  mutate(source = '2 - CAX')
+  filter(bestvalue == 'Yes') %>%
+  filter(agency != 'SBT')
 
-# n_ests <- pop_df %>%
-#   group_by(pop, spawningyear) %>%
-#   count()
+
+# 
+#  %>%
+#   mutate(source = '2 - CAX')
+
+
 
 # Missing Data - 
 
-idfg <- readxl::read_excel('./data/input/IDFG_2024_ChinookNOSA.xlsx',
-                          sheet = 'Sheet1') %>%
-  mutate(Population = ifelse(grepl('above Indian', Population), 'Middle Fork Salmon River Upper Mainstem', Population),
-         Population = ifelse(grepl('below Indian', Population), 'Middle Fork Salmon River Lower Mainstem', Population),
-         Population = ifelse(PopID == 28, 'South Fork Salmon River', Population)) %>%
-  mutate(Population = str_trim(str_remove(Population, " above.*|below.*"))) %>% 
-  select(pop = Population, spawningyear = SpawnYear, nosaij = NOSAIJ, tsaij = TSAIJ)
+# idfg <- readxl::read_excel('./data/input/IDFG_2024_ChinookNOSA.xlsx',
+#                           sheet = 'Sheet1') %>%
+#   mutate(Population = ifelse(grepl('above Indian', Population), 'Middle Fork Salmon River Upper Mainstem', Population),
+#          Population = ifelse(grepl('below Indian', Population), 'Middle Fork Salmon River Lower Mainstem', Population),
+#          Population = ifelse(PopID == 28, 'South Fork Salmon River', Population)) %>%
+#   mutate(Population = str_trim(str_remove(Population, " above.*|below.*"))) %>% 
+#   select(pop = Population, spawningyear = SpawnYear, nosaij = NOSAIJ, tsaij = TSAIJ)
+# 
+# wdfw <- readxl::read_excel('./data/input/wdfw_NOSA_2024.xlsx',
+#                            sheet = 'Sheet1') %>%
+#   filter(COMMONNAME == spp) %>%
+#   filter(SPAWNINGYEAR %in% c(2023, 2024)) %>%
+#   select(pop = LOCATIONNAME, spawningyear = SPAWNINGYEAR, nosaij = NOSAIJ, tsaij = TSAIJ)
+# 
+# odfw <- readxl::read_excel('./data/input/ChS_GRIMN_NOSA_TSA_forRK_20250319.xlsx') %>%  #sheet = 'qry_ChS_GRIMN_NOSA_TSA_forRK_20250319'
+#   select(pop = CommonPopName, spawningyear = SpawningYear, nosaij = NOSAIJ, tsaij = TSAIJ) %>%
+#   filter(pop != 'Lostine River spring Chinook') %>%
+#   mutate(pop = gsub(' spring Chinook| spring/summer Chinook', "", pop),
+#          pop = ifelse(pop == 'Upper Grande Ronde', 'Grande Ronde River Upper Mainstem', pop),
+#          pop = ifelse(pop == 'Wallowa-Lostine', 'Wallowa/Lostine Rivers', pop),
+#          pop = ifelse(pop == 'Imnaha River', 'Imnaha River Mainstem', pop))
+# 
+# #npt
+# npt <- readxl::read_excel('./data/input/NPT_2024_NOSA.xlsx',
+#                            sheet = 'Sheet1')
+#   
+# names(npt) <- c('spawningyear', 'East Fork South Fork Salmon River', 'Secesh River', 'JC_weir')
+# 
+# npt <- npt %>%
+#   select(-JC_weir) %>%
+#   pivot_longer(-spawningyear, names_to = 'pop', values_to = 'nosaij')
+# 
+# new_df <- bind_rows(idfg, wdfw) %>%
+#   bind_rows(odfw) %>%
+#   bind_rows(npt) %>%
+#   mutate(source = '1 - Updated')
+# 
 
-wdfw <- readxl::read_excel('./data/input/wdfw_NOSA_2024.xlsx',
-                           sheet = 'Sheet1') %>%
-  filter(COMMONNAME == spp) %>%
-  filter(SPAWNINGYEAR %in% c(2023, 2024)) %>%
-  select(pop = LOCATIONNAME, spawningyear = SPAWNINGYEAR, nosaij = NOSAIJ, tsaij = TSAIJ)
+methods_df <- cax_df %>%
+  group_by(pop, popfit, agency, protmethname) %>%
+  summarize(n = n(),
+            min_yr = min(spawningyear),
+            max_yr = max(spawningyear))
 
-odfw <- readxl::read_excel('./data/input/ChS_GRIMN_NOSA_TSA_forRK_20250319.xlsx') %>%  #sheet = 'qry_ChS_GRIMN_NOSA_TSA_forRK_20250319'
-  select(pop = CommonPopName, spawningyear = SpawningYear, nosaij = NOSAIJ, tsaij = TSAIJ) %>%
-  filter(pop != 'Lostine River spring Chinook') %>%
-  mutate(pop = gsub(' spring Chinook| spring/summer Chinook', "", pop),
-         pop = ifelse(pop == 'Upper Grande Ronde', 'Grande Ronde River Upper Mainstem', pop),
-         pop = ifelse(pop == 'Wallowa-Lostine', 'Wallowa/Lostine Rivers', pop),
-         pop = ifelse(pop == 'Imnaha River', 'Imnaha River Mainstem', pop))
 
-#npt
-npt <- readxl::read_excel('./data/input/NPT_2024_NOSA.xlsx',
-                           sheet = 'Sheet1')
-  
-names(npt) <- c('spawningyear', 'East Fork South Fork Salmon River', 'Secesh River', 'JC_weir')
+n_ests <- cax_df %>%
+  group_by(pop, spawningyear, estimatetype) %>%
+  count()
 
-npt <- npt %>%
-  select(-JC_weir) %>%
-  pivot_longer(-spawningyear, names_to = 'pop', values_to = 'nosaij')
-
-new_df <- bind_rows(idfg, wdfw) %>%
-  bind_rows(odfw) %>%
-  bind_rows(npt) %>%
-  mutate(source = '1 - Updated')
-
-pop_df <- bind_rows(cax_df, new_df) %>%
-  left_join(trt_pops,
-            by = 'pop') %>%
-  arrange(pop, spawningyear, source)
-
-ggplot(data = pop_df, aes(x = spawningyear, y = nosaij, colour = source)) +
+cax_df %>%
+  #filter(pop == 'East Fork South Fork Salmon River') %>%
+ggplot(aes(x = spawningyear, y = nosaij, group = estimatetype, colour = estimatetype)) +
   geom_line() +
   geom_point() +
   facet_wrap(~pop)
 
-# Create a single time-series using differing methods; prioritizes based on source
-pop_df <- pop_df %>%
-  arrange(pop, spawningyear, source) %>%
-  group_by(pop, spawningyear) %>%
-  slice(1) %>%
-  ungroup() %>%
-  mutate(method = '1')
+# # Create a single time-series using differing methods; prioritizes based on source
+# pop_df <- pop_df %>%
+#   arrange(pop, spawningyear, source) %>%
+#   group_by(pop, spawningyear) %>%
+#   slice(1) %>%
+#   ungroup() %>%
+#   mutate(method = '1')
 
 # NEW METHOD FOR MISSING DATA - USE DABOM ESTIMATES!!!
 
 # combine dabom data
 
-dabom <- readxl::read_excel('C://GitHub/SnakeRiverFishStatus/output/syntheses/deprecated/LGR_Chinook_all_summaries_2025-01-31.xlsx', sheet = 'Pop_Tot_Esc')
-site <- readxl::read_excel('C://GitHub/SnakeRiverFishStatus/output/syntheses/deprecated/LGR_Chinook_all_summaries_2025-01-31.xlsx',
-                           sheet = 'Site_Esc')
-
-unique(dabom$popid)
-
-# pull in populations with direct estimates
-pops <- c('SNASO',
-          'CRLOL','CRLOC',
-          #'SEUMA/SEMEA/SEMOO',
-          'SCLAW/SCUMA', 
-          'GRCAT', 'GRUMA', 'GRLOS', 'GRWEN', 'GRMIN', 
-          'IRBSH', 'IRMAI',
-          'SFEFS', 'SFSEC', 'SFSMA',
-          'MFBIG', 'MFBEA', 'MFMAR',
-          'SRPAN', 'SRNFS', 'SRLEM',
-          'SRVAL', 'SRYFS')
-
-direct_ests <- dabom %>%
-  filter(popid %in% pops) %>%
-  mutate(popid = ifelse(popid == 'SCLAW/SCUMA', 'SCUMA', popid)) %>%
-  select(spawn_yr, popid, nosaij = median)
-
-ggplot(data = direct_ests, aes(x = spawn_yr, y = nosaij)) +
-  geom_line() + 
-  geom_point() +
-  facet_wrap(~popid)
+#' dabom <- readxl::read_excel('C://GitHub/SnakeRiverFishStatus/output/syntheses/deprecated/LGR_Chinook_all_summaries_2025-01-31.xlsx', sheet = 'Pop_Tot_Esc')
+#' site <- readxl::read_excel('C://GitHub/SnakeRiverFishStatus/output/syntheses/deprecated/LGR_Chinook_all_summaries_2025-01-31.xlsx',
+#'                            sheet = 'Site_Esc')
+#' 
+#' unique(dabom$popid)
+#' 
+#' # pull in populations with direct estimates
+#' pops <- c('SNASO',
+#'           'CRLOL','CRLOC',
+#'           #'SEUMA/SEMEA/SEMOO',
+#'           'SCLAW/SCUMA', 
+#'           'GRCAT', 'GRUMA', 'GRLOS', 'GRWEN', 'GRMIN', 
+#'           'IRBSH', 'IRMAI',
+#'           'SFEFS', 'SFSEC', 'SFSMA',
+#'           'MFBIG', 'MFBEA', 'MFMAR',
+#'           'SRPAN', 'SRNFS', 'SRLEM',
+#'           'SRVAL', 'SRYFS')
+#' 
+#' direct_ests <- dabom %>%
+#'   filter(popid %in% pops) %>%
+#'   mutate(popid = ifelse(popid == 'SCLAW/SCUMA', 'SCUMA', popid)) %>%
+#'   select(spawn_yr, popid, nosaij = median)
+#' 
+#' ggplot(data = direct_ests, aes(x = spawn_yr, y = nosaij)) +
+#'   geom_line() + 
+#'   geom_point() +
+#'   facet_wrap(~popid)
 
 
 #### NOT VALID FOR MODELING ####
@@ -202,42 +314,37 @@ ggplot(data = direct_ests, aes(x = spawn_yr, y = nosaij)) +
 # )
 
 # Get Lookingglass  
-looking_ests <- site %>%
-  filter(site == 'LGW') %>%
-  mutate(popid = 'GRLOO') %>%
-  select(spawn_yr, popid, nosaij = median)
+# looking_ests <- site %>%
+#   filter(site == 'LGW') %>%
+#   mutate(popid = 'GRLOO') %>%
+#   select(spawn_yr, popid, nosaij = median)
 
 # combine
 
-dabom_df <- direct_ests %>% 
-  #bind_rows(selway_ests) %>%
-  #bind_rows(salmon_ests) %>%
-  bind_rows(looking_ests) %>%
-  rename(TRT_POPID = popid) %>%
-  left_join(trt_pops,
-            by = 'TRT_POPID') %>%
-    mutate(source = '3 - PIT Array',
-           method = '2') %>%
-  rename(spawningyear = spawn_yr)
+# dabom_df <- direct_ests %>% 
+#   #bind_rows(selway_ests) %>%
+#   #bind_rows(salmon_ests) %>%
+#   bind_rows(looking_ests) %>%
+#   rename(TRT_POPID = popid) %>%
+#   left_join(trt_pops,
+#             by = 'TRT_POPID') %>%
+#     mutate(source = '3 - PIT Array',
+#            method = '2') %>%
+#   rename(spawningyear = spawn_yr)
 
     # filter(!is.na(pop),
     #        nosaij != 0)
 
 # Combine all estimates
 
-full_df <- bind_rows(pop_df, dabom_df)
+# full_df <- bind_rows(pop_df, dabom_df)
 
 obj <- ls()
-rm(list = obj[!grepl('full_df|yr|spp', obj)])
+rm(list = obj[!grepl('cax_df|yr|spp', obj)])
 
 # n_ests <- full_df %>%
 #   group_by(pop, spawningyear) %>%
 #   count()
-
-ggplot(data = full_df, aes(x = spawningyear, y = nosaij, colour = method)) +
-  geom_line() +
-  geom_point() +
-  facet_wrap(~TRT_POPID)
 
 # mgt_targets <- readxl::read_excel('./data/mgt_targets.xlsx',
 #                                   sheet = 'pop_targets')
@@ -255,26 +362,24 @@ ggplot(data = full_df, aes(x = spawningyear, y = nosaij, colour = method)) +
 #   coord_flip()
 
 
-
-
 source('./R/transform_data.R')
 
-df <- transform_data(full_df %>%
+df <- transform_data(cax_df %>%
                        filter(spawningyear >= 1980), pop, method)
 df %>%
   ggplot(aes(x = spawningyear, y = c)) +
-    geom_line(aes(linetype = as.factor(method), group = paste0(pop, method))) +
+    geom_line(aes(linetype = as.factor(estimatetype), group = paste0(pop, estimatetype))) +
     geom_smooth(method = 'loess', colour = 'firebrick') + #, span = .75)
     geom_hline(yintercept = 0, colour = 'black') +
     facet_wrap(~TRT_POPID, scales = 'free_y') +
     theme_bw()
 
 df %>%
-  ggplot(aes(x = spawningyear, y = c)) +
-  geom_line(aes(linetype = as.factor(method), group = paste0(pop, method))) +
+  ggplot(aes(x = spawningyear, y = z)) +
+  geom_line(aes(linetype = as.factor(estimatetype), group = paste0(pop, estimatetype))) +
   #geom_smooth(method = 'loess', colour = 'firebrick') + #, span = .75)
   geom_hline(yintercept = 0, colour = 'black') +
-  #facet_wrap(~TRT_POPID, scales = 'free_y') +
+  facet_wrap(~estimatetype, nrow = 2, scales = 'free_y') +
   theme_bw()
 
-saveRDS(full_df, file = paste0('./data/input/',spp,'_data_', yr,'.rds'))
+saveRDS(cax_df, file = paste0('./data/input/',yr,'/',spp,'_data_', yr,'.rds'))

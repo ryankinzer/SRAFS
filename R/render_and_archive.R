@@ -5,7 +5,7 @@ library(rmarkdown)
 today <- format(Sys.Date(), "%Y-%m-%d")
 
 # Define archive filename
-archive_dir <- "archive"
+archive_dir <- "docs/archive"
 output_name <- paste0("SRAFS_summary_", today, ".html")
 output_path <- file.path(archive_dir, output_name)
 

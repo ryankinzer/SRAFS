@@ -1,0 +1,406 @@
+species,mpg,pop,method,spawningyear,abundance,modeled
+Steelhead,Clearwater River,Clearwater River Lower Mainstem,1,2011,3421,3588
+Steelhead,Clearwater River,Clearwater River Lower Mainstem,1,2012,3613,2822
+Steelhead,Clearwater River,Clearwater River Lower Mainstem,1,2013,2187,1810
+Steelhead,Clearwater River,Clearwater River Lower Mainstem,1,2014,2627,2010
+Steelhead,Clearwater River,Clearwater River Lower Mainstem,1,2015,4287,3195
+Steelhead,Clearwater River,Clearwater River Lower Mainstem,1,2016,3598,2230
+Steelhead,Clearwater River,Clearwater River Lower Mainstem,1,2017,1084,890
+Steelhead,Clearwater River,Clearwater River Lower Mainstem,1,2018,632,571
+Steelhead,Clearwater River,Clearwater River Lower Mainstem,1,2019,443,592
+Steelhead,Clearwater River,Clearwater River Lower Mainstem,1,2020,476,549
+Steelhead,Clearwater River,Clearwater River Lower Mainstem,1,2021,1138,949
+Steelhead,Clearwater River,Clearwater River Lower Mainstem,1,2022,343,531
+Steelhead,Clearwater River,Clearwater River Lower Mainstem,1,2023,282,754
+Steelhead,Clearwater River,Clearwater River Lower Mainstem,1,2024,661,800
+Steelhead,Clearwater River,Clearwater River Lower Mainstem,1,2025,1288,1144
+Steelhead,Clearwater River,Clearwater River Lower Mainstem,2,2011,1908,4674
+Steelhead,Clearwater River,Clearwater River Lower Mainstem,2,2012,3651,3676
+Steelhead,Clearwater River,Clearwater River Lower Mainstem,2,2013,1851,2358
+Steelhead,Clearwater River,Clearwater River Lower Mainstem,2,2014,3034,2618
+Steelhead,Clearwater River,Clearwater River Lower Mainstem,2,2015,2765,4162
+Steelhead,Clearwater River,Clearwater River Lower Mainstem,2,2016,2653,2905
+Steelhead,Clearwater River,Clearwater River Lower Mainstem,2,2017,1557,1159
+Steelhead,Clearwater River,Clearwater River Lower Mainstem,2,2018,1526,744
+Steelhead,Clearwater River,Clearwater River Lower Mainstem,2,2019,1161,771
+Steelhead,Clearwater River,Clearwater River Lower Mainstem,2,2020,1499,715
+Steelhead,Clearwater River,Clearwater River Lower Mainstem,2,2021,1237,1236
+Steelhead,Clearwater River,Clearwater River Lower Mainstem,2,2022,373,692
+Steelhead,Clearwater River,Clearwater River Lower Mainstem,2,2023,787,983
+Steelhead,Clearwater River,Clearwater River Lower Mainstem,2,2024,1265,1043
+Steelhead,Clearwater River,Clearwater River Lower Mainstem,2,2025,1443,1490
+Steelhead,Clearwater River,Lochsa River,2,2017,1263,655
+Steelhead,Clearwater River,Lochsa River,2,2018,346,420
+Steelhead,Clearwater River,Lochsa River,2,2019,397,435
+Steelhead,Clearwater River,Lochsa River,2,2020,154,404
+Steelhead,Clearwater River,Lochsa River,2,2021,691,698
+Steelhead,Clearwater River,Lochsa River,2,2022,480,391
+Steelhead,Clearwater River,Lochsa River,2,2023,803,555
+Steelhead,Clearwater River,Lochsa River,2,2024,358,589
+Steelhead,Clearwater River,Lochsa River,2,2025,1400,842
+Steelhead,Clearwater River,Lolo Creek,2,2012,759,640
+Steelhead,Clearwater River,Lolo Creek,2,2013,388,411
+Steelhead,Clearwater River,Lolo Creek,2,2014,328,456
+Steelhead,Clearwater River,Lolo Creek,2,2015,745,725
+Steelhead,Clearwater River,Lolo Creek,2,2016,420,506
+Steelhead,Clearwater River,Lolo Creek,2,2017,144,202
+Steelhead,Clearwater River,Lolo Creek,2,2018,157,129
+Steelhead,Clearwater River,Lolo Creek,2,2019,209,134
+Steelhead,Clearwater River,Lolo Creek,2,2020,75,125
+Steelhead,Clearwater River,Lolo Creek,2,2021,396,215
+Steelhead,Clearwater River,Lolo Creek,2,2022,114,120
+Steelhead,Clearwater River,Lolo Creek,2,2023,216,171
+Steelhead,Clearwater River,Lolo Creek,2,2024,168,182
+Steelhead,Clearwater River,Lolo Creek,2,2025,213,259
+Steelhead,Clearwater River,Selway River,2,2017,621,538
+Steelhead,Clearwater River,Selway River,2,2018,305,345
+Steelhead,Clearwater River,Selway River,2,2019,264,358
+Steelhead,Clearwater River,Selway River,2,2020,158,332
+Steelhead,Clearwater River,Selway River,2,2021,907,573
+Steelhead,Clearwater River,Selway River,2,2022,511,321
+Steelhead,Clearwater River,Selway River,2,2023,756,456
+Steelhead,Clearwater River,Selway River,2,2024,280,484
+Steelhead,Clearwater River,Selway River,2,2025,779,691
+Steelhead,Clearwater River,South Fork Clearwater River,2,2012,1232,990
+Steelhead,Clearwater River,South Fork Clearwater River,2,2013,732,635
+Steelhead,Clearwater River,South Fork Clearwater River,2,2014,567,705
+Steelhead,Clearwater River,South Fork Clearwater River,2,2015,1075,1121
+Steelhead,Clearwater River,South Fork Clearwater River,2,2016,900,782
+Steelhead,Clearwater River,South Fork Clearwater River,2,2017,485,312
+Steelhead,Clearwater River,South Fork Clearwater River,2,2018,128,200
+Steelhead,Clearwater River,South Fork Clearwater River,2,2019,143,208
+Steelhead,Clearwater River,South Fork Clearwater River,2,2020,113,193
+Steelhead,Clearwater River,South Fork Clearwater River,2,2021,353,333
+Steelhead,Clearwater River,South Fork Clearwater River,2,2022,238,186
+Steelhead,Clearwater River,South Fork Clearwater River,2,2023,275,265
+Steelhead,Clearwater River,South Fork Clearwater River,2,2024,258,281
+Steelhead,Clearwater River,South Fork Clearwater River,2,2025,580,401
+Steelhead,Grande Ronde River,Grande Ronde River Lower Mainstem,2,2019,1560,1223
+Steelhead,Grande Ronde River,Grande Ronde River Lower Mainstem,2,2020,1206,1135
+Steelhead,Grande Ronde River,Grande Ronde River Lower Mainstem,2,2021,1798,1961
+Steelhead,Grande Ronde River,Grande Ronde River Lower Mainstem,2,2022,901,1098
+Steelhead,Grande Ronde River,Grande Ronde River Lower Mainstem,2,2023,1523,1559
+Steelhead,Grande Ronde River,Grande Ronde River Upper Mainstem,1,2011,3259,3969
+Steelhead,Grande Ronde River,Grande Ronde River Upper Mainstem,1,2012,3255,3121
+Steelhead,Grande Ronde River,Grande Ronde River Upper Mainstem,1,2013,1540,2002
+Steelhead,Grande Ronde River,Grande Ronde River Upper Mainstem,1,2014,2501,2223
+Steelhead,Grande Ronde River,Grande Ronde River Upper Mainstem,1,2015,4908,3534
+Steelhead,Grande Ronde River,Grande Ronde River Upper Mainstem,1,2016,2556,2467
+Steelhead,Grande Ronde River,Grande Ronde River Upper Mainstem,1,2017,1699,984
+Steelhead,Grande Ronde River,Grande Ronde River Upper Mainstem,1,2018,341,632
+Steelhead,Grande Ronde River,Grande Ronde River Upper Mainstem,2,2013,1266,1218
+Steelhead,Grande Ronde River,Grande Ronde River Upper Mainstem,2,2014,1142,1352
+Steelhead,Grande Ronde River,Grande Ronde River Upper Mainstem,2,2015,2497,2149
+Steelhead,Grande Ronde River,Grande Ronde River Upper Mainstem,2,2016,1431,1500
+Steelhead,Grande Ronde River,Grande Ronde River Upper Mainstem,2,2017,508,599
+Steelhead,Grande Ronde River,Grande Ronde River Upper Mainstem,2,2018,411,384
+Steelhead,Grande Ronde River,Grande Ronde River Upper Mainstem,2,2019,385,398
+Steelhead,Grande Ronde River,Grande Ronde River Upper Mainstem,2,2020,533,369
+Steelhead,Grande Ronde River,Grande Ronde River Upper Mainstem,2,2021,813,638
+Steelhead,Grande Ronde River,Grande Ronde River Upper Mainstem,2,2022,243,357
+Steelhead,Grande Ronde River,Grande Ronde River Upper Mainstem,2,2023,541,507
+Steelhead,Grande Ronde River,Grande Ronde River Upper Mainstem,2,2024,619,538
+Steelhead,Grande Ronde River,Grande Ronde River Upper Mainstem,2,2025,575,770
+Steelhead,Grande Ronde River,Joseph Creek,1,2011,5647,3728
+Steelhead,Grande Ronde River,Joseph Creek,1,2012,1305,2931
+Steelhead,Grande Ronde River,Joseph Creek,1,2013,2149,1881
+Steelhead,Grande Ronde River,Joseph Creek,1,2014,2641,2088
+Steelhead,Grande Ronde River,Joseph Creek,1,2015,2916,3319
+Steelhead,Grande Ronde River,Joseph Creek,1,2016,1593,2317
+Steelhead,Grande Ronde River,Joseph Creek,1,2017,1565,924
+Steelhead,Grande Ronde River,Joseph Creek,2,2011,1729,2655
+Steelhead,Grande Ronde River,Joseph Creek,2,2012,1925,2088
+Steelhead,Grande Ronde River,Joseph Creek,2,2013,1794,1340
+Steelhead,Grande Ronde River,Joseph Creek,2,2014,2096,1487
+Steelhead,Grande Ronde River,Joseph Creek,2,2015,3202,2364
+Steelhead,Grande Ronde River,Joseph Creek,2,2016,1852,1650
+Steelhead,Grande Ronde River,Joseph Creek,2,2017,613,658
+Steelhead,Grande Ronde River,Joseph Creek,2,2018,756,423
+Steelhead,Grande Ronde River,Joseph Creek,2,2019,474,438
+Steelhead,Grande Ronde River,Joseph Creek,2,2020,491,406
+Steelhead,Grande Ronde River,Joseph Creek,2,2021,738,702
+Steelhead,Grande Ronde River,Joseph Creek,2,2022,281,393
+Steelhead,Grande Ronde River,Joseph Creek,2,2023,328,558
+Steelhead,Grande Ronde River,Joseph Creek,2,2024,481,592
+Steelhead,Grande Ronde River,Joseph Creek,2,2025,616,847
+Steelhead,Grande Ronde River,Wallowa River,2,2014,547,1283
+Steelhead,Grande Ronde River,Wallowa River,2,2015,1099,2039
+Steelhead,Grande Ronde River,Wallowa River,2,2016,1000,1424
+Steelhead,Grande Ronde River,Wallowa River,2,2017,487,568
+Steelhead,Grande Ronde River,Wallowa River,2,2018,310,364
+Steelhead,Grande Ronde River,Wallowa River,2,2019,597,378
+Steelhead,Grande Ronde River,Wallowa River,2,2020,718,351
+Steelhead,Grande Ronde River,Wallowa River,2,2021,1030,606
+Steelhead,Grande Ronde River,Wallowa River,2,2022,387,339
+Steelhead,Grande Ronde River,Wallowa River,2,2023,484,482
+Steelhead,Grande Ronde River,Wallowa River,2,2024,484,511
+Steelhead,Grande Ronde River,Wallowa River,2,2025,1016,730
+Steelhead,Imnaha River,Imnaha River,2,2011,3408,4089
+Steelhead,Imnaha River,Imnaha River,2,2012,2978,3215
+Steelhead,Imnaha River,Imnaha River,2,2013,1571,2063
+Steelhead,Imnaha River,Imnaha River,2,2014,2517,2290
+Steelhead,Imnaha River,Imnaha River,2,2015,2655,3640
+Steelhead,Imnaha River,Imnaha River,2,2016,2177,2541
+Steelhead,Imnaha River,Imnaha River,2,2017,939,1014
+Steelhead,Imnaha River,Imnaha River,2,2018,674,651
+Steelhead,Imnaha River,Imnaha River,2,2019,602,674
+Steelhead,Imnaha River,Imnaha River,2,2020,705,626
+Steelhead,Imnaha River,Imnaha River,2,2021,888,1081
+Steelhead,Imnaha River,Imnaha River,2,2022,901,605
+Steelhead,Imnaha River,Imnaha River,2,2023,949,860
+Steelhead,Imnaha River,Imnaha River,2,2024,1537,912
+Steelhead,Imnaha River,Imnaha River,2,2025,1452,1304
+Steelhead,Lower Snake,Asotin Creek,2,2011,4476,2800
+Steelhead,Lower Snake,Asotin Creek,2,2012,2021,2202
+Steelhead,Lower Snake,Asotin Creek,2,2013,1477,1412
+Steelhead,Lower Snake,Asotin Creek,2,2014,1993,1568
+Steelhead,Lower Snake,Asotin Creek,2,2015,2429,2493
+Steelhead,Lower Snake,Asotin Creek,2,2016,2606,1740
+Steelhead,Lower Snake,Asotin Creek,2,2017,707,694
+Steelhead,Lower Snake,Asotin Creek,2,2018,453,446
+Steelhead,Lower Snake,Asotin Creek,2,2019,438,462
+Steelhead,Lower Snake,Asotin Creek,2,2020,321,429
+Steelhead,Lower Snake,Asotin Creek,2,2021,501,740
+Steelhead,Lower Snake,Asotin Creek,2,2022,428,415
+Steelhead,Lower Snake,Asotin Creek,2,2023,526,589
+Steelhead,Lower Snake,Asotin Creek,2,2024,576,625
+Steelhead,Lower Snake,Asotin Creek,2,2025,725,893
+Steelhead,Lower Snake,Tucannon River,2,2011,1067,1776
+Steelhead,Lower Snake,Tucannon River,2,2012,1210,1397
+Steelhead,Lower Snake,Tucannon River,2,2013,626,896
+Steelhead,Lower Snake,Tucannon River,2,2014,733,995
+Steelhead,Lower Snake,Tucannon River,2,2015,1164,1581
+Steelhead,Lower Snake,Tucannon River,2,2016,884,1104
+Steelhead,Lower Snake,Tucannon River,2,2017,370,440
+Steelhead,Lower Snake,Tucannon River,2,2018,596,283
+Steelhead,Lower Snake,Tucannon River,2,2019,337,293
+Steelhead,Lower Snake,Tucannon River,2,2020,433,272
+Steelhead,Lower Snake,Tucannon River,2,2021,417,470
+Steelhead,Lower Snake,Tucannon River,2,2022,316,263
+Steelhead,Lower Snake,Tucannon River,2,2023,481,373
+Steelhead,Lower Snake,Tucannon River,2,2024,560,396
+Steelhead,Lower Snake,Tucannon River,2,2025,553,566
+Steelhead,Salmon River,East Fork Salmon River,2,2012,81,134
+Steelhead,Salmon River,East Fork Salmon River,2,2013,82,86
+Steelhead,Salmon River,East Fork Salmon River,2,2015,150,152
+Steelhead,Salmon River,East Fork Salmon River,2,2018,16,27
+Steelhead,Salmon River,East Fork Salmon River,2,2019,75,28
+Steelhead,Salmon River,Lemhi River,2,2011,427,459
+Steelhead,Salmon River,Lemhi River,2,2012,359,361
+Steelhead,Salmon River,Lemhi River,2,2013,367,231
+Steelhead,Salmon River,Lemhi River,2,2014,398,257
+Steelhead,Salmon River,Lemhi River,2,2015,368,408
+Steelhead,Salmon River,Lemhi River,2,2016,399,285
+Steelhead,Salmon River,Lemhi River,2,2017,161,114
+Steelhead,Salmon River,Lemhi River,2,2018,105,73
+Steelhead,Salmon River,Lemhi River,2,2019,63,76
+Steelhead,Salmon River,Lemhi River,2,2020,103,70
+Steelhead,Salmon River,Lemhi River,2,2021,92,121
+Steelhead,Salmon River,Lemhi River,2,2022,38,68
+Steelhead,Salmon River,Lemhi River,2,2023,40,96
+Steelhead,Salmon River,Lemhi River,2,2024,100,102
+Steelhead,Salmon River,Lemhi River,2,2025,104,146
+Steelhead,Salmon River,Little Salmon River,1,2011,1941,1428
+Steelhead,Salmon River,Little Salmon River,1,2012,1683,1123
+Steelhead,Salmon River,Little Salmon River,1,2013,834,720
+Steelhead,Salmon River,Little Salmon River,1,2014,984,800
+Steelhead,Salmon River,Little Salmon River,1,2015,1805,1271
+Steelhead,Salmon River,Little Salmon River,1,2016,1170,887
+Steelhead,Salmon River,Little Salmon River,1,2017,157,354
+Steelhead,Salmon River,Little Salmon River,1,2018,199,227
+Steelhead,Salmon River,Little Salmon River,1,2019,151,235
+Steelhead,Salmon River,Little Salmon River,1,2020,175,219
+Steelhead,Salmon River,Little Salmon River,1,2021,401,377
+Steelhead,Salmon River,Little Salmon River,1,2022,140,211
+Steelhead,Salmon River,Little Salmon River,1,2023,370,300
+Steelhead,Salmon River,Little Salmon River,1,2024,399,318
+Steelhead,Salmon River,Little Salmon River,1,2025,369,455
+Steelhead,Salmon River,Little Salmon River,2,2013,133,242
+Steelhead,Salmon River,Little Salmon River,2,2014,81,268
+Steelhead,Salmon River,Little Salmon River,2,2016,196,298
+Steelhead,Salmon River,Little Salmon River,2,2017,50,119
+Steelhead,Salmon River,Little Salmon River,2,2018,178,76
+Steelhead,Salmon River,Little Salmon River,2,2019,86,79
+Steelhead,Salmon River,Little Salmon River,2,2021,347,127
+Steelhead,Salmon River,Little Salmon River,2,2022,331,71
+Steelhead,Salmon River,Little Salmon River,2,2023,84,101
+Steelhead,Salmon River,Little Salmon River,2,2024,48,107
+Steelhead,Salmon River,Little Salmon River,2,2025,246,153
+Steelhead,Salmon River,Middle Fork Salmon River Lower Mainstem,2,2011,1520,1585
+Steelhead,Salmon River,Middle Fork Salmon River Lower Mainstem,2,2012,961,1246
+Steelhead,Salmon River,Middle Fork Salmon River Lower Mainstem,2,2013,1007,799
+Steelhead,Salmon River,Middle Fork Salmon River Lower Mainstem,2,2014,671,888
+Steelhead,Salmon River,Middle Fork Salmon River Lower Mainstem,2,2015,2006,1411
+Steelhead,Salmon River,Middle Fork Salmon River Lower Mainstem,2,2016,808,985
+Steelhead,Salmon River,Middle Fork Salmon River Lower Mainstem,2,2017,158,393
+Steelhead,Salmon River,Middle Fork Salmon River Lower Mainstem,2,2018,330,252
+Steelhead,Salmon River,Middle Fork Salmon River Lower Mainstem,2,2019,192,261
+Steelhead,Salmon River,Middle Fork Salmon River Lower Mainstem,2,2020,208,243
+Steelhead,Salmon River,Middle Fork Salmon River Lower Mainstem,2,2021,265,419
+Steelhead,Salmon River,Middle Fork Salmon River Lower Mainstem,2,2022,374,235
+Steelhead,Salmon River,Middle Fork Salmon River Lower Mainstem,2,2023,472,333
+Steelhead,Salmon River,Middle Fork Salmon River Lower Mainstem,2,2024,663,353
+Steelhead,Salmon River,Middle Fork Salmon River Lower Mainstem,2,2025,667,505
+Steelhead,Salmon River,Middle Fork Salmon River Upper Mainstem,2,2020,74,119
+Steelhead,Salmon River,Middle Fork Salmon River Upper Mainstem,2,2021,328,205
+Steelhead,Salmon River,Middle Fork Salmon River Upper Mainstem,2,2022,134,115
+Steelhead,Salmon River,Middle Fork Salmon River Upper Mainstem,2,2023,191,163
+Steelhead,Salmon River,Middle Fork Salmon River Upper Mainstem,2,2024,150,173
+Steelhead,Salmon River,Middle Fork Salmon River Upper Mainstem,2,2025,203,248
+Steelhead,Salmon River,North Fork Salmon River,2,2019,177,100
+Steelhead,Salmon River,North Fork Salmon River,2,2020,170,92
+Steelhead,Salmon River,North Fork Salmon River,2,2022,58,89
+Steelhead,Salmon River,North Fork Salmon River,2,2023,114,127
+Steelhead,Salmon River,North Fork Salmon River,2,2024,80,135
+Steelhead,Salmon River,North Fork Salmon River,2,2025,161,193
+Steelhead,Salmon River,Pahsimeroi River,2,2011,141,109
+Steelhead,Salmon River,Pahsimeroi River,2,2012,215,85
+Steelhead,Salmon River,Pahsimeroi River,2,2014,152,61
+Steelhead,Salmon River,Pahsimeroi River,2,2015,123,97
+Steelhead,Salmon River,Pahsimeroi River,2,2016,75,67
+Steelhead,Salmon River,Pahsimeroi River,2,2017,13,27
+Steelhead,Salmon River,Pahsimeroi River,2,2018,32,17
+Steelhead,Salmon River,Pahsimeroi River,2,2019,38,18
+Steelhead,Salmon River,Pahsimeroi River,2,2020,51,17
+Steelhead,Salmon River,Pahsimeroi River,2,2021,27,29
+Steelhead,Salmon River,Pahsimeroi River,2,2022,8,16
+Steelhead,Salmon River,Pahsimeroi River,2,2023,26,23
+Steelhead,Salmon River,Pahsimeroi River,2,2024,15,24
+Steelhead,Salmon River,Pahsimeroi River,2,2025,0,35
+Steelhead,Salmon River,Panther Creek,2,2018,187,278
+Steelhead,Salmon River,Panther Creek,2,2019,262,288
+Steelhead,Salmon River,Panther Creek,2,2020,313,267
+Steelhead,Salmon River,Panther Creek,2,2021,447,462
+Steelhead,Salmon River,Panther Creek,2,2022,286,259
+Steelhead,Salmon River,Panther Creek,2,2023,452,367
+Steelhead,Salmon River,Panther Creek,2,2024,349,390
+Steelhead,Salmon River,Panther Creek,2,2025,643,557
+Steelhead,Salmon River,Salmon River Upper Mainstem,2,2011,1027,667
+Steelhead,Salmon River,Salmon River Upper Mainstem,2,2012,899,525
+Steelhead,Salmon River,Salmon River Upper Mainstem,2,2013,320,337
+Steelhead,Salmon River,Salmon River Upper Mainstem,2,2014,217,374
+Steelhead,Salmon River,Salmon River Upper Mainstem,2,2015,639,594
+Steelhead,Salmon River,Salmon River Upper Mainstem,2,2016,319,415
+Steelhead,Salmon River,Salmon River Upper Mainstem,2,2017,102,165
+Steelhead,Salmon River,Salmon River Upper Mainstem,2,2018,57,106
+Steelhead,Salmon River,Salmon River Upper Mainstem,2,2019,63,110
+Steelhead,Salmon River,Salmon River Upper Mainstem,2,2020,181,102
+Steelhead,Salmon River,Salmon River Upper Mainstem,2,2021,304,176
+Steelhead,Salmon River,Salmon River Upper Mainstem,2,2022,190,99
+Steelhead,Salmon River,Salmon River Upper Mainstem,2,2023,125,140
+Steelhead,Salmon River,Salmon River Upper Mainstem,2,2024,87,149
+Steelhead,Salmon River,Salmon River Upper Mainstem,2,2025,276,213
+Steelhead,Salmon River,Secesh River,2,2011,359,225
+Steelhead,Salmon River,Secesh River,2,2012,188,177
+Steelhead,Salmon River,Secesh River,2,2013,47,114
+Steelhead,Salmon River,Secesh River,2,2014,145,126
+Steelhead,Salmon River,Secesh River,2,2015,269,201
+Steelhead,Salmon River,Secesh River,2,2016,163,140
+Steelhead,Salmon River,Secesh River,2,2017,73,56
+Steelhead,Salmon River,Secesh River,2,2018,38,36
+Steelhead,Salmon River,Secesh River,2,2019,23,37
+Steelhead,Salmon River,Secesh River,2,2020,14,35
+Steelhead,Salmon River,Secesh River,2,2021,36,60
+Steelhead,Salmon River,Secesh River,2,2022,33,33
+Steelhead,Salmon River,Secesh River,2,2023,57,47
+Steelhead,Salmon River,Secesh River,2,2024,56,50
+Steelhead,Salmon River,Secesh River,2,2025,154,72
+Steelhead,Salmon River,South Fork Salmon River,2,2011,2655,1733
+Steelhead,Salmon River,South Fork Salmon River,2,2012,1347,1363
+Steelhead,Salmon River,South Fork Salmon River,2,2013,879,875
+Steelhead,Salmon River,South Fork Salmon River,2,2014,899,971
+Steelhead,Salmon River,South Fork Salmon River,2,2015,2071,1543
+Steelhead,Salmon River,South Fork Salmon River,2,2016,790,1077
+Steelhead,Salmon River,South Fork Salmon River,2,2017,576,430
+Steelhead,Salmon River,South Fork Salmon River,2,2018,180,276
+Steelhead,Salmon River,South Fork Salmon River,2,2019,230,286
+Steelhead,Salmon River,South Fork Salmon River,2,2020,98,265
+Steelhead,Salmon River,South Fork Salmon River,2,2021,458,458
+Steelhead,Salmon River,South Fork Salmon River,2,2022,335,257
+Steelhead,Salmon River,South Fork Salmon River,2,2023,401,364
+Steelhead,Salmon River,South Fork Salmon River,2,2024,281,387
+Steelhead,Salmon River,South Fork Salmon River,2,2025,1416,553
+Steelhead,Clearwater River,Lochsa River,2,2011,NA,2641
+Steelhead,Clearwater River,Lochsa River,2,2012,NA,2077
+Steelhead,Clearwater River,Lochsa River,2,2013,NA,1332
+Steelhead,Clearwater River,Lochsa River,2,2014,NA,1479
+Steelhead,Clearwater River,Lochsa River,2,2015,NA,2351
+Steelhead,Clearwater River,Lochsa River,2,2016,NA,1641
+Steelhead,Clearwater River,Lolo Creek,2,2011,NA,814
+Steelhead,Clearwater River,Selway River,2,2011,NA,2169
+Steelhead,Clearwater River,Selway River,2,2012,NA,1705
+Steelhead,Clearwater River,Selway River,2,2013,NA,1094
+Steelhead,Clearwater River,Selway River,2,2014,NA,1215
+Steelhead,Clearwater River,Selway River,2,2015,NA,1931
+Steelhead,Clearwater River,Selway River,2,2016,NA,1348
+Steelhead,Clearwater River,South Fork Clearwater River,2,2011,NA,1259
+Steelhead,Grande Ronde River,Grande Ronde River Lower Mainstem,2,2011,NA,7416
+Steelhead,Grande Ronde River,Grande Ronde River Lower Mainstem,2,2012,NA,5832
+Steelhead,Grande Ronde River,Grande Ronde River Lower Mainstem,2,2013,NA,3741
+Steelhead,Grande Ronde River,Grande Ronde River Lower Mainstem,2,2014,NA,4155
+Steelhead,Grande Ronde River,Grande Ronde River Lower Mainstem,2,2015,NA,6603
+Steelhead,Grande Ronde River,Grande Ronde River Lower Mainstem,2,2016,NA,4609
+Steelhead,Grande Ronde River,Grande Ronde River Lower Mainstem,2,2017,NA,1839
+Steelhead,Grande Ronde River,Grande Ronde River Lower Mainstem,2,2018,NA,1180
+Steelhead,Grande Ronde River,Grande Ronde River Lower Mainstem,2,2024,NA,1654
+Steelhead,Grande Ronde River,Grande Ronde River Lower Mainstem,2,2025,NA,2365
+Steelhead,Grande Ronde River,Grande Ronde River Upper Mainstem,1,2019,NA,654
+Steelhead,Grande Ronde River,Grande Ronde River Upper Mainstem,1,2020,NA,607
+Steelhead,Grande Ronde River,Grande Ronde River Upper Mainstem,1,2021,NA,1049
+Steelhead,Grande Ronde River,Grande Ronde River Upper Mainstem,1,2022,NA,588
+Steelhead,Grande Ronde River,Grande Ronde River Upper Mainstem,1,2023,NA,834
+Steelhead,Grande Ronde River,Grande Ronde River Upper Mainstem,1,2024,NA,885
+Steelhead,Grande Ronde River,Grande Ronde River Upper Mainstem,1,2025,NA,1265
+Steelhead,Grande Ronde River,Grande Ronde River Upper Mainstem,2,2011,NA,2414
+Steelhead,Grande Ronde River,Grande Ronde River Upper Mainstem,2,2012,NA,1898
+Steelhead,Grande Ronde River,Joseph Creek,1,2018,NA,593
+Steelhead,Grande Ronde River,Joseph Creek,1,2019,NA,615
+Steelhead,Grande Ronde River,Joseph Creek,1,2020,NA,571
+Steelhead,Grande Ronde River,Joseph Creek,1,2021,NA,986
+Steelhead,Grande Ronde River,Joseph Creek,1,2022,NA,552
+Steelhead,Grande Ronde River,Joseph Creek,1,2023,NA,784
+Steelhead,Grande Ronde River,Joseph Creek,1,2024,NA,832
+Steelhead,Grande Ronde River,Joseph Creek,1,2025,NA,1189
+Steelhead,Grande Ronde River,Wallowa River,2,2011,NA,2290
+Steelhead,Grande Ronde River,Wallowa River,2,2012,NA,1801
+Steelhead,Grande Ronde River,Wallowa River,2,2013,NA,1156
+Steelhead,Salmon River,East Fork Salmon River,2,2011,NA,170
+Steelhead,Salmon River,East Fork Salmon River,2,2014,NA,95
+Steelhead,Salmon River,East Fork Salmon River,2,2016,NA,106
+Steelhead,Salmon River,East Fork Salmon River,2,2017,NA,42
+Steelhead,Salmon River,East Fork Salmon River,2,2020,NA,26
+Steelhead,Salmon River,East Fork Salmon River,2,2021,NA,45
+Steelhead,Salmon River,East Fork Salmon River,2,2022,NA,25
+Steelhead,Salmon River,East Fork Salmon River,2,2023,NA,36
+Steelhead,Salmon River,East Fork Salmon River,2,2024,NA,38
+Steelhead,Salmon River,East Fork Salmon River,2,2025,NA,54
+Steelhead,Salmon River,Little Salmon River,2,2011,NA,479
+Steelhead,Salmon River,Little Salmon River,2,2012,NA,377
+Steelhead,Salmon River,Little Salmon River,2,2015,NA,427
+Steelhead,Salmon River,Little Salmon River,2,2020,NA,73
+Steelhead,Salmon River,Middle Fork Salmon River Upper Mainstem,2,2011,NA,777
+Steelhead,Salmon River,Middle Fork Salmon River Upper Mainstem,2,2012,NA,611
+Steelhead,Salmon River,Middle Fork Salmon River Upper Mainstem,2,2013,NA,392
+Steelhead,Salmon River,Middle Fork Salmon River Upper Mainstem,2,2014,NA,435
+Steelhead,Salmon River,Middle Fork Salmon River Upper Mainstem,2,2015,NA,692
+Steelhead,Salmon River,Middle Fork Salmon River Upper Mainstem,2,2016,NA,483
+Steelhead,Salmon River,Middle Fork Salmon River Upper Mainstem,2,2017,NA,193
+Steelhead,Salmon River,Middle Fork Salmon River Upper Mainstem,2,2018,NA,124
+Steelhead,Salmon River,Middle Fork Salmon River Upper Mainstem,2,2019,NA,128
+Steelhead,Salmon River,North Fork Salmon River,2,2011,NA,604
+Steelhead,Salmon River,North Fork Salmon River,2,2012,NA,475
+Steelhead,Salmon River,North Fork Salmon River,2,2013,NA,305
+Steelhead,Salmon River,North Fork Salmon River,2,2014,NA,338
+Steelhead,Salmon River,North Fork Salmon River,2,2015,NA,538
+Steelhead,Salmon River,North Fork Salmon River,2,2016,NA,375
+Steelhead,Salmon River,North Fork Salmon River,2,2017,NA,150
+Steelhead,Salmon River,North Fork Salmon River,2,2018,NA,96
+Steelhead,Salmon River,North Fork Salmon River,2,2021,NA,160
+Steelhead,Salmon River,Pahsimeroi River,2,2013,NA,55
+Steelhead,Salmon River,Panther Creek,2,2011,NA,1747
+Steelhead,Salmon River,Panther Creek,2,2012,NA,1374
+Steelhead,Salmon River,Panther Creek,2,2013,NA,881
+Steelhead,Salmon River,Panther Creek,2,2014,NA,979
+Steelhead,Salmon River,Panther Creek,2,2015,NA,1555
+Steelhead,Salmon River,Panther Creek,2,2016,NA,1086
+Steelhead,Salmon River,Panther Creek,2,2017,NA,433

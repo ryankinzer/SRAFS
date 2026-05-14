@@ -67,7 +67,7 @@ library(kableExtra)
 
 <div style="margin-top: 1em; font-style: italic; font-size:1.0em;">
 <b>Suggested Citation for Annual Results:</b> <br>
-Hesse, J.A. and Kinzer, R.N., 2025. Snake River Anadromous Fish Status: Quasi-Extinction Threshold Analysis. Department of Fisheries Resources Management. Version: `r format(Sys.Date(), '%d %B, %Y')`. Available: https://ryankinzer.github.io/SRAFS/
+Hesse, J.A. and Kinzer, R.N., 2026. Snake River Anadromous Fish Status: Quasi-Extinction Threshold Analysis. Department of Fisheries Resources Management. Version: `r format(Sys.Date(), '%d %B, %Y')`. Available: https://ryankinzer.github.io/SRAFS/
 </div>
 
 
@@ -77,17 +77,17 @@ Hesse, J.A. and Kinzer, R.N., 2025. Snake River Anadromous Fish Status: Quasi-Ex
 # Quasi-Extinction Summary
 
 ```{r proj-path}
-archive <- FALSE
-yr <- 2024
+yr <- 2025
 fig_path <- here::here('figures',yr,'/')
 source('../R/summarize_qet_risk.R')
 ```
 
 Updates for the `r yr` analysis:
 
-- Removed Little Salmon River due to limited data from only a small portion of the population.
+- Removed Little Salmon River from spring/summer Chinook Salmon analysis due to limited data from only a small portion of the population.
 - Included multiple time-series of observations for each population if available (i.e, spawning ground survey data, weir observations, PIT-tag based estimates)
-- Performed model selection on multiple candidate models with varying numbers of state processes, process error, and observation error parameters
+- Performed model selection on multiple candidate models with varying numbers of state processes, drift, process error, and observation error parameters
+- PIT-tag based estimates now include an expansion for available habitat not covered by the instream PIT-tag detection system (Ackerman et al. 2026, in prep)
 
 ## Spring/summer Chinook Salmon
 
@@ -101,7 +101,7 @@ spp <-'Chinook salmon'
 load(paste0('../data/output/',yr,'/',gsub(' ', '_', spp), '_summary_data_',yr,'.rda'))
 ```
 
-```{r chn-summary, tab.cap = 'The table provides summary counts of spring/summer Chinook salmon populations currently below minimum abundance thresholds, 50 spawners, and meeting the quasi-extinction threshold (4 consecutive years below 50 spawners), and the number of populations predicted to fall below 50 by return year 2029.' }
+```{r chn-summary, tab.cap = 'The table provides summary counts of spring/summer Chinook salmon populations currently below minimum abundance thresholds, 50 spawners, and meeting the quasi-extinction threshold (4 consecutive years below 50 spawners), and the number of populations predicted to fall below 50 by return year 2030.' }
 # 1) All populations
 sum_all <- summarize_qet_risk(dat, "All Snake River Populations", yr)
 
@@ -116,9 +116,9 @@ summary_table <- bind_rows(sum_all, sum_esa) %>%
          `Below Minimum Abundance Threshold` = paste0(n_below_mat, ' (',round(pct_below_mat*100),'%)'),
          `Current Return Below 50` = paste0(n_below_50, ' (',round(pct_below_50*100),'%)'),
          `Currently Below Quasi-Extinction Threshold` = paste0(n_qet, ' (',round(pct_qet*100),'%)'),
-         `Predicted Below 50 by 2029` = paste0(n_pred_below_50, ' (',round(pct_pred_below_50*100),'%)')
+         `Predicted Below 50 by 2030` = paste0(n_pred_below_50, ' (',round(pct_pred_below_50*100),'%)')
          ) %>%
-  select(group, Populations, `Below Minimum Abundance Threshold`, `Current Return Below 50`, `Currently Below Quasi-Extinction Threshold`, `Predicted Below 50 by 2029`)
+  select(group, Populations, `Below Minimum Abundance Threshold`, `Current Return Below 50`, `Currently Below Quasi-Extinction Threshold`, `Predicted Below 50 by 2030`)
   
 
 summary_table %>%
@@ -128,22 +128,13 @@ summary_table %>%
   kable()
 ```
 
-<!-- - Seven state processes and trends, aligned with major population groups, represent spring/summer Chinook Salmon populations -->
-<!-- - Spring/summer Chinook Salmon populations have declined by an average of 6% annually for the last 10-years -->
-<!-- - All populations below minimum abundance thresholds (MAT) -->
-<!--   - 4 populations (12%) currently meeting QET -->
-<!--   - 8 populations (24%) below 50 spawners in 2024 -->
-<!--   - 10 populations (29%) predicted to be at or below 50 by 2029 -->
-<!-- - ESA-listed extant populations only (n = 28): -->
-<!--   -  -->
-
 
 ```{r chn-qet-map, fig.cap = 'Current status of natural-origin Snake River spring/summer Chinook Salmon relative to the quasi-extinction threshold (QET) and Columbia Basin Partnership goals.'}
 #![](../figures/2024/multiple/Chinook salmon/Chinook_salmon_map_2024.png)
 include_graphics(paste0(fig_path,'Chinook_salmon/','Chinook_salmon_map_',yr,'.png'))
 ```
 
-```{r chn-sa-slope, fig.cap = 'Estimated slope parameters for natural-origin Snake River spring/summer Chinook Salmon abundance trends indicate an average annual decline of 6% for the last 10-years.'}
+```{r chn-sa-slope, fig.cap = 'Estimated slope parameters for natural-origin Snake River spring/summer Chinook Salmon abundance trends indicate an average annual growth rate of approximately 0% for the last 10-years, however, considerable variability exists across major population groups.'}
 #![](../figures/2024/multiple/Chinook salmon/Chinook_salmon_sa_slope_fig_2024.png)
 include_graphics(paste0(fig_path,'Chinook_salmon/','Chinook_salmon_slope_',yr,'.png'))
 ```
@@ -179,7 +170,7 @@ dat <- bind_rows(
   ))
 ```
 
-```{r sth-summary, tab.cap = 'The table provides summary counts of steelhead populations currently below minimum abundance thresholds, 50 spawners, and meeting the quasi-extinction threshold (4 consecutive years below 50 spawners), and the number of populations predicted to fall below 50 by return year 2029.' }
+```{r sth-summary, tab.cap = 'The table provides summary counts of steelhead populations currently below minimum abundance thresholds, 50 spawners, and meeting the quasi-extinction threshold (4 consecutive years below 50 spawners), and the number of populations predicted to fall below 50 by return year 2030.' }
 # 1) All populations
 sum_all <- summarize_qet_risk(dat, "All Snake River Populations", yr)
 
@@ -194,9 +185,9 @@ summary_table <- bind_rows(sum_all, sum_esa) %>%
          `Below Minimum Abundance Threshold` = paste0(n_below_mat, ' (',round(pct_below_mat*100),'%)'),
          `Current Return Below 50` = paste0(n_below_50, ' (',round(pct_below_50*100),'%)'),
          `Currently Below Quasi-Extinction Threshold` = paste0(n_qet, ' (',round(pct_qet*100),'%)'),
-         `Predicted Below 50 by 2029` = paste0(n_pred_below_50, ' (',round(pct_pred_below_50*100),'%)')
+         `Predicted Below 50 by 2030` = paste0(n_pred_below_50, ' (',round(pct_pred_below_50*100),'%)')
          ) %>%
-  select(group, Populations, `Below Minimum Abundance Threshold`, `Current Return Below 50`, `Currently Below Quasi-Extinction Threshold`, `Predicted Below 50 by 2029`)
+  select(group, Populations, `Below Minimum Abundance Threshold`, `Current Return Below 50`, `Currently Below Quasi-Extinction Threshold`, `Predicted Below 50 by 2030`)
   
 
 summary_table %>%
@@ -206,21 +197,13 @@ summary_table %>%
   kable()
 ```
 
-<!-- - A single state process and trend represents all summer steelhead populations -->
-<!-- - Summer steelhead have declined by 11% annually for the last 10-years -->
-<!-- - All populations below critical abundance thresholds -->
-<!--   - 3 populations (14%) currently meeting QET -->
-<!--   - 3 populations (14%) below 50 spawners in 2024 -->
-<!--   - 6 populations (27%) predicted to by at or below 50 by 2029 -->
-<!-- - ESA-listed extant populations only (n = 24): -->
-<!--   -  -->
 
 ```{r sth-qet-map, fig.cap = 'Current status of natural-origin Snake River summer steelhead relative to the quasi-extinction threshold (QET) and Columbia Basin Partnership goals.'}
 #![](../figures/2024/multiple/Chinook salmon/Chinook_salmon_map_2024.png)
 include_graphics(paste0(fig_path,'Steelhead/','Steelhead_map_',yr,'.png'))
 ```
 
-```{r sth-sa-slope, fig.cap = 'Modeled abundance trends of natural-origin Snake River summer steelhead indicate an annual 11% decline for the last 10-years.'}
+```{r sth-sa-slope, fig.cap = 'Modeled abundance trends of natural-origin Snake River summer steelhead indicate an annual 3% decline for the last 10-years.'}
 #![](../figures/2024/multiple/Chinook salmon/Chinook_salmon_sa_slope_fig_2024.png)
 include_graphics(paste0(fig_path,'Steelhead/', 'Steelhead_slope_',yr,'.png'))
 ```
@@ -229,47 +212,80 @@ include_graphics(paste0(fig_path,'Steelhead/', 'Steelhead_slope_',yr,'.png'))
 
 ## Datasets
 
-1. **NOSAij**: derived by co-managers and downloaded from [Coordinated Assessments](https://cax.streamnet.org/) on 3/05/2025
+1. **NOSAij**: derived by co-managers and downloaded from [Coordinated Assessments](https://cax.streamnet.org/) on 5/12/2026
     - Generally estimated from expanded redd counts or mark/recapture weir estimates
   
 2. **Escapement**: derived from PIT-tag observations and a branch occupancy model similar to Waterhouse et al. 2020
-    - includes a time-varying component to better describe run-timings of different populations passing Lower Granite Dam
+    - Includes a time-varying component to better describe run-timings of different populations passing Lower Granite Dam
+    - Estimates have been expanded to the full population using available habitat models; see Ackerman et al. 2026 (in prep)
 
 ## Data Analysis
 
-### **M**ultivariate **A**uto-**R**egressive **S**tate **S**pace Model (Holmes et al. 2012)  
+### Multivariate Auto-Regressive State-Space Model (MARSS; Holmes et al. 2012)
 
+\[
 \begin{aligned}
 \textbf{State process:} \quad
-& \mathbf{x}_{t} = \mathbf{x}_{t-1} + \mathbf{u} + \mathbf{w}_t, \quad \mathbf{w}_t \sim \mathcal{N}(0, \mathbf{Q}) \\
+& \mathbf{x}_{t} = \mathbf{x}_{t-1} + \mathbf{u} + \mathbf{w}_t,
+\quad \mathbf{w}_t \sim \mathcal{N}(0, \mathbf{Q}) \\
+\\
 \textbf{Observation process:} \quad
-& \mathbf{y}_{t} = \mathbf{Z} \mathbf{x}_{t} + \mathbf{a} + \mathbf{v}_t, \quad \mathbf{v}_t \sim \mathcal{N}(0, \mathbf{R})
+& \mathbf{y}_{t} = \mathbf{Z}\mathbf{x}_{t} + \mathbf{a} + \mathbf{v}_t,
+\quad \mathbf{v}_t \sim \mathcal{N}(0, \mathbf{R})
 \end{aligned}
+\]
 
+where:
 
-- $\mathbf{x}_t$: vector of hidden state values at time $t$
-- $\mathbf{u}$: state intercept (drift) vector
+- $\mathbf{x}_t$: vector of latent (unobserved) state values at time $t$
+- $\mathbf{u}$: vector of state-specific drift parameters representing mean temporal trends
+- $\mathbf{w}_t$: process error vector with variance-covariance matrix $\mathbf{Q}$
 - $\mathbf{y}_t$: vector of observed values at time $t$
-- $\mathbf{Z}$: observation matrix mapping states to observations
-- $\mathbf{a}$: observation bias vector
+- $\mathbf{Z}$: observation matrix linking latent states to observed time series
+- $\mathbf{a}$: observation intercept or bias vector
+- $\mathbf{v}_t$: observation error vector with variance-covariance matrix $\mathbf{R}$
 
+The fitted MARSS models assumed a random-walk-with-drift state process where the autoregressive coefficient matrix was fixed as $\mathbf{B} = \mathbf{I}$.
 
 ### Fitted Models
 
-- State process ( $\mathbf{u}$ ):
-  - A single basin-wide process (1) 
-  - A process for each major population group (7 - sp/sm Chinook Salmon and 5 - summer steelhead)
-  - A process for each population (34 - sp/sm Chinook Salmon and 22 summer steelhead)
-    
-- Process Error ( $\mathbf{Q}$ )
-  - Equal Variance-Covariance (2)
-  - Diagaonl and Equal (1)
-  - Diagonal and Unequal (equals number of state processes)
-    
-- Observation Error ( $\mathbf{R}$ )
-  - Diagonal and Equal (1)
-  - Diagonal and Unequal (equals number of observation time-series)
+#### State Structure ($\mathbf{Z}$)
 
+Models were fit assuming:
+
+- A single basin-wide latent process (1 state)
+- A latent process for each major population group:
+  - 7 spring/summer Chinook salmon groups
+  - 5 summer steelhead groups
+- A latent process for each population:
+  - 34 spring/summer Chinook salmon populations
+  - 22 summer steelhead populations
+
+#### Drift Parameters ($\mathbf{u}$)
+
+- Equal drift across all state processes (1 parameter)
+- State-specific drift parameters (number of parameters equals the number of state processes)
+
+#### Process Error Structure ($\mathbf{Q}$)
+
+- Equal variance-covariance structure:
+  - shared variance parameter
+  - shared covariance parameter
+- Diagonal and equal variance:
+  - equal variances across state processes
+  - covariances fixed to zero
+- Diagonal and unequal variance:
+  - unique variances for each state process
+  - covariances fixed to zero
+
+#### Observation Error Structure ($\mathbf{R}$)
+
+- Diagonal and equal variance:
+  - equal observation variances across time series
+  - covariances fixed to zero
+- Diagonal and unequal variance:
+  - unique observation variances for each time series
+  - covariances fixed to zero
 
 # Results
 
@@ -285,8 +301,8 @@ load(paste0('../data/output/',yr,'/', gsub(' ','_', spp), '_model_fits_',yr,'.rd
 
 ### Observations
 
-```{r chn-obs, tab.cap="Summary of abundance time-series used in modeling Snake River spring/summer Chinook Salmon populations (n = 48). Time-series length and data sources varied by population, with observations spanning from 1980 to 2024. Abundance estimates were primarily based on spawning ground surveys and weir counts, with PIT-tag detections included for select populations. The 10th, 50th (median), and 90th percentiles of observed abundance values are provided to summarize distributional characteristics across years."}
-mod_inputs$dat %>%
+```{r chn-obs, tab.cap="Summary of abundance time-series used in modeling Snake River spring/summer Chinook Salmon populations (n = 52). Time-series length and data sources varied by population, with observations spanning across 15 return years; beginning in 2011 and ending in 2025. Abundance estimates were primarily based on spawning ground surveys and weir counts, with PIT-tag detections included for select populations. The 10th, 50th (median), and 90th percentiles of observed abundance values are provided to summarize distributional characteristics across years."}
+dat %>%
   filter(!is.na(nosaij)) %>%
   filter(spawningyear >= 1980) %>%
   group_by(mpg, pop, method) %>%
@@ -320,33 +336,22 @@ mod_inputs$dat %>%
 
 ```{r chn-mod-results}
 # summarize model results and select best model
-mod_results <- tibble(
-  model_id = seq_along(mod_fit),
-  logLik = sapply(mod_fit, function(x) logLik(x)),
-  AICc = sapply(mod_fit, function(x) x$AICc),
-  converged = sapply(mod_fit, function(x) x$convergence),
-  n_samps = sapply(mod_fit, function(x) x$samp.size),
-  n_params = sapply(mod_fit, function(x) x$num.params),
-  U = sapply(mod_fit, function(x) length(x$par$U)),
-  Q = sapply(mod_fit, function(x) length(x$par$Q)),
-  A = sapply(mod_fit, function(x) length(x$par$A)),
-  R = sapply(mod_fit, function(x) length(x$par$R))
-) %>%
-  mutate(deltaAIC = AICc - min(AICc))
+source('../R/summarize_ModelFits.R')
 
-mod_results <- mod_results %>%
-  filter(!(model_id %in% c(3, 4, 5, 6))) %>%
-  mutate(model_id = 1:n()) %>%
-  arrange(AICc)# a single process only has a single variance (no model runs for diag and unequal or equalvarcov)
-
+mod_tbl <- summarize_ModelFits(mod_fit = mod_fit, model_grid) %>%
+  select(model_id = fit_index, Z:U, n_samps, n_params, logLik, AICc, deltaAIC) %>%
+  group_by(logLik) %>%
+  slice_min(AICc, n = 1, with_ties = FALSE) %>%
+  ungroup() %>%
+  arrange(deltaAIC)
 ```
 
 
 ```{r print-chn-results, tab.cap = "Candidate models and number of parameters fit to spring/summer Chinook Salmon time-series observations to explain Snake River abundance trends."}
-mod_results %>%
+mod_tbl %>%
   slice(1:10) %>%
-  select(model_id, n_params, U, Q, R, logLik, AICc, deltaAIC) %>%
-  kable(col.names = c('Model Id', 'Total Parameters', 'U', 'Q', 'R', 'logLik', 'AICc', '$\\Delta$AIC'),
+  select(model_id, n_params, Z, U, Q, R, logLik, AICc, deltaAIC) %>%
+  kable(col.names = c('Model Id', 'Total Parameters', 'Z', 'U', 'Q', 'R', 'logLik', 'AICc', '$\\Delta$AIC'),
         booktabs = TRUE, 
         digits = 2,
         escape = FALSE,
@@ -356,7 +361,7 @@ mod_results %>%
 
 ### State Process
 
-```{r state-process, fig.cap = "Estimated abundance (natural-log) trends for the seven state processes (xtT) estimated from the best fitting Snake River spring/summer Chinook Salmon model (grey shading represents 95% CI's)."}
+```{r state-process, fig.cap = "Estimated abundance (natural-log) trends for the seven state processes (xtT) estimated from the best fitting Snake River spring/summer Chinook Salmon model (grey shading represents 95% CI's). The blue line indicates the MARSS drift parameter and the estimated annual change in abundance across the 15 years of observations."}
 #![](../figures/2024/multiple/Chinook salmon/Chinook_salmon_state_process_2024.png)
 include_graphics(paste0(fig_path,gsub(' ','_', spp),'/',gsub(' ','_', spp),'_states_',yr,'.png'))
 #include_graphics("C:/Users/ryank/OneDrive - nezperce365/Projects/DFRM Research Division/Abundance_Declines/figures/2024/multiple/Chinook salmon/Chinook_salmon_state_process_2024.png")
@@ -388,8 +393,8 @@ load(paste0('../data/output/',yr,'/', gsub(' ','_', spp), '_model_fits_',yr,'.rd
 
 ### Observations
 
-```{r sth-obs, tab.cap="Summary of abundance time-series used in modeling Snake River summer steelhead populations (n = 25). Time-series length and data sources varied by population, with observations spanning from 2010 to 2024. Abundance estimates were primarily based on PIT-tag detections, with spawning ground surveys and weir counts included for select populations. The 10th, 50th (median), and 90th percentiles of observed abundance values are provided to summarize distributional characteristics across years."}
-mod_inputs$dat %>%
+```{r sth-obs, tab.cap="Summary of abundance time-series used in modeling Snake River summer steelhead populations (n = 27). Time-series length and data sources varied by population, with observations spanning across 15 return years; beginning in 2011 and ending in 2025. Abundance estimates were primarily based on PIT-tag detections, with spawning ground surveys and weir counts included for select populations. The 10th, 50th (median), and 90th percentiles of observed abundance values are provided to summarize distributional characteristics across years."}
+dat %>%
   filter(!is.na(nosaij)) %>%
   filter(spawningyear >= 2010) %>%
   group_by(mpg, pop, method) %>%
@@ -423,33 +428,20 @@ mod_inputs$dat %>%
 
 ```{r shd-summ-results}
 # summarize model results and select best model
-mod_results <- tibble(
-  model_id = seq_along(mod_fit),
-  logLik = sapply(mod_fit, function(x) logLik(x)),
-  AICc = sapply(mod_fit, function(x) x$AICc),
-  converged = sapply(mod_fit, function(x) x$convergence),
-  n_samps = sapply(mod_fit, function(x) x$samp.size),
-  n_params = sapply(mod_fit, function(x) x$num.params),
-  U = sapply(mod_fit, function(x) length(x$par$U)),
-  Q = sapply(mod_fit, function(x) length(x$par$Q)),
-  A = sapply(mod_fit, function(x) length(x$par$A)),
-  R = sapply(mod_fit, function(x) length(x$par$R))
-) %>%
-  mutate(deltaAIC = AICc - min(AICc))
-
-mod_results <- mod_results %>%
-  filter(!(model_id %in% c(3, 4, 5, 6))) %>%
-  mutate(model_id = 1:n()) %>%
-  arrange(AICc)# a single process only has a single variance (no model runs for diag and unequal or equalvarcov)
-
+mod_tbl <- summarize_ModelFits(mod_fit = mod_fit, model_grid) %>%
+  select(model_id = fit_index, Z:U, n_samps, n_params, logLik, AICc, deltaAIC) %>%
+  group_by(logLik) %>%
+  slice_min(AICc, n = 1, with_ties = FALSE) %>%
+  ungroup() %>%
+  arrange(deltaAIC)
 ```
 
 
 ```{r shd-mod-results, tab.cap = "Candidate models and number of parameters fit to summer steelhead time-series observations to explain Snake River abundance trends."}
-mod_results %>%
+mod_tbl %>%
   slice(1:10) %>%
-  select(model_id, n_params, U, Q, R, logLik, AICc, deltaAIC) %>%
-  kable(col.names = c('Model Id', 'Total Parameters', 'u', 'Q', 'R', 'logLik', 'AICc', '$\\Delta$AIC'),
+  select(model_id, n_params, Z, U, Q, R, logLik, AICc, deltaAIC) %>%
+  kable(col.names = c('Model Id', 'Total Parameters', 'Z', 'U', 'Q', 'R', 'logLik', 'AICc', '$\\Delta$AIC'),
         booktabs = TRUE,
         escape = FALSE,
         label = NA) %>%
@@ -458,7 +450,7 @@ mod_results %>%
 
 ### State Process
 
-```{r sth-state-process, fig.cap = "Estimated abundance (natural-log) trend for a single state process (xtT) as estimated from the best fitting Snake River summer steelhed model (grey shading represents 95% CI's)."}
+```{r sth-state-process, fig.cap = "Estimated abundance (natural-log) trend for a single state process (xtT) as estimated from the best fitting Snake River summer steelhed model (grey shading represents 95% CI's). The blue line indicates the MARSS drift parameter and the estimated annual change in abundance across the 15 years of observations."}
 #![](../figures/2024/multiple/Chinook salmon/Chinook_salmon_state_process_2024.png)
 include_graphics(paste0(fig_path,gsub(' ','_', spp),'/',gsub(' ','_', spp),'_states_',yr,'.png'))
 #include_graphics("C:/Users/ryank/OneDrive - nezperce365/Projects/DFRM Research Division/Abundance_Declines/figures/2024/multiple/Chinook salmon/Chinook_salmon_state_process_2024.png")
@@ -476,12 +468,6 @@ include_graphics(paste0(fig_path,gsub(' ','_', spp),'/',gsub(' ','_', spp),'_obs
 ```{r sth-qet-pred, fig.cap = 'Estimated and predicted population abundance trends for natural-origin Snake River summer steelhead. Red points and triangles indicated an estimated annual return of 50 or fewer spawners.'}
 #![](../figures/2024/multiple/Chinook salmon/Chinook_salmon_qet_pred_fig_2024.png)
 include_graphics(paste0(fig_path,gsub(' ','_', spp),'/',gsub(' ','_', spp),'_predictions_',yr,'.png'))
-```
-
-```{r archive}
-if(archive){
-  source('../R/render_and_archive.R')
-}
 ```
 
 # Version Archive
