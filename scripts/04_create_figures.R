@@ -12,15 +12,15 @@ version <- '25'
 yr <- 2025
 
 spp <- 'Chinook salmon'
-run <- 'Spring-summer'
-#run <- 'Fall'
+#run <- 'Spring-summer'
+run <- 'Fall'
 
 #spp <- 'Steelhead'
 #run <- 'Summer'
 
 
 if(spp == 'Chinook salmon' && run == 'Fall'){
-  fig_path <- here::here('figures',,yr,gsub(' ','_',spp),gsub('-','_',run))
+  fig_path <- here::here('figures',yr,gsub(' ','_',spp),gsub('-','_',run))
 } else {
   fig_path <- here::here('figures',yr,gsub(' ','_',spp))
 }
@@ -58,8 +58,7 @@ if(spp == 'Chinook salmon' && run == 'Spring-summer'){
   master_dam <- master_dam %>%
   select(spawnyear = ChinookRunYear, Wild_Large = WildSpSuChinookAdults, Wild_Small = WildSpSuChinookJacks, Hatchery_Large = HatcherySpSuChinookAdults, Hatchery_Small = HatcherySpSuChinookJacks)
 } else if (spp == 'Chinook salmon' && run == 'Fall'){
-    master_dam <- master_dam %>%
-      select(spawnyear = ChinookRunYear, Wild_Large = WildFallChinookAdults, Hatchery_Large = HatcheryFallChinookAdults)
+    master_dam <- read_csv('./data/fall_chinook_adults.csv')
   } else if (spp == 'Steelhead' && run == 'Summer'){
     master_dam <- master_dam %>%
       select(spawnyear = ChinookRunYear, Wild_Large = WildSteelheadAdults, Hatchery_Large = HatcherySteelheadAdults)
@@ -115,6 +114,49 @@ if(spp == 'Chinook salmon' && run == 'Spring-summer'){
     summarise(est = sum(est, na.rm = TRUE))
 
 } else if(spp == 'Chinook salmon' && run == 'Fall'){
+  
+  # library(rCAX)
+  # raw_dat = rcax_hli("NOSA", qlist = list(limit = 10000))
+  # 
+  # dat <- raw_dat %>%
+  #   filter(grepl('Snake River fall-run ESU', esapopname)) %>%
+  #   filter(estimatetype == 'Escapement') %>%
+  #   select(commonname:nosaij, nosaej, phosij, phosej,protmethname, protmethdocumentation:agency)
+
+    # mutate(
+    #   method = case_when(
+    #     !is.na(protmethname) ~ protmethname,
+    #     !is.na(methodadjustments) ~ methodadjustments,
+    #     !is.na(metacomments) ~ metacomments
+    #   ),
+    #   across(c('nosaij', 'nosaej', 'tsaij', 'tsaej'), as.integer)
+    # ) %>%
+    # select(
+    #   species,
+    #   run,
+    #   pop = locationname,
+    #   spawningyear,
+    #   nosaij,
+    #   tsaij,
+    #   nosaej,
+    #   tsaej,
+    #   estimatetype,
+    #   popfit,
+    #   popfitnotes,
+    #   method,
+    #   agency,
+    #   contains('protmeth'),
+    #   methodadjustments,
+    #   metacomments,
+    #   popfit,
+    #   bestvalue
+    # ) %>%
+    # left_join(trt_pops,
+    #           by = 'pop') %>%
+    # select(mpg, pop, TRT_POPID, spawningyear, everything()) %>%
+    # arrange(pop, spawningyear, estimatetype)
+  
+  
   idfg_dat <- master_dam %>%
     mutate(size = case_when(
       size == 'Large' ~ 'Adult',
